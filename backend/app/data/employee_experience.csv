@@ -1,0 +1,1701 @@
+experience_id,employee_id,date_of_joining,highest_education,previous_industry,previous_company_type,previous_experience_years,experience_in_company_years,total_experience_years,experience_band,probation_completed
+EXP-00001,EMP-10001,2022-05-27,12th,Logistics & Warehousing,Large Indian Company,8.0,4.5,12.5,10+ yrs,Yes
+EXP-00002,EMP-10002,2023-12-12,12th,Fresher,None,0.0,2.9,2.9,1-3 yrs,Yes
+EXP-00003,EMP-10003,2020-11-15,12th,Electronics Manufacturing,Large Indian Company,8.0,6.0,14.0,10+ yrs,Yes
+EXP-00004,EMP-10004,2021-07-06,10th,Electronics Manufacturing,MNC,5.0,5.4,10.4,10+ yrs,Yes
+EXP-00005,EMP-10005,2019-11-27,ITI,Electronics Manufacturing,Mid-size Company,4.0,7.0,11.0,10+ yrs,Yes
+EXP-00006,EMP-10006,2024-10-22,12th,Electronics Manufacturing,Contract Staffing,2.0,2.1,4.1,3-6 yrs,Yes
+EXP-00007,EMP-10007,2022-05-01,ITI,Fresher,None,0.0,4.6,4.6,3-6 yrs,Yes
+EXP-00008,EMP-10008,2021-12-23,Diploma,Automobile,Mid-size Company,10.0,4.9,14.9,10+ yrs,Yes
+EXP-00009,EMP-10009,2022-12-23,ITI,FMCG,Small Enterprise,5.0,3.9,8.9,6-10 yrs,Yes
+EXP-00010,EMP-10010,2021-08-18,ITI,Textile & Garments,Large Indian Company,12.0,4.4,16.4,10+ yrs,Yes
+EXP-00011,EMP-10011,2024-02-15,12th,Automobile,Large Indian Company,1.0,2.8,3.8,3-6 yrs,Yes
+EXP-00012,EMP-10012,2022-10-23,12th,FMCG,Mid-size Company,9.0,4.1,13.1,10+ yrs,Yes
+EXP-00013,EMP-10013,2024-04-14,Diploma,Automobile,Mid-size Company,6.0,2.6,8.6,6-10 yrs,Yes
+EXP-00014,EMP-10014,2020-11-29,Diploma,Telecom,Mid-size Company,16.0,6.0,22.0,10+ yrs,Yes
+EXP-00015,EMP-10015,2019-01-24,12th,Electronics Manufacturing,Mid-size Company,4.0,7.8,11.8,10+ yrs,Yes
+EXP-00016,EMP-10016,2022-11-23,B.Sc,Pharma,Contract Staffing,6.0,4.0,10.0,6-10 yrs,Yes
+EXP-00017,EMP-10017,2020-04-01,10th,Automobile,MNC,7.0,6.6,13.6,10+ yrs,Yes
+EXP-00018,EMP-10018,2025-04-08,12th,Automobile,Large Indian Company,2.0,1.6,3.6,3-6 yrs,Yes
+EXP-00019,EMP-10019,2020-10-30,ITI,Automobile,MNC,12.0,6.1,18.1,10+ yrs,Yes
+EXP-00020,EMP-10020,2022-04-28,10th,Textile & Garments,Large Indian Company,3.0,4.6,7.6,6-10 yrs,Yes
+EXP-00021,EMP-10021,2026-03-04,12th,Fresher,None,0.0,0.7,0.7,<1 yr,Yes
+EXP-00022,EMP-10022,2024-05-24,B.Sc,Electronics Manufacturing,Small Enterprise,5.0,2.5,7.5,6-10 yrs,Yes
+EXP-00023,EMP-10023,2024-07-01,Diploma,Fresher,None,0.0,1.5,1.5,1-3 yrs,Yes
+EXP-00024,EMP-10024,2022-09-16,ITI,Textile & Garments,Mid-size Company,3.0,4.2,7.2,6-10 yrs,Yes
+EXP-00025,EMP-10025,2023-02-12,10th,Automobile,Mid-size Company,3.0,3.8,6.8,6-10 yrs,Yes
+EXP-00026,EMP-10026,2021-08-23,ITI,Electronics Manufacturing,Mid-size Company,2.0,5.2,7.2,6-10 yrs,Yes
+EXP-00027,EMP-10027,2022-09-30,B.Sc,Pharma,Contract Staffing,1.0,4.1,5.1,3-6 yrs,Yes
+EXP-00028,EMP-10028,2023-11-29,12th,Textile & Garments,Contract Staffing,10.0,3.0,13.0,10+ yrs,Yes
+EXP-00029,EMP-10029,2024-01-23,Diploma,Automobile,Mid-size Company,4.0,2.8,6.8,6-10 yrs,Yes
+EXP-00030,EMP-10030,2023-02-22,10th,Logistics & Warehousing,MNC,13.0,3.7,16.7,10+ yrs,Yes
+EXP-00031,EMP-10031,2018-12-13,ITI,Electronics Manufacturing,Contract Staffing,12.0,7.9,19.9,10+ yrs,Yes
+EXP-00032,EMP-10032,2022-02-27,Diploma,Automobile,Contract Staffing,8.0,4.7,12.7,10+ yrs,Yes
+EXP-00033,EMP-10033,2021-07-05,B.E/B.Tech,Retail,Large Indian Company,9.0,5.4,14.4,10+ yrs,Yes
+EXP-00034,EMP-10034,2019-07-31,Diploma,Retail,Mid-size Company,2.0,7.3,9.3,6-10 yrs,Yes
+EXP-00035,EMP-10035,2023-02-10,ITI,Electronics Manufacturing,Mid-size Company,7.0,3.8,10.8,10+ yrs,Yes
+EXP-00036,EMP-10036,2021-07-03,Diploma,Pharma,Mid-size Company,3.0,5.4,8.4,6-10 yrs,Yes
+EXP-00037,EMP-10037,2021-11-19,B.E/B.Tech,Textile & Garments,Small Enterprise,10.0,5.0,15.0,10+ yrs,Yes
+EXP-00038,EMP-10038,2024-12-01,Diploma,FMCG,Small Enterprise,2.0,2.0,4.0,3-6 yrs,Yes
+EXP-00039,EMP-10039,2021-04-14,Diploma,Fresher,None,0.0,5.6,5.6,3-6 yrs,Yes
+EXP-00040,EMP-10040,2019-06-21,B.Sc,Automobile,Small Enterprise,3.0,7.4,10.4,10+ yrs,Yes
+EXP-00041,EMP-10041,2023-05-19,Diploma,Automobile,Large Indian Company,11.0,3.5,14.5,10+ yrs,Yes
+EXP-00042,EMP-10042,2024-04-09,ITI,Electronics Manufacturing,Contract Staffing,6.0,2.6,8.6,6-10 yrs,Yes
+EXP-00043,EMP-10043,2018-11-22,12th,Pharma,MNC,7.0,7.0,14.0,10+ yrs,Yes
+EXP-00044,EMP-10044,2020-11-06,Diploma,Electronics Manufacturing,Mid-size Company,11.0,6.0,17.0,10+ yrs,Yes
+EXP-00045,EMP-10045,2024-12-22,12th,Telecom,Small Enterprise,5.0,1.9,6.9,6-10 yrs,Yes
+EXP-00046,EMP-10046,2024-10-10,Diploma,Fresher,None,0.0,2.1,2.1,1-3 yrs,Yes
+EXP-00047,EMP-10047,2022-10-25,12th,Electronics Manufacturing,Small Enterprise,9.0,4.1,13.1,10+ yrs,Yes
+EXP-00048,EMP-10048,2026-03-31,ITI,Electronics Manufacturing,MNC,1.0,0.6,1.6,1-3 yrs,Yes
+EXP-00049,EMP-10049,2024-02-03,ITI,Electronics Manufacturing,Large Indian Company,3.0,2.8,5.8,3-6 yrs,Yes
+EXP-00050,EMP-10050,2019-07-08,10th,Telecom,Mid-size Company,3.0,7.4,10.4,10+ yrs,Yes
+EXP-00051,EMP-10051,2020-06-20,12th,Pharma,Small Enterprise,9.0,6.4,15.4,10+ yrs,Yes
+EXP-00052,EMP-10052,2022-07-28,12th,Telecom,MNC,3.0,4.3,7.3,6-10 yrs,Yes
+EXP-00053,EMP-10053,2023-09-21,B.E/B.Tech,Logistics & Warehousing,Contract Staffing,9.0,3.2,12.2,10+ yrs,Yes
+EXP-00054,EMP-10054,2021-08-18,Diploma,Automobile,Large Indian Company,3.0,5.3,8.3,6-10 yrs,Yes
+EXP-00055,EMP-10055,2020-06-11,B.E/B.Tech,Electronics Manufacturing,Large Indian Company,8.0,6.4,14.4,10+ yrs,Yes
+EXP-00056,EMP-10056,2023-01-02,B.E/B.Tech,Textile & Garments,Large Indian Company,10.0,3.9,13.9,10+ yrs,Yes
+EXP-00057,EMP-10057,2020-05-06,B.E/B.Tech,Automobile,MNC,8.0,6.5,14.5,10+ yrs,Yes
+EXP-00058,EMP-10058,2021-08-30,B.E/B.Tech,Electronics Manufacturing,Large Indian Company,4.0,5.2,9.2,6-10 yrs,Yes
+EXP-00059,EMP-10059,2026-01-10,Diploma,Fresher,None,0.0,0.9,0.9,<1 yr,Yes
+EXP-00060,EMP-10060,2018-06-04,ITI,Textile & Garments,Small Enterprise,7.0,8.5,15.5,10+ yrs,Yes
+EXP-00061,EMP-10061,2026-04-17,10th,Fresher,None,0.0,0.6,0.6,<1 yr,Yes
+EXP-00062,EMP-10062,2020-08-27,12th,Electronics Manufacturing,Contract Staffing,7.0,6.2,13.2,10+ yrs,Yes
+EXP-00063,EMP-10063,2023-05-12,B.Sc,FMCG,Large Indian Company,6.0,3.5,9.5,6-10 yrs,Yes
+EXP-00064,EMP-10064,2023-11-25,10th,Fresher,None,0.0,3.0,3.0,1-3 yrs,Yes
+EXP-00065,EMP-10065,2022-10-17,Diploma,Electronics Manufacturing,Mid-size Company,5.0,4.1,9.1,6-10 yrs,Yes
+EXP-00066,EMP-10066,2022-12-04,Diploma,Electronics Manufacturing,Small Enterprise,2.0,4.0,6.0,3-6 yrs,Yes
+EXP-00067,EMP-10067,2019-03-16,12th,Automobile,Mid-size Company,11.0,7.7,18.7,10+ yrs,Yes
+EXP-00068,EMP-10068,2023-05-01,12th,Automobile,Contract Staffing,9.0,3.6,12.6,10+ yrs,Yes
+EXP-00069,EMP-10069,2019-11-27,12th,Electronics Manufacturing,Mid-size Company,16.0,7.0,23.0,10+ yrs,Yes
+EXP-00070,EMP-10070,2020-02-08,ITI,Logistics & Warehousing,Large Indian Company,6.0,6.4,12.4,10+ yrs,Yes
+EXP-00071,EMP-10071,2020-10-29,ITI,Textile & Garments,Mid-size Company,1.0,5.9,6.9,6-10 yrs,Yes
+EXP-00072,EMP-10072,2024-07-17,12th,Fresher,None,0.0,2.3,2.3,1-3 yrs,Yes
+EXP-00073,EMP-10073,2022-02-21,ITI,Logistics & Warehousing,MNC,16.0,4.7,20.7,10+ yrs,Yes
+EXP-00074,EMP-10074,2021-06-23,B.E/B.Tech,FMCG,Contract Staffing,12.0,5.4,17.4,10+ yrs,Yes
+EXP-00075,EMP-10075,2021-03-19,ITI,Logistics & Warehousing,Mid-size Company,10.0,5.7,15.7,10+ yrs,Yes
+EXP-00076,EMP-10076,2024-09-10,Diploma,Electronics Manufacturing,Contract Staffing,9.0,2.2,11.2,10+ yrs,Yes
+EXP-00077,EMP-10077,2023-06-19,12th,Fresher,None,0.0,3.4,3.4,3-6 yrs,Yes
+EXP-00078,EMP-10078,2022-10-20,12th,Electronics Manufacturing,Contract Staffing,15.0,4.1,19.1,10+ yrs,Yes
+EXP-00079,EMP-10079,2020-03-18,Diploma,Pharma,Contract Staffing,9.0,6.7,15.7,10+ yrs,Yes
+EXP-00080,EMP-10080,2020-08-26,12th,Electronics Manufacturing,Small Enterprise,5.0,6.2,11.2,10+ yrs,Yes
+EXP-00081,EMP-10081,2021-09-05,12th,Fresher,None,0.0,5.2,5.2,3-6 yrs,Yes
+EXP-00082,EMP-10082,2022-12-16,Diploma,Fresher,None,0.0,3.9,3.9,3-6 yrs,Yes
+EXP-00083,EMP-10083,2020-12-05,12th,Textile & Garments,Mid-size Company,10.0,6.0,16.0,10+ yrs,Yes
+EXP-00084,EMP-10084,2022-09-23,B.Sc,Textile & Garments,Small Enterprise,16.0,4.2,20.2,10+ yrs,Yes
+EXP-00085,EMP-10085,2022-12-13,Diploma,Automobile,Contract Staffing,6.0,3.9,9.9,6-10 yrs,Yes
+EXP-00086,EMP-10086,2021-05-29,10th,Fresher,None,0.0,5.5,5.5,3-6 yrs,Yes
+EXP-00087,EMP-10087,2018-07-28,ITI,Electronics Manufacturing,Mid-size Company,2.0,8.3,10.3,10+ yrs,Yes
+EXP-00088,EMP-10088,2023-09-15,12th,Textile & Garments,Mid-size Company,6.0,3.2,9.2,6-10 yrs,Yes
+EXP-00089,EMP-10089,2023-04-21,Diploma,Fresher,None,0.0,3.6,3.6,3-6 yrs,Yes
+EXP-00090,EMP-10090,2023-07-16,B.Sc,Electronics Manufacturing,Large Indian Company,10.0,3.3,13.3,10+ yrs,Yes
+EXP-00091,EMP-10091,2021-10-23,10th,Pharma,Mid-size Company,5.0,5.1,10.1,10+ yrs,Yes
+EXP-00092,EMP-10092,2021-10-06,12th,Automobile,Large Indian Company,10.0,5.1,15.1,10+ yrs,Yes
+EXP-00093,EMP-10093,2025-07-16,ITI,Fresher,None,0.0,1.3,1.3,1-3 yrs,Yes
+EXP-00094,EMP-10094,2020-10-05,Diploma,FMCG,Large Indian Company,14.0,6.1,20.1,10+ yrs,Yes
+EXP-00095,EMP-10095,2023-07-14,ITI,Fresher,None,0.0,3.4,3.4,3-6 yrs,Yes
+EXP-00096,EMP-10096,2019-06-24,Diploma,Automobile,Large Indian Company,5.0,7.4,12.4,10+ yrs,Yes
+EXP-00097,EMP-10097,2019-11-27,Diploma,Textile & Garments,Contract Staffing,14.0,7.0,21.0,10+ yrs,Yes
+EXP-00098,EMP-10098,2021-08-19,10th,FMCG,Contract Staffing,7.0,5.3,12.3,10+ yrs,Yes
+EXP-00099,EMP-10099,2022-01-13,Diploma,FMCG,Large Indian Company,6.0,4.9,10.9,10+ yrs,Yes
+EXP-00100,EMP-10100,2022-09-14,ITI,Textile & Garments,Mid-size Company,8.0,4.2,12.2,10+ yrs,Yes
+EXP-00101,EMP-10101,2023-04-07,12th,Fresher,None,0.0,3.6,3.6,3-6 yrs,Yes
+EXP-00102,EMP-10102,2022-12-14,B.Sc,Pharma,MNC,14.0,3.9,17.9,10+ yrs,Yes
+EXP-00103,EMP-10103,2024-05-05,Diploma,Fresher,None,0.0,2.5,2.5,1-3 yrs,Yes
+EXP-00104,EMP-10104,2022-08-13,10th,Telecom,Contract Staffing,4.0,4.3,8.3,6-10 yrs,Yes
+EXP-00105,EMP-10105,2022-06-27,Diploma,Logistics & Warehousing,Large Indian Company,5.0,4.4,9.4,6-10 yrs,Yes
+EXP-00106,EMP-10106,2024-10-11,B.E/B.Tech,Electronics Manufacturing,Small Enterprise,5.0,1.6,6.6,6-10 yrs,Yes
+EXP-00107,EMP-10107,2021-10-13,Diploma,Automobile,Large Indian Company,2.0,5.1,7.1,6-10 yrs,Yes
+EXP-00108,EMP-10108,2023-06-11,ITI,Fresher,None,0.0,3.4,3.4,3-6 yrs,Yes
+EXP-00109,EMP-10109,2021-05-29,Diploma,Electronics Manufacturing,MNC,7.0,5.5,12.5,10+ yrs,Yes
+EXP-00110,EMP-10110,2022-03-21,ITI,Telecom,Small Enterprise,9.0,4.7,13.7,10+ yrs,Yes
+EXP-00111,EMP-10111,2026-05-26,12th,Fresher,None,0.0,0.5,0.5,<1 yr,No
+EXP-00112,EMP-10112,2022-06-28,Diploma,Retail,Mid-size Company,9.0,4.4,13.4,10+ yrs,Yes
+EXP-00113,EMP-10113,2019-08-29,ITI,Automobile,Large Indian Company,2.0,7.2,9.2,6-10 yrs,Yes
+EXP-00114,EMP-10114,2020-01-14,ITI,Fresher,None,0.0,6.9,6.9,6-10 yrs,Yes
+EXP-00115,EMP-10115,2019-07-08,10th,Electronics Manufacturing,Large Indian Company,8.0,7.4,15.4,10+ yrs,Yes
+EXP-00116,EMP-10116,2020-04-05,ITI,Fresher,None,0.0,6.6,6.6,6-10 yrs,Yes
+EXP-00117,EMP-10117,2021-06-18,ITI,Electronics Manufacturing,MNC,7.0,5.4,12.4,10+ yrs,Yes
+EXP-00118,EMP-10118,2020-12-10,10th,Textile & Garments,Small Enterprise,7.0,5.9,12.9,10+ yrs,Yes
+EXP-00119,EMP-10119,2025-10-25,ITI,FMCG,Large Indian Company,8.0,1.1,9.1,6-10 yrs,Yes
+EXP-00120,EMP-10120,2020-04-25,Diploma,Automobile,Small Enterprise,11.0,6.0,17.0,10+ yrs,Yes
+EXP-00121,EMP-10121,2019-10-08,ITI,Textile & Garments,MNC,3.0,7.1,10.1,10+ yrs,Yes
+EXP-00122,EMP-10122,2021-11-07,B.E/B.Tech,Automobile,Large Indian Company,6.0,5.0,11.0,10+ yrs,Yes
+EXP-00123,EMP-10123,2020-06-02,B.E/B.Tech,Electronics Manufacturing,Contract Staffing,11.0,6.0,17.0,10+ yrs,Yes
+EXP-00124,EMP-10124,2020-11-26,ITI,Electronics Manufacturing,Mid-size Company,5.0,6.0,11.0,10+ yrs,Yes
+EXP-00125,EMP-10125,2024-01-11,Diploma,Fresher,None,0.0,2.9,2.9,1-3 yrs,Yes
+EXP-00126,EMP-10126,2023-02-06,ITI,Fresher,None,0.0,3.8,3.8,3-6 yrs,Yes
+EXP-00127,EMP-10127,2018-12-20,B.Sc,Automobile,MNC,8.0,7.9,15.9,10+ yrs,Yes
+EXP-00128,EMP-10128,2023-02-16,Diploma,Automobile,MNC,4.0,3.8,7.8,6-10 yrs,Yes
+EXP-00129,EMP-10129,2020-09-09,12th,Electronics Manufacturing,Small Enterprise,4.0,6.2,10.2,10+ yrs,Yes
+EXP-00130,EMP-10130,2021-01-21,Diploma,Automobile,Small Enterprise,5.0,5.8,10.8,10+ yrs,Yes
+EXP-00131,EMP-10131,2021-12-08,10th,Retail,Mid-size Company,1.0,5.0,6.0,3-6 yrs,Yes
+EXP-00132,EMP-10132,2021-03-29,B.Sc,Automobile,MNC,9.0,5.6,14.6,10+ yrs,Yes
+EXP-00133,EMP-10133,2019-03-13,10th,Electronics Manufacturing,Large Indian Company,10.0,7.7,17.7,10+ yrs,Yes
+EXP-00134,EMP-10134,2019-04-17,ITI,Retail,Large Indian Company,13.0,7.6,20.6,10+ yrs,Yes
+EXP-00135,EMP-10135,2018-08-18,ITI,Electronics Manufacturing,Contract Staffing,6.0,8.3,14.3,10+ yrs,Yes
+EXP-00136,EMP-10136,2024-01-23,12th,Fresher,None,0.0,2.2,2.2,1-3 yrs,Yes
+EXP-00137,EMP-10137,2019-03-28,12th,Logistics & Warehousing,Mid-size Company,15.0,7.6,22.6,10+ yrs,Yes
+EXP-00138,EMP-10138,2022-04-29,12th,Electronics Manufacturing,Mid-size Company,4.0,4.6,8.6,6-10 yrs,Yes
+EXP-00139,EMP-10139,2023-10-18,B.Sc,FMCG,Contract Staffing,7.0,3.1,10.1,10+ yrs,Yes
+EXP-00140,EMP-10140,2020-06-15,Diploma,Automobile,Contract Staffing,4.0,6.4,10.4,10+ yrs,Yes
+EXP-00141,EMP-10141,2020-08-28,Diploma,Electronics Manufacturing,Small Enterprise,12.0,6.2,18.2,10+ yrs,Yes
+EXP-00142,EMP-10142,2023-12-12,12th,Fresher,None,0.0,2.9,2.9,1-3 yrs,Yes
+EXP-00143,EMP-10143,2023-01-31,10th,Fresher,None,0.0,3.8,3.8,3-6 yrs,Yes
+EXP-00144,EMP-10144,2025-08-28,ITI,Fresher,None,0.0,1.2,1.2,1-3 yrs,Yes
+EXP-00145,EMP-10145,2025-04-19,Diploma,Automobile,Large Indian Company,8.0,1.6,9.6,6-10 yrs,Yes
+EXP-00146,EMP-10146,2024-01-31,Diploma,Electronics Manufacturing,MNC,9.0,2.8,11.8,10+ yrs,Yes
+EXP-00147,EMP-10147,2023-04-01,B.E/B.Tech,Electronics Manufacturing,Small Enterprise,14.0,3.6,17.6,10+ yrs,Yes
+EXP-00148,EMP-10148,2021-12-15,ITI,Textile & Garments,Mid-size Company,8.0,4.9,12.9,10+ yrs,Yes
+EXP-00149,EMP-10149,2020-07-18,10th,Electronics Manufacturing,MNC,10.0,6.3,16.3,10+ yrs,Yes
+EXP-00150,EMP-10150,2018-09-06,Diploma,FMCG,Large Indian Company,3.0,8.2,11.2,10+ yrs,Yes
+EXP-00151,EMP-10151,2020-05-11,12th,Electronics Manufacturing,Mid-size Company,6.0,6.5,12.5,10+ yrs,Yes
+EXP-00152,EMP-10152,2018-12-31,ITI,Electronics Manufacturing,Contract Staffing,1.0,7.9,8.9,6-10 yrs,Yes
+EXP-00153,EMP-10153,2025-04-14,12th,Fresher,None,0.0,1.6,1.6,1-3 yrs,Yes
+EXP-00154,EMP-10154,2022-02-02,Diploma,Electronics Manufacturing,Contract Staffing,12.0,4.8,16.8,10+ yrs,Yes
+EXP-00155,EMP-10155,2024-10-27,12th,Fresher,None,0.0,2.1,2.1,1-3 yrs,Yes
+EXP-00156,EMP-10156,2019-02-05,ITI,Textile & Garments,Large Indian Company,7.0,7.5,14.5,10+ yrs,Yes
+EXP-00157,EMP-10157,2024-10-11,Diploma,Automobile,Large Indian Company,4.0,2.1,6.1,6-10 yrs,Yes
+EXP-00158,EMP-10158,2024-04-22,10th,Fresher,None,0.0,2.6,2.6,1-3 yrs,Yes
+EXP-00159,EMP-10159,2023-05-19,12th,Electronics Manufacturing,Mid-size Company,9.0,3.5,12.5,10+ yrs,Yes
+EXP-00160,EMP-10160,2022-04-02,ITI,Logistics & Warehousing,Small Enterprise,14.0,4.6,18.6,10+ yrs,Yes
+EXP-00161,EMP-10161,2023-09-24,12th,FMCG,Large Indian Company,6.0,3.2,9.2,6-10 yrs,Yes
+EXP-00162,EMP-10162,2020-07-06,B.E/B.Tech,Automobile,MNC,8.0,6.4,14.4,10+ yrs,Yes
+EXP-00163,EMP-10163,2022-04-08,12th,Fresher,None,0.0,4.6,4.6,3-6 yrs,Yes
+EXP-00164,EMP-10164,2022-06-05,Diploma,Pharma,MNC,11.0,4.5,15.5,10+ yrs,Yes
+EXP-00165,EMP-10165,2023-05-15,Diploma,Electronics Manufacturing,MNC,15.0,3.5,18.5,10+ yrs,Yes
+EXP-00166,EMP-10166,2019-12-05,ITI,Logistics & Warehousing,Mid-size Company,11.0,7.0,18.0,10+ yrs,Yes
+EXP-00167,EMP-10167,2021-10-04,12th,Automobile,Small Enterprise,3.0,5.1,8.1,6-10 yrs,Yes
+EXP-00168,EMP-10168,2019-10-17,10th,Automobile,Contract Staffing,3.0,6.6,9.6,6-10 yrs,Yes
+EXP-00169,EMP-10169,2020-08-14,ITI,Fresher,None,0.0,6.3,6.3,6-10 yrs,Yes
+EXP-00170,EMP-10170,2020-08-07,ITI,Electronics Manufacturing,Large Indian Company,6.0,6.3,12.3,10+ yrs,Yes
+EXP-00171,EMP-10171,2020-06-16,Diploma,Electronics Manufacturing,MNC,5.0,6.4,11.4,10+ yrs,Yes
+EXP-00172,EMP-10172,2022-12-18,ITI,Fresher,None,0.0,3.9,3.9,3-6 yrs,Yes
+EXP-00173,EMP-10173,2023-10-09,12th,Fresher,None,0.0,3.1,3.1,3-6 yrs,Yes
+EXP-00174,EMP-10174,2022-06-09,12th,Automobile,Small Enterprise,9.0,4.4,13.4,10+ yrs,Yes
+EXP-00175,EMP-10175,2022-06-01,B.E/B.Tech,Automobile,Mid-size Company,5.0,4.5,9.5,6-10 yrs,Yes
+EXP-00176,EMP-10176,2025-09-06,B.E/B.Tech,Textile & Garments,Contract Staffing,6.0,1.2,7.2,6-10 yrs,Yes
+EXP-00177,EMP-10177,2022-03-10,12th,Logistics & Warehousing,Small Enterprise,8.0,4.7,12.7,10+ yrs,Yes
+EXP-00178,EMP-10178,2024-12-25,12th,Logistics & Warehousing,Mid-size Company,4.0,1.9,5.9,3-6 yrs,Yes
+EXP-00179,EMP-10179,2020-06-01,ITI,Textile & Garments,Mid-size Company,7.0,6.5,13.5,10+ yrs,Yes
+EXP-00180,EMP-10180,2024-05-01,10th,Fresher,None,0.0,2.6,2.6,1-3 yrs,Yes
+EXP-00181,EMP-10181,2021-12-27,B.E/B.Tech,Automobile,Contract Staffing,10.0,4.9,14.9,10+ yrs,Yes
+EXP-00182,EMP-10182,2024-11-29,10th,Retail,MNC,9.0,1.1,10.1,10+ yrs,Yes
+EXP-00183,EMP-10183,2021-02-07,ITI,Electronics Manufacturing,Contract Staffing,3.0,5.8,8.8,6-10 yrs,Yes
+EXP-00184,EMP-10184,2024-04-08,ITI,Fresher,None,0.0,2.6,2.6,1-3 yrs,Yes
+EXP-00185,EMP-10185,2021-08-06,10th,Electronics Manufacturing,Large Indian Company,7.0,5.3,12.3,10+ yrs,Yes
+EXP-00186,EMP-10186,2021-08-29,10th,Electronics Manufacturing,Contract Staffing,9.0,5.2,14.2,10+ yrs,Yes
+EXP-00187,EMP-10187,2020-04-20,B.Sc,Electronics Manufacturing,MNC,11.0,6.6,17.6,10+ yrs,Yes
+EXP-00188,EMP-10188,2021-06-01,B.E/B.Tech,Electronics Manufacturing,MNC,3.0,5.5,8.5,6-10 yrs,Yes
+EXP-00189,EMP-10189,2023-08-05,ITI,Electronics Manufacturing,Small Enterprise,3.0,2.6,5.6,3-6 yrs,Yes
+EXP-00190,EMP-10190,2022-02-26,Diploma,Logistics & Warehousing,Contract Staffing,5.0,4.7,9.7,6-10 yrs,Yes
+EXP-00191,EMP-10191,2022-06-02,ITI,FMCG,Mid-size Company,7.0,4.5,11.5,10+ yrs,Yes
+EXP-00192,EMP-10192,2018-08-07,12th,Automobile,Mid-size Company,6.0,8.3,14.3,10+ yrs,Yes
+EXP-00193,EMP-10193,2022-09-29,B.E/B.Tech,Electronics Manufacturing,Large Indian Company,14.0,4.1,18.1,10+ yrs,Yes
+EXP-00194,EMP-10194,2024-06-06,ITI,Electronics Manufacturing,Mid-size Company,3.0,2.5,5.5,3-6 yrs,Yes
+EXP-00195,EMP-10195,2018-12-12,12th,Automobile,Contract Staffing,14.0,7.5,21.5,10+ yrs,Yes
+EXP-00196,EMP-10196,2019-07-08,Diploma,Electronics Manufacturing,Small Enterprise,10.0,7.4,17.4,10+ yrs,Yes
+EXP-00197,EMP-10197,2019-08-02,Diploma,Textile & Garments,Mid-size Company,7.0,7.3,14.3,10+ yrs,Yes
+EXP-00198,EMP-10198,2023-10-08,ITI,Electronics Manufacturing,Contract Staffing,12.0,3.1,15.1,10+ yrs,Yes
+EXP-00199,EMP-10199,2020-05-31,10th,FMCG,Large Indian Company,7.0,6.5,13.5,10+ yrs,Yes
+EXP-00200,EMP-10200,2022-12-21,12th,Electronics Manufacturing,Small Enterprise,8.0,3.9,11.9,10+ yrs,Yes
+EXP-00201,EMP-10201,2021-12-07,10th,Logistics & Warehousing,Large Indian Company,6.0,5.0,11.0,10+ yrs,Yes
+EXP-00202,EMP-10202,2018-10-22,ITI,Automobile,Small Enterprise,3.0,8.1,11.1,10+ yrs,Yes
+EXP-00203,EMP-10203,2022-06-16,12th,Fresher,None,0.0,4.4,4.4,3-6 yrs,Yes
+EXP-00204,EMP-10204,2019-02-15,ITI,Textile & Garments,Large Indian Company,3.0,7.8,10.8,10+ yrs,Yes
+EXP-00205,EMP-10205,2022-08-16,Diploma,Fresher,None,0.0,4.3,4.3,3-6 yrs,Yes
+EXP-00206,EMP-10206,2020-03-31,Diploma,Electronics Manufacturing,Small Enterprise,4.0,6.6,10.6,10+ yrs,Yes
+EXP-00207,EMP-10207,2021-10-12,10th,Textile & Garments,Mid-size Company,3.0,5.1,8.1,6-10 yrs,Yes
+EXP-00208,EMP-10208,2022-12-07,ITI,Telecom,MNC,7.0,4.0,11.0,10+ yrs,Yes
+EXP-00209,EMP-10209,2024-08-16,Diploma,Logistics & Warehousing,Mid-size Company,10.0,2.3,12.3,10+ yrs,Yes
+EXP-00210,EMP-10210,2024-09-12,Diploma,Logistics & Warehousing,Contract Staffing,8.0,2.2,10.2,10+ yrs,Yes
+EXP-00211,EMP-10211,2025-03-31,Diploma,Electronics Manufacturing,Mid-size Company,9.0,1.6,10.6,10+ yrs,Yes
+EXP-00212,EMP-10212,2020-10-27,12th,Electronics Manufacturing,Contract Staffing,4.0,6.1,10.1,10+ yrs,Yes
+EXP-00213,EMP-10213,2026-09-25,ITI,Fresher,None,0.0,0.2,0.2,<1 yr,No
+EXP-00214,EMP-10214,2021-06-15,Diploma,Logistics & Warehousing,Small Enterprise,3.0,5.4,8.4,6-10 yrs,Yes
+EXP-00215,EMP-10215,2019-08-09,12th,Textile & Garments,Large Indian Company,6.0,7.3,13.3,10+ yrs,Yes
+EXP-00216,EMP-10216,2020-05-21,ITI,Textile & Garments,Mid-size Company,4.0,6.5,10.5,10+ yrs,Yes
+EXP-00217,EMP-10217,2023-05-27,B.Sc,FMCG,Large Indian Company,14.0,3.5,17.5,10+ yrs,Yes
+EXP-00218,EMP-10218,2023-06-28,Diploma,Fresher,None,0.0,3.4,3.4,3-6 yrs,Yes
+EXP-00219,EMP-10219,2021-10-26,ITI,FMCG,Mid-size Company,3.0,5.1,8.1,6-10 yrs,Yes
+EXP-00220,EMP-10220,2018-11-05,ITI,FMCG,Large Indian Company,2.0,8.0,10.0,6-10 yrs,Yes
+EXP-00221,EMP-10221,2019-07-08,ITI,Electronics Manufacturing,Large Indian Company,10.0,6.6,16.6,10+ yrs,Yes
+EXP-00222,EMP-10222,2020-04-29,B.Sc,Automobile,Small Enterprise,9.0,6.6,15.6,10+ yrs,Yes
+EXP-00223,EMP-10223,2021-02-14,12th,Electronics Manufacturing,Mid-size Company,13.0,5.8,18.8,10+ yrs,Yes
+EXP-00224,EMP-10224,2022-06-04,12th,Fresher,None,0.0,4.5,4.5,3-6 yrs,Yes
+EXP-00225,EMP-10225,2023-04-25,Diploma,Automobile,MNC,10.0,3.6,13.6,10+ yrs,Yes
+EXP-00226,EMP-10226,2022-05-02,Diploma,Telecom,Small Enterprise,5.0,4.6,9.6,6-10 yrs,Yes
+EXP-00227,EMP-10227,2020-03-04,Diploma,Electronics Manufacturing,Small Enterprise,15.0,6.7,21.7,10+ yrs,Yes
+EXP-00228,EMP-10228,2022-10-31,Diploma,FMCG,Mid-size Company,5.0,4.1,9.1,6-10 yrs,Yes
+EXP-00229,EMP-10229,2019-12-09,B.Sc,Textile & Garments,Small Enterprise,12.0,6.9,18.9,10+ yrs,Yes
+EXP-00230,EMP-10230,2020-01-31,B.E/B.Tech,FMCG,Small Enterprise,6.0,6.8,12.8,10+ yrs,Yes
+EXP-00231,EMP-10231,2020-04-28,10th,FMCG,Small Enterprise,1.0,6.6,7.6,6-10 yrs,Yes
+EXP-00232,EMP-10232,2021-08-09,ITI,Telecom,Large Indian Company,16.0,5.3,21.3,10+ yrs,Yes
+EXP-00233,EMP-10233,2021-05-19,ITI,Automobile,Mid-size Company,4.0,5.5,9.5,6-10 yrs,Yes
+EXP-00234,EMP-10234,2022-12-27,ITI,Electronics Manufacturing,MNC,8.0,3.9,11.9,10+ yrs,Yes
+EXP-00235,EMP-10235,2023-06-26,B.Sc,Electronics Manufacturing,MNC,12.0,3.4,15.4,10+ yrs,Yes
+EXP-00236,EMP-10236,2018-09-21,10th,Automobile,MNC,5.0,8.2,13.2,10+ yrs,Yes
+EXP-00237,EMP-10237,2020-04-16,ITI,FMCG,MNC,8.0,6.4,14.4,10+ yrs,Yes
+EXP-00238,EMP-10238,2020-12-23,Diploma,Telecom,Mid-size Company,14.0,5.9,19.9,10+ yrs,Yes
+EXP-00239,EMP-10239,2020-08-22,Diploma,Electronics Manufacturing,Mid-size Company,17.0,6.2,23.2,10+ yrs,Yes
+EXP-00240,EMP-10240,2022-10-27,ITI,Automobile,Large Indian Company,7.0,4.1,11.1,10+ yrs,Yes
+EXP-00241,EMP-10241,2021-05-05,Diploma,Textile & Garments,Mid-size Company,10.0,5.5,15.5,10+ yrs,Yes
+EXP-00242,EMP-10242,2025-08-25,12th,Fresher,None,0.0,1.2,1.2,1-3 yrs,Yes
+EXP-00243,EMP-10243,2020-05-31,Diploma,Automobile,Large Indian Company,13.0,6.5,19.5,10+ yrs,Yes
+EXP-00244,EMP-10244,2026-01-31,12th,Fresher,None,0.0,0.5,0.5,<1 yr,Yes
+EXP-00245,EMP-10245,2019-04-11,ITI,Electronics Manufacturing,MNC,11.0,7.6,18.6,10+ yrs,Yes
+EXP-00246,EMP-10246,2021-12-25,10th,FMCG,Mid-size Company,7.0,4.0,11.0,10+ yrs,Yes
+EXP-00247,EMP-10247,2024-08-30,12th,Automobile,Contract Staffing,4.0,2.2,6.2,6-10 yrs,Yes
+EXP-00248,EMP-10248,2021-12-18,Diploma,Electronics Manufacturing,Large Indian Company,9.0,4.9,13.9,10+ yrs,Yes
+EXP-00249,EMP-10249,2023-01-25,12th,Electronics Manufacturing,Large Indian Company,11.0,3.8,14.8,10+ yrs,Yes
+EXP-00250,EMP-10250,2022-12-15,ITI,Textile & Garments,Large Indian Company,11.0,3.9,14.9,10+ yrs,Yes
+EXP-00251,EMP-10251,2022-08-26,ITI,Retail,Mid-size Company,10.0,4.2,14.2,10+ yrs,Yes
+EXP-00252,EMP-10252,2024-07-26,ITI,Fresher,None,0.0,2.3,2.3,1-3 yrs,Yes
+EXP-00253,EMP-10253,2023-09-25,Diploma,Textile & Garments,Contract Staffing,13.0,3.2,16.2,10+ yrs,Yes
+EXP-00254,EMP-10254,2018-10-20,ITI,Electronics Manufacturing,Large Indian Company,7.0,8.1,15.1,10+ yrs,Yes
+EXP-00255,EMP-10255,2024-01-31,ITI,Fresher,None,0.0,2.8,2.8,1-3 yrs,Yes
+EXP-00256,EMP-10256,2019-04-26,Diploma,Electronics Manufacturing,Small Enterprise,11.0,7.6,18.6,10+ yrs,Yes
+EXP-00257,EMP-10257,2024-11-11,ITI,Fresher,None,0.0,2.0,2.0,1-3 yrs,Yes
+EXP-00258,EMP-10258,2023-03-21,ITI,Textile & Garments,Contract Staffing,7.0,3.7,10.7,10+ yrs,Yes
+EXP-00259,EMP-10259,2026-04-30,ITI,Fresher,None,0.0,0.6,0.6,<1 yr,Yes
+EXP-00260,EMP-10260,2018-11-13,10th,Electronics Manufacturing,Large Indian Company,7.0,8.0,15.0,10+ yrs,Yes
+EXP-00261,EMP-10261,2020-03-29,12th,Retail,Mid-size Company,7.0,6.6,13.6,10+ yrs,Yes
+EXP-00262,EMP-10262,2021-02-06,Diploma,Textile & Garments,MNC,11.0,5.8,16.8,10+ yrs,Yes
+EXP-00263,EMP-10263,2019-06-09,12th,Electronics Manufacturing,MNC,9.0,6.6,15.6,10+ yrs,Yes
+EXP-00264,EMP-10264,2021-03-22,B.Sc,Logistics & Warehousing,Large Indian Company,7.0,5.7,12.7,10+ yrs,Yes
+EXP-00265,EMP-10265,2025-11-16,12th,Fresher,None,0.0,1.0,1.0,<1 yr,Yes
+EXP-00266,EMP-10266,2019-07-03,12th,Electronics Manufacturing,Contract Staffing,6.0,7.4,13.4,10+ yrs,Yes
+EXP-00267,EMP-10267,2018-10-05,10th,Pharma,Small Enterprise,9.0,8.0,17.0,10+ yrs,Yes
+EXP-00268,EMP-10268,2020-10-01,Diploma,Telecom,Small Enterprise,11.0,6.1,17.1,10+ yrs,Yes
+EXP-00269,EMP-10269,2018-09-17,ITI,Automobile,Mid-size Company,11.0,8.2,19.2,10+ yrs,Yes
+EXP-00270,EMP-10270,2021-02-24,ITI,Electronics Manufacturing,Small Enterprise,9.0,5.7,14.7,10+ yrs,Yes
+EXP-00271,EMP-10271,2020-04-07,Diploma,Retail,MNC,3.0,6.6,9.6,6-10 yrs,Yes
+EXP-00272,EMP-10272,2022-02-21,12th,Telecom,MNC,6.0,4.7,10.7,10+ yrs,Yes
+EXP-00273,EMP-10273,2024-05-19,10th,FMCG,Mid-size Company,2.0,2.5,4.5,3-6 yrs,Yes
+EXP-00274,EMP-10274,2025-09-21,ITI,Fresher,None,0.0,1.2,1.2,1-3 yrs,Yes
+EXP-00275,EMP-10275,2026-03-19,Diploma,Electronics Manufacturing,Small Enterprise,11.0,0.7,11.7,10+ yrs,Yes
+EXP-00276,EMP-10276,2019-06-28,B.Sc,FMCG,Small Enterprise,6.0,7.4,13.4,10+ yrs,Yes
+EXP-00277,EMP-10277,2024-07-26,ITI,Telecom,Small Enterprise,4.0,2.3,6.3,6-10 yrs,Yes
+EXP-00278,EMP-10278,2020-08-04,ITI,Automobile,Mid-size Company,8.0,6.3,14.3,10+ yrs,Yes
+EXP-00279,EMP-10279,2019-05-05,B.E/B.Tech,Electronics Manufacturing,Mid-size Company,4.0,7.5,11.5,10+ yrs,Yes
+EXP-00280,EMP-10280,2024-11-21,ITI,Electronics Manufacturing,MNC,10.0,1.9,11.9,10+ yrs,Yes
+EXP-00281,EMP-10281,2021-08-10,ITI,Electronics Manufacturing,Contract Staffing,11.0,5.3,16.3,10+ yrs,Yes
+EXP-00282,EMP-10282,2021-08-04,Diploma,Logistics & Warehousing,Large Indian Company,7.0,5.2,12.2,10+ yrs,Yes
+EXP-00283,EMP-10283,2019-09-28,ITI,Automobile,Mid-size Company,11.0,7.1,18.1,10+ yrs,Yes
+EXP-00284,EMP-10284,2026-05-08,10th,Fresher,None,0.0,0.5,0.5,<1 yr,Yes
+EXP-00285,EMP-10285,2019-05-08,ITI,Electronics Manufacturing,Large Indian Company,5.0,6.7,11.7,10+ yrs,Yes
+EXP-00286,EMP-10286,2023-05-29,Diploma,Electronics Manufacturing,Mid-size Company,10.0,3.5,13.5,10+ yrs,Yes
+EXP-00287,EMP-10287,2020-02-02,ITI,Textile & Garments,Contract Staffing,7.0,6.8,13.8,10+ yrs,Yes
+EXP-00288,EMP-10288,2018-12-29,Diploma,Electronics Manufacturing,Large Indian Company,13.0,7.9,20.9,10+ yrs,Yes
+EXP-00289,EMP-10289,2024-07-11,10th,Fresher,None,0.0,2.4,2.4,1-3 yrs,Yes
+EXP-00290,EMP-10290,2020-07-01,12th,FMCG,Mid-size Company,7.0,6.4,13.4,10+ yrs,Yes
+EXP-00291,EMP-10291,2021-07-02,10th,Telecom,Large Indian Company,7.0,5.4,12.4,10+ yrs,Yes
+EXP-00292,EMP-10292,2024-04-23,ITI,Fresher,None,0.0,2.6,2.6,1-3 yrs,Yes
+EXP-00293,EMP-10293,2020-07-01,ITI,Automobile,Contract Staffing,3.0,6.4,9.4,6-10 yrs,Yes
+EXP-00294,EMP-10294,2026-04-12,ITI,Textile & Garments,Small Enterprise,1.0,0.6,1.6,1-3 yrs,Yes
+EXP-00295,EMP-10295,2020-12-04,10th,Telecom,Small Enterprise,6.0,5.1,11.1,10+ yrs,Yes
+EXP-00296,EMP-10296,2018-06-03,Diploma,Automobile,MNC,9.0,8.5,17.5,10+ yrs,Yes
+EXP-00297,EMP-10297,2018-06-28,Diploma,Automobile,Mid-size Company,7.0,8.4,15.4,10+ yrs,Yes
+EXP-00298,EMP-10298,2021-10-05,12th,Automobile,MNC,1.0,5.1,6.1,6-10 yrs,Yes
+EXP-00299,EMP-10299,2025-01-24,B.Sc,Logistics & Warehousing,Mid-size Company,9.0,1.8,10.8,10+ yrs,Yes
+EXP-00300,EMP-10300,2020-12-06,B.Sc,Electronics Manufacturing,Large Indian Company,1.0,6.0,7.0,6-10 yrs,Yes
+EXP-00301,EMP-10301,2022-03-03,Diploma,Telecom,Contract Staffing,12.0,4.7,16.7,10+ yrs,Yes
+EXP-00302,EMP-10302,2025-07-20,ITI,Fresher,None,0.0,1.3,1.3,1-3 yrs,Yes
+EXP-00303,EMP-10303,2021-02-22,ITI,Automobile,Mid-size Company,9.0,5.7,14.7,10+ yrs,Yes
+EXP-00304,EMP-10304,2022-08-25,B.Sc,Electronics Manufacturing,Contract Staffing,7.0,4.2,11.2,10+ yrs,Yes
+EXP-00305,EMP-10305,2020-11-10,B.E/B.Tech,Automobile,Small Enterprise,5.0,6.0,11.0,10+ yrs,Yes
+EXP-00306,EMP-10306,2022-10-30,10th,Automobile,Small Enterprise,9.0,4.1,13.1,10+ yrs,Yes
+EXP-00307,EMP-10307,2019-11-28,ITI,Electronics Manufacturing,Mid-size Company,12.0,7.0,19.0,10+ yrs,Yes
+EXP-00308,EMP-10308,2025-08-10,10th,Fresher,None,0.0,1.3,1.3,1-3 yrs,Yes
+EXP-00309,EMP-10309,2018-12-28,12th,Electronics Manufacturing,Small Enterprise,4.0,7.9,11.9,10+ yrs,Yes
+EXP-00310,EMP-10310,2020-04-29,12th,Telecom,Small Enterprise,14.0,6.6,20.6,10+ yrs,Yes
+EXP-00311,EMP-10311,2023-12-26,Diploma,Fresher,None,0.0,2.9,2.9,1-3 yrs,Yes
+EXP-00312,EMP-10312,2023-01-06,12th,Electronics Manufacturing,Small Enterprise,7.0,3.9,10.9,10+ yrs,Yes
+EXP-00313,EMP-10313,2022-06-05,Diploma,Pharma,Mid-size Company,16.0,4.5,20.5,10+ yrs,Yes
+EXP-00314,EMP-10314,2022-06-09,ITI,Logistics & Warehousing,MNC,1.0,4.4,5.4,3-6 yrs,Yes
+EXP-00315,EMP-10315,2025-05-02,Diploma,Fresher,None,0.0,1.6,1.6,1-3 yrs,Yes
+EXP-00316,EMP-10316,2022-08-15,10th,Electronics Manufacturing,Large Indian Company,9.0,4.3,13.3,10+ yrs,Yes
+EXP-00317,EMP-10317,2023-04-03,Diploma,Textile & Garments,Mid-size Company,14.0,3.6,17.6,10+ yrs,Yes
+EXP-00318,EMP-10318,2020-11-03,Diploma,Electronics Manufacturing,Mid-size Company,5.0,6.0,11.0,10+ yrs,Yes
+EXP-00319,EMP-10319,2025-10-07,ITI,Fresher,None,0.0,1.1,1.1,1-3 yrs,Yes
+EXP-00320,EMP-10320,2026-04-11,ITI,Fresher,None,0.0,0.6,0.6,<1 yr,Yes
+EXP-00321,EMP-10321,2026-04-18,10th,Fresher,None,0.0,0.6,0.6,<1 yr,Yes
+EXP-00322,EMP-10322,2018-12-10,12th,Telecom,Large Indian Company,3.0,7.9,10.9,10+ yrs,Yes
+EXP-00323,EMP-10323,2019-06-15,ITI,Electronics Manufacturing,Mid-size Company,2.0,7.4,9.4,6-10 yrs,Yes
+EXP-00324,EMP-10324,2020-01-29,ITI,Electronics Manufacturing,MNC,5.0,6.8,11.8,10+ yrs,Yes
+EXP-00325,EMP-10325,2019-06-10,10th,Textile & Garments,Mid-size Company,9.0,7.4,16.4,10+ yrs,Yes
+EXP-00326,EMP-10326,2025-09-17,Diploma,Fresher,None,0.0,1.2,1.2,1-3 yrs,Yes
+EXP-00327,EMP-10327,2023-09-03,ITI,Automobile,MNC,4.0,3.2,7.2,6-10 yrs,Yes
+EXP-00328,EMP-10328,2020-11-19,12th,Automobile,Mid-size Company,8.0,6.0,14.0,10+ yrs,Yes
+EXP-00329,EMP-10329,2024-05-25,Diploma,Telecom,MNC,6.0,2.0,8.0,6-10 yrs,Yes
+EXP-00330,EMP-10330,2021-01-22,B.E/B.Tech,Automobile,Mid-size Company,8.0,5.8,13.8,10+ yrs,Yes
+EXP-00331,EMP-10331,2020-10-25,12th,Electronics Manufacturing,Large Indian Company,7.0,6.1,13.1,10+ yrs,Yes
+EXP-00332,EMP-10332,2020-07-08,ITI,Fresher,None,0.0,6.4,6.4,6-10 yrs,Yes
+EXP-00333,EMP-10333,2024-03-10,12th,FMCG,Contract Staffing,5.0,2.7,7.7,6-10 yrs,Yes
+EXP-00334,EMP-10334,2022-11-23,10th,Fresher,None,0.0,4.0,4.0,3-6 yrs,Yes
+EXP-00335,EMP-10335,2021-12-18,10th,Electronics Manufacturing,Mid-size Company,9.0,4.9,13.9,10+ yrs,Yes
+EXP-00336,EMP-10336,2020-08-03,B.E/B.Tech,Textile & Garments,Mid-size Company,12.0,6.3,18.3,10+ yrs,Yes
+EXP-00337,EMP-10337,2022-02-03,10th,Logistics & Warehousing,Mid-size Company,10.0,4.0,14.0,10+ yrs,Yes
+EXP-00338,EMP-10338,2021-11-06,10th,Electronics Manufacturing,Large Indian Company,5.0,5.0,10.0,6-10 yrs,Yes
+EXP-00339,EMP-10339,2024-06-11,B.Sc,Retail,Large Indian Company,5.0,2.4,7.4,6-10 yrs,Yes
+EXP-00340,EMP-10340,2020-04-18,12th,Automobile,Contract Staffing,12.0,6.6,18.6,10+ yrs,Yes
+EXP-00341,EMP-10341,2025-02-09,ITI,Electronics Manufacturing,Mid-size Company,7.0,1.8,8.8,6-10 yrs,Yes
+EXP-00342,EMP-10342,2023-01-14,12th,Fresher,None,0.0,3.8,3.8,3-6 yrs,Yes
+EXP-00343,EMP-10343,2021-03-03,B.E/B.Tech,Electronics Manufacturing,Mid-size Company,10.0,5.7,15.7,10+ yrs,Yes
+EXP-00344,EMP-10344,2024-04-08,Diploma,FMCG,Contract Staffing,9.0,2.6,11.6,10+ yrs,Yes
+EXP-00345,EMP-10345,2021-10-21,ITI,Automobile,Contract Staffing,3.0,5.1,8.1,6-10 yrs,Yes
+EXP-00346,EMP-10346,2023-08-26,B.Sc,Electronics Manufacturing,Large Indian Company,2.0,3.2,5.2,3-6 yrs,Yes
+EXP-00347,EMP-10347,2025-04-18,10th,Fresher,None,0.0,1.6,1.6,1-3 yrs,Yes
+EXP-00348,EMP-10348,2020-08-14,ITI,Pharma,MNC,11.0,6.3,17.3,10+ yrs,Yes
+EXP-00349,EMP-10349,2020-10-17,ITI,Fresher,None,0.0,6.1,6.1,6-10 yrs,Yes
+EXP-00350,EMP-10350,2022-04-23,12th,Fresher,None,0.0,4.6,4.6,3-6 yrs,Yes
+EXP-00351,EMP-10351,2023-05-22,ITI,Pharma,Contract Staffing,11.0,3.5,14.5,10+ yrs,Yes
+EXP-00352,EMP-10352,2024-06-25,ITI,Retail,Contract Staffing,8.0,2.4,10.4,10+ yrs,Yes
+EXP-00353,EMP-10353,2020-08-29,Diploma,Automobile,Small Enterprise,6.0,6.2,12.2,10+ yrs,Yes
+EXP-00354,EMP-10354,2021-04-19,12th,Automobile,Small Enterprise,6.0,5.6,11.6,10+ yrs,Yes
+EXP-00355,EMP-10355,2026-03-05,Diploma,Fresher,None,0.0,0.7,0.7,<1 yr,Yes
+EXP-00356,EMP-10356,2024-11-20,Diploma,Automobile,Mid-size Company,8.0,2.0,10.0,6-10 yrs,Yes
+EXP-00357,EMP-10357,2022-03-30,12th,Automobile,Large Indian Company,2.0,4.6,6.6,6-10 yrs,Yes
+EXP-00358,EMP-10358,2021-09-04,ITI,Fresher,None,0.0,5.2,5.2,3-6 yrs,Yes
+EXP-00359,EMP-10359,2024-02-07,B.Sc,Textile & Garments,Small Enterprise,5.0,2.8,7.8,6-10 yrs,Yes
+EXP-00360,EMP-10360,2024-02-28,ITI,Automobile,MNC,11.0,2.7,13.7,10+ yrs,Yes
+EXP-00361,EMP-10361,2022-11-23,Diploma,Electronics Manufacturing,Mid-size Company,5.0,4.0,9.0,6-10 yrs,Yes
+EXP-00362,EMP-10362,2019-06-30,B.Sc,Electronics Manufacturing,Mid-size Company,15.0,7.4,22.4,10+ yrs,Yes
+EXP-00363,EMP-10363,2018-09-10,ITI,Electronics Manufacturing,Mid-size Company,12.0,7.6,19.6,10+ yrs,Yes
+EXP-00364,EMP-10364,2023-10-30,ITI,Automobile,Small Enterprise,14.0,3.1,17.1,10+ yrs,Yes
+EXP-00365,EMP-10365,2020-11-02,ITI,Fresher,None,0.0,6.0,6.0,3-6 yrs,Yes
+EXP-00366,EMP-10366,2025-03-30,Diploma,Electronics Manufacturing,Large Indian Company,6.0,1.6,7.6,6-10 yrs,Yes
+EXP-00367,EMP-10367,2025-09-11,10th,Fresher,None,0.0,1.2,1.2,1-3 yrs,Yes
+EXP-00368,EMP-10368,2021-06-28,B.E/B.Tech,Electronics Manufacturing,Contract Staffing,11.0,5.4,16.4,10+ yrs,Yes
+EXP-00369,EMP-10369,2019-12-06,Diploma,FMCG,MNC,14.0,7.0,21.0,10+ yrs,Yes
+EXP-00370,EMP-10370,2022-02-03,ITI,Textile & Garments,Large Indian Company,3.0,4.8,7.8,6-10 yrs,Yes
+EXP-00371,EMP-10371,2026-06-05,ITI,Fresher,None,0.0,0.5,0.5,<1 yr,No
+EXP-00372,EMP-10372,2024-12-08,Diploma,Electronics Manufacturing,Mid-size Company,4.0,1.9,5.9,3-6 yrs,Yes
+EXP-00373,EMP-10373,2022-07-17,12th,Electronics Manufacturing,Large Indian Company,3.0,4.3,7.3,6-10 yrs,Yes
+EXP-00374,EMP-10374,2021-08-23,ITI,Automobile,Small Enterprise,8.0,5.2,13.2,10+ yrs,Yes
+EXP-00375,EMP-10375,2020-11-19,10th,Electronics Manufacturing,Large Indian Company,3.0,6.0,9.0,6-10 yrs,Yes
+EXP-00376,EMP-10376,2022-08-14,ITI,Electronics Manufacturing,Mid-size Company,9.0,4.3,13.3,10+ yrs,Yes
+EXP-00377,EMP-10377,2021-12-19,Diploma,Pharma,Small Enterprise,12.0,4.9,16.9,10+ yrs,Yes
+EXP-00378,EMP-10378,2021-07-05,ITI,Electronics Manufacturing,MNC,8.0,5.4,13.4,10+ yrs,Yes
+EXP-00379,EMP-10379,2020-12-08,ITI,Automobile,Mid-size Company,8.0,5.9,13.9,10+ yrs,Yes
+EXP-00380,EMP-10380,2019-11-07,ITI,Logistics & Warehousing,Mid-size Company,3.0,7.0,10.0,6-10 yrs,Yes
+EXP-00381,EMP-10381,2021-12-24,Diploma,Automobile,Small Enterprise,5.0,4.9,9.9,6-10 yrs,Yes
+EXP-00382,EMP-10382,2022-02-23,ITI,Logistics & Warehousing,Small Enterprise,10.0,4.7,14.7,10+ yrs,Yes
+EXP-00383,EMP-10383,2021-11-24,Diploma,Fresher,None,0.0,5.0,5.0,3-6 yrs,Yes
+EXP-00384,EMP-10384,2022-02-25,ITI,FMCG,Small Enterprise,9.0,4.7,13.7,10+ yrs,Yes
+EXP-00385,EMP-10385,2018-07-08,ITI,Electronics Manufacturing,Mid-size Company,14.0,8.4,22.4,10+ yrs,Yes
+EXP-00386,EMP-10386,2023-05-16,Diploma,Pharma,Small Enterprise,5.0,3.5,8.5,6-10 yrs,Yes
+EXP-00387,EMP-10387,2024-03-29,Diploma,Electronics Manufacturing,Small Enterprise,6.0,2.6,8.6,6-10 yrs,Yes
+EXP-00388,EMP-10388,2023-05-20,10th,Fresher,None,0.0,2.9,2.9,1-3 yrs,Yes
+EXP-00389,EMP-10389,2022-11-11,Diploma,Pharma,MNC,13.0,4.0,17.0,10+ yrs,Yes
+EXP-00390,EMP-10390,2021-11-27,B.Sc,FMCG,Large Indian Company,3.0,5.0,8.0,6-10 yrs,Yes
+EXP-00391,EMP-10391,2019-12-06,Diploma,Electronics Manufacturing,Mid-size Company,7.0,7.0,14.0,10+ yrs,Yes
+EXP-00392,EMP-10392,2020-02-08,B.Sc,Electronics Manufacturing,Mid-size Company,9.0,6.8,15.8,10+ yrs,Yes
+EXP-00393,EMP-10393,2022-05-26,10th,Electronics Manufacturing,Large Indian Company,2.0,4.3,6.3,6-10 yrs,Yes
+EXP-00394,EMP-10394,2021-03-01,Diploma,Automobile,MNC,17.0,5.7,22.7,10+ yrs,Yes
+EXP-00395,EMP-10395,2022-07-19,ITI,Electronics Manufacturing,Mid-size Company,5.0,4.3,9.3,6-10 yrs,Yes
+EXP-00396,EMP-10396,2022-09-05,B.Sc,Electronics Manufacturing,Small Enterprise,13.0,4.2,17.2,10+ yrs,Yes
+EXP-00397,EMP-10397,2019-11-23,12th,Electronics Manufacturing,Large Indian Company,10.0,7.0,17.0,10+ yrs,Yes
+EXP-00398,EMP-10398,2024-04-27,Diploma,Automobile,Small Enterprise,17.0,2.6,19.6,10+ yrs,Yes
+EXP-00399,EMP-10399,2019-03-04,B.E/B.Tech,Automobile,Mid-size Company,1.0,7.7,8.7,6-10 yrs,Yes
+EXP-00400,EMP-10400,2025-12-20,12th,Fresher,None,0.0,0.9,0.9,<1 yr,Yes
+EXP-00401,EMP-10401,2020-07-02,Diploma,Electronics Manufacturing,Contract Staffing,7.0,6.4,13.4,10+ yrs,Yes
+EXP-00402,EMP-10402,2025-09-24,Diploma,Fresher,None,0.0,1.2,1.2,1-3 yrs,Yes
+EXP-00403,EMP-10403,2024-06-15,B.Sc,Automobile,Contract Staffing,7.0,2.4,9.4,6-10 yrs,Yes
+EXP-00404,EMP-10404,2025-04-09,ITI,Electronics Manufacturing,MNC,5.0,1.6,6.6,6-10 yrs,Yes
+EXP-00405,EMP-10405,2020-12-22,10th,Electronics Manufacturing,Large Indian Company,8.0,5.9,13.9,10+ yrs,Yes
+EXP-00406,EMP-10406,2020-11-02,Diploma,FMCG,Contract Staffing,6.0,6.0,12.0,10+ yrs,Yes
+EXP-00407,EMP-10407,2021-07-13,12th,Electronics Manufacturing,Large Indian Company,5.0,5.4,10.4,10+ yrs,Yes
+EXP-00408,EMP-10408,2021-12-28,ITI,Pharma,Contract Staffing,7.0,4.9,11.9,10+ yrs,Yes
+EXP-00409,EMP-10409,2024-03-29,Diploma,Automobile,MNC,2.0,2.6,4.6,3-6 yrs,Yes
+EXP-00410,EMP-10410,2020-05-25,Diploma,Electronics Manufacturing,MNC,2.0,6.5,8.5,6-10 yrs,Yes
+EXP-00411,EMP-10411,2020-08-15,ITI,Automobile,Large Indian Company,3.0,5.7,8.7,6-10 yrs,Yes
+EXP-00412,EMP-10412,2020-03-04,ITI,Pharma,Contract Staffing,4.0,6.7,10.7,10+ yrs,Yes
+EXP-00413,EMP-10413,2024-11-07,Diploma,Automobile,Large Indian Company,4.0,2.0,6.0,3-6 yrs,Yes
+EXP-00414,EMP-10414,2025-01-23,10th,Fresher,None,0.0,1.8,1.8,1-3 yrs,Yes
+EXP-00415,EMP-10415,2026-07-02,Diploma,Fresher,None,0.0,0.4,0.4,<1 yr,No
+EXP-00416,EMP-10416,2021-07-08,B.Sc,Electronics Manufacturing,Contract Staffing,6.0,4.5,10.5,10+ yrs,Yes
+EXP-00417,EMP-10417,2020-05-21,Diploma,Automobile,Mid-size Company,15.0,6.5,21.5,10+ yrs,Yes
+EXP-00418,EMP-10418,2020-11-19,ITI,Automobile,Large Indian Company,15.0,6.0,21.0,10+ yrs,Yes
+EXP-00419,EMP-10419,2023-07-25,ITI,Electronics Manufacturing,Contract Staffing,2.0,3.0,5.0,3-6 yrs,Yes
+EXP-00420,EMP-10420,2022-03-21,ITI,FMCG,Mid-size Company,20.0,4.7,24.7,10+ yrs,Yes
+EXP-00421,EMP-10421,2024-08-04,MBA,FMCG,Small Enterprise,5.0,2.3,7.3,6-10 yrs,Yes
+EXP-00422,EMP-10422,2021-08-12,Diploma,Textile & Garments,Mid-size Company,1.0,5.3,6.3,6-10 yrs,Yes
+EXP-00423,EMP-10423,2024-07-01,ITI,Automobile,Small Enterprise,7.0,2.4,9.4,6-10 yrs,Yes
+EXP-00424,EMP-10424,2022-02-25,12th,Electronics Manufacturing,Large Indian Company,11.0,4.7,15.7,10+ yrs,Yes
+EXP-00425,EMP-10425,2021-04-30,ITI,Electronics Manufacturing,Contract Staffing,12.0,5.6,17.6,10+ yrs,Yes
+EXP-00426,EMP-10426,2021-05-29,ITI,Electronics Manufacturing,Large Indian Company,1.0,5.5,6.5,6-10 yrs,Yes
+EXP-00427,EMP-10427,2019-03-12,B.E/B.Tech,FMCG,MNC,7.0,7.7,14.7,10+ yrs,Yes
+EXP-00428,EMP-10428,2021-08-12,ITI,Electronics Manufacturing,Contract Staffing,11.0,5.3,16.3,10+ yrs,Yes
+EXP-00429,EMP-10429,2025-07-04,12th,Electronics Manufacturing,Large Indian Company,0.1,1.4,1.5,1-3 yrs,Yes
+EXP-00430,EMP-10430,2019-09-25,ITI,FMCG,Contract Staffing,7.0,7.2,14.2,10+ yrs,Yes
+EXP-00431,EMP-10431,2021-01-29,ITI,Automobile,Large Indian Company,2.0,5.8,7.8,6-10 yrs,Yes
+EXP-00432,EMP-10432,2023-02-12,ITI,FMCG,Large Indian Company,10.0,3.8,13.8,10+ yrs,Yes
+EXP-00433,EMP-10433,2025-08-12,12th,Fresher,None,0.0,0.3,0.3,<1 yr,No
+EXP-00434,EMP-10434,2019-03-17,Diploma,Electronics Manufacturing,Large Indian Company,12.0,7.7,19.7,10+ yrs,Yes
+EXP-00435,EMP-10435,2022-07-30,Diploma,FMCG,Mid-size Company,5.0,4.3,9.3,6-10 yrs,Yes
+EXP-00436,EMP-10436,2018-08-17,ITI,Pharma,Contract Staffing,9.0,8.3,17.3,10+ yrs,Yes
+EXP-00437,EMP-10437,2020-04-07,ITI,Fresher,None,0.0,6.6,6.6,6-10 yrs,Yes
+EXP-00438,EMP-10438,2022-06-18,10th,Fresher,None,0.0,4.4,4.4,3-6 yrs,Yes
+EXP-00439,EMP-10439,2021-03-15,ITI,Electronics Manufacturing,Mid-size Company,14.0,5.7,19.7,10+ yrs,Yes
+EXP-00440,EMP-10440,2025-01-28,12th,Fresher,None,0.0,1.8,1.8,1-3 yrs,Yes
+EXP-00441,EMP-10441,2025-10-11,10th,Fresher,None,0.0,1.1,1.1,1-3 yrs,Yes
+EXP-00442,EMP-10442,2020-11-19,Diploma,Electronics Manufacturing,Contract Staffing,6.0,6.0,12.0,10+ yrs,Yes
+EXP-00443,EMP-10443,2024-04-19,10th,Fresher,None,0.0,2.6,2.6,1-3 yrs,Yes
+EXP-00444,EMP-10444,2023-07-25,Diploma,Fresher,None,0.0,3.3,3.3,3-6 yrs,Yes
+EXP-00445,EMP-10445,2024-06-20,ITI,Electronics Manufacturing,Small Enterprise,10.0,2.4,12.4,10+ yrs,Yes
+EXP-00446,EMP-10446,2023-08-26,B.E/B.Tech,Electronics Manufacturing,MNC,5.0,3.2,8.2,6-10 yrs,Yes
+EXP-00447,EMP-10447,2021-11-13,Diploma,Automobile,Large Indian Company,12.0,5.0,17.0,10+ yrs,Yes
+EXP-00448,EMP-10448,2018-10-14,ITI,Retail,MNC,5.0,8.1,13.1,10+ yrs,Yes
+EXP-00449,EMP-10449,2019-04-12,B.Sc,FMCG,Mid-size Company,7.0,7.6,14.6,10+ yrs,Yes
+EXP-00450,EMP-10450,2022-01-22,B.E/B.Tech,Electronics Manufacturing,Large Indian Company,8.0,4.8,12.8,10+ yrs,Yes
+EXP-00451,EMP-10451,2020-06-23,Diploma,Pharma,Mid-size Company,6.0,5.9,11.9,10+ yrs,Yes
+EXP-00452,EMP-10452,2023-12-11,12th,Fresher,None,0.0,2.9,2.9,1-3 yrs,Yes
+EXP-00453,EMP-10453,2025-10-29,12th,Fresher,None,0.0,1.1,1.1,1-3 yrs,Yes
+EXP-00454,EMP-10454,2018-10-08,10th,Electronics Manufacturing,Large Indian Company,8.0,8.1,16.1,10+ yrs,Yes
+EXP-00455,EMP-10455,2023-06-18,ITI,Electronics Manufacturing,Mid-size Company,8.0,3.4,11.4,10+ yrs,Yes
+EXP-00456,EMP-10456,2023-01-14,ITI,FMCG,Contract Staffing,5.0,3.8,8.8,6-10 yrs,Yes
+EXP-00457,EMP-10457,2021-06-02,12th,Electronics Manufacturing,Mid-size Company,3.0,5.5,8.5,6-10 yrs,Yes
+EXP-00458,EMP-10458,2019-08-25,Diploma,Telecom,Mid-size Company,15.0,7.2,22.2,10+ yrs,Yes
+EXP-00459,EMP-10459,2022-06-17,10th,Retail,MNC,4.0,4.4,8.4,6-10 yrs,Yes
+EXP-00460,EMP-10460,2021-11-18,Diploma,Electronics Manufacturing,Large Indian Company,10.0,5.0,15.0,10+ yrs,Yes
+EXP-00461,EMP-10461,2024-04-04,12th,Electronics Manufacturing,Mid-size Company,1.0,2.6,3.6,3-6 yrs,Yes
+EXP-00462,EMP-10462,2020-07-05,Diploma,Telecom,Large Indian Company,7.0,6.4,13.4,10+ yrs,Yes
+EXP-00463,EMP-10463,2025-10-29,10th,Fresher,None,0.0,1.1,1.1,1-3 yrs,Yes
+EXP-00464,EMP-10464,2020-07-07,10th,Telecom,Small Enterprise,10.0,6.4,16.4,10+ yrs,Yes
+EXP-00465,EMP-10465,2024-06-29,ITI,Fresher,None,0.0,2.4,2.4,1-3 yrs,Yes
+EXP-00466,EMP-10466,2023-10-15,Diploma,Telecom,Large Indian Company,10.0,3.1,13.1,10+ yrs,Yes
+EXP-00467,EMP-10467,2025-10-10,MBA,Textile & Garments,Small Enterprise,2.0,1.1,3.1,3-6 yrs,Yes
+EXP-00468,EMP-10468,2022-05-25,12th,Textile & Garments,Large Indian Company,8.0,4.5,12.5,10+ yrs,Yes
+EXP-00469,EMP-10469,2022-08-27,12th,FMCG,Small Enterprise,7.0,4.2,11.2,10+ yrs,Yes
+EXP-00470,EMP-10470,2021-10-01,Diploma,Telecom,Contract Staffing,4.0,5.1,9.1,6-10 yrs,Yes
+EXP-00471,EMP-10471,2018-07-14,ITI,Textile & Garments,Contract Staffing,2.0,8.4,10.4,10+ yrs,Yes
+EXP-00472,EMP-10472,2023-11-15,B.Sc,Automobile,Contract Staffing,8.0,3.0,11.0,10+ yrs,Yes
+EXP-00473,EMP-10473,2022-11-02,MBA,Textile & Garments,Contract Staffing,8.0,4.0,12.0,10+ yrs,Yes
+EXP-00474,EMP-10474,2020-10-13,ITI,Logistics & Warehousing,Large Indian Company,3.0,6.1,9.1,6-10 yrs,Yes
+EXP-00475,EMP-10475,2024-12-29,10th,Fresher,None,0.0,1.9,1.9,1-3 yrs,Yes
+EXP-00476,EMP-10476,2022-04-19,12th,Electronics Manufacturing,MNC,10.0,4.6,14.6,10+ yrs,Yes
+EXP-00477,EMP-10477,2019-11-05,B.E/B.Tech,Electronics Manufacturing,Small Enterprise,13.0,7.0,20.0,10+ yrs,Yes
+EXP-00478,EMP-10478,2020-11-12,Diploma,Electronics Manufacturing,Large Indian Company,15.0,6.0,21.0,10+ yrs,Yes
+EXP-00479,EMP-10479,2020-05-02,12th,Electronics Manufacturing,Contract Staffing,13.0,6.6,19.6,10+ yrs,Yes
+EXP-00480,EMP-10480,2022-03-30,B.E/B.Tech,Electronics Manufacturing,Mid-size Company,7.0,4.6,11.6,10+ yrs,Yes
+EXP-00481,EMP-10481,2020-11-08,ITI,Electronics Manufacturing,Small Enterprise,4.0,6.0,10.0,6-10 yrs,Yes
+EXP-00482,EMP-10482,2021-12-09,ITI,Fresher,None,0.0,4.9,4.9,3-6 yrs,Yes
+EXP-00483,EMP-10483,2019-05-28,10th,Retail,Small Enterprise,7.0,7.5,14.5,10+ yrs,Yes
+EXP-00484,EMP-10484,2022-07-04,ITI,Automobile,MNC,3.0,4.4,7.4,6-10 yrs,Yes
+EXP-00485,EMP-10485,2020-04-25,B.E/B.Tech,Automobile,Contract Staffing,5.0,6.6,11.6,10+ yrs,Yes
+EXP-00486,EMP-10486,2023-09-28,10th,Fresher,None,0.0,3.1,3.1,3-6 yrs,Yes
+EXP-00487,EMP-10487,2020-08-19,Diploma,Automobile,Contract Staffing,7.0,6.3,13.3,10+ yrs,Yes
+EXP-00488,EMP-10488,2023-10-07,B.E/B.Tech,Electronics Manufacturing,Small Enterprise,9.0,3.1,12.1,10+ yrs,Yes
+EXP-00489,EMP-10489,2021-04-23,12th,Automobile,MNC,10.0,5.6,15.6,10+ yrs,Yes
+EXP-00490,EMP-10490,2023-07-28,ITI,Electronics Manufacturing,Large Indian Company,4.0,3.3,7.3,6-10 yrs,Yes
+EXP-00491,EMP-10491,2020-11-25,MBA,Electronics Manufacturing,MNC,12.0,6.0,18.0,10+ yrs,Yes
+EXP-00492,EMP-10492,2020-05-27,10th,Automobile,Small Enterprise,7.0,6.5,13.5,10+ yrs,Yes
+EXP-00493,EMP-10493,2018-10-04,ITI,Logistics & Warehousing,Mid-size Company,5.0,8.1,13.1,10+ yrs,Yes
+EXP-00494,EMP-10494,2023-07-30,B.Sc,Textile & Garments,Small Enterprise,7.0,3.3,10.3,10+ yrs,Yes
+EXP-00495,EMP-10495,2020-11-21,ITI,Fresher,None,0.0,6.0,6.0,3-6 yrs,Yes
+EXP-00496,EMP-10496,2023-06-16,B.E/B.Tech,Electronics Manufacturing,Small Enterprise,11.0,3.4,14.4,10+ yrs,Yes
+EXP-00497,EMP-10497,2025-09-27,12th,Fresher,None,0.0,1.1,1.1,1-3 yrs,Yes
+EXP-00498,EMP-10498,2023-05-04,Diploma,Textile & Garments,Large Indian Company,8.0,3.5,11.5,10+ yrs,Yes
+EXP-00499,EMP-10499,2020-05-01,ITI,Electronics Manufacturing,Large Indian Company,9.0,6.6,15.6,10+ yrs,Yes
+EXP-00500,EMP-10500,2020-04-05,12th,Logistics & Warehousing,Mid-size Company,1.0,6.6,7.6,6-10 yrs,Yes
+EXP-00501,EMP-10501,2023-03-14,Diploma,FMCG,Mid-size Company,4.0,3.7,7.7,6-10 yrs,Yes
+EXP-00502,EMP-10502,2020-10-29,10th,Pharma,Mid-size Company,1.0,6.1,7.1,6-10 yrs,Yes
+EXP-00503,EMP-10503,2019-06-26,Diploma,Textile & Garments,Mid-size Company,7.0,7.4,14.4,10+ yrs,Yes
+EXP-00504,EMP-10504,2018-10-10,12th,Telecom,Large Indian Company,7.0,8.1,15.1,10+ yrs,Yes
+EXP-00505,EMP-10505,2021-03-01,Diploma,Logistics & Warehousing,Mid-size Company,9.0,5.7,14.7,10+ yrs,Yes
+EXP-00506,EMP-10506,2023-05-05,Diploma,Automobile,Contract Staffing,8.0,3.5,11.5,10+ yrs,Yes
+EXP-00507,EMP-10507,2022-09-12,Diploma,Textile & Garments,Mid-size Company,11.0,4.2,15.2,10+ yrs,Yes
+EXP-00508,EMP-10508,2021-03-25,ITI,Electronics Manufacturing,MNC,7.0,5.4,12.4,10+ yrs,Yes
+EXP-00509,EMP-10509,2019-05-28,B.E/B.Tech,Automobile,Mid-size Company,3.0,7.5,10.5,10+ yrs,Yes
+EXP-00510,EMP-10510,2021-03-21,Diploma,Pharma,Small Enterprise,3.0,5.7,8.7,6-10 yrs,Yes
+EXP-00511,EMP-10511,2025-01-12,ITI,Fresher,None,0.0,1.9,1.9,1-3 yrs,Yes
+EXP-00512,EMP-10512,2024-04-16,Diploma,Fresher,None,0.0,2.6,2.6,1-3 yrs,Yes
+EXP-00513,EMP-10513,2020-12-24,10th,Pharma,Small Enterprise,1.0,5.9,6.9,6-10 yrs,Yes
+EXP-00514,EMP-10514,2018-08-19,B.E/B.Tech,Electronics Manufacturing,Large Indian Company,10.0,8.3,18.3,10+ yrs,Yes
+EXP-00515,EMP-10515,2021-01-30,Diploma,Fresher,None,0.0,5.8,5.8,3-6 yrs,Yes
+EXP-00516,EMP-10516,2020-02-13,ITI,Electronics Manufacturing,Large Indian Company,11.0,6.8,17.8,10+ yrs,Yes
+EXP-00517,EMP-10517,2022-07-12,ITI,Electronics Manufacturing,Contract Staffing,3.0,4.4,7.4,6-10 yrs,Yes
+EXP-00518,EMP-10518,2021-03-30,Diploma,Electronics Manufacturing,Large Indian Company,9.0,5.6,14.6,10+ yrs,Yes
+EXP-00519,EMP-10519,2021-03-26,B.E/B.Tech,Electronics Manufacturing,Mid-size Company,11.0,5.7,16.7,10+ yrs,Yes
+EXP-00520,EMP-10520,2021-03-10,12th,Electronics Manufacturing,Mid-size Company,5.0,5.7,10.7,10+ yrs,Yes
+EXP-00521,EMP-10521,2020-10-28,12th,Telecom,Large Indian Company,5.0,6.1,11.1,10+ yrs,Yes
+EXP-00522,EMP-10522,2020-05-19,12th,Electronics Manufacturing,Small Enterprise,13.0,6.5,19.5,10+ yrs,Yes
+EXP-00523,EMP-10523,2022-03-24,ITI,Logistics & Warehousing,Large Indian Company,8.0,4.7,12.7,10+ yrs,Yes
+EXP-00524,EMP-10524,2023-12-18,12th,Fresher,None,0.0,2.1,2.1,1-3 yrs,Yes
+EXP-00525,EMP-10525,2020-03-08,10th,Textile & Garments,Contract Staffing,10.0,6.7,16.7,10+ yrs,Yes
+EXP-00526,EMP-10526,2018-09-15,ITI,Fresher,None,0.0,8.2,8.2,6-10 yrs,Yes
+EXP-00527,EMP-10527,2024-03-26,Diploma,Fresher,None,0.0,2.7,2.7,1-3 yrs,Yes
+EXP-00528,EMP-10528,2023-01-11,Diploma,Electronics Manufacturing,Contract Staffing,15.0,3.9,18.9,10+ yrs,Yes
+EXP-00529,EMP-10529,2020-10-31,12th,Telecom,Contract Staffing,10.0,6.1,16.1,10+ yrs,Yes
+EXP-00530,EMP-10530,2022-08-12,Diploma,Telecom,Mid-size Company,5.0,4.3,9.3,6-10 yrs,Yes
+EXP-00531,EMP-10531,2019-01-13,B.E/B.Tech,Electronics Manufacturing,Contract Staffing,8.0,7.9,15.9,10+ yrs,Yes
+EXP-00532,EMP-10532,2020-11-07,Diploma,Logistics & Warehousing,Mid-size Company,6.0,6.0,12.0,10+ yrs,Yes
+EXP-00533,EMP-10533,2021-08-08,ITI,Electronics Manufacturing,MNC,4.0,5.3,9.3,6-10 yrs,Yes
+EXP-00534,EMP-10534,2020-04-22,ITI,Automobile,Large Indian Company,6.0,6.6,12.6,10+ yrs,Yes
+EXP-00535,EMP-10535,2018-07-16,B.E/B.Tech,Electronics Manufacturing,Large Indian Company,4.0,8.3,12.3,10+ yrs,Yes
+EXP-00536,EMP-10536,2023-07-24,Diploma,Electronics Manufacturing,Contract Staffing,11.0,3.3,14.3,10+ yrs,Yes
+EXP-00537,EMP-10537,2023-09-20,ITI,Textile & Garments,Contract Staffing,15.0,3.2,18.2,10+ yrs,Yes
+EXP-00538,EMP-10538,2020-12-27,ITI,Textile & Garments,Contract Staffing,11.0,5.9,16.9,10+ yrs,Yes
+EXP-00539,EMP-10539,2024-09-08,B.E/B.Tech,Textile & Garments,Mid-size Company,7.0,2.2,9.2,6-10 yrs,Yes
+EXP-00540,EMP-10540,2019-01-13,12th,Telecom,MNC,1.0,7.9,8.9,6-10 yrs,Yes
+EXP-00541,EMP-10541,2022-11-18,Diploma,Retail,MNC,4.0,4.0,8.0,6-10 yrs,Yes
+EXP-00542,EMP-10542,2023-05-07,B.E/B.Tech,Textile & Garments,MNC,8.0,3.5,11.5,10+ yrs,Yes
+EXP-00543,EMP-10543,2019-01-22,ITI,Automobile,Large Indian Company,8.0,7.8,15.8,10+ yrs,Yes
+EXP-00544,EMP-10544,2022-06-04,B.Sc,Pharma,Mid-size Company,10.0,4.5,14.5,10+ yrs,Yes
+EXP-00545,EMP-10545,2019-05-16,12th,Electronics Manufacturing,MNC,7.0,7.5,14.5,10+ yrs,Yes
+EXP-00546,EMP-10546,2020-06-23,ITI,Telecom,Large Indian Company,5.0,6.4,11.4,10+ yrs,Yes
+EXP-00547,EMP-10547,2025-11-05,12th,Fresher,None,0.0,1.0,1.0,<1 yr,Yes
+EXP-00548,EMP-10548,2018-07-20,B.E/B.Tech,FMCG,Small Enterprise,1.0,8.3,9.3,6-10 yrs,Yes
+EXP-00549,EMP-10549,2019-08-18,B.E/B.Tech,Electronics Manufacturing,Mid-size Company,9.0,7.3,16.3,10+ yrs,Yes
+EXP-00550,EMP-10550,2025-01-15,B.E/B.Tech,Electronics Manufacturing,MNC,6.0,1.8,7.8,6-10 yrs,Yes
+EXP-00551,EMP-10551,2024-12-15,Diploma,Automobile,MNC,2.0,1.9,3.9,3-6 yrs,Yes
+EXP-00552,EMP-10552,2024-09-01,B.Sc,Electronics Manufacturing,Large Indian Company,12.0,2.2,14.2,10+ yrs,Yes
+EXP-00553,EMP-10553,2024-01-31,Diploma,Electronics Manufacturing,MNC,1.0,2.8,3.8,3-6 yrs,Yes
+EXP-00554,EMP-10554,2020-04-08,Diploma,Fresher,None,0.0,6.6,6.6,6-10 yrs,Yes
+EXP-00555,EMP-10555,2020-09-18,12th,Textile & Garments,Mid-size Company,4.0,5.4,9.4,6-10 yrs,Yes
+EXP-00556,EMP-10556,2024-11-29,Diploma,FMCG,Large Indian Company,2.0,2.0,4.0,3-6 yrs,Yes
+EXP-00557,EMP-10557,2024-02-15,12th,Fresher,None,0.0,2.8,2.8,1-3 yrs,Yes
+EXP-00558,EMP-10558,2025-11-02,B.Sc,Electronics Manufacturing,Mid-size Company,1.0,1.0,2.0,1-3 yrs,Yes
+EXP-00559,EMP-10559,2022-06-21,12th,Fresher,None,0.0,4.4,4.4,3-6 yrs,Yes
+EXP-00560,EMP-10560,2021-05-07,Diploma,Electronics Manufacturing,Small Enterprise,3.0,5.5,8.5,6-10 yrs,Yes
+EXP-00561,EMP-10561,2018-12-01,Diploma,Textile & Garments,MNC,15.0,8.0,23.0,10+ yrs,Yes
+EXP-00562,EMP-10562,2021-03-29,ITI,Pharma,Mid-size Company,7.0,5.6,12.6,10+ yrs,Yes
+EXP-00563,EMP-10563,2021-03-15,12th,Telecom,MNC,9.0,5.7,14.7,10+ yrs,Yes
+EXP-00564,EMP-10564,2024-07-01,12th,Fresher,None,0.0,2.4,2.4,1-3 yrs,Yes
+EXP-00565,EMP-10565,2026-04-10,10th,Fresher,None,0.0,0.4,0.4,<1 yr,No
+EXP-00566,EMP-10566,2022-10-16,B.E/B.Tech,Electronics Manufacturing,Large Indian Company,2.0,4.1,6.1,6-10 yrs,Yes
+EXP-00567,EMP-10567,2023-09-04,ITI,Electronics Manufacturing,Contract Staffing,10.0,3.2,13.2,10+ yrs,Yes
+EXP-00568,EMP-10568,2022-08-05,Diploma,Electronics Manufacturing,MNC,7.0,4.3,11.3,10+ yrs,Yes
+EXP-00569,EMP-10569,2021-05-26,12th,Textile & Garments,Mid-size Company,4.0,4.6,8.6,6-10 yrs,Yes
+EXP-00570,EMP-10570,2021-01-28,10th,Automobile,MNC,1.0,5.8,6.8,6-10 yrs,Yes
+EXP-00571,EMP-10571,2021-01-28,Diploma,Electronics Manufacturing,MNC,2.1,5.8,7.9,6-10 yrs,Yes
+EXP-00572,EMP-10572,2024-02-24,Diploma,Automobile,Large Indian Company,3.0,2.7,5.7,3-6 yrs,Yes
+EXP-00573,EMP-10573,2022-10-05,ITI,Automobile,MNC,10.0,4.1,14.1,10+ yrs,Yes
+EXP-00574,EMP-10574,2025-10-22,12th,Electronics Manufacturing,Small Enterprise,6.0,1.1,7.1,6-10 yrs,Yes
+EXP-00575,EMP-10575,2020-02-22,10th,Pharma,Mid-size Company,2.0,6.7,8.7,6-10 yrs,Yes
+EXP-00576,EMP-10576,2023-05-17,Diploma,Telecom,Large Indian Company,12.0,3.5,15.5,10+ yrs,Yes
+EXP-00577,EMP-10577,2019-11-23,ITI,Logistics & Warehousing,Mid-size Company,4.0,7.0,11.0,10+ yrs,Yes
+EXP-00578,EMP-10578,2020-09-01,ITI,Electronics Manufacturing,Mid-size Company,1.0,6.2,7.2,6-10 yrs,Yes
+EXP-00579,EMP-10579,2021-06-06,B.E/B.Tech,Electronics Manufacturing,Mid-size Company,1.0,5.5,6.5,6-10 yrs,Yes
+EXP-00580,EMP-10580,2024-02-17,ITI,Electronics Manufacturing,Large Indian Company,13.0,2.8,15.8,10+ yrs,Yes
+EXP-00581,EMP-10581,2021-05-22,12th,Pharma,Large Indian Company,4.0,5.5,9.5,6-10 yrs,Yes
+EXP-00582,EMP-10582,2024-09-09,10th,Fresher,None,0.0,1.8,1.8,1-3 yrs,Yes
+EXP-00583,EMP-10583,2021-10-31,12th,Fresher,None,0.0,5.1,5.1,3-6 yrs,Yes
+EXP-00584,EMP-10584,2018-12-24,12th,Electronics Manufacturing,Small Enterprise,6.0,7.9,13.9,10+ yrs,Yes
+EXP-00585,EMP-10585,2023-05-24,10th,Automobile,Mid-size Company,2.0,3.5,5.5,3-6 yrs,Yes
+EXP-00586,EMP-10586,2019-10-17,ITI,Telecom,Small Enterprise,13.0,7.1,20.1,10+ yrs,Yes
+EXP-00587,EMP-10587,2018-12-10,ITI,FMCG,MNC,6.0,7.9,13.9,10+ yrs,Yes
+EXP-00588,EMP-10588,2025-11-10,12th,Fresher,None,0.0,1.0,1.0,<1 yr,Yes
+EXP-00589,EMP-10589,2025-02-21,Diploma,Automobile,MNC,15.0,1.7,16.7,10+ yrs,Yes
+EXP-00590,EMP-10590,2020-08-22,Diploma,Automobile,Large Indian Company,13.0,6.2,19.2,10+ yrs,Yes
+EXP-00591,EMP-10591,2023-01-25,10th,Electronics Manufacturing,MNC,16.0,3.8,19.8,10+ yrs,Yes
+EXP-00592,EMP-10592,2022-04-26,B.E/B.Tech,Logistics & Warehousing,Mid-size Company,16.0,4.6,20.6,10+ yrs,Yes
+EXP-00593,EMP-10593,2023-10-13,12th,Electronics Manufacturing,Contract Staffing,4.0,3.1,7.1,6-10 yrs,Yes
+EXP-00594,EMP-10594,2019-11-10,12th,Automobile,Mid-size Company,6.0,7.0,13.0,10+ yrs,Yes
+EXP-00595,EMP-10595,2023-02-11,Diploma,Electronics Manufacturing,Contract Staffing,14.0,3.8,17.8,10+ yrs,Yes
+EXP-00596,EMP-10596,2018-07-10,ITI,Electronics Manufacturing,Contract Staffing,2.0,8.4,10.4,10+ yrs,Yes
+EXP-00597,EMP-10597,2022-07-01,ITI,Logistics & Warehousing,Mid-size Company,2.0,4.4,6.4,6-10 yrs,Yes
+EXP-00598,EMP-10598,2020-04-12,Diploma,Automobile,Mid-size Company,14.0,5.9,19.9,10+ yrs,Yes
+EXP-00599,EMP-10599,2020-01-25,Diploma,Retail,Large Indian Company,6.0,6.3,12.3,10+ yrs,Yes
+EXP-00600,EMP-10600,2020-09-12,12th,Pharma,MNC,5.0,6.2,11.2,10+ yrs,Yes
+EXP-00601,EMP-10601,2022-09-12,ITI,Electronics Manufacturing,MNC,10.0,4.2,14.2,10+ yrs,Yes
+EXP-00602,EMP-10602,2021-01-16,12th,Telecom,Mid-size Company,9.0,5.8,14.8,10+ yrs,Yes
+EXP-00603,EMP-10603,2018-10-04,Diploma,Automobile,MNC,7.0,8.1,15.1,10+ yrs,Yes
+EXP-00604,EMP-10604,2020-12-13,ITI,Logistics & Warehousing,Mid-size Company,3.0,5.9,8.9,6-10 yrs,Yes
+EXP-00605,EMP-10605,2022-06-13,ITI,Telecom,Mid-size Company,3.0,4.4,7.4,6-10 yrs,Yes
+EXP-00606,EMP-10606,2019-01-15,ITI,Automobile,Large Indian Company,5.0,7.8,12.8,10+ yrs,Yes
+EXP-00607,EMP-10607,2021-11-02,Diploma,Retail,Large Indian Company,3.0,5.0,8.0,6-10 yrs,Yes
+EXP-00608,EMP-10608,2019-07-28,Diploma,Electronics Manufacturing,MNC,2.0,7.3,9.3,6-10 yrs,Yes
+EXP-00609,EMP-10609,2021-01-31,Diploma,Logistics & Warehousing,Small Enterprise,11.0,5.8,16.8,10+ yrs,Yes
+EXP-00610,EMP-10610,2023-11-16,12th,Fresher,None,0.0,3.0,3.0,1-3 yrs,Yes
+EXP-00611,EMP-10611,2019-04-19,12th,Electronics Manufacturing,Small Enterprise,3.0,7.6,10.6,10+ yrs,Yes
+EXP-00612,EMP-10612,2026-05-28,10th,Fresher,None,0.0,0.5,0.5,<1 yr,No
+EXP-00613,EMP-10613,2024-06-27,B.E/B.Tech,Telecom,Contract Staffing,8.0,2.4,10.4,10+ yrs,Yes
+EXP-00614,EMP-10614,2024-07-08,ITI,Fresher,None,0.0,2.4,2.4,1-3 yrs,Yes
+EXP-00615,EMP-10615,2022-09-16,Diploma,Automobile,Small Enterprise,15.0,4.2,19.2,10+ yrs,Yes
+EXP-00616,EMP-10616,2020-12-19,ITI,Automobile,Mid-size Company,4.0,5.9,9.9,6-10 yrs,Yes
+EXP-00617,EMP-10617,2022-08-06,Diploma,Pharma,Large Indian Company,13.0,4.3,17.3,10+ yrs,Yes
+EXP-00618,EMP-10618,2021-11-10,B.E/B.Tech,Automobile,Large Indian Company,9.0,5.0,14.0,10+ yrs,Yes
+EXP-00619,EMP-10619,2020-07-18,Diploma,Automobile,Mid-size Company,8.0,6.3,14.3,10+ yrs,Yes
+EXP-00620,EMP-10620,2023-02-26,12th,Automobile,Small Enterprise,12.0,3.7,15.7,10+ yrs,Yes
+EXP-00621,EMP-10621,2020-01-10,ITI,Logistics & Warehousing,Contract Staffing,4.0,6.9,10.9,10+ yrs,Yes
+EXP-00622,EMP-10622,2025-03-01,10th,Pharma,MNC,10.0,1.7,11.7,10+ yrs,Yes
+EXP-00623,EMP-10623,2024-10-04,Diploma,Fresher,None,0.0,2.1,2.1,1-3 yrs,Yes
+EXP-00624,EMP-10624,2023-10-26,Diploma,Telecom,Large Indian Company,5.0,3.1,8.1,6-10 yrs,Yes
+EXP-00625,EMP-10625,2025-02-24,12th,Electronics Manufacturing,MNC,11.0,1.2,12.2,10+ yrs,Yes
+EXP-00626,EMP-10626,2020-07-19,10th,Textile & Garments,Mid-size Company,14.0,6.3,20.3,10+ yrs,Yes
+EXP-00627,EMP-10627,2023-08-08,10th,Fresher,None,0.0,3.3,3.3,3-6 yrs,Yes
+EXP-00628,EMP-10628,2025-02-24,B.E/B.Tech,Electronics Manufacturing,MNC,5.0,1.2,6.2,6-10 yrs,Yes
+EXP-00629,EMP-10629,2023-10-25,12th,Telecom,Mid-size Company,5.0,3.1,8.1,6-10 yrs,Yes
+EXP-00630,EMP-10630,2018-06-21,B.E/B.Tech,Automobile,Large Indian Company,9.0,8.4,17.4,10+ yrs,Yes
+EXP-00631,EMP-10631,2018-10-13,B.E/B.Tech,Logistics & Warehousing,Small Enterprise,14.0,8.1,22.1,10+ yrs,Yes
+EXP-00632,EMP-10632,2021-05-21,ITI,Electronics Manufacturing,Large Indian Company,8.0,5.5,13.5,10+ yrs,Yes
+EXP-00633,EMP-10633,2025-01-18,ITI,Fresher,None,0.0,1.8,1.8,1-3 yrs,Yes
+EXP-00634,EMP-10634,2024-08-13,B.E/B.Tech,Electronics Manufacturing,MNC,9.0,2.3,11.3,10+ yrs,Yes
+EXP-00635,EMP-10635,2023-08-29,ITI,Logistics & Warehousing,MNC,2.0,3.2,5.2,3-6 yrs,Yes
+EXP-00636,EMP-10636,2025-09-15,ITI,Fresher,None,0.0,1.2,1.2,1-3 yrs,Yes
+EXP-00637,EMP-10637,2024-02-03,ITI,Telecom,Large Indian Company,8.0,2.8,10.8,10+ yrs,Yes
+EXP-00638,EMP-10638,2021-03-28,ITI,Electronics Manufacturing,MNC,3.0,5.6,8.6,6-10 yrs,Yes
+EXP-00639,EMP-10639,2021-05-05,B.E/B.Tech,Automobile,Contract Staffing,10.0,5.5,15.5,10+ yrs,Yes
+EXP-00640,EMP-10640,2020-11-12,Diploma,FMCG,Mid-size Company,5.0,6.0,11.0,10+ yrs,Yes
+EXP-00641,EMP-10641,2019-08-27,ITI,Automobile,Large Indian Company,12.0,7.2,19.2,10+ yrs,Yes
+EXP-00642,EMP-10642,2022-07-20,12th,Automobile,Large Indian Company,13.0,4.3,17.3,10+ yrs,Yes
+EXP-00643,EMP-10643,2018-11-30,ITI,Automobile,Large Indian Company,8.0,8.0,16.0,10+ yrs,Yes
+EXP-00644,EMP-10644,2020-10-01,12th,Electronics Manufacturing,MNC,12.0,6.1,18.1,10+ yrs,Yes
+EXP-00645,EMP-10645,2019-07-03,ITI,FMCG,MNC,15.0,7.4,22.4,10+ yrs,Yes
+EXP-00646,EMP-10646,2021-07-04,12th,Electronics Manufacturing,MNC,15.0,5.3,20.3,10+ yrs,Yes
+EXP-00647,EMP-10647,2025-07-15,ITI,Fresher,None,0.0,0.7,0.7,<1 yr,Yes
+EXP-00648,EMP-10648,2020-06-14,12th,Electronics Manufacturing,Small Enterprise,11.0,6.4,17.4,10+ yrs,Yes
+EXP-00649,EMP-10649,2026-01-10,10th,Fresher,None,0.0,0.9,0.9,<1 yr,Yes
+EXP-00650,EMP-10650,2019-02-04,B.E/B.Tech,Automobile,Contract Staffing,10.0,7.8,17.8,10+ yrs,Yes
+EXP-00651,EMP-10651,2021-11-01,Diploma,Automobile,Small Enterprise,3.0,5.1,8.1,6-10 yrs,Yes
+EXP-00652,EMP-10652,2019-09-14,B.E/B.Tech,Electronics Manufacturing,MNC,11.0,6.8,17.8,10+ yrs,Yes
+EXP-00653,EMP-10653,2024-04-01,10th,Automobile,Large Indian Company,9.0,2.6,11.6,10+ yrs,Yes
+EXP-00654,EMP-10654,2024-09-23,Diploma,Textile & Garments,Small Enterprise,2.0,2.2,4.2,3-6 yrs,Yes
+EXP-00655,EMP-10655,2020-10-12,B.E/B.Tech,Pharma,Small Enterprise,11.0,6.1,17.1,10+ yrs,Yes
+EXP-00656,EMP-10656,2020-06-11,10th,FMCG,Large Indian Company,5.0,6.4,11.4,10+ yrs,Yes
+EXP-00657,EMP-10657,2019-07-18,ITI,Electronics Manufacturing,Large Indian Company,7.0,7.3,14.3,10+ yrs,Yes
+EXP-00658,EMP-10658,2020-12-30,Diploma,Textile & Garments,MNC,11.0,5.9,16.9,10+ yrs,Yes
+EXP-00659,EMP-10659,2023-07-06,10th,Fresher,None,0.0,3.4,3.4,3-6 yrs,Yes
+EXP-00660,EMP-10660,2019-11-25,ITI,Pharma,Mid-size Company,13.0,7.0,20.0,10+ yrs,Yes
+EXP-00661,EMP-10661,2024-07-07,Diploma,FMCG,Small Enterprise,6.0,2.4,8.4,6-10 yrs,Yes
+EXP-00662,EMP-10662,2022-10-07,Diploma,Automobile,Contract Staffing,12.0,4.1,16.1,10+ yrs,Yes
+EXP-00663,EMP-10663,2024-05-15,Diploma,Electronics Manufacturing,Mid-size Company,13.0,2.5,15.5,10+ yrs,Yes
+EXP-00664,EMP-10664,2023-10-22,Diploma,Fresher,None,0.0,3.1,3.1,3-6 yrs,Yes
+EXP-00665,EMP-10665,2023-06-18,10th,Electronics Manufacturing,Large Indian Company,2.0,3.4,5.4,3-6 yrs,Yes
+EXP-00666,EMP-10666,2021-07-14,ITI,FMCG,Contract Staffing,11.0,5.4,16.4,10+ yrs,Yes
+EXP-00667,EMP-10667,2018-12-10,12th,Electronics Manufacturing,Large Indian Company,5.0,7.9,12.9,10+ yrs,Yes
+EXP-00668,EMP-10668,2022-12-03,B.Sc,Logistics & Warehousing,MNC,8.0,4.0,12.0,10+ yrs,Yes
+EXP-00669,EMP-10669,2019-07-08,10th,Electronics Manufacturing,Small Enterprise,9.0,7.4,16.4,10+ yrs,Yes
+EXP-00670,EMP-10670,2025-04-21,12th,Fresher,None,0.0,1.6,1.6,1-3 yrs,Yes
+EXP-00671,EMP-10671,2021-03-09,ITI,Automobile,Large Indian Company,9.0,5.1,14.1,10+ yrs,Yes
+EXP-00672,EMP-10672,2021-02-21,10th,Logistics & Warehousing,Mid-size Company,5.0,5.7,10.7,10+ yrs,Yes
+EXP-00673,EMP-10673,2024-01-08,ITI,Fresher,None,0.0,2.9,2.9,1-3 yrs,Yes
+EXP-00674,EMP-10674,2023-04-09,ITI,Automobile,Small Enterprise,6.0,3.6,9.6,6-10 yrs,Yes
+EXP-00675,EMP-10675,2021-09-18,10th,Textile & Garments,Small Enterprise,9.0,5.2,14.2,10+ yrs,Yes
+EXP-00676,EMP-10676,2023-12-27,Diploma,Fresher,None,0.0,2.9,2.9,1-3 yrs,Yes
+EXP-00677,EMP-10677,2019-10-20,ITI,Pharma,Mid-size Company,8.0,7.1,15.1,10+ yrs,Yes
+EXP-00678,EMP-10678,2021-01-01,B.E/B.Tech,Electronics Manufacturing,Large Indian Company,4.0,5.9,9.9,6-10 yrs,Yes
+EXP-00679,EMP-10679,2020-04-08,Diploma,Textile & Garments,Contract Staffing,14.0,6.6,20.6,10+ yrs,Yes
+EXP-00680,EMP-10680,2023-07-31,ITI,Fresher,None,0.0,3.3,3.3,3-6 yrs,Yes
+EXP-00681,EMP-10681,2019-12-20,Diploma,Electronics Manufacturing,Mid-size Company,2.0,6.9,8.9,6-10 yrs,Yes
+EXP-00682,EMP-10682,2026-03-04,12th,Textile & Garments,MNC,1.0,0.7,1.7,1-3 yrs,Yes
+EXP-00683,EMP-10683,2025-03-27,10th,Fresher,None,0.0,1.7,1.7,1-3 yrs,Yes
+EXP-00684,EMP-10684,2020-09-02,ITI,Electronics Manufacturing,Mid-size Company,10.0,6.2,16.2,10+ yrs,Yes
+EXP-00685,EMP-10685,2018-09-10,12th,Electronics Manufacturing,Small Enterprise,9.0,7.9,16.9,10+ yrs,Yes
+EXP-00686,EMP-10686,2022-01-16,Diploma,Electronics Manufacturing,Large Indian Company,13.0,4.8,17.8,10+ yrs,Yes
+EXP-00687,EMP-10687,2022-04-09,12th,Pharma,MNC,6.0,4.6,10.6,10+ yrs,Yes
+EXP-00688,EMP-10688,2025-11-12,ITI,Fresher,None,0.0,1.0,1.0,<1 yr,Yes
+EXP-00689,EMP-10689,2019-09-19,10th,Logistics & Warehousing,Mid-size Company,5.0,7.2,12.2,10+ yrs,Yes
+EXP-00690,EMP-10690,2021-03-11,Diploma,FMCG,MNC,4.0,5.7,9.7,6-10 yrs,Yes
+EXP-00691,EMP-10691,2022-02-18,10th,Automobile,Mid-size Company,13.0,4.8,17.8,10+ yrs,Yes
+EXP-00692,EMP-10692,2021-04-30,Diploma,Electronics Manufacturing,MNC,2.0,5.6,7.6,6-10 yrs,Yes
+EXP-00693,EMP-10693,2026-07-05,10th,Fresher,None,0.0,0.4,0.4,<1 yr,No
+EXP-00694,EMP-10694,2025-01-03,Diploma,Electronics Manufacturing,Large Indian Company,9.0,1.9,10.9,10+ yrs,Yes
+EXP-00695,EMP-10695,2025-05-29,ITI,Fresher,None,0.0,1.5,1.5,1-3 yrs,Yes
+EXP-00696,EMP-10696,2022-12-14,12th,Logistics & Warehousing,Contract Staffing,6.0,3.9,9.9,6-10 yrs,Yes
+EXP-00697,EMP-10697,2020-04-16,Diploma,Electronics Manufacturing,Mid-size Company,11.0,6.6,17.6,10+ yrs,Yes
+EXP-00698,EMP-10698,2023-08-06,Diploma,Electronics Manufacturing,Contract Staffing,15.0,3.3,18.3,10+ yrs,Yes
+EXP-00699,EMP-10699,2022-09-23,12th,Electronics Manufacturing,Mid-size Company,4.0,4.2,8.2,6-10 yrs,Yes
+EXP-00700,EMP-10700,2024-07-31,ITI,Fresher,None,0.0,2.3,2.3,1-3 yrs,Yes
+EXP-00701,EMP-10701,2019-03-31,ITI,Electronics Manufacturing,MNC,4.0,7.6,11.6,10+ yrs,Yes
+EXP-00702,EMP-10702,2020-02-12,Diploma,Automobile,Mid-size Company,5.0,6.8,11.8,10+ yrs,Yes
+EXP-00703,EMP-10703,2019-05-04,Diploma,Electronics Manufacturing,MNC,9.0,7.5,16.5,10+ yrs,Yes
+EXP-00704,EMP-10704,2025-02-21,12th,Automobile,Mid-size Company,2.0,1.7,3.7,3-6 yrs,Yes
+EXP-00705,EMP-10705,2022-01-04,ITI,Textile & Garments,MNC,5.0,4.9,9.9,6-10 yrs,Yes
+EXP-00706,EMP-10706,2021-03-02,ITI,Fresher,None,0.0,5.7,5.7,3-6 yrs,Yes
+EXP-00707,EMP-10707,2020-04-14,ITI,FMCG,Large Indian Company,3.0,6.6,9.6,6-10 yrs,Yes
+EXP-00708,EMP-10708,2022-11-16,12th,Fresher,None,0.0,4.0,4.0,3-6 yrs,Yes
+EXP-00709,EMP-10709,2023-06-15,B.Sc,FMCG,Mid-size Company,6.0,3.4,9.4,6-10 yrs,Yes
+EXP-00710,EMP-10710,2020-01-26,ITI,Textile & Garments,Small Enterprise,13.0,6.8,19.8,10+ yrs,Yes
+EXP-00711,EMP-10711,2020-02-11,12th,Electronics Manufacturing,MNC,16.0,6.8,22.8,10+ yrs,Yes
+EXP-00712,EMP-10712,2018-12-21,ITI,Fresher,None,0.0,7.9,7.9,6-10 yrs,Yes
+EXP-00713,EMP-10713,2022-05-19,ITI,Logistics & Warehousing,Small Enterprise,11.0,4.5,15.5,10+ yrs,Yes
+EXP-00714,EMP-10714,2021-03-01,ITI,Fresher,None,0.0,5.7,5.7,3-6 yrs,Yes
+EXP-00715,EMP-10715,2025-12-08,ITI,Fresher,None,0.0,1.0,1.0,<1 yr,Yes
+EXP-00716,EMP-10716,2020-07-19,ITI,Textile & Garments,Contract Staffing,7.0,6.3,13.3,10+ yrs,Yes
+EXP-00717,EMP-10717,2024-11-27,Diploma,Electronics Manufacturing,Large Indian Company,16.0,2.0,18.0,10+ yrs,Yes
+EXP-00718,EMP-10718,2019-03-05,ITI,Automobile,Small Enterprise,5.0,7.7,12.7,10+ yrs,Yes
+EXP-00719,EMP-10719,2023-02-19,ITI,Textile & Garments,Large Indian Company,4.0,3.8,7.8,6-10 yrs,Yes
+EXP-00720,EMP-10720,2025-11-21,ITI,Fresher,None,0.0,1.0,1.0,<1 yr,Yes
+EXP-00721,EMP-10721,2025-04-13,ITI,Fresher,None,0.0,1.6,1.6,1-3 yrs,Yes
+EXP-00722,EMP-10722,2024-04-05,Diploma,Retail,Contract Staffing,7.0,2.6,9.6,6-10 yrs,Yes
+EXP-00723,EMP-10723,2020-05-23,ITI,Logistics & Warehousing,Mid-size Company,5.0,6.5,11.5,10+ yrs,Yes
+EXP-00724,EMP-10724,2023-04-22,ITI,Electronics Manufacturing,Large Indian Company,5.0,3.6,8.6,6-10 yrs,Yes
+EXP-00725,EMP-10725,2023-11-22,Diploma,Electronics Manufacturing,Mid-size Company,7.0,3.0,10.0,6-10 yrs,Yes
+EXP-00726,EMP-10726,2020-08-07,12th,Fresher,None,0.0,6.3,6.3,6-10 yrs,Yes
+EXP-00727,EMP-10727,2021-01-19,12th,Electronics Manufacturing,Mid-size Company,6.0,5.8,11.8,10+ yrs,Yes
+EXP-00728,EMP-10728,2020-09-17,Diploma,Textile & Garments,MNC,7.0,6.2,13.2,10+ yrs,Yes
+EXP-00729,EMP-10729,2018-08-27,ITI,Textile & Garments,Large Indian Company,7.0,8.2,15.2,10+ yrs,Yes
+EXP-00730,EMP-10730,2020-01-03,Diploma,Pharma,Small Enterprise,11.0,6.9,17.9,10+ yrs,Yes
+EXP-00731,EMP-10731,2022-12-09,Diploma,Fresher,None,0.0,3.9,3.9,3-6 yrs,Yes
+EXP-00732,EMP-10732,2022-02-24,B.E/B.Tech,Telecom,Contract Staffing,1.0,4.7,5.7,3-6 yrs,Yes
+EXP-00733,EMP-10733,2024-01-29,12th,Automobile,Large Indian Company,9.0,2.8,11.8,10+ yrs,Yes
+EXP-00734,EMP-10734,2020-11-06,Diploma,Electronics Manufacturing,Large Indian Company,11.0,6.0,17.0,10+ yrs,Yes
+EXP-00735,EMP-10735,2023-01-30,ITI,Automobile,Large Indian Company,8.0,3.8,11.8,10+ yrs,Yes
+EXP-00736,EMP-10736,2023-09-09,12th,Fresher,None,0.0,3.2,3.2,3-6 yrs,Yes
+EXP-00737,EMP-10737,2020-11-28,ITI,Electronics Manufacturing,Large Indian Company,14.0,6.0,20.0,10+ yrs,Yes
+EXP-00738,EMP-10738,2019-02-05,12th,Automobile,MNC,3.0,7.8,10.8,10+ yrs,Yes
+EXP-00739,EMP-10739,2023-09-13,12th,FMCG,Mid-size Company,6.0,3.2,9.2,6-10 yrs,Yes
+EXP-00740,EMP-10740,2022-08-08,ITI,Fresher,None,0.0,4.3,4.3,3-6 yrs,Yes
+EXP-00741,EMP-10741,2022-09-17,12th,Fresher,None,0.0,3.5,3.5,3-6 yrs,Yes
+EXP-00742,EMP-10742,2020-12-13,Diploma,Electronics Manufacturing,Mid-size Company,5.0,5.9,10.9,10+ yrs,Yes
+EXP-00743,EMP-10743,2023-04-21,Diploma,Telecom,MNC,5.0,3.6,8.6,6-10 yrs,Yes
+EXP-00744,EMP-10744,2018-07-24,10th,Pharma,Large Indian Company,12.0,8.3,20.3,10+ yrs,Yes
+EXP-00745,EMP-10745,2021-05-17,Diploma,Textile & Garments,Mid-size Company,2.0,5.5,7.5,6-10 yrs,Yes
+EXP-00746,EMP-10746,2023-05-18,B.E/B.Tech,Automobile,Small Enterprise,9.0,3.5,12.5,10+ yrs,Yes
+EXP-00747,EMP-10747,2020-11-15,ITI,Automobile,Small Enterprise,10.0,6.0,16.0,10+ yrs,Yes
+EXP-00748,EMP-10748,2019-01-18,ITI,Electronics Manufacturing,Mid-size Company,16.0,7.8,23.8,10+ yrs,Yes
+EXP-00749,EMP-10749,2024-08-26,Diploma,Logistics & Warehousing,MNC,5.0,2.2,7.2,6-10 yrs,Yes
+EXP-00750,EMP-10750,2018-07-12,Diploma,Electronics Manufacturing,MNC,11.0,8.4,19.4,10+ yrs,Yes
+EXP-00751,EMP-10751,2018-11-20,Diploma,Automobile,Large Indian Company,4.0,8.0,12.0,10+ yrs,Yes
+EXP-00752,EMP-10752,2021-01-07,12th,FMCG,Large Indian Company,8.0,5.9,13.9,10+ yrs,Yes
+EXP-00753,EMP-10753,2018-11-26,ITI,Electronics Manufacturing,MNC,4.0,8.0,12.0,10+ yrs,Yes
+EXP-00754,EMP-10754,2018-10-14,B.E/B.Tech,Electronics Manufacturing,Large Indian Company,19.0,8.1,27.1,10+ yrs,Yes
+EXP-00755,EMP-10755,2018-11-26,12th,FMCG,Mid-size Company,1.0,8.0,9.0,6-10 yrs,Yes
+EXP-00756,EMP-10756,2021-06-06,Diploma,Electronics Manufacturing,Large Indian Company,12.0,5.5,17.5,10+ yrs,Yes
+EXP-00757,EMP-10757,2021-12-06,ITI,Electronics Manufacturing,Contract Staffing,2.0,5.0,7.0,6-10 yrs,Yes
+EXP-00758,EMP-10758,2018-11-28,12th,Electronics Manufacturing,MNC,8.0,8.0,16.0,10+ yrs,Yes
+EXP-00759,EMP-10759,2024-09-24,ITI,Fresher,None,0.0,2.2,2.2,1-3 yrs,Yes
+EXP-00760,EMP-10760,2019-01-18,12th,Automobile,Mid-size Company,16.0,7.8,23.8,10+ yrs,Yes
+EXP-00761,EMP-10761,2025-02-17,10th,Fresher,None,0.0,1.8,1.8,1-3 yrs,Yes
+EXP-00762,EMP-10762,2024-05-26,12th,Electronics Manufacturing,Contract Staffing,5.0,2.5,7.5,6-10 yrs,Yes
+EXP-00763,EMP-10763,2020-11-28,ITI,Logistics & Warehousing,Mid-size Company,10.0,6.0,16.0,10+ yrs,Yes
+EXP-00764,EMP-10764,2022-07-13,12th,Textile & Garments,Mid-size Company,10.0,4.4,14.4,10+ yrs,Yes
+EXP-00765,EMP-10765,2025-08-06,ITI,Fresher,None,0.0,1.3,1.3,1-3 yrs,Yes
+EXP-00766,EMP-10766,2022-08-26,Diploma,Electronics Manufacturing,MNC,9.0,4.2,13.2,10+ yrs,Yes
+EXP-00767,EMP-10767,2020-06-22,12th,Automobile,Small Enterprise,11.0,6.4,17.4,10+ yrs,Yes
+EXP-00768,EMP-10768,2022-05-27,B.E/B.Tech,Electronics Manufacturing,Large Indian Company,11.0,4.5,15.5,10+ yrs,Yes
+EXP-00769,EMP-10769,2018-12-04,Diploma,Electronics Manufacturing,Large Indian Company,3.0,8.0,11.0,10+ yrs,Yes
+EXP-00770,EMP-10770,2019-07-14,Diploma,Electronics Manufacturing,Mid-size Company,10.0,7.4,17.4,10+ yrs,Yes
+EXP-00771,EMP-10771,2022-10-19,10th,FMCG,Large Indian Company,10.0,4.1,14.1,10+ yrs,Yes
+EXP-00772,EMP-10772,2020-06-03,ITI,Textile & Garments,Large Indian Company,12.0,6.5,18.5,10+ yrs,Yes
+EXP-00773,EMP-10773,2024-06-12,B.Sc,Retail,Large Indian Company,2.0,2.4,4.4,3-6 yrs,Yes
+EXP-00774,EMP-10774,2022-05-09,B.E/B.Tech,Electronics Manufacturing,Large Indian Company,17.0,4.5,21.5,10+ yrs,Yes
+EXP-00775,EMP-10775,2026-02-14,10th,Fresher,None,0.0,0.8,0.8,<1 yr,Yes
+EXP-00776,EMP-10776,2025-08-24,ITI,Fresher,None,0.0,1.2,1.2,1-3 yrs,Yes
+EXP-00777,EMP-10777,2020-03-20,B.E/B.Tech,Electronics Manufacturing,Mid-size Company,2.0,6.7,8.7,6-10 yrs,Yes
+EXP-00778,EMP-10778,2022-12-26,12th,Electronics Manufacturing,Mid-size Company,2.0,3.9,5.9,3-6 yrs,Yes
+EXP-00779,EMP-10779,2024-08-18,B.E/B.Tech,Electronics Manufacturing,Contract Staffing,14.0,2.3,16.3,10+ yrs,Yes
+EXP-00780,EMP-10780,2024-05-18,B.Sc,Automobile,Contract Staffing,10.0,2.5,12.5,10+ yrs,Yes
+EXP-00781,EMP-10781,2018-08-15,B.Sc,Electronics Manufacturing,Small Enterprise,5.0,8.3,13.3,10+ yrs,Yes
+EXP-00782,EMP-10782,2020-02-10,ITI,Automobile,Large Indian Company,11.0,6.8,17.8,10+ yrs,Yes
+EXP-00783,EMP-10783,2026-03-14,Diploma,Fresher,None,0.0,0.2,0.2,<1 yr,No
+EXP-00784,EMP-10784,2021-02-18,ITI,FMCG,MNC,5.0,5.8,10.8,10+ yrs,Yes
+EXP-00785,EMP-10785,2020-09-26,ITI,Logistics & Warehousing,Mid-size Company,9.0,6.1,15.1,10+ yrs,Yes
+EXP-00786,EMP-10786,2024-07-13,ITI,Automobile,Large Indian Company,5.0,2.4,7.4,6-10 yrs,Yes
+EXP-00787,EMP-10787,2021-12-18,12th,Telecom,Contract Staffing,20.0,4.9,24.9,10+ yrs,Yes
+EXP-00788,EMP-10788,2020-10-19,Diploma,Fresher,None,0.0,6.1,6.1,6-10 yrs,Yes
+EXP-00789,EMP-10789,2022-10-18,Diploma,Electronics Manufacturing,Small Enterprise,4.0,4.1,8.1,6-10 yrs,Yes
+EXP-00790,EMP-10790,2024-10-09,Diploma,Electronics Manufacturing,MNC,8.0,2.1,10.1,10+ yrs,Yes
+EXP-00791,EMP-10791,2024-08-30,Diploma,Telecom,Mid-size Company,2.0,2.2,4.2,3-6 yrs,Yes
+EXP-00792,EMP-10792,2023-02-07,12th,Logistics & Warehousing,Large Indian Company,6.0,3.8,9.8,6-10 yrs,Yes
+EXP-00793,EMP-10793,2026-03-02,Diploma,Fresher,None,0.0,0.7,0.7,<1 yr,Yes
+EXP-00794,EMP-10794,2019-06-22,MBA,Electronics Manufacturing,Large Indian Company,11.0,7.4,18.4,10+ yrs,Yes
+EXP-00795,EMP-10795,2020-01-23,Diploma,Textile & Garments,Small Enterprise,2.0,6.8,8.8,6-10 yrs,Yes
+EXP-00796,EMP-10796,2026-06-29,ITI,Fresher,None,0.0,0.4,0.4,<1 yr,No
+EXP-00797,EMP-10797,2021-12-05,ITI,Textile & Garments,Mid-size Company,6.0,5.0,11.0,10+ yrs,Yes
+EXP-00798,EMP-10798,2024-01-13,Diploma,Fresher,None,0.0,2.9,2.9,1-3 yrs,Yes
+EXP-00799,EMP-10799,2022-09-13,Diploma,FMCG,MNC,7.0,4.2,11.2,10+ yrs,Yes
+EXP-00800,EMP-10800,2021-02-09,Diploma,Automobile,Large Indian Company,6.0,5.8,11.8,10+ yrs,Yes
+EXP-00801,EMP-10801,2022-09-19,Diploma,Electronics Manufacturing,Large Indian Company,7.0,4.2,11.2,10+ yrs,Yes
+EXP-00802,EMP-10802,2025-02-17,B.Sc,Logistics & Warehousing,Contract Staffing,20.0,1.8,21.8,10+ yrs,Yes
+EXP-00803,EMP-10803,2020-04-08,B.Sc,Retail,Small Enterprise,7.0,6.6,13.6,10+ yrs,Yes
+EXP-00804,EMP-10804,2019-04-01,12th,Telecom,Mid-size Company,3.0,7.6,10.6,10+ yrs,Yes
+EXP-00805,EMP-10805,2024-08-21,ITI,FMCG,Large Indian Company,10.0,2.2,12.2,10+ yrs,Yes
+EXP-00806,EMP-10806,2019-04-27,Diploma,Telecom,Small Enterprise,7.0,7.6,14.6,10+ yrs,Yes
+EXP-00807,EMP-10807,2026-03-29,12th,Fresher,None,0.0,0.6,0.6,<1 yr,Yes
+EXP-00808,EMP-10808,2019-12-13,B.E/B.Tech,FMCG,MNC,9.0,6.5,15.5,10+ yrs,Yes
+EXP-00809,EMP-10809,2021-07-30,B.Sc,Electronics Manufacturing,Small Enterprise,1.0,5.3,6.3,6-10 yrs,Yes
+EXP-00810,EMP-10810,2021-10-30,12th,Fresher,None,0.0,5.1,5.1,3-6 yrs,Yes
+EXP-00811,EMP-10811,2018-06-10,ITI,Telecom,MNC,9.0,8.4,17.4,10+ yrs,Yes
+EXP-00812,EMP-10812,2022-10-31,10th,Electronics Manufacturing,Mid-size Company,7.0,4.1,11.1,10+ yrs,Yes
+EXP-00813,EMP-10813,2018-07-13,ITI,FMCG,Small Enterprise,2.0,8.4,10.4,10+ yrs,Yes
+EXP-00814,EMP-10814,2019-01-10,10th,Automobile,MNC,8.0,7.1,15.1,10+ yrs,Yes
+EXP-00815,EMP-10815,2019-10-11,Diploma,Electronics Manufacturing,Mid-size Company,8.0,6.5,14.5,10+ yrs,Yes
+EXP-00816,EMP-10816,2025-05-01,Diploma,Fresher,None,0.0,1.6,1.6,1-3 yrs,Yes
+EXP-00817,EMP-10817,2020-05-24,10th,FMCG,Small Enterprise,15.0,6.5,21.5,10+ yrs,Yes
+EXP-00818,EMP-10818,2019-09-12,Diploma,Fresher,None,0.0,6.2,6.2,6-10 yrs,Yes
+EXP-00819,EMP-10819,2019-10-27,12th,Electronics Manufacturing,MNC,8.0,7.1,15.1,10+ yrs,Yes
+EXP-00820,EMP-10820,2019-07-09,Diploma,Pharma,Mid-size Company,9.0,7.4,16.4,10+ yrs,Yes
+EXP-00821,EMP-10821,2022-02-25,Diploma,Fresher,None,0.0,4.0,4.0,3-6 yrs,Yes
+EXP-00822,EMP-10822,2020-02-14,ITI,Retail,Large Indian Company,6.0,6.8,12.8,10+ yrs,Yes
+EXP-00823,EMP-10823,2020-03-09,B.Sc,Pharma,Mid-size Company,15.0,6.7,21.7,10+ yrs,Yes
+EXP-00824,EMP-10824,2019-07-14,12th,Electronics Manufacturing,Small Enterprise,7.0,7.4,14.4,10+ yrs,Yes
+EXP-00825,EMP-10825,2021-07-27,Diploma,Electronics Manufacturing,Contract Staffing,4.0,5.3,9.3,6-10 yrs,Yes
+EXP-00826,EMP-10826,2020-05-18,Diploma,Electronics Manufacturing,Small Enterprise,7.0,6.5,13.5,10+ yrs,Yes
+EXP-00827,EMP-10827,2026-02-08,10th,Fresher,None,0.0,0.8,0.8,<1 yr,Yes
+EXP-00828,EMP-10828,2020-09-17,10th,Electronics Manufacturing,Large Indian Company,7.0,6.0,13.0,10+ yrs,Yes
+EXP-00829,EMP-10829,2021-07-31,12th,Logistics & Warehousing,Mid-size Company,10.0,5.3,15.3,10+ yrs,Yes
+EXP-00830,EMP-10830,2023-12-21,B.E/B.Tech,Electronics Manufacturing,MNC,8.0,2.3,10.3,10+ yrs,Yes
+EXP-00831,EMP-10831,2023-05-11,10th,Fresher,None,0.0,3.5,3.5,3-6 yrs,Yes
+EXP-00832,EMP-10832,2024-09-18,12th,Fresher,None,0.0,2.2,2.2,1-3 yrs,Yes
+EXP-00833,EMP-10833,2020-07-09,ITI,Electronics Manufacturing,Mid-size Company,2.0,6.4,8.4,6-10 yrs,Yes
+EXP-00834,EMP-10834,2019-06-29,12th,Pharma,MNC,7.0,7.4,14.4,10+ yrs,Yes
+EXP-00835,EMP-10835,2019-01-09,Diploma,Logistics & Warehousing,Mid-size Company,11.0,7.2,18.2,10+ yrs,Yes
+EXP-00836,EMP-10836,2018-09-28,Diploma,Textile & Garments,MNC,4.0,8.1,12.1,10+ yrs,Yes
+EXP-00837,EMP-10837,2019-04-06,ITI,Logistics & Warehousing,Large Indian Company,5.0,7.6,12.6,10+ yrs,Yes
+EXP-00838,EMP-10838,2026-02-07,12th,Fresher,None,0.0,0.8,0.8,<1 yr,Yes
+EXP-00839,EMP-10839,2022-11-29,10th,Telecom,Large Indian Company,11.0,4.0,15.0,10+ yrs,Yes
+EXP-00840,EMP-10840,2018-10-20,10th,Telecom,Mid-size Company,9.0,8.1,17.1,10+ yrs,Yes
+EXP-00841,EMP-10841,2023-06-18,B.E/B.Tech,Electronics Manufacturing,Contract Staffing,6.0,3.4,9.4,6-10 yrs,Yes
+EXP-00842,EMP-10842,2018-08-14,B.E/B.Tech,Logistics & Warehousing,Mid-size Company,17.0,8.3,25.3,10+ yrs,Yes
+EXP-00843,EMP-10843,2023-02-09,ITI,Automobile,Large Indian Company,6.0,3.8,9.8,6-10 yrs,Yes
+EXP-00844,EMP-10844,2022-11-11,B.Sc,Electronics Manufacturing,Mid-size Company,11.0,4.0,15.0,10+ yrs,Yes
+EXP-00845,EMP-10845,2023-04-11,B.E/B.Tech,Automobile,MNC,12.0,3.6,15.6,10+ yrs,Yes
+EXP-00846,EMP-10846,2023-08-09,Diploma,Telecom,Mid-size Company,8.0,3.3,11.3,10+ yrs,Yes
+EXP-00847,EMP-10847,2023-12-16,Diploma,Automobile,Mid-size Company,5.0,2.9,7.9,6-10 yrs,Yes
+EXP-00848,EMP-10848,2020-08-12,Diploma,Telecom,MNC,7.0,6.3,13.3,10+ yrs,Yes
+EXP-00849,EMP-10849,2021-07-23,10th,Electronics Manufacturing,Mid-size Company,6.0,5.3,11.3,10+ yrs,Yes
+EXP-00850,EMP-10850,2021-07-30,12th,Fresher,None,0.0,5.3,5.3,3-6 yrs,Yes
+EXP-00851,EMP-10851,2018-12-09,ITI,FMCG,Mid-size Company,3.0,7.9,10.9,10+ yrs,Yes
+EXP-00852,EMP-10852,2025-02-19,12th,Electronics Manufacturing,Mid-size Company,12.0,1.7,13.7,10+ yrs,Yes
+EXP-00853,EMP-10853,2025-07-10,Diploma,Fresher,None,0.0,1.4,1.4,1-3 yrs,Yes
+EXP-00854,EMP-10854,2023-02-19,12th,Automobile,Contract Staffing,9.0,3.3,12.3,10+ yrs,Yes
+EXP-00855,EMP-10855,2022-03-13,12th,Fresher,None,0.0,4.7,4.7,3-6 yrs,Yes
+EXP-00856,EMP-10856,2021-01-26,Diploma,Logistics & Warehousing,Mid-size Company,13.0,5.8,18.8,10+ yrs,Yes
+EXP-00857,EMP-10857,2025-09-02,10th,Fresher,None,0.0,1.2,1.2,1-3 yrs,Yes
+EXP-00858,EMP-10858,2024-01-30,Diploma,Automobile,Small Enterprise,10.0,2.8,12.8,10+ yrs,Yes
+EXP-00859,EMP-10859,2024-09-26,10th,Fresher,None,0.0,2.1,2.1,1-3 yrs,Yes
+EXP-00860,EMP-10860,2021-11-11,10th,Electronics Manufacturing,Large Indian Company,6.0,5.0,11.0,10+ yrs,Yes
+EXP-00861,EMP-10861,2024-09-03,Diploma,Textile & Garments,Large Indian Company,8.0,2.2,10.2,10+ yrs,Yes
+EXP-00862,EMP-10862,2020-07-04,Diploma,Electronics Manufacturing,MNC,5.0,6.2,11.2,10+ yrs,Yes
+EXP-00863,EMP-10863,2018-07-23,Diploma,Electronics Manufacturing,MNC,12.0,8.3,20.3,10+ yrs,Yes
+EXP-00864,EMP-10864,2021-04-30,MBA,Logistics & Warehousing,Large Indian Company,11.0,5.6,16.6,10+ yrs,Yes
+EXP-00865,EMP-10865,2023-06-02,Diploma,Automobile,Contract Staffing,3.0,3.4,6.4,6-10 yrs,Yes
+EXP-00866,EMP-10866,2021-09-24,12th,Logistics & Warehousing,MNC,7.0,5.2,12.2,10+ yrs,Yes
+EXP-00867,EMP-10867,2025-04-06,Diploma,Textile & Garments,MNC,6.0,1.6,7.6,6-10 yrs,Yes
+EXP-00868,EMP-10868,2022-06-08,10th,Textile & Garments,MNC,8.0,4.5,12.5,10+ yrs,Yes
+EXP-00869,EMP-10869,2024-01-05,B.Sc,Pharma,Mid-size Company,10.0,2.9,12.9,10+ yrs,Yes
+EXP-00870,EMP-10870,2023-12-12,12th,Telecom,MNC,4.0,2.9,6.9,6-10 yrs,Yes
+EXP-00871,EMP-10871,2023-08-04,B.Sc,FMCG,Large Indian Company,10.0,3.3,13.3,10+ yrs,Yes
+EXP-00872,EMP-10872,2023-09-28,12th,Electronics Manufacturing,Large Indian Company,8.0,3.1,11.1,10+ yrs,Yes
+EXP-00873,EMP-10873,2020-04-20,ITI,Automobile,Contract Staffing,10.0,6.6,16.6,10+ yrs,Yes
+EXP-00874,EMP-10874,2020-07-24,ITI,Textile & Garments,MNC,10.0,6.3,16.3,10+ yrs,Yes
+EXP-00875,EMP-10875,2019-03-13,12th,Electronics Manufacturing,Mid-size Company,10.0,7.7,17.7,10+ yrs,Yes
+EXP-00876,EMP-10876,2023-11-03,ITI,Textile & Garments,Small Enterprise,1.0,3.0,4.0,3-6 yrs,Yes
+EXP-00877,EMP-10877,2019-02-15,10th,Automobile,Large Indian Company,8.0,7.8,15.8,10+ yrs,Yes
+EXP-00878,EMP-10878,2021-01-29,B.E/B.Tech,Electronics Manufacturing,Mid-size Company,12.0,5.8,17.8,10+ yrs,Yes
+EXP-00879,EMP-10879,2023-08-17,12th,Pharma,Contract Staffing,6.0,3.3,9.3,6-10 yrs,Yes
+EXP-00880,EMP-10880,2021-10-01,B.Sc,Automobile,MNC,12.0,5.1,17.1,10+ yrs,Yes
+EXP-00881,EMP-10881,2020-05-28,B.E/B.Tech,Automobile,Mid-size Company,14.0,6.5,20.5,10+ yrs,Yes
+EXP-00882,EMP-10882,2022-12-08,ITI,Electronics Manufacturing,Large Indian Company,2.0,4.0,6.0,3-6 yrs,Yes
+EXP-00883,EMP-10883,2024-09-19,12th,Electronics Manufacturing,Small Enterprise,6.0,2.2,8.2,6-10 yrs,Yes
+EXP-00884,EMP-10884,2022-10-26,B.E/B.Tech,Electronics Manufacturing,Large Indian Company,14.0,4.1,18.1,10+ yrs,Yes
+EXP-00885,EMP-10885,2018-10-30,Diploma,Retail,Large Indian Company,10.0,8.1,18.1,10+ yrs,Yes
+EXP-00886,EMP-10886,2023-08-22,ITI,Telecom,Contract Staffing,6.0,3.2,9.2,6-10 yrs,Yes
+EXP-00887,EMP-10887,2022-03-14,Diploma,Automobile,Contract Staffing,6.0,4.7,10.7,10+ yrs,Yes
+EXP-00888,EMP-10888,2023-02-08,10th,Logistics & Warehousing,MNC,6.0,3.8,9.8,6-10 yrs,Yes
+EXP-00889,EMP-10889,2018-12-05,ITI,Electronics Manufacturing,Large Indian Company,4.0,8.0,12.0,10+ yrs,Yes
+EXP-00890,EMP-10890,2024-01-29,B.E/B.Tech,Fresher,None,0.0,2.8,2.8,1-3 yrs,Yes
+EXP-00891,EMP-10891,2021-07-19,B.E/B.Tech,Textile & Garments,Large Indian Company,11.0,5.3,16.3,10+ yrs,Yes
+EXP-00892,EMP-10892,2021-12-19,Diploma,Fresher,None,0.0,4.9,4.9,3-6 yrs,Yes
+EXP-00893,EMP-10893,2024-08-18,MBA,Electronics Manufacturing,Mid-size Company,11.0,2.3,13.3,10+ yrs,Yes
+EXP-00894,EMP-10894,2021-03-15,10th,Electronics Manufacturing,MNC,6.0,5.7,11.7,10+ yrs,Yes
+EXP-00895,EMP-10895,2024-05-18,Diploma,Electronics Manufacturing,Small Enterprise,5.0,2.5,7.5,6-10 yrs,Yes
+EXP-00896,EMP-10896,2021-04-05,10th,Electronics Manufacturing,Large Indian Company,3.0,5.6,8.6,6-10 yrs,Yes
+EXP-00897,EMP-10897,2021-06-29,Diploma,Electronics Manufacturing,Small Enterprise,9.0,5.4,14.4,10+ yrs,Yes
+EXP-00898,EMP-10898,2023-06-29,ITI,Fresher,None,0.0,3.4,3.4,3-6 yrs,Yes
+EXP-00899,EMP-10899,2021-06-12,ITI,Textile & Garments,Large Indian Company,9.0,5.4,14.4,10+ yrs,Yes
+EXP-00900,EMP-10900,2022-11-03,12th,FMCG,Large Indian Company,2.0,4.0,6.0,3-6 yrs,Yes
+EXP-00901,EMP-10901,2021-10-23,12th,FMCG,Mid-size Company,9.0,5.1,14.1,10+ yrs,Yes
+EXP-00902,EMP-10902,2021-01-03,Diploma,Electronics Manufacturing,Small Enterprise,1.0,5.9,6.9,6-10 yrs,Yes
+EXP-00903,EMP-10903,2022-08-21,12th,Pharma,MNC,4.0,4.2,8.2,6-10 yrs,Yes
+EXP-00904,EMP-10904,2019-09-19,ITI,Electronics Manufacturing,Contract Staffing,14.0,7.2,21.2,10+ yrs,Yes
+EXP-00905,EMP-10905,2021-11-26,ITI,Electronics Manufacturing,Contract Staffing,11.0,5.0,16.0,10+ yrs,Yes
+EXP-00906,EMP-10906,2024-08-26,Diploma,Electronics Manufacturing,MNC,7.0,2.2,9.2,6-10 yrs,Yes
+EXP-00907,EMP-10907,2022-04-02,12th,Electronics Manufacturing,Small Enterprise,8.0,4.6,12.6,10+ yrs,Yes
+EXP-00908,EMP-10908,2023-11-19,10th,FMCG,Small Enterprise,8.0,3.0,11.0,10+ yrs,Yes
+EXP-00909,EMP-10909,2019-06-03,Diploma,Electronics Manufacturing,MNC,10.0,7.5,17.5,10+ yrs,Yes
+EXP-00910,EMP-10910,2020-07-23,Diploma,Electronics Manufacturing,Small Enterprise,15.0,6.3,21.3,10+ yrs,Yes
+EXP-00911,EMP-10911,2022-01-13,10th,Textile & Garments,Mid-size Company,9.0,4.9,13.9,10+ yrs,Yes
+EXP-00912,EMP-10912,2019-01-24,ITI,Logistics & Warehousing,Small Enterprise,5.0,7.8,12.8,10+ yrs,Yes
+EXP-00913,EMP-10913,2018-12-05,ITI,Pharma,Mid-size Company,5.0,8.0,13.0,10+ yrs,Yes
+EXP-00914,EMP-10914,2023-03-13,10th,Telecom,Contract Staffing,7.0,3.7,10.7,10+ yrs,Yes
+EXP-00915,EMP-10915,2020-07-16,ITI,Electronics Manufacturing,MNC,7.0,6.3,13.3,10+ yrs,Yes
+EXP-00916,EMP-10916,2023-06-23,12th,Electronics Manufacturing,Large Indian Company,8.0,3.4,11.4,10+ yrs,Yes
+EXP-00917,EMP-10917,2022-02-08,12th,Electronics Manufacturing,Mid-size Company,3.0,4.8,7.8,6-10 yrs,Yes
+EXP-00918,EMP-10918,2021-09-28,Diploma,Textile & Garments,Large Indian Company,9.0,5.1,14.1,10+ yrs,Yes
+EXP-00919,EMP-10919,2025-03-15,B.E/B.Tech,Automobile,Mid-size Company,2.0,1.7,3.7,3-6 yrs,Yes
+EXP-00920,EMP-10920,2025-09-07,ITI,Fresher,None,0.0,1.2,1.2,1-3 yrs,Yes
+EXP-00921,EMP-10921,2023-09-02,ITI,Telecom,Large Indian Company,6.0,3.2,9.2,6-10 yrs,Yes
+EXP-00922,EMP-10922,2022-10-23,Diploma,Electronics Manufacturing,MNC,6.0,4.1,10.1,10+ yrs,Yes
+EXP-00923,EMP-10923,2022-09-03,ITI,Logistics & Warehousing,Large Indian Company,11.0,4.2,15.2,10+ yrs,Yes
+EXP-00924,EMP-10924,2024-01-04,B.Sc,Textile & Garments,Contract Staffing,8.0,2.9,10.9,10+ yrs,Yes
+EXP-00925,EMP-10925,2019-02-15,B.Sc,Automobile,Mid-size Company,6.0,7.8,13.8,10+ yrs,Yes
+EXP-00926,EMP-10926,2021-01-24,Diploma,Retail,Contract Staffing,9.0,5.8,14.8,10+ yrs,Yes
+EXP-00927,EMP-10927,2021-11-27,10th,Textile & Garments,MNC,4.0,5.0,9.0,6-10 yrs,Yes
+EXP-00928,EMP-10928,2020-03-26,B.Sc,FMCG,Small Enterprise,10.0,6.7,16.7,10+ yrs,Yes
+EXP-00929,EMP-10929,2020-06-08,10th,Telecom,MNC,5.0,6.5,11.5,10+ yrs,Yes
+EXP-00930,EMP-10930,2021-04-02,12th,Automobile,MNC,6.0,5.6,11.6,10+ yrs,Yes
+EXP-00931,EMP-10931,2022-03-23,B.Sc,Electronics Manufacturing,Mid-size Company,12.0,4.7,16.7,10+ yrs,Yes
+EXP-00932,EMP-10932,2024-11-13,ITI,FMCG,MNC,9.0,2.0,11.0,10+ yrs,Yes
+EXP-00933,EMP-10933,2023-08-03,12th,Pharma,Small Enterprise,7.0,3.3,10.3,10+ yrs,Yes
+EXP-00934,EMP-10934,2018-08-19,10th,Retail,Contract Staffing,9.0,8.3,17.3,10+ yrs,Yes
+EXP-00935,EMP-10935,2023-09-25,Diploma,Logistics & Warehousing,Mid-size Company,6.0,3.2,9.2,6-10 yrs,Yes
+EXP-00936,EMP-10936,2022-05-30,ITI,Electronics Manufacturing,Small Enterprise,5.0,4.5,9.5,6-10 yrs,Yes
+EXP-00937,EMP-10937,2021-06-24,B.E/B.Tech,Pharma,MNC,10.0,5.4,15.4,10+ yrs,Yes
+EXP-00938,EMP-10938,2019-01-11,B.E/B.Tech,Electronics Manufacturing,MNC,9.0,7.9,16.9,10+ yrs,Yes
+EXP-00939,EMP-10939,2023-11-25,B.E/B.Tech,Textile & Garments,Small Enterprise,10.0,3.0,13.0,10+ yrs,Yes
+EXP-00940,EMP-10940,2020-01-16,ITI,Textile & Garments,Mid-size Company,3.0,6.8,9.8,6-10 yrs,Yes
+EXP-00941,EMP-10941,2022-01-12,Diploma,Electronics Manufacturing,Large Indian Company,10.0,4.9,14.9,10+ yrs,Yes
+EXP-00942,EMP-10942,2020-04-04,ITI,Electronics Manufacturing,Small Enterprise,12.0,6.6,18.6,10+ yrs,Yes
+EXP-00943,EMP-10943,2023-08-12,10th,Electronics Manufacturing,Large Indian Company,7.0,3.3,10.3,10+ yrs,Yes
+EXP-00944,EMP-10944,2020-10-04,ITI,Textile & Garments,Large Indian Company,8.0,6.1,14.1,10+ yrs,Yes
+EXP-00945,EMP-10945,2023-09-04,ITI,Electronics Manufacturing,Mid-size Company,8.0,3.2,11.2,10+ yrs,Yes
+EXP-00946,EMP-10946,2024-06-08,Diploma,Fresher,None,0.0,2.5,2.5,1-3 yrs,Yes
+EXP-00947,EMP-10947,2026-02-14,B.E/B.Tech,Electronics Manufacturing,Mid-size Company,13.0,0.8,13.8,10+ yrs,Yes
+EXP-00948,EMP-10948,2020-05-24,Diploma,Textile & Garments,Mid-size Company,5.0,6.5,11.5,10+ yrs,Yes
+EXP-00949,EMP-10949,2022-09-02,ITI,Automobile,Large Indian Company,4.0,4.2,8.2,6-10 yrs,Yes
+EXP-00950,EMP-10950,2025-05-23,12th,Fresher,None,0.0,1.5,1.5,1-3 yrs,Yes
+EXP-00951,EMP-10951,2021-05-22,ITI,Automobile,Mid-size Company,10.0,5.5,15.5,10+ yrs,Yes
+EXP-00952,EMP-10952,2022-01-09,B.Sc,Electronics Manufacturing,Large Indian Company,11.0,4.9,15.9,10+ yrs,Yes
+EXP-00953,EMP-10953,2019-06-21,B.E/B.Tech,Electronics Manufacturing,Mid-size Company,13.0,7.4,20.4,10+ yrs,Yes
+EXP-00954,EMP-10954,2021-05-29,Diploma,Electronics Manufacturing,Large Indian Company,5.0,5.5,10.5,10+ yrs,Yes
+EXP-00955,EMP-10955,2019-03-21,Diploma,Electronics Manufacturing,Large Indian Company,13.0,7.7,20.7,10+ yrs,Yes
+EXP-00956,EMP-10956,2022-03-29,12th,Logistics & Warehousing,Large Indian Company,5.0,4.6,9.6,6-10 yrs,Yes
+EXP-00957,EMP-10957,2023-09-14,10th,Fresher,None,0.0,2.4,2.4,1-3 yrs,Yes
+EXP-00958,EMP-10958,2020-05-12,10th,Electronics Manufacturing,Contract Staffing,4.0,6.2,10.2,10+ yrs,Yes
+EXP-00959,EMP-10959,2025-06-24,12th,Fresher,None,0.0,1.4,1.4,1-3 yrs,Yes
+EXP-00960,EMP-10960,2025-07-20,10th,Fresher,None,0.0,1.3,1.3,1-3 yrs,Yes
+EXP-00961,EMP-10961,2020-04-03,ITI,Automobile,Large Indian Company,4.0,6.6,10.6,10+ yrs,Yes
+EXP-00962,EMP-10962,2018-08-28,ITI,Electronics Manufacturing,Mid-size Company,11.0,8.2,19.2,10+ yrs,Yes
+EXP-00963,EMP-10963,2024-02-16,10th,Fresher,None,0.0,2.8,2.8,1-3 yrs,Yes
+EXP-00964,EMP-10964,2020-03-01,ITI,Electronics Manufacturing,Small Enterprise,2.0,6.7,8.7,6-10 yrs,Yes
+EXP-00965,EMP-10965,2020-02-27,10th,Automobile,Large Indian Company,5.0,6.7,11.7,10+ yrs,Yes
+EXP-00966,EMP-10966,2018-07-17,12th,Logistics & Warehousing,MNC,8.0,8.3,16.3,10+ yrs,Yes
+EXP-00967,EMP-10967,2021-06-30,10th,Automobile,Mid-size Company,8.0,5.4,13.4,10+ yrs,Yes
+EXP-00968,EMP-10968,2021-01-15,12th,Textile & Garments,Large Indian Company,8.0,5.8,13.8,10+ yrs,Yes
+EXP-00969,EMP-10969,2020-05-04,ITI,Electronics Manufacturing,MNC,4.0,6.5,10.5,10+ yrs,Yes
+EXP-00970,EMP-10970,2023-05-13,B.E/B.Tech,Electronics Manufacturing,Small Enterprise,9.0,3.5,12.5,10+ yrs,Yes
+EXP-00971,EMP-10971,2020-06-13,12th,Automobile,MNC,4.0,6.4,10.4,10+ yrs,Yes
+EXP-00972,EMP-10972,2021-09-04,Diploma,Automobile,Large Indian Company,13.0,5.2,18.2,10+ yrs,Yes
+EXP-00973,EMP-10973,2023-10-22,ITI,Electronics Manufacturing,MNC,8.0,3.1,11.1,10+ yrs,Yes
+EXP-00974,EMP-10974,2023-02-06,Diploma,Electronics Manufacturing,Mid-size Company,10.0,3.8,13.8,10+ yrs,Yes
+EXP-00975,EMP-10975,2020-11-15,10th,Automobile,Small Enterprise,6.0,6.0,12.0,10+ yrs,Yes
+EXP-00976,EMP-10976,2025-11-24,10th,Fresher,None,0.0,1.0,1.0,<1 yr,Yes
+EXP-00977,EMP-10977,2021-01-20,B.Sc,Automobile,Contract Staffing,8.0,5.8,13.8,10+ yrs,Yes
+EXP-00978,EMP-10978,2022-07-06,Diploma,Automobile,Mid-size Company,1.0,4.4,5.4,3-6 yrs,Yes
+EXP-00979,EMP-10979,2024-05-27,B.Sc,Electronics Manufacturing,Large Indian Company,9.0,2.5,11.5,10+ yrs,Yes
+EXP-00980,EMP-10980,2024-08-21,10th,Fresher,None,0.0,2.2,2.2,1-3 yrs,Yes
+EXP-00981,EMP-10981,2023-06-30,10th,Automobile,Contract Staffing,7.0,3.4,10.4,10+ yrs,Yes
+EXP-00982,EMP-10982,2019-10-07,Diploma,Automobile,Large Indian Company,7.0,7.1,14.1,10+ yrs,Yes
+EXP-00983,EMP-10983,2023-09-08,12th,Automobile,Mid-size Company,5.0,3.2,8.2,6-10 yrs,Yes
+EXP-00984,EMP-10984,2019-12-19,10th,Retail,Mid-size Company,11.0,6.9,17.9,10+ yrs,Yes
+EXP-00985,EMP-10985,2020-11-09,ITI,Electronics Manufacturing,Large Indian Company,13.0,6.0,19.0,10+ yrs,Yes
+EXP-00986,EMP-10986,2019-02-09,12th,Automobile,Contract Staffing,3.0,7.8,10.8,10+ yrs,Yes
+EXP-00987,EMP-10987,2023-09-24,Diploma,Electronics Manufacturing,Large Indian Company,1.0,3.2,4.2,3-6 yrs,Yes
+EXP-00988,EMP-10988,2020-05-02,ITI,Electronics Manufacturing,Large Indian Company,7.0,6.6,13.6,10+ yrs,Yes
+EXP-00989,EMP-10989,2024-11-24,12th,Textile & Garments,Contract Staffing,15.0,2.0,17.0,10+ yrs,Yes
+EXP-00990,EMP-10990,2021-07-08,12th,Fresher,None,0.0,5.4,5.4,3-6 yrs,Yes
+EXP-00991,EMP-10991,2024-05-13,ITI,Electronics Manufacturing,Large Indian Company,9.0,2.5,11.5,10+ yrs,Yes
+EXP-00992,EMP-10992,2019-01-19,ITI,Automobile,Mid-size Company,7.0,7.8,14.8,10+ yrs,Yes
+EXP-00993,EMP-10993,2023-06-20,Diploma,Fresher,None,0.0,3.4,3.4,3-6 yrs,Yes
+EXP-00994,EMP-10994,2021-09-28,Diploma,Textile & Garments,Mid-size Company,12.0,5.1,17.1,10+ yrs,Yes
+EXP-00995,EMP-10995,2025-04-26,12th,Fresher,None,0.0,1.6,1.6,1-3 yrs,Yes
+EXP-00996,EMP-10996,2022-09-23,B.Sc,Automobile,Contract Staffing,3.0,4.2,7.2,6-10 yrs,Yes
+EXP-00997,EMP-10997,2019-06-09,Diploma,FMCG,MNC,5.0,7.4,12.4,10+ yrs,Yes
+EXP-00998,EMP-10998,2024-02-26,Diploma,FMCG,Large Indian Company,7.0,2.7,9.7,6-10 yrs,Yes
+EXP-00999,EMP-10999,2023-03-09,B.E/B.Tech,Electronics Manufacturing,Contract Staffing,5.0,3.7,8.7,6-10 yrs,Yes
+EXP-01000,EMP-11000,2020-07-16,ITI,Telecom,Large Indian Company,3.0,6.3,9.3,6-10 yrs,Yes
+EXP-01001,EMP-11001,2020-08-08,12th,Telecom,Mid-size Company,7.0,6.3,13.3,10+ yrs,Yes
+EXP-01002,EMP-11002,2020-09-15,12th,Telecom,Small Enterprise,6.0,6.2,12.2,10+ yrs,Yes
+EXP-01003,EMP-11003,2022-05-21,ITI,Electronics Manufacturing,Mid-size Company,16.0,4.3,20.3,10+ yrs,Yes
+EXP-01004,EMP-11004,2022-09-11,10th,Electronics Manufacturing,Large Indian Company,13.0,4.2,17.2,10+ yrs,Yes
+EXP-01005,EMP-11005,2022-08-18,Diploma,Textile & Garments,MNC,8.0,4.3,12.3,10+ yrs,Yes
+EXP-01006,EMP-11006,2019-02-10,12th,Electronics Manufacturing,Large Indian Company,3.0,6.9,9.9,6-10 yrs,Yes
+EXP-01007,EMP-11007,2021-04-01,10th,Electronics Manufacturing,Contract Staffing,7.0,5.6,12.6,10+ yrs,Yes
+EXP-01008,EMP-11008,2019-09-14,12th,Electronics Manufacturing,Mid-size Company,3.0,7.2,10.2,10+ yrs,Yes
+EXP-01009,EMP-11009,2025-01-14,Diploma,Logistics & Warehousing,Large Indian Company,7.0,1.8,8.8,6-10 yrs,Yes
+EXP-01010,EMP-11010,2022-06-19,Diploma,Electronics Manufacturing,Contract Staffing,12.0,4.4,16.4,10+ yrs,Yes
+EXP-01011,EMP-11011,2021-10-23,Diploma,Electronics Manufacturing,MNC,5.0,5.1,10.1,10+ yrs,Yes
+EXP-01012,EMP-11012,2020-02-03,ITI,Telecom,Mid-size Company,4.0,6.8,10.8,10+ yrs,Yes
+EXP-01013,EMP-11013,2019-05-31,Diploma,Textile & Garments,Contract Staffing,13.0,7.5,20.5,10+ yrs,Yes
+EXP-01014,EMP-11014,2023-11-13,B.E/B.Tech,Electronics Manufacturing,Contract Staffing,7.0,3.0,10.0,6-10 yrs,Yes
+EXP-01015,EMP-11015,2021-09-07,10th,Telecom,Contract Staffing,6.0,5.2,11.2,10+ yrs,Yes
+EXP-01016,EMP-11016,2021-08-19,Diploma,Fresher,None,0.0,5.3,5.3,3-6 yrs,Yes
+EXP-01017,EMP-11017,2021-05-28,12th,Telecom,Large Indian Company,7.0,5.5,12.5,10+ yrs,Yes
+EXP-01018,EMP-11018,2025-02-12,10th,Electronics Manufacturing,Contract Staffing,1.0,1.8,2.8,1-3 yrs,Yes
+EXP-01019,EMP-11019,2023-12-09,Diploma,Electronics Manufacturing,Contract Staffing,1.0,2.9,3.9,3-6 yrs,Yes
+EXP-01020,EMP-11020,2018-06-09,ITI,Electronics Manufacturing,Large Indian Company,9.0,8.4,17.4,10+ yrs,Yes
+EXP-01021,EMP-11021,2024-12-01,12th,Fresher,None,0.0,2.0,2.0,1-3 yrs,Yes
+EXP-01022,EMP-11022,2024-02-22,Diploma,Fresher,None,0.0,2.7,2.7,1-3 yrs,Yes
+EXP-01023,EMP-11023,2021-02-12,ITI,Logistics & Warehousing,Mid-size Company,8.0,5.8,13.8,10+ yrs,Yes
+EXP-01024,EMP-11024,2020-01-15,ITI,Logistics & Warehousing,Contract Staffing,5.0,6.8,11.8,10+ yrs,Yes
+EXP-01025,EMP-11025,2023-12-04,Diploma,FMCG,MNC,11.0,3.0,14.0,10+ yrs,Yes
+EXP-01026,EMP-11026,2021-07-19,12th,Telecom,MNC,12.0,5.3,17.3,10+ yrs,Yes
+EXP-01027,EMP-11027,2020-03-22,B.Sc,Retail,Small Enterprise,1.0,6.7,7.7,6-10 yrs,Yes
+EXP-01028,EMP-11028,2023-10-14,ITI,Textile & Garments,Small Enterprise,6.0,3.1,9.1,6-10 yrs,Yes
+EXP-01029,EMP-11029,2021-07-03,12th,Automobile,Contract Staffing,10.0,5.4,15.4,10+ yrs,Yes
+EXP-01030,EMP-11030,2022-12-11,B.E/B.Tech,Electronics Manufacturing,Large Indian Company,3.0,3.9,6.9,6-10 yrs,Yes
+EXP-01031,EMP-11031,2023-04-17,12th,Fresher,None,0.0,2.7,2.7,1-3 yrs,Yes
+EXP-01032,EMP-11032,2018-12-11,ITI,Logistics & Warehousing,Contract Staffing,7.0,7.9,14.9,10+ yrs,Yes
+EXP-01033,EMP-11033,2024-04-01,ITI,Automobile,MNC,8.0,2.6,10.6,10+ yrs,Yes
+EXP-01034,EMP-11034,2022-07-12,ITI,Electronics Manufacturing,Small Enterprise,7.0,4.4,11.4,10+ yrs,Yes
+EXP-01035,EMP-11035,2021-02-11,ITI,Electronics Manufacturing,Small Enterprise,3.0,5.8,8.8,6-10 yrs,Yes
+EXP-01036,EMP-11036,2020-04-20,ITI,Textile & Garments,Mid-size Company,7.0,6.6,13.6,10+ yrs,Yes
+EXP-01037,EMP-11037,2022-07-01,Diploma,Logistics & Warehousing,Large Indian Company,9.0,4.4,13.4,10+ yrs,Yes
+EXP-01038,EMP-11038,2021-12-16,B.Sc,Fresher,None,0.0,4.9,4.9,3-6 yrs,Yes
+EXP-01039,EMP-11039,2021-03-08,10th,Fresher,None,0.0,4.7,4.7,3-6 yrs,Yes
+EXP-01040,EMP-11040,2026-04-28,12th,Fresher,None,0.0,0.6,0.6,<1 yr,Yes
+EXP-01041,EMP-11041,2022-05-22,B.E/B.Tech,Textile & Garments,Large Indian Company,11.0,4.5,15.5,10+ yrs,Yes
+EXP-01042,EMP-11042,2022-03-07,Diploma,Automobile,Large Indian Company,8.0,4.7,12.7,10+ yrs,Yes
+EXP-01043,EMP-11043,2018-10-23,B.E/B.Tech,Electronics Manufacturing,Small Enterprise,8.0,8.1,16.1,10+ yrs,Yes
+EXP-01044,EMP-11044,2020-05-01,B.Sc,Textile & Garments,Mid-size Company,11.0,6.6,17.6,10+ yrs,Yes
+EXP-01045,EMP-11045,2021-01-14,ITI,Automobile,MNC,4.0,5.8,9.8,6-10 yrs,Yes
+EXP-01046,EMP-11046,2019-12-23,ITI,Electronics Manufacturing,Small Enterprise,11.0,6.9,17.9,10+ yrs,Yes
+EXP-01047,EMP-11047,2023-03-13,B.E/B.Tech,Electronics Manufacturing,Mid-size Company,13.0,3.7,16.7,10+ yrs,Yes
+EXP-01048,EMP-11048,2024-06-15,B.Sc,Automobile,Mid-size Company,16.0,2.4,18.4,10+ yrs,Yes
+EXP-01049,EMP-11049,2021-03-18,ITI,Electronics Manufacturing,Mid-size Company,4.0,5.7,9.7,6-10 yrs,Yes
+EXP-01050,EMP-11050,2019-03-14,Diploma,Electronics Manufacturing,Mid-size Company,9.0,7.7,16.7,10+ yrs,Yes
+EXP-01051,EMP-11051,2025-08-18,12th,Automobile,MNC,11.0,1.3,12.3,10+ yrs,Yes
+EXP-01052,EMP-11052,2025-01-21,B.E/B.Tech,Electronics Manufacturing,Mid-size Company,12.0,1.8,13.8,10+ yrs,Yes
+EXP-01053,EMP-11053,2020-08-25,12th,FMCG,Large Indian Company,1.0,5.7,6.7,6-10 yrs,Yes
+EXP-01054,EMP-11054,2023-08-14,Diploma,Textile & Garments,Mid-size Company,12.0,3.3,15.3,10+ yrs,Yes
+EXP-01055,EMP-11055,2025-12-11,12th,Fresher,None,0.0,0.9,0.9,<1 yr,Yes
+EXP-01056,EMP-11056,2025-02-10,12th,Electronics Manufacturing,MNC,7.0,1.8,8.8,6-10 yrs,Yes
+EXP-01057,EMP-11057,2021-04-29,B.Sc,Electronics Manufacturing,Mid-size Company,4.0,5.6,9.6,6-10 yrs,Yes
+EXP-01058,EMP-11058,2020-04-24,Diploma,Automobile,Mid-size Company,7.0,6.6,13.6,10+ yrs,Yes
+EXP-01059,EMP-11059,2018-07-27,ITI,Pharma,Contract Staffing,11.0,8.3,19.3,10+ yrs,Yes
+EXP-01060,EMP-11060,2021-04-04,Diploma,Fresher,None,0.0,5.6,5.6,3-6 yrs,Yes
+EXP-01061,EMP-11061,2023-07-09,ITI,Electronics Manufacturing,Large Indian Company,10.0,3.4,13.4,10+ yrs,Yes
+EXP-01062,EMP-11062,2023-05-10,12th,Automobile,Large Indian Company,9.0,3.5,12.5,10+ yrs,Yes
+EXP-01063,EMP-11063,2020-09-20,ITI,Retail,MNC,11.0,5.7,16.7,10+ yrs,Yes
+EXP-01064,EMP-11064,2025-01-18,Diploma,Electronics Manufacturing,MNC,3.0,1.8,4.8,3-6 yrs,Yes
+EXP-01065,EMP-11065,2020-09-23,Diploma,Telecom,Contract Staffing,11.0,6.2,17.2,10+ yrs,Yes
+EXP-01066,EMP-11066,2020-11-21,10th,Electronics Manufacturing,Small Enterprise,22.0,6.0,28.0,10+ yrs,Yes
+EXP-01067,EMP-11067,2018-08-11,Diploma,Logistics & Warehousing,MNC,7.0,8.3,15.3,10+ yrs,Yes
+EXP-01068,EMP-11068,2020-09-10,ITI,Automobile,Contract Staffing,5.0,6.2,11.2,10+ yrs,Yes
+EXP-01069,EMP-11069,2022-06-12,ITI,Textile & Garments,MNC,9.0,4.4,13.4,10+ yrs,Yes
+EXP-01070,EMP-11070,2024-11-27,B.Sc,Automobile,Large Indian Company,14.0,2.0,16.0,10+ yrs,Yes
+EXP-01071,EMP-11071,2018-07-14,ITI,Textile & Garments,Mid-size Company,10.0,8.4,18.4,10+ yrs,Yes
+EXP-01072,EMP-11072,2023-04-17,Diploma,Automobile,MNC,7.0,3.6,10.6,10+ yrs,Yes
+EXP-01073,EMP-11073,2023-06-11,Diploma,Telecom,Contract Staffing,8.0,3.4,11.4,10+ yrs,Yes
+EXP-01074,EMP-11074,2022-02-22,12th,Fresher,None,0.0,4.7,4.7,3-6 yrs,Yes
+EXP-01075,EMP-11075,2019-08-20,ITI,Electronics Manufacturing,Large Indian Company,14.0,7.3,21.3,10+ yrs,Yes
+EXP-01076,EMP-11076,2021-12-07,12th,FMCG,Contract Staffing,11.0,5.0,16.0,10+ yrs,Yes
+EXP-01077,EMP-11077,2020-11-20,Diploma,Logistics & Warehousing,Mid-size Company,7.0,5.2,12.2,10+ yrs,Yes
+EXP-01078,EMP-11078,2020-07-18,12th,Fresher,None,0.0,6.3,6.3,6-10 yrs,Yes
+EXP-01079,EMP-11079,2020-06-23,ITI,Fresher,None,0.0,6.0,6.0,3-6 yrs,Yes
+EXP-01080,EMP-11080,2025-06-16,Diploma,Electronics Manufacturing,Large Indian Company,5.0,1.4,6.4,6-10 yrs,Yes
+EXP-01081,EMP-11081,2020-08-01,Diploma,Automobile,Large Indian Company,11.0,6.3,17.3,10+ yrs,Yes
+EXP-01082,EMP-11082,2021-07-08,ITI,Logistics & Warehousing,Mid-size Company,11.0,5.4,16.4,10+ yrs,Yes
+EXP-01083,EMP-11083,2020-03-16,ITI,Retail,Mid-size Company,5.0,6.7,11.7,10+ yrs,Yes
+EXP-01084,EMP-11084,2018-09-25,Diploma,Pharma,Contract Staffing,6.0,8.2,14.2,10+ yrs,Yes
+EXP-01085,EMP-11085,2025-10-06,Diploma,Electronics Manufacturing,Mid-size Company,4.0,1.1,5.1,3-6 yrs,Yes
+EXP-01086,EMP-11086,2018-12-16,12th,Automobile,Contract Staffing,3.0,7.9,10.9,10+ yrs,Yes
+EXP-01087,EMP-11087,2020-11-02,B.Sc,Automobile,Large Indian Company,7.0,6.0,13.0,10+ yrs,Yes
+EXP-01088,EMP-11088,2021-08-18,12th,Automobile,MNC,12.0,5.3,17.3,10+ yrs,Yes
+EXP-01089,EMP-11089,2022-07-22,B.E/B.Tech,Electronics Manufacturing,Large Indian Company,8.0,4.3,12.3,10+ yrs,Yes
+EXP-01090,EMP-11090,2020-05-26,Diploma,Automobile,Mid-size Company,12.0,6.5,18.5,10+ yrs,Yes
+EXP-01091,EMP-11091,2022-08-11,12th,Telecom,Mid-size Company,13.0,4.1,17.1,10+ yrs,Yes
+EXP-01092,EMP-11092,2018-08-08,Diploma,Electronics Manufacturing,Mid-size Company,6.0,8.3,14.3,10+ yrs,Yes
+EXP-01093,EMP-11093,2019-06-19,Diploma,Textile & Garments,MNC,6.0,6.7,12.7,10+ yrs,Yes
+EXP-01094,EMP-11094,2020-10-02,B.Sc,FMCG,Mid-size Company,12.0,6.1,18.1,10+ yrs,Yes
+EXP-01095,EMP-11095,2021-10-03,Diploma,Electronics Manufacturing,Large Indian Company,8.0,5.1,13.1,10+ yrs,Yes
+EXP-01096,EMP-11096,2021-06-30,ITI,FMCG,Large Indian Company,11.0,5.4,16.4,10+ yrs,Yes
+EXP-01097,EMP-11097,2025-08-16,10th,Fresher,None,0.0,1.3,1.3,1-3 yrs,Yes
+EXP-01098,EMP-11098,2023-03-25,ITI,Fresher,None,0.0,3.7,3.7,3-6 yrs,Yes
+EXP-01099,EMP-11099,2020-05-21,B.Sc,Electronics Manufacturing,Mid-size Company,13.0,6.5,19.5,10+ yrs,Yes
+EXP-01100,EMP-11100,2025-12-26,10th,FMCG,Mid-size Company,5.0,0.9,5.9,3-6 yrs,Yes
+EXP-01101,EMP-11101,2023-03-10,ITI,Retail,Large Indian Company,4.0,3.7,7.7,6-10 yrs,Yes
+EXP-01102,EMP-11102,2022-01-29,B.Sc,Retail,Contract Staffing,10.0,4.8,14.8,10+ yrs,Yes
+EXP-01103,EMP-11103,2020-12-31,12th,Textile & Garments,Contract Staffing,10.0,5.9,15.9,10+ yrs,Yes
+EXP-01104,EMP-11104,2018-06-22,ITI,Automobile,Large Indian Company,5.0,8.4,13.4,10+ yrs,Yes
+EXP-01105,EMP-11105,2021-11-21,10th,Electronics Manufacturing,Mid-size Company,8.0,5.0,13.0,10+ yrs,Yes
+EXP-01106,EMP-11106,2019-01-31,ITI,Electronics Manufacturing,Small Enterprise,12.0,7.8,19.8,10+ yrs,Yes
+EXP-01107,EMP-11107,2022-08-14,ITI,Electronics Manufacturing,Mid-size Company,11.0,4.3,15.3,10+ yrs,Yes
+EXP-01108,EMP-11108,2022-09-04,Diploma,Automobile,Mid-size Company,3.0,4.2,7.2,6-10 yrs,Yes
+EXP-01109,EMP-11109,2022-09-09,ITI,Automobile,Small Enterprise,12.0,4.2,16.2,10+ yrs,Yes
+EXP-01110,EMP-11110,2022-09-12,Diploma,Electronics Manufacturing,MNC,14.0,4.2,18.2,10+ yrs,Yes
+EXP-01111,EMP-11111,2021-03-06,ITI,Fresher,None,0.0,5.7,5.7,3-6 yrs,Yes
+EXP-01112,EMP-11112,2023-10-12,B.E/B.Tech,Electronics Manufacturing,Mid-size Company,16.0,3.1,19.1,10+ yrs,Yes
+EXP-01113,EMP-11113,2019-06-25,10th,Electronics Manufacturing,MNC,8.0,7.4,15.4,10+ yrs,Yes
+EXP-01114,EMP-11114,2018-12-09,B.Sc,Automobile,Small Enterprise,13.0,7.9,20.9,10+ yrs,Yes
+EXP-01115,EMP-11115,2023-06-13,ITI,Telecom,Small Enterprise,10.0,3.4,13.4,10+ yrs,Yes
+EXP-01116,EMP-11116,2019-05-05,12th,Electronics Manufacturing,Contract Staffing,5.0,7.5,12.5,10+ yrs,Yes
+EXP-01117,EMP-11117,2020-03-25,ITI,Electronics Manufacturing,Mid-size Company,5.0,6.7,11.7,10+ yrs,Yes
+EXP-01118,EMP-11118,2018-08-02,ITI,Textile & Garments,Large Indian Company,6.0,8.3,14.3,10+ yrs,Yes
+EXP-01119,EMP-11119,2021-11-07,Diploma,Textile & Garments,Mid-size Company,5.0,5.0,10.0,6-10 yrs,Yes
+EXP-01120,EMP-11120,2022-06-20,Diploma,Automobile,Mid-size Company,12.0,4.4,16.4,10+ yrs,Yes
+EXP-01121,EMP-11121,2021-11-01,12th,Fresher,None,0.0,5.1,5.1,3-6 yrs,Yes
+EXP-01122,EMP-11122,2019-10-12,B.Sc,Fresher,None,0.0,7.1,7.1,6-10 yrs,Yes
+EXP-01123,EMP-11123,2019-09-02,Diploma,Automobile,Large Indian Company,7.0,7.2,14.2,10+ yrs,Yes
+EXP-01124,EMP-11124,2022-08-01,ITI,Electronics Manufacturing,Small Enterprise,9.0,4.3,13.3,10+ yrs,Yes
+EXP-01125,EMP-11125,2020-09-23,ITI,Logistics & Warehousing,MNC,9.0,6.2,15.2,10+ yrs,Yes
+EXP-01126,EMP-11126,2022-12-22,Diploma,Fresher,None,0.0,3.9,3.9,3-6 yrs,Yes
+EXP-01127,EMP-11127,2020-03-24,10th,Electronics Manufacturing,Large Indian Company,6.0,6.7,12.7,10+ yrs,Yes
+EXP-01128,EMP-11128,2025-11-08,ITI,Fresher,None,0.0,1.0,1.0,<1 yr,Yes
+EXP-01129,EMP-11129,2022-12-04,ITI,FMCG,MNC,7.0,4.0,11.0,10+ yrs,Yes
+EXP-01130,EMP-11130,2024-09-07,B.E/B.Tech,Textile & Garments,Contract Staffing,18.0,2.2,20.2,10+ yrs,Yes
+EXP-01131,EMP-11131,2021-05-07,12th,Electronics Manufacturing,Small Enterprise,11.0,5.5,16.5,10+ yrs,Yes
+EXP-01132,EMP-11132,2023-10-02,ITI,Electronics Manufacturing,Large Indian Company,13.0,3.1,16.1,10+ yrs,Yes
+EXP-01133,EMP-11133,2019-06-02,B.E/B.Tech,Logistics & Warehousing,Small Enterprise,10.0,7.5,17.5,10+ yrs,Yes
+EXP-01134,EMP-11134,2026-01-18,10th,Fresher,None,0.0,0.8,0.8,<1 yr,Yes
+EXP-01135,EMP-11135,2019-05-30,Diploma,Electronics Manufacturing,Small Enterprise,10.0,7.5,17.5,10+ yrs,Yes
+EXP-01136,EMP-11136,2022-02-25,ITI,Electronics Manufacturing,Mid-size Company,8.0,4.7,12.7,10+ yrs,Yes
+EXP-01137,EMP-11137,2022-04-30,Diploma,Textile & Garments,Contract Staffing,5.0,4.6,9.6,6-10 yrs,Yes
+EXP-01138,EMP-11138,2025-10-09,Diploma,Fresher,None,0.0,1.1,1.1,1-3 yrs,Yes
+EXP-01139,EMP-11139,2025-04-19,ITI,Fresher,None,0.0,1.6,1.6,1-3 yrs,Yes
+EXP-01140,EMP-11140,2020-09-07,12th,Logistics & Warehousing,Small Enterprise,3.0,6.2,9.2,6-10 yrs,Yes
+EXP-01141,EMP-11141,2019-11-05,ITI,Automobile,Large Indian Company,9.0,6.6,15.6,10+ yrs,Yes
+EXP-01142,EMP-11142,2020-07-18,12th,Textile & Garments,Mid-size Company,6.0,6.3,12.3,10+ yrs,Yes
+EXP-01143,EMP-11143,2019-05-25,B.Sc,Telecom,Small Enterprise,5.0,7.5,12.5,10+ yrs,Yes
+EXP-01144,EMP-11144,2023-02-09,ITI,Electronics Manufacturing,MNC,4.0,3.8,7.8,6-10 yrs,Yes
+EXP-01145,EMP-11145,2021-09-26,Diploma,Automobile,MNC,14.0,5.1,19.1,10+ yrs,Yes
+EXP-01146,EMP-11146,2022-08-19,12th,Retail,Small Enterprise,5.0,4.3,9.3,6-10 yrs,Yes
+EXP-01147,EMP-11147,2020-09-25,ITI,Electronics Manufacturing,Mid-size Company,1.0,6.2,7.2,6-10 yrs,Yes
+EXP-01148,EMP-11148,2023-03-05,ITI,Electronics Manufacturing,Large Indian Company,8.0,3.7,11.7,10+ yrs,Yes
+EXP-01149,EMP-11149,2018-09-05,12th,Telecom,Small Enterprise,3.0,8.2,11.2,10+ yrs,Yes
+EXP-01150,EMP-11150,2020-06-18,ITI,Electronics Manufacturing,MNC,12.0,6.4,18.4,10+ yrs,Yes
+EXP-01151,EMP-11151,2024-03-16,10th,Logistics & Warehousing,Large Indian Company,2.0,2.7,4.7,3-6 yrs,Yes
+EXP-01152,EMP-11152,2021-12-14,MBA,Logistics & Warehousing,Large Indian Company,20.0,4.9,24.9,10+ yrs,Yes
+EXP-01153,EMP-11153,2020-12-02,Diploma,Telecom,Mid-size Company,12.0,6.0,18.0,10+ yrs,Yes
+EXP-01154,EMP-11154,2022-10-09,B.Sc,Fresher,None,0.0,4.1,4.1,3-6 yrs,Yes
+EXP-01155,EMP-11155,2019-10-02,12th,Electronics Manufacturing,Mid-size Company,9.0,7.1,16.1,10+ yrs,Yes
+EXP-01156,EMP-11156,2019-07-21,ITI,FMCG,Small Enterprise,4.0,7.3,11.3,10+ yrs,Yes
+EXP-01157,EMP-11157,2019-06-30,12th,Textile & Garments,Mid-size Company,9.0,7.4,16.4,10+ yrs,Yes
+EXP-01158,EMP-11158,2024-11-01,Diploma,Automobile,Contract Staffing,10.0,2.1,12.1,10+ yrs,Yes
+EXP-01159,EMP-11159,2019-10-26,ITI,FMCG,MNC,2.0,7.1,9.1,6-10 yrs,Yes
+EXP-01160,EMP-11160,2022-11-02,ITI,Fresher,None,0.0,4.0,4.0,3-6 yrs,Yes
+EXP-01161,EMP-11161,2021-09-30,10th,Fresher,None,0.0,5.1,5.1,3-6 yrs,Yes
+EXP-01162,EMP-11162,2023-02-07,Diploma,Telecom,MNC,7.0,3.8,10.8,10+ yrs,Yes
+EXP-01163,EMP-11163,2021-03-26,Diploma,Telecom,Mid-size Company,14.0,5.7,19.7,10+ yrs,Yes
+EXP-01164,EMP-11164,2026-02-07,12th,Fresher,None,0.0,0.8,0.8,<1 yr,Yes
+EXP-01165,EMP-11165,2021-03-08,Diploma,Electronics Manufacturing,Small Enterprise,1.0,5.7,6.7,6-10 yrs,Yes
+EXP-01166,EMP-11166,2023-06-19,ITI,Electronics Manufacturing,Large Indian Company,4.0,3.4,7.4,6-10 yrs,Yes
+EXP-01167,EMP-11167,2023-02-17,B.E/B.Tech,Electronics Manufacturing,Small Enterprise,12.0,3.8,15.8,10+ yrs,Yes
+EXP-01168,EMP-11168,2021-09-27,B.Sc,Telecom,Small Enterprise,9.0,5.1,14.1,10+ yrs,Yes
+EXP-01169,EMP-11169,2021-10-03,12th,Telecom,Mid-size Company,6.0,5.1,11.1,10+ yrs,Yes
+EXP-01170,EMP-11170,2022-04-26,B.Sc,Electronics Manufacturing,Mid-size Company,1.0,4.6,5.6,3-6 yrs,Yes
+EXP-01171,EMP-11171,2019-08-04,Diploma,Electronics Manufacturing,Mid-size Company,2.0,7.3,9.3,6-10 yrs,Yes
+EXP-01172,EMP-11172,2020-04-27,ITI,FMCG,Small Enterprise,15.0,6.6,21.6,10+ yrs,Yes
+EXP-01173,EMP-11173,2023-07-04,B.Sc,Fresher,None,0.0,3.4,3.4,3-6 yrs,Yes
+EXP-01174,EMP-11174,2024-07-28,B.E/B.Tech,Automobile,Large Indian Company,9.0,2.3,11.3,10+ yrs,Yes
+EXP-01175,EMP-11175,2024-08-13,Diploma,FMCG,MNC,8.0,2.3,10.3,10+ yrs,Yes
+EXP-01176,EMP-11176,2023-12-21,B.E/B.Tech,Automobile,MNC,12.0,2.9,14.9,10+ yrs,Yes
+EXP-01177,EMP-11177,2023-12-16,B.E/B.Tech,Logistics & Warehousing,Contract Staffing,17.0,2.9,19.9,10+ yrs,Yes
+EXP-01178,EMP-11178,2021-02-09,ITI,Automobile,Large Indian Company,13.0,5.8,18.8,10+ yrs,Yes
+EXP-01179,EMP-11179,2020-09-22,10th,Logistics & Warehousing,Mid-size Company,11.0,6.2,17.2,10+ yrs,Yes
+EXP-01180,EMP-11180,2022-10-26,ITI,Fresher,None,0.0,4.1,4.1,3-6 yrs,Yes
+EXP-01181,EMP-11181,2023-09-06,ITI,Electronics Manufacturing,Contract Staffing,16.0,3.2,19.2,10+ yrs,Yes
+EXP-01182,EMP-11182,2020-12-19,Diploma,Electronics Manufacturing,Contract Staffing,10.0,5.9,15.9,10+ yrs,Yes
+EXP-01183,EMP-11183,2022-02-17,Diploma,FMCG,Mid-size Company,1.0,4.8,5.8,3-6 yrs,Yes
+EXP-01184,EMP-11184,2023-11-30,12th,Telecom,MNC,3.0,2.0,5.0,3-6 yrs,Yes
+EXP-01185,EMP-11185,2020-01-07,ITI,Electronics Manufacturing,Small Enterprise,13.0,6.9,19.9,10+ yrs,Yes
+EXP-01186,EMP-11186,2018-09-01,ITI,FMCG,MNC,5.0,8.2,13.2,10+ yrs,Yes
+EXP-01187,EMP-11187,2021-01-02,Diploma,Automobile,Small Enterprise,8.0,5.2,13.2,10+ yrs,Yes
+EXP-01188,EMP-11188,2023-03-05,B.E/B.Tech,Pharma,Large Indian Company,3.0,3.7,6.7,6-10 yrs,Yes
+EXP-01189,EMP-11189,2021-10-05,ITI,Logistics & Warehousing,MNC,7.0,5.1,12.1,10+ yrs,Yes
+EXP-01190,EMP-11190,2019-04-28,Diploma,Pharma,Mid-size Company,9.0,7.6,16.6,10+ yrs,Yes
+EXP-01191,EMP-11191,2022-12-02,Diploma,Automobile,Large Indian Company,7.0,4.0,11.0,10+ yrs,Yes
+EXP-01192,EMP-11192,2025-08-24,ITI,Fresher,None,0.0,1.2,1.2,1-3 yrs,Yes
+EXP-01193,EMP-11193,2023-03-11,ITI,Electronics Manufacturing,MNC,4.0,3.7,7.7,6-10 yrs,Yes
+EXP-01194,EMP-11194,2022-08-03,12th,Electronics Manufacturing,MNC,1.0,4.3,5.3,3-6 yrs,Yes
+EXP-01195,EMP-11195,2024-04-28,10th,Electronics Manufacturing,Mid-size Company,1.0,2.6,3.6,3-6 yrs,Yes
+EXP-01196,EMP-11196,2022-04-26,ITI,FMCG,Small Enterprise,1.0,4.6,5.6,3-6 yrs,Yes
+EXP-01197,EMP-11197,2022-02-03,10th,Electronics Manufacturing,Mid-size Company,7.0,4.8,11.8,10+ yrs,Yes
+EXP-01198,EMP-11198,2020-07-25,12th,FMCG,Large Indian Company,4.0,6.3,10.3,10+ yrs,Yes
+EXP-01199,EMP-11199,2019-08-10,ITI,Pharma,Large Indian Company,10.0,7.3,17.3,10+ yrs,Yes
+EXP-01200,EMP-11200,2019-07-21,Diploma,Automobile,Mid-size Company,7.0,7.3,14.3,10+ yrs,Yes
+EXP-01201,EMP-11201,2018-09-16,Diploma,Logistics & Warehousing,Large Indian Company,12.0,8.2,20.2,10+ yrs,Yes
+EXP-01202,EMP-11202,2021-11-23,ITI,Electronics Manufacturing,Large Indian Company,5.0,4.9,9.9,6-10 yrs,Yes
+EXP-01203,EMP-11203,2020-05-22,12th,Electronics Manufacturing,Small Enterprise,9.0,6.5,15.5,10+ yrs,Yes
+EXP-01204,EMP-11204,2022-05-16,ITI,Automobile,Large Indian Company,5.0,4.3,9.3,6-10 yrs,Yes
+EXP-01205,EMP-11205,2024-03-16,10th,Logistics & Warehousing,MNC,14.0,2.7,16.7,10+ yrs,Yes
+EXP-01206,EMP-11206,2021-03-10,12th,Electronics Manufacturing,Small Enterprise,5.0,5.7,10.7,10+ yrs,Yes
+EXP-01207,EMP-11207,2020-09-03,Diploma,Fresher,None,0.0,6.2,6.2,6-10 yrs,Yes
+EXP-01208,EMP-11208,2020-04-18,ITI,Pharma,Large Indian Company,10.0,6.6,16.6,10+ yrs,Yes
+EXP-01209,EMP-11209,2020-03-10,10th,Electronics Manufacturing,Mid-size Company,6.0,6.7,12.7,10+ yrs,Yes
+EXP-01210,EMP-11210,2024-07-23,ITI,Fresher,None,0.0,1.8,1.8,1-3 yrs,Yes
+EXP-01211,EMP-11211,2021-05-25,Diploma,Electronics Manufacturing,Mid-size Company,3.0,5.5,8.5,6-10 yrs,Yes
+EXP-01212,EMP-11212,2023-01-22,Diploma,Electronics Manufacturing,Mid-size Company,10.0,3.1,13.1,10+ yrs,Yes
+EXP-01213,EMP-11213,2019-06-08,12th,Electronics Manufacturing,Large Indian Company,6.0,7.5,13.5,10+ yrs,Yes
+EXP-01214,EMP-11214,2020-09-04,Diploma,Textile & Garments,MNC,10.0,6.2,16.2,10+ yrs,Yes
+EXP-01215,EMP-11215,2022-12-30,ITI,Retail,MNC,11.0,3.9,14.9,10+ yrs,Yes
+EXP-01216,EMP-11216,2018-07-28,10th,Textile & Garments,Mid-size Company,8.0,8.3,16.3,10+ yrs,Yes
+EXP-01217,EMP-11217,2025-08-09,ITI,Fresher,None,0.0,0.4,0.4,<1 yr,No
+EXP-01218,EMP-11218,2020-08-31,ITI,Telecom,Mid-size Company,6.0,5.8,11.8,10+ yrs,Yes
+EXP-01219,EMP-11219,2025-02-08,12th,Fresher,None,0.0,1.8,1.8,1-3 yrs,Yes
+EXP-01220,EMP-11220,2020-12-22,ITI,Electronics Manufacturing,MNC,12.0,5.9,17.9,10+ yrs,Yes
+EXP-01221,EMP-11221,2020-12-14,12th,Electronics Manufacturing,MNC,11.0,5.9,16.9,10+ yrs,Yes
+EXP-01222,EMP-11222,2018-12-16,ITI,Electronics Manufacturing,Contract Staffing,5.0,7.9,12.9,10+ yrs,Yes
+EXP-01223,EMP-11223,2020-10-28,ITI,Textile & Garments,Mid-size Company,7.0,6.1,13.1,10+ yrs,Yes
+EXP-01224,EMP-11224,2024-05-17,Diploma,Fresher,None,0.0,2.5,2.5,1-3 yrs,Yes
+EXP-01225,EMP-11225,2025-02-04,10th,Fresher,None,0.0,1.3,1.3,1-3 yrs,Yes
+EXP-01226,EMP-11226,2021-11-15,Diploma,Retail,Mid-size Company,15.0,5.0,20.0,10+ yrs,Yes
+EXP-01227,EMP-11227,2025-08-06,ITI,Logistics & Warehousing,Large Indian Company,8.0,1.3,9.3,6-10 yrs,Yes
+EXP-01228,EMP-11228,2026-05-30,Diploma,Fresher,None,0.0,0.5,0.5,<1 yr,No
+EXP-01229,EMP-11229,2019-04-09,Diploma,Electronics Manufacturing,Contract Staffing,1.0,7.6,8.6,6-10 yrs,Yes
+EXP-01230,EMP-11230,2023-02-08,ITI,Retail,Large Indian Company,4.0,3.8,7.8,6-10 yrs,Yes
+EXP-01231,EMP-11231,2021-05-11,12th,Telecom,MNC,4.0,5.5,9.5,6-10 yrs,Yes
+EXP-01232,EMP-11232,2021-06-08,B.E/B.Tech,Automobile,Contract Staffing,11.0,5.5,16.5,10+ yrs,Yes
+EXP-01233,EMP-11233,2024-02-02,12th,Pharma,Large Indian Company,8.0,2.8,10.8,10+ yrs,Yes
+EXP-01234,EMP-11234,2020-11-23,ITI,Electronics Manufacturing,Small Enterprise,5.0,6.0,11.0,10+ yrs,Yes
+EXP-01235,EMP-11235,2018-09-08,Diploma,Electronics Manufacturing,MNC,3.0,8.2,11.2,10+ yrs,Yes
+EXP-01236,EMP-11236,2022-06-24,10th,Electronics Manufacturing,Mid-size Company,5.0,4.4,9.4,6-10 yrs,Yes
+EXP-01237,EMP-11237,2021-03-19,ITI,FMCG,MNC,3.0,5.7,8.7,6-10 yrs,Yes
+EXP-01238,EMP-11238,2020-12-26,10th,Automobile,Mid-size Company,12.0,5.9,17.9,10+ yrs,Yes
+EXP-01239,EMP-11239,2020-05-16,B.E/B.Tech,Logistics & Warehousing,MNC,12.0,6.5,18.5,10+ yrs,Yes
+EXP-01240,EMP-11240,2025-11-08,10th,Fresher,None,0.0,0.2,0.2,<1 yr,No
+EXP-01241,EMP-11241,2020-04-07,12th,Fresher,None,0.0,6.6,6.6,6-10 yrs,Yes
+EXP-01242,EMP-11242,2021-09-24,10th,Electronics Manufacturing,Mid-size Company,11.0,5.2,16.2,10+ yrs,Yes
+EXP-01243,EMP-11243,2019-08-08,12th,Automobile,Mid-size Company,7.0,7.3,14.3,10+ yrs,Yes
+EXP-01244,EMP-11244,2021-07-12,10th,Electronics Manufacturing,MNC,5.0,5.4,10.4,10+ yrs,Yes
+EXP-01245,EMP-11245,2020-05-03,ITI,Automobile,Small Enterprise,3.0,6.5,9.5,6-10 yrs,Yes
+EXP-01246,EMP-11246,2021-11-21,12th,Retail,Small Enterprise,5.0,5.0,10.0,6-10 yrs,Yes
+EXP-01247,EMP-11247,2020-04-25,12th,Electronics Manufacturing,Mid-size Company,8.0,6.6,14.6,10+ yrs,Yes
+EXP-01248,EMP-11248,2022-03-02,B.Sc,Logistics & Warehousing,MNC,6.0,4.7,10.7,10+ yrs,Yes
+EXP-01249,EMP-11249,2018-07-10,ITI,Logistics & Warehousing,Small Enterprise,14.0,8.4,22.4,10+ yrs,Yes
+EXP-01250,EMP-11250,2019-05-17,Diploma,Pharma,Mid-size Company,3.0,7.2,10.2,10+ yrs,Yes
+EXP-01251,EMP-11251,2020-08-26,ITI,Textile & Garments,Contract Staffing,11.0,6.0,17.0,10+ yrs,Yes
+EXP-01252,EMP-11252,2021-08-28,Diploma,Electronics Manufacturing,Small Enterprise,11.0,5.2,16.2,10+ yrs,Yes
+EXP-01253,EMP-11253,2020-07-10,MBA,Electronics Manufacturing,Large Indian Company,12.0,6.4,18.4,10+ yrs,Yes
+EXP-01254,EMP-11254,2023-11-06,12th,Electronics Manufacturing,MNC,4.0,3.0,7.0,6-10 yrs,Yes
+EXP-01255,EMP-11255,2020-05-20,Diploma,Electronics Manufacturing,Mid-size Company,2.0,6.5,8.5,6-10 yrs,Yes
+EXP-01256,EMP-11256,2019-01-30,MBA,Logistics & Warehousing,Large Indian Company,15.0,7.8,22.8,10+ yrs,Yes
+EXP-01257,EMP-11257,2019-07-20,Diploma,Electronics Manufacturing,Mid-size Company,8.0,7.3,15.3,10+ yrs,Yes
+EXP-01258,EMP-11258,2020-09-18,ITI,Electronics Manufacturing,MNC,15.0,6.2,21.2,10+ yrs,Yes
+EXP-01259,EMP-11259,2019-08-14,12th,Electronics Manufacturing,Contract Staffing,10.0,7.3,17.3,10+ yrs,Yes
+EXP-01260,EMP-11260,2022-04-19,Diploma,Telecom,Large Indian Company,6.0,4.6,10.6,10+ yrs,Yes
+EXP-01261,EMP-11261,2021-12-29,10th,Logistics & Warehousing,Small Enterprise,6.0,4.9,10.9,10+ yrs,Yes
+EXP-01262,EMP-11262,2020-05-09,B.Sc,Electronics Manufacturing,MNC,14.0,6.5,20.5,10+ yrs,Yes
+EXP-01263,EMP-11263,2021-12-30,ITI,Textile & Garments,Large Indian Company,7.0,4.9,11.9,10+ yrs,Yes
+EXP-01264,EMP-11264,2020-05-13,Diploma,Electronics Manufacturing,Large Indian Company,10.0,6.5,16.5,10+ yrs,Yes
+EXP-01265,EMP-11265,2021-07-31,ITI,Automobile,Large Indian Company,6.0,5.3,11.3,10+ yrs,Yes
+EXP-01266,EMP-11266,2020-03-29,ITI,Telecom,Large Indian Company,13.0,6.6,19.6,10+ yrs,Yes
+EXP-01267,EMP-11267,2019-05-24,B.Sc,Logistics & Warehousing,Mid-size Company,7.0,7.5,14.5,10+ yrs,Yes
+EXP-01268,EMP-11268,2020-11-04,Diploma,Electronics Manufacturing,Mid-size Company,9.0,6.0,15.0,10+ yrs,Yes
+EXP-01269,EMP-11269,2019-12-13,10th,Electronics Manufacturing,Contract Staffing,10.0,6.9,16.9,10+ yrs,Yes
+EXP-01270,EMP-11270,2021-07-04,10th,Retail,Mid-size Company,9.0,5.4,14.4,10+ yrs,Yes
+EXP-01271,EMP-11271,2021-06-20,Diploma,Fresher,None,0.0,5.4,5.4,3-6 yrs,Yes
+EXP-01272,EMP-11272,2021-07-15,B.E/B.Tech,Electronics Manufacturing,MNC,6.0,5.3,11.3,10+ yrs,Yes
+EXP-01273,EMP-11273,2023-10-06,10th,Automobile,MNC,2.0,3.1,5.1,3-6 yrs,Yes
+EXP-01274,EMP-11274,2025-07-21,B.Sc,Electronics Manufacturing,Large Indian Company,9.0,1.3,10.3,10+ yrs,Yes
+EXP-01275,EMP-11275,2018-07-01,12th,Electronics Manufacturing,Large Indian Company,10.0,8.4,18.4,10+ yrs,Yes
+EXP-01276,EMP-11276,2018-10-11,10th,Electronics Manufacturing,Mid-size Company,6.0,8.1,14.1,10+ yrs,Yes
+EXP-01277,EMP-11277,2024-04-19,10th,Telecom,MNC,5.0,2.6,7.6,6-10 yrs,Yes
+EXP-01278,EMP-11278,2021-02-01,B.Sc,Electronics Manufacturing,MNC,5.0,5.8,10.8,10+ yrs,Yes
+EXP-01279,EMP-11279,2023-09-20,10th,Electronics Manufacturing,MNC,5.0,2.2,7.2,6-10 yrs,Yes
+EXP-01280,EMP-11280,2020-04-22,Diploma,FMCG,Mid-size Company,9.0,6.6,15.6,10+ yrs,Yes
+EXP-01281,EMP-11281,2018-12-15,ITI,Pharma,Mid-size Company,15.0,7.9,22.9,10+ yrs,Yes
+EXP-01282,EMP-11282,2025-11-16,10th,Fresher,None,0.0,1.0,1.0,<1 yr,Yes
+EXP-01283,EMP-11283,2025-09-01,ITI,Fresher,None,0.0,1.2,1.2,1-3 yrs,Yes
+EXP-01284,EMP-11284,2020-01-30,Diploma,Electronics Manufacturing,MNC,7.0,6.8,13.8,10+ yrs,Yes
+EXP-01285,EMP-11285,2019-04-08,ITI,Retail,Mid-size Company,7.0,7.6,14.6,10+ yrs,Yes
+EXP-01286,EMP-11286,2022-01-17,ITI,Electronics Manufacturing,Large Indian Company,2.0,4.1,6.1,6-10 yrs,Yes
+EXP-01287,EMP-11287,2021-10-19,ITI,Logistics & Warehousing,Large Indian Company,6.0,5.1,11.1,10+ yrs,Yes
+EXP-01288,EMP-11288,2019-05-03,ITI,Retail,Small Enterprise,12.0,7.6,19.6,10+ yrs,Yes
+EXP-01289,EMP-11289,2020-03-09,12th,Automobile,MNC,5.0,6.7,11.7,10+ yrs,Yes
+EXP-01290,EMP-11290,2019-11-16,10th,Automobile,Mid-size Company,2.0,7.0,9.0,6-10 yrs,Yes
+EXP-01291,EMP-11291,2022-01-09,B.E/B.Tech,Electronics Manufacturing,MNC,6.0,4.9,10.9,10+ yrs,Yes
+EXP-01292,EMP-11292,2024-10-05,Diploma,FMCG,MNC,17.0,2.1,19.1,10+ yrs,Yes
+EXP-01293,EMP-11293,2021-04-16,B.Sc,Telecom,Large Indian Company,7.0,5.6,12.6,10+ yrs,Yes
+EXP-01294,EMP-11294,2019-05-26,ITI,Electronics Manufacturing,Mid-size Company,5.0,7.5,12.5,10+ yrs,Yes
+EXP-01295,EMP-11295,2026-02-05,ITI,Telecom,Large Indian Company,9.0,0.8,9.8,6-10 yrs,Yes
+EXP-01296,EMP-11296,2023-08-15,Diploma,Logistics & Warehousing,MNC,11.0,3.3,14.3,10+ yrs,Yes
+EXP-01297,EMP-11297,2019-09-26,12th,Electronics Manufacturing,MNC,2.0,7.2,9.2,6-10 yrs,Yes
+EXP-01298,EMP-11298,2024-11-10,B.E/B.Tech,Textile & Garments,Mid-size Company,14.0,1.9,15.9,10+ yrs,Yes
+EXP-01299,EMP-11299,2021-10-05,ITI,Pharma,Small Enterprise,10.0,5.1,15.1,10+ yrs,Yes
+EXP-01300,EMP-11300,2026-03-11,10th,Textile & Garments,Contract Staffing,7.0,0.7,7.7,6-10 yrs,Yes
+EXP-01301,EMP-11301,2021-11-22,ITI,Telecom,Contract Staffing,10.0,4.8,14.8,10+ yrs,Yes
+EXP-01302,EMP-11302,2022-12-10,Diploma,Logistics & Warehousing,Contract Staffing,7.0,3.9,10.9,10+ yrs,Yes
+EXP-01303,EMP-11303,2019-12-28,12th,Electronics Manufacturing,Large Indian Company,12.0,6.9,18.9,10+ yrs,Yes
+EXP-01304,EMP-11304,2021-10-12,B.Sc,Logistics & Warehousing,MNC,8.0,5.1,13.1,10+ yrs,Yes
+EXP-01305,EMP-11305,2021-03-20,ITI,Textile & Garments,Mid-size Company,6.0,5.7,11.7,10+ yrs,Yes
+EXP-01306,EMP-11306,2019-01-13,10th,Pharma,Small Enterprise,11.0,7.9,18.9,10+ yrs,Yes
+EXP-01307,EMP-11307,2022-06-08,12th,Electronics Manufacturing,Large Indian Company,4.0,4.5,8.5,6-10 yrs,Yes
+EXP-01308,EMP-11308,2018-11-26,ITI,Electronics Manufacturing,Large Indian Company,3.0,8.0,11.0,10+ yrs,Yes
+EXP-01309,EMP-11309,2025-08-05,ITI,Fresher,None,0.0,0.3,0.3,<1 yr,No
+EXP-01310,EMP-11310,2020-10-03,Diploma,Telecom,Small Enterprise,6.0,6.1,12.1,10+ yrs,Yes
+EXP-01311,EMP-11311,2025-06-21,10th,Electronics Manufacturing,Large Indian Company,9.0,1.4,10.4,10+ yrs,Yes
+EXP-01312,EMP-11312,2018-10-27,ITI,Automobile,Contract Staffing,5.0,8.1,13.1,10+ yrs,Yes
+EXP-01313,EMP-11313,2025-01-28,12th,Automobile,Contract Staffing,2.0,1.8,3.8,3-6 yrs,Yes
+EXP-01314,EMP-11314,2020-12-13,12th,FMCG,Contract Staffing,12.0,5.9,17.9,10+ yrs,Yes
+EXP-01315,EMP-11315,2019-12-01,10th,Electronics Manufacturing,Large Indian Company,2.0,7.0,9.0,6-10 yrs,Yes
+EXP-01316,EMP-11316,2024-02-26,ITI,Electronics Manufacturing,Mid-size Company,18.0,2.7,20.7,10+ yrs,Yes
+EXP-01317,EMP-11317,2018-07-15,B.E/B.Tech,Electronics Manufacturing,Contract Staffing,9.0,8.4,17.4,10+ yrs,Yes
+EXP-01318,EMP-11318,2023-11-09,ITI,Electronics Manufacturing,Mid-size Company,12.0,3.0,15.0,10+ yrs,Yes
+EXP-01319,EMP-11319,2019-12-13,Diploma,FMCG,MNC,12.0,6.9,18.9,10+ yrs,Yes
+EXP-01320,EMP-11320,2020-07-19,12th,Logistics & Warehousing,Small Enterprise,8.0,6.3,14.3,10+ yrs,Yes
+EXP-01321,EMP-11321,2025-08-21,12th,Fresher,None,0.0,1.2,1.2,1-3 yrs,Yes
+EXP-01322,EMP-11322,2020-06-06,12th,Electronics Manufacturing,Contract Staffing,2.0,6.5,8.5,6-10 yrs,Yes
+EXP-01323,EMP-11323,2022-11-19,Diploma,FMCG,Mid-size Company,2.0,4.0,6.0,3-6 yrs,Yes
+EXP-01324,EMP-11324,2020-11-09,10th,Fresher,None,0.0,6.0,6.0,3-6 yrs,Yes
+EXP-01325,EMP-11325,2019-10-12,ITI,Automobile,Large Indian Company,4.0,7.1,11.1,10+ yrs,Yes
+EXP-01326,EMP-11326,2022-04-07,12th,Telecom,Mid-size Company,7.0,4.0,11.0,10+ yrs,Yes
+EXP-01327,EMP-11327,2022-08-09,Diploma,Electronics Manufacturing,MNC,13.0,4.3,17.3,10+ yrs,Yes
+EXP-01328,EMP-11328,2019-06-20,12th,Electronics Manufacturing,Contract Staffing,12.0,7.4,19.4,10+ yrs,Yes
+EXP-01329,EMP-11329,2018-11-23,Diploma,Telecom,Mid-size Company,14.0,8.0,22.0,10+ yrs,Yes
+EXP-01330,EMP-11330,2021-09-25,ITI,Electronics Manufacturing,Mid-size Company,6.0,5.2,11.2,10+ yrs,Yes
+EXP-01331,EMP-11331,2023-06-01,Diploma,Pharma,Mid-size Company,4.0,3.2,7.2,6-10 yrs,Yes
+EXP-01332,EMP-11332,2020-08-03,Diploma,Textile & Garments,Small Enterprise,3.0,6.3,9.3,6-10 yrs,Yes
+EXP-01333,EMP-11333,2020-09-22,10th,Automobile,Mid-size Company,2.0,6.2,8.2,6-10 yrs,Yes
+EXP-01334,EMP-11334,2020-11-11,10th,Automobile,Contract Staffing,7.0,6.0,13.0,10+ yrs,Yes
+EXP-01335,EMP-11335,2021-10-01,10th,Textile & Garments,Mid-size Company,7.0,5.1,12.1,10+ yrs,Yes
+EXP-01336,EMP-11336,2019-04-28,12th,Electronics Manufacturing,Contract Staffing,8.0,7.6,15.6,10+ yrs,Yes
+EXP-01337,EMP-11337,2025-07-10,10th,Fresher,None,0.0,1.4,1.4,1-3 yrs,Yes
+EXP-01338,EMP-11338,2022-01-12,Diploma,Electronics Manufacturing,MNC,13.0,4.9,17.9,10+ yrs,Yes
+EXP-01339,EMP-11339,2020-10-01,12th,Automobile,Large Indian Company,10.0,6.1,16.1,10+ yrs,Yes
+EXP-01340,EMP-11340,2022-10-06,ITI,Electronics Manufacturing,MNC,4.0,4.1,8.1,6-10 yrs,Yes
+EXP-01341,EMP-11341,2022-06-02,B.E/B.Tech,Electronics Manufacturing,Small Enterprise,3.0,4.5,7.5,6-10 yrs,Yes
+EXP-01342,EMP-11342,2021-10-19,B.E/B.Tech,Telecom,Mid-size Company,17.0,5.1,22.1,10+ yrs,Yes
+EXP-01343,EMP-11343,2023-05-26,Diploma,Electronics Manufacturing,Mid-size Company,10.0,3.5,13.5,10+ yrs,Yes
+EXP-01344,EMP-11344,2024-10-13,ITI,Electronics Manufacturing,MNC,8.0,2.1,10.1,10+ yrs,Yes
+EXP-01345,EMP-11345,2021-11-18,Diploma,Electronics Manufacturing,MNC,16.0,5.0,21.0,10+ yrs,Yes
+EXP-01346,EMP-11346,2020-03-22,12th,Electronics Manufacturing,MNC,6.0,6.7,12.7,10+ yrs,Yes
+EXP-01347,EMP-11347,2021-04-15,12th,Electronics Manufacturing,Contract Staffing,5.0,5.6,10.6,10+ yrs,Yes
+EXP-01348,EMP-11348,2024-04-26,B.E/B.Tech,Electronics Manufacturing,MNC,1.0,2.6,3.6,3-6 yrs,Yes
+EXP-01349,EMP-11349,2023-10-05,ITI,Logistics & Warehousing,Large Indian Company,6.0,3.1,9.1,6-10 yrs,Yes
+EXP-01350,EMP-11350,2023-03-02,12th,FMCG,MNC,2.0,3.7,5.7,3-6 yrs,Yes
+EXP-01351,EMP-11351,2026-01-13,ITI,Fresher,None,0.0,0.9,0.9,<1 yr,Yes
+EXP-01352,EMP-11352,2019-07-22,Diploma,Electronics Manufacturing,MNC,18.0,7.3,25.3,10+ yrs,Yes
+EXP-01353,EMP-11353,2019-08-21,Diploma,Automobile,Small Enterprise,9.0,7.2,16.2,10+ yrs,Yes
+EXP-01354,EMP-11354,2022-10-28,12th,Fresher,None,0.0,4.1,4.1,3-6 yrs,Yes
+EXP-01355,EMP-11355,2020-10-13,Diploma,Telecom,Contract Staffing,3.0,6.1,9.1,6-10 yrs,Yes
+EXP-01356,EMP-11356,2025-01-20,B.E/B.Tech,Automobile,MNC,12.0,1.8,13.8,10+ yrs,Yes
+EXP-01357,EMP-11357,2025-08-08,Diploma,Fresher,None,0.0,1.3,1.3,1-3 yrs,Yes
+EXP-01358,EMP-11358,2023-10-17,ITI,Automobile,Mid-size Company,3.0,3.1,6.1,6-10 yrs,Yes
+EXP-01359,EMP-11359,2020-07-28,10th,Textile & Garments,Contract Staffing,8.0,6.3,14.3,10+ yrs,Yes
+EXP-01360,EMP-11360,2021-01-15,12th,FMCG,Large Indian Company,2.0,5.8,7.8,6-10 yrs,Yes
+EXP-01361,EMP-11361,2022-01-29,B.E/B.Tech,Automobile,MNC,14.0,4.8,18.8,10+ yrs,Yes
+EXP-01362,EMP-11362,2021-12-21,12th,Electronics Manufacturing,Large Indian Company,1.0,4.9,5.9,3-6 yrs,Yes
+EXP-01363,EMP-11363,2019-02-07,B.E/B.Tech,Electronics Manufacturing,Mid-size Company,20.0,7.8,27.8,10+ yrs,Yes
+EXP-01364,EMP-11364,2022-07-03,ITI,Automobile,MNC,1.0,4.1,5.1,3-6 yrs,Yes
+EXP-01365,EMP-11365,2023-01-16,ITI,Electronics Manufacturing,MNC,3.0,3.8,6.8,6-10 yrs,Yes
+EXP-01366,EMP-11366,2019-11-24,ITI,Automobile,MNC,12.0,7.0,19.0,10+ yrs,Yes
+EXP-01367,EMP-11367,2018-06-13,Diploma,Textile & Garments,Mid-size Company,14.0,8.4,22.4,10+ yrs,Yes
+EXP-01368,EMP-11368,2022-11-14,Diploma,Fresher,None,0.0,4.0,4.0,3-6 yrs,Yes
+EXP-01369,EMP-11369,2019-09-28,Diploma,Electronics Manufacturing,Contract Staffing,3.0,6.4,9.4,6-10 yrs,Yes
+EXP-01370,EMP-11370,2020-09-03,ITI,Pharma,Small Enterprise,6.0,6.2,12.2,10+ yrs,Yes
+EXP-01371,EMP-11371,2021-06-06,ITI,Logistics & Warehousing,MNC,7.0,5.5,12.5,10+ yrs,Yes
+EXP-01372,EMP-11372,2018-11-22,12th,Textile & Garments,Mid-size Company,5.0,8.0,13.0,10+ yrs,Yes
+EXP-01373,EMP-11373,2022-11-18,12th,Logistics & Warehousing,Large Indian Company,10.0,4.0,14.0,10+ yrs,Yes
+EXP-01374,EMP-11374,2022-02-23,Diploma,Telecom,Large Indian Company,5.0,4.7,9.7,6-10 yrs,Yes
+EXP-01375,EMP-11375,2021-11-05,B.E/B.Tech,Pharma,Mid-size Company,5.0,5.0,10.0,6-10 yrs,Yes
+EXP-01376,EMP-11376,2021-01-19,ITI,Automobile,Mid-size Company,5.0,5.5,10.5,10+ yrs,Yes
+EXP-01377,EMP-11377,2023-01-24,Diploma,Logistics & Warehousing,Contract Staffing,10.0,3.8,13.8,10+ yrs,Yes
+EXP-01378,EMP-11378,2021-02-11,12th,Automobile,Small Enterprise,4.0,5.8,9.8,6-10 yrs,Yes
+EXP-01379,EMP-11379,2020-12-03,Diploma,FMCG,Mid-size Company,10.0,6.0,16.0,10+ yrs,Yes
+EXP-01380,EMP-11380,2022-10-21,ITI,Automobile,Mid-size Company,2.0,4.1,6.1,6-10 yrs,Yes
+EXP-01381,EMP-11381,2019-02-18,ITI,Retail,Contract Staffing,6.0,7.8,13.8,10+ yrs,Yes
+EXP-01382,EMP-11382,2022-06-03,12th,Textile & Garments,MNC,6.0,4.5,10.5,10+ yrs,Yes
+EXP-01383,EMP-11383,2021-11-15,ITI,Electronics Manufacturing,Contract Staffing,11.0,5.0,16.0,10+ yrs,Yes
+EXP-01384,EMP-11384,2019-08-08,ITI,Electronics Manufacturing,Small Enterprise,4.0,7.3,11.3,10+ yrs,Yes
+EXP-01385,EMP-11385,2020-07-28,ITI,Textile & Garments,MNC,6.0,6.3,12.3,10+ yrs,Yes
+EXP-01386,EMP-11386,2021-12-12,Diploma,Telecom,Mid-size Company,5.0,4.9,9.9,6-10 yrs,Yes
+EXP-01387,EMP-11387,2022-09-28,10th,Electronics Manufacturing,Mid-size Company,5.0,4.1,9.1,6-10 yrs,Yes
+EXP-01388,EMP-11388,2022-06-10,12th,Electronics Manufacturing,MNC,7.0,4.4,11.4,10+ yrs,Yes
+EXP-01389,EMP-11389,2023-06-25,12th,Fresher,None,0.0,3.4,3.4,3-6 yrs,Yes
+EXP-01390,EMP-11390,2020-09-13,ITI,Electronics Manufacturing,MNC,5.0,6.2,11.2,10+ yrs,Yes
+EXP-01391,EMP-11391,2020-04-02,12th,Automobile,Large Indian Company,9.0,6.6,15.6,10+ yrs,Yes
+EXP-01392,EMP-11392,2020-02-22,ITI,Pharma,Mid-size Company,6.0,6.7,12.7,10+ yrs,Yes
+EXP-01393,EMP-11393,2021-12-02,Diploma,Electronics Manufacturing,Mid-size Company,1.0,5.0,6.0,3-6 yrs,Yes
+EXP-01394,EMP-11394,2018-09-05,ITI,Electronics Manufacturing,Contract Staffing,10.0,8.2,18.2,10+ yrs,Yes
+EXP-01395,EMP-11395,2020-05-23,10th,Electronics Manufacturing,Mid-size Company,7.0,6.5,13.5,10+ yrs,Yes
+EXP-01396,EMP-11396,2020-04-02,Diploma,Textile & Garments,Small Enterprise,2.0,6.6,8.6,6-10 yrs,Yes
+EXP-01397,EMP-11397,2021-06-08,12th,Textile & Garments,Mid-size Company,9.0,5.5,14.5,10+ yrs,Yes
+EXP-01398,EMP-11398,2021-04-12,B.E/B.Tech,Logistics & Warehousing,Small Enterprise,11.0,5.6,16.6,10+ yrs,Yes
+EXP-01399,EMP-11399,2024-08-22,Diploma,Textile & Garments,Mid-size Company,9.0,2.2,11.2,10+ yrs,Yes
+EXP-01400,EMP-11400,2022-09-02,B.Sc,Telecom,Mid-size Company,16.0,4.2,20.2,10+ yrs,Yes
+EXP-01401,EMP-11401,2022-01-08,B.E/B.Tech,Logistics & Warehousing,Small Enterprise,11.0,4.9,15.9,10+ yrs,Yes
+EXP-01402,EMP-11402,2020-09-27,B.E/B.Tech,Pharma,Small Enterprise,7.0,6.1,13.1,10+ yrs,Yes
+EXP-01403,EMP-11403,2019-12-04,Diploma,Telecom,Contract Staffing,8.0,7.0,15.0,10+ yrs,Yes
+EXP-01404,EMP-11404,2021-01-22,12th,Automobile,Large Indian Company,3.0,5.8,8.8,6-10 yrs,Yes
+EXP-01405,EMP-11405,2020-06-20,12th,FMCG,Small Enterprise,2.0,6.4,8.4,6-10 yrs,Yes
+EXP-01406,EMP-11406,2021-07-09,ITI,Retail,MNC,7.0,5.4,12.4,10+ yrs,Yes
+EXP-01407,EMP-11407,2020-12-19,ITI,Electronics Manufacturing,Contract Staffing,4.0,5.9,9.9,6-10 yrs,Yes
+EXP-01408,EMP-11408,2020-09-23,B.Sc,Telecom,Large Indian Company,14.0,6.2,20.2,10+ yrs,Yes
+EXP-01409,EMP-11409,2018-11-04,Diploma,Logistics & Warehousing,Mid-size Company,6.0,8.0,14.0,10+ yrs,Yes
+EXP-01410,EMP-11410,2022-03-05,Diploma,Electronics Manufacturing,Contract Staffing,2.0,4.7,6.7,6-10 yrs,Yes
+EXP-01411,EMP-11411,2020-04-17,Diploma,Automobile,MNC,8.0,6.6,14.6,10+ yrs,Yes
+EXP-01412,EMP-11412,2019-09-14,B.E/B.Tech,Automobile,Contract Staffing,5.0,7.2,12.2,10+ yrs,Yes
+EXP-01413,EMP-11413,2021-07-18,Diploma,Electronics Manufacturing,Contract Staffing,4.0,5.3,9.3,6-10 yrs,Yes
+EXP-01414,EMP-11414,2021-06-13,ITI,Automobile,Large Indian Company,3.0,5.4,8.4,6-10 yrs,Yes
+EXP-01415,EMP-11415,2024-05-21,12th,Electronics Manufacturing,Mid-size Company,7.0,2.5,9.5,6-10 yrs,Yes
+EXP-01416,EMP-11416,2021-11-29,12th,Textile & Garments,Large Indian Company,8.0,5.0,13.0,10+ yrs,Yes
+EXP-01417,EMP-11417,2024-09-23,ITI,Automobile,Mid-size Company,12.0,2.2,14.2,10+ yrs,Yes
+EXP-01418,EMP-11418,2020-07-11,ITI,Logistics & Warehousing,MNC,7.0,6.4,13.4,10+ yrs,Yes
+EXP-01419,EMP-11419,2022-02-14,12th,Automobile,MNC,4.0,4.8,8.8,6-10 yrs,Yes
+EXP-01420,EMP-11420,2023-01-04,12th,Fresher,None,0.0,3.9,3.9,3-6 yrs,Yes
+EXP-01421,EMP-11421,2020-05-14,Diploma,Electronics Manufacturing,MNC,5.0,6.5,11.5,10+ yrs,Yes
+EXP-01422,EMP-11422,2021-06-04,B.E/B.Tech,Pharma,Large Indian Company,12.0,5.5,17.5,10+ yrs,Yes
+EXP-01423,EMP-11423,2024-04-26,12th,Textile & Garments,Contract Staffing,4.0,2.6,6.6,6-10 yrs,Yes
+EXP-01424,EMP-11424,2021-02-16,10th,FMCG,Mid-size Company,6.0,5.8,11.8,10+ yrs,Yes
+EXP-01425,EMP-11425,2021-06-23,Diploma,Automobile,Mid-size Company,6.0,5.4,11.4,10+ yrs,Yes
+EXP-01426,EMP-11426,2020-07-19,ITI,FMCG,Large Indian Company,9.0,6.3,15.3,10+ yrs,Yes
+EXP-01427,EMP-11427,2020-08-28,B.E/B.Tech,Electronics Manufacturing,Mid-size Company,8.0,6.2,14.2,10+ yrs,Yes
+EXP-01428,EMP-11428,2018-12-30,10th,Logistics & Warehousing,MNC,6.0,7.0,13.0,10+ yrs,Yes
+EXP-01429,EMP-11429,2022-03-02,B.Sc,Electronics Manufacturing,Small Enterprise,13.0,4.7,17.7,10+ yrs,Yes
+EXP-01430,EMP-11430,2025-01-06,12th,Automobile,Mid-size Company,8.0,1.9,9.9,6-10 yrs,Yes
+EXP-01431,EMP-11431,2020-05-18,Diploma,Pharma,Small Enterprise,2.0,6.5,8.5,6-10 yrs,Yes
+EXP-01432,EMP-11432,2022-08-24,B.E/B.Tech,Electronics Manufacturing,Mid-size Company,7.0,4.2,11.2,10+ yrs,Yes
+EXP-01433,EMP-11433,2021-04-27,Diploma,FMCG,Contract Staffing,6.0,5.6,11.6,10+ yrs,Yes
+EXP-01434,EMP-11434,2019-09-13,12th,Pharma,Contract Staffing,6.0,7.2,13.2,10+ yrs,Yes
+EXP-01435,EMP-11435,2023-08-16,Diploma,Fresher,None,0.0,3.3,3.3,3-6 yrs,Yes
+EXP-01436,EMP-11436,2019-10-19,12th,Telecom,Contract Staffing,8.0,7.1,15.1,10+ yrs,Yes
+EXP-01437,EMP-11437,2026-02-08,12th,Fresher,None,0.0,0.8,0.8,<1 yr,Yes
+EXP-01438,EMP-11438,2022-09-08,ITI,Automobile,Contract Staffing,10.0,4.2,14.2,10+ yrs,Yes
+EXP-01439,EMP-11439,2021-06-03,Diploma,Electronics Manufacturing,Large Indian Company,11.0,5.5,16.5,10+ yrs,Yes
+EXP-01440,EMP-11440,2023-10-11,B.Sc,Automobile,MNC,10.0,3.1,13.1,10+ yrs,Yes
+EXP-01441,EMP-11441,2024-04-30,10th,Fresher,None,0.0,2.6,2.6,1-3 yrs,Yes
+EXP-01442,EMP-11442,2021-11-28,Diploma,FMCG,Small Enterprise,5.0,5.0,10.0,6-10 yrs,Yes
+EXP-01443,EMP-11443,2020-04-14,12th,Electronics Manufacturing,Large Indian Company,7.0,6.6,13.6,10+ yrs,Yes
+EXP-01444,EMP-11444,2023-01-17,Diploma,Automobile,Large Indian Company,9.0,3.8,12.8,10+ yrs,Yes
+EXP-01445,EMP-11445,2023-08-06,12th,Textile & Garments,Mid-size Company,4.0,3.3,7.3,6-10 yrs,Yes
+EXP-01446,EMP-11446,2021-09-17,ITI,Electronics Manufacturing,Mid-size Company,18.0,4.8,22.8,10+ yrs,Yes
+EXP-01447,EMP-11447,2024-11-06,10th,Fresher,None,0.0,2.0,2.0,1-3 yrs,Yes
+EXP-01448,EMP-11448,2022-03-14,B.E/B.Tech,Electronics Manufacturing,MNC,4.0,4.7,8.7,6-10 yrs,Yes
+EXP-01449,EMP-11449,2019-02-27,ITI,Textile & Garments,Large Indian Company,3.0,7.7,10.7,10+ yrs,Yes
+EXP-01450,EMP-11450,2022-03-08,ITI,Automobile,Large Indian Company,5.0,4.7,9.7,6-10 yrs,Yes
+EXP-01451,EMP-11451,2022-07-05,12th,Retail,Mid-size Company,12.0,4.4,16.4,10+ yrs,Yes
+EXP-01452,EMP-11452,2024-09-03,ITI,Electronics Manufacturing,Large Indian Company,6.0,2.2,8.2,6-10 yrs,Yes
+EXP-01453,EMP-11453,2021-06-29,12th,Textile & Garments,MNC,4.0,5.4,9.4,6-10 yrs,Yes
+EXP-01454,EMP-11454,2018-06-11,ITI,Electronics Manufacturing,MNC,3.0,8.4,11.4,10+ yrs,Yes
+EXP-01455,EMP-11455,2021-11-17,Diploma,Automobile,Large Indian Company,4.0,5.0,9.0,6-10 yrs,Yes
+EXP-01456,EMP-11456,2025-04-16,ITI,Automobile,Mid-size Company,6.0,1.6,7.6,6-10 yrs,Yes
+EXP-01457,EMP-11457,2020-05-26,ITI,Electronics Manufacturing,Large Indian Company,6.0,6.5,12.5,10+ yrs,Yes
+EXP-01458,EMP-11458,2020-02-01,ITI,Logistics & Warehousing,Large Indian Company,5.0,6.8,11.8,10+ yrs,Yes
+EXP-01459,EMP-11459,2020-03-12,ITI,Electronics Manufacturing,Mid-size Company,11.0,6.6,17.6,10+ yrs,Yes
+EXP-01460,EMP-11460,2020-06-13,12th,Automobile,MNC,4.0,6.4,10.4,10+ yrs,Yes
+EXP-01461,EMP-11461,2021-12-21,Diploma,Automobile,Large Indian Company,11.0,4.5,15.5,10+ yrs,Yes
+EXP-01462,EMP-11462,2020-07-06,ITI,Retail,MNC,7.0,6.4,13.4,10+ yrs,Yes
+EXP-01463,EMP-11463,2021-12-30,10th,Pharma,MNC,2.0,4.9,6.9,6-10 yrs,Yes
+EXP-01464,EMP-11464,2020-04-27,ITI,Pharma,Large Indian Company,5.0,6.6,11.6,10+ yrs,Yes
+EXP-01465,EMP-11465,2019-07-09,Diploma,Retail,Large Indian Company,7.0,7.4,14.4,10+ yrs,Yes
+EXP-01466,EMP-11466,2022-05-08,B.E/B.Tech,Electronics Manufacturing,MNC,13.0,4.5,17.5,10+ yrs,Yes
+EXP-01467,EMP-11467,2019-06-23,B.E/B.Tech,Textile & Garments,MNC,7.0,7.4,14.4,10+ yrs,Yes
+EXP-01468,EMP-11468,2023-02-10,Diploma,Telecom,Mid-size Company,19.0,3.8,22.8,10+ yrs,Yes
+EXP-01469,EMP-11469,2021-01-07,Diploma,Automobile,Mid-size Company,5.0,5.2,10.2,10+ yrs,Yes
+EXP-01470,EMP-11470,2019-10-30,ITI,Retail,MNC,10.0,7.1,17.1,10+ yrs,Yes
+EXP-01471,EMP-11471,2019-03-02,10th,FMCG,Large Indian Company,6.0,7.5,13.5,10+ yrs,Yes
+EXP-01472,EMP-11472,2024-08-28,12th,Automobile,MNC,5.0,2.2,7.2,6-10 yrs,Yes
+EXP-01473,EMP-11473,2023-03-22,Diploma,Electronics Manufacturing,Mid-size Company,6.0,3.7,9.7,6-10 yrs,Yes
+EXP-01474,EMP-11474,2021-07-23,10th,Electronics Manufacturing,Large Indian Company,7.0,5.3,12.3,10+ yrs,Yes
+EXP-01475,EMP-11475,2022-06-08,10th,Textile & Garments,Contract Staffing,13.0,4.5,17.5,10+ yrs,Yes
+EXP-01476,EMP-11476,2023-11-06,ITI,Fresher,None,0.0,3.0,3.0,1-3 yrs,Yes
+EXP-01477,EMP-11477,2020-10-15,B.E/B.Tech,Logistics & Warehousing,Mid-size Company,20.0,6.1,26.1,10+ yrs,Yes
+EXP-01478,EMP-11478,2020-02-17,ITI,Electronics Manufacturing,Small Enterprise,10.0,6.8,16.8,10+ yrs,Yes
+EXP-01479,EMP-11479,2023-02-26,ITI,Electronics Manufacturing,Contract Staffing,2.0,3.7,5.7,3-6 yrs,Yes
+EXP-01480,EMP-11480,2021-11-02,Diploma,Electronics Manufacturing,Small Enterprise,9.0,5.0,14.0,10+ yrs,Yes
+EXP-01481,EMP-11481,2020-05-22,12th,Textile & Garments,Small Enterprise,13.0,6.5,19.5,10+ yrs,Yes
+EXP-01482,EMP-11482,2020-09-13,Diploma,Electronics Manufacturing,Mid-size Company,2.0,6.0,8.0,6-10 yrs,Yes
+EXP-01483,EMP-11483,2020-10-30,ITI,Textile & Garments,Mid-size Company,18.0,6.1,24.1,10+ yrs,Yes
+EXP-01484,EMP-11484,2020-10-04,ITI,Automobile,Large Indian Company,6.0,6.1,12.1,10+ yrs,Yes
+EXP-01485,EMP-11485,2024-03-22,Diploma,Retail,Mid-size Company,8.0,2.7,10.7,10+ yrs,Yes
+EXP-01486,EMP-11486,2021-01-27,B.Sc,Automobile,Large Indian Company,7.0,5.8,12.8,10+ yrs,Yes
+EXP-01487,EMP-11487,2020-07-19,12th,Electronics Manufacturing,Small Enterprise,3.0,6.3,9.3,6-10 yrs,Yes
+EXP-01488,EMP-11488,2021-10-21,12th,Electronics Manufacturing,MNC,10.0,5.1,15.1,10+ yrs,Yes
+EXP-01489,EMP-11489,2025-03-01,Diploma,FMCG,Mid-size Company,11.0,1.7,12.7,10+ yrs,Yes
+EXP-01490,EMP-11490,2020-07-14,B.E/B.Tech,Automobile,Small Enterprise,24.0,6.4,30.4,10+ yrs,Yes
+EXP-01491,EMP-11491,2022-11-08,ITI,Textile & Garments,Large Indian Company,14.0,4.0,18.0,10+ yrs,Yes
+EXP-01492,EMP-11492,2020-12-12,12th,Logistics & Warehousing,Mid-size Company,7.0,5.9,12.9,10+ yrs,Yes
+EXP-01493,EMP-11493,2021-12-17,Diploma,Electronics Manufacturing,Mid-size Company,5.0,4.9,9.9,6-10 yrs,Yes
+EXP-01494,EMP-11494,2022-04-23,12th,Automobile,Contract Staffing,10.0,4.6,14.6,10+ yrs,Yes
+EXP-01495,EMP-11495,2020-05-16,12th,Automobile,Small Enterprise,10.0,6.5,16.5,10+ yrs,Yes
+EXP-01496,EMP-11496,2020-07-06,12th,Logistics & Warehousing,Small Enterprise,5.0,6.4,11.4,10+ yrs,Yes
+EXP-01497,EMP-11497,2021-12-10,ITI,Automobile,Large Indian Company,2.0,4.3,6.3,6-10 yrs,Yes
+EXP-01498,EMP-11498,2023-02-05,Diploma,Pharma,Contract Staffing,7.0,3.8,10.8,10+ yrs,Yes
+EXP-01499,EMP-11499,2021-03-18,B.Sc,Automobile,Mid-size Company,5.0,5.7,10.7,10+ yrs,Yes
+EXP-01500,EMP-11500,2020-07-02,Diploma,Automobile,Large Indian Company,9.0,6.4,15.4,10+ yrs,Yes
+EXP-01501,EMP-11501,2022-10-18,10th,Automobile,Mid-size Company,5.0,4.1,9.1,6-10 yrs,Yes
+EXP-01502,EMP-11502,2020-01-23,12th,Electronics Manufacturing,Large Indian Company,5.0,6.8,11.8,10+ yrs,Yes
+EXP-01503,EMP-11503,2023-05-19,Diploma,Retail,MNC,10.0,3.5,13.5,10+ yrs,Yes
+EXP-01504,EMP-11504,2020-07-03,ITI,Logistics & Warehousing,Mid-size Company,15.0,6.4,21.4,10+ yrs,Yes
+EXP-01505,EMP-11505,2020-03-31,ITI,Pharma,MNC,6.0,6.6,12.6,10+ yrs,Yes
+EXP-01506,EMP-11506,2020-06-16,12th,Logistics & Warehousing,MNC,2.0,6.4,8.4,6-10 yrs,Yes
+EXP-01507,EMP-11507,2022-12-18,12th,Electronics Manufacturing,Contract Staffing,8.0,3.0,11.0,10+ yrs,Yes
+EXP-01508,EMP-11508,2024-01-18,B.Sc,Electronics Manufacturing,Contract Staffing,6.0,2.8,8.8,6-10 yrs,Yes
+EXP-01509,EMP-11509,2024-01-11,ITI,Automobile,Contract Staffing,6.0,2.9,8.9,6-10 yrs,Yes
+EXP-01510,EMP-11510,2021-06-12,12th,Electronics Manufacturing,Large Indian Company,10.0,5.4,15.4,10+ yrs,Yes
+EXP-01511,EMP-11511,2024-05-27,ITI,Fresher,None,0.0,2.5,2.5,1-3 yrs,Yes
+EXP-01512,EMP-11512,2025-04-26,12th,Fresher,None,0.0,1.6,1.6,1-3 yrs,Yes
+EXP-01513,EMP-11513,2021-02-01,ITI,Automobile,Mid-size Company,11.0,5.8,16.8,10+ yrs,Yes
+EXP-01514,EMP-11514,2022-03-17,Diploma,Electronics Manufacturing,Small Enterprise,12.0,4.7,16.7,10+ yrs,Yes
+EXP-01515,EMP-11515,2021-04-13,B.E/B.Tech,Electronics Manufacturing,MNC,16.0,5.6,21.6,10+ yrs,Yes
+EXP-01516,EMP-11516,2025-09-11,10th,Fresher,None,0.0,1.2,1.2,1-3 yrs,Yes
+EXP-01517,EMP-11517,2020-07-23,Diploma,FMCG,MNC,4.0,6.3,10.3,10+ yrs,Yes
+EXP-01518,EMP-11518,2022-02-12,12th,Electronics Manufacturing,Contract Staffing,1.0,4.8,5.8,3-6 yrs,Yes
+EXP-01519,EMP-11519,2018-12-16,Diploma,Electronics Manufacturing,Mid-size Company,10.0,7.9,17.9,10+ yrs,Yes
+EXP-01520,EMP-11520,2020-08-28,Diploma,FMCG,Large Indian Company,9.0,6.2,15.2,10+ yrs,Yes
+EXP-01521,EMP-11521,2018-06-15,B.E/B.Tech,Retail,Large Indian Company,17.0,8.4,25.4,10+ yrs,Yes
+EXP-01522,EMP-11522,2019-10-29,12th,Electronics Manufacturing,Contract Staffing,7.0,7.1,14.1,10+ yrs,Yes
+EXP-01523,EMP-11523,2024-08-27,12th,Fresher,None,0.0,2.2,2.2,1-3 yrs,Yes
+EXP-01524,EMP-11524,2020-06-28,ITI,Automobile,Mid-size Company,6.0,6.4,12.4,10+ yrs,Yes
+EXP-01525,EMP-11525,2023-11-09,ITI,Fresher,None,0.0,3.0,3.0,1-3 yrs,Yes
+EXP-01526,EMP-11526,2022-01-31,ITI,Fresher,None,0.0,4.1,4.1,3-6 yrs,Yes
+EXP-01527,EMP-11527,2025-06-30,10th,Fresher,None,0.0,1.4,1.4,1-3 yrs,Yes
+EXP-01528,EMP-11528,2025-03-11,12th,Fresher,None,0.0,1.7,1.7,1-3 yrs,Yes
+EXP-01529,EMP-11529,2019-07-08,12th,Telecom,Contract Staffing,18.0,6.4,24.4,10+ yrs,Yes
+EXP-01530,EMP-11530,2022-11-29,ITI,Electronics Manufacturing,Contract Staffing,7.0,4.0,11.0,10+ yrs,Yes
+EXP-01531,EMP-11531,2023-01-05,B.Sc,Telecom,Small Enterprise,1.0,3.9,4.9,3-6 yrs,Yes
+EXP-01532,EMP-11532,2021-06-08,ITI,FMCG,MNC,8.0,5.5,13.5,10+ yrs,Yes
+EXP-01533,EMP-11533,2018-10-19,ITI,Automobile,Large Indian Company,4.0,8.1,12.1,10+ yrs,Yes
+EXP-01534,EMP-11534,2022-11-08,12th,Pharma,Large Indian Company,9.0,4.0,13.0,10+ yrs,Yes
+EXP-01535,EMP-11535,2024-06-25,10th,Electronics Manufacturing,MNC,9.0,2.4,11.4,10+ yrs,Yes
+EXP-01536,EMP-11536,2022-11-24,Diploma,Retail,Small Enterprise,4.0,4.0,8.0,6-10 yrs,Yes
+EXP-01537,EMP-11537,2022-04-16,12th,Automobile,Mid-size Company,5.0,4.6,9.6,6-10 yrs,Yes
+EXP-01538,EMP-11538,2022-04-11,ITI,Fresher,None,0.0,4.6,4.6,3-6 yrs,Yes
+EXP-01539,EMP-11539,2021-07-16,B.E/B.Tech,Electronics Manufacturing,Large Indian Company,8.0,5.3,13.3,10+ yrs,Yes
+EXP-01540,EMP-11540,2020-01-10,B.E/B.Tech,Electronics Manufacturing,Large Indian Company,15.0,6.9,21.9,10+ yrs,Yes
+EXP-01541,EMP-11541,2020-05-20,Diploma,Textile & Garments,Small Enterprise,5.0,6.5,11.5,10+ yrs,Yes
+EXP-01542,EMP-11542,2020-12-17,10th,Electronics Manufacturing,MNC,2.0,5.9,7.9,6-10 yrs,Yes
+EXP-01543,EMP-11543,2023-11-14,12th,Pharma,Mid-size Company,3.0,3.0,6.0,3-6 yrs,Yes
+EXP-01544,EMP-11544,2021-05-09,MBA,Automobile,Contract Staffing,1.0,5.5,6.5,6-10 yrs,Yes
+EXP-01545,EMP-11545,2025-06-08,Diploma,Automobile,MNC,4.0,1.5,5.5,3-6 yrs,Yes
+EXP-01546,EMP-11546,2022-11-04,B.Sc,Automobile,MNC,6.0,4.0,10.0,6-10 yrs,Yes
+EXP-01547,EMP-11547,2023-03-15,12th,Telecom,Large Indian Company,6.0,3.7,9.7,6-10 yrs,Yes
+EXP-01548,EMP-11548,2022-05-26,Diploma,Telecom,Mid-size Company,8.0,4.5,12.5,10+ yrs,Yes
+EXP-01549,EMP-11549,2021-05-02,12th,Electronics Manufacturing,Large Indian Company,5.0,5.6,10.6,10+ yrs,Yes
+EXP-01550,EMP-11550,2021-09-08,ITI,Electronics Manufacturing,Mid-size Company,13.0,5.2,18.2,10+ yrs,Yes
+EXP-01551,EMP-11551,2020-05-24,12th,Automobile,Contract Staffing,6.0,6.5,12.5,10+ yrs,Yes
+EXP-01552,EMP-11552,2021-01-17,10th,Automobile,Mid-size Company,1.0,5.8,6.8,6-10 yrs,Yes
+EXP-01553,EMP-11553,2025-04-24,ITI,Automobile,Mid-size Company,5.0,1.4,6.4,6-10 yrs,Yes
+EXP-01554,EMP-11554,2020-12-05,B.Sc,FMCG,Mid-size Company,11.0,6.0,17.0,10+ yrs,Yes
+EXP-01555,EMP-11555,2018-07-03,12th,Electronics Manufacturing,Large Indian Company,7.0,8.4,15.4,10+ yrs,Yes
+EXP-01556,EMP-11556,2018-12-02,Diploma,Automobile,Mid-size Company,9.0,8.0,17.0,10+ yrs,Yes
+EXP-01557,EMP-11557,2024-02-12,ITI,Fresher,None,0.0,2.8,2.8,1-3 yrs,Yes
+EXP-01558,EMP-11558,2025-03-13,ITI,Fresher,None,0.0,1.7,1.7,1-3 yrs,Yes
+EXP-01559,EMP-11559,2023-04-18,ITI,Electronics Manufacturing,Large Indian Company,2.0,2.8,4.8,3-6 yrs,Yes
+EXP-01560,EMP-11560,2023-11-16,ITI,Electronics Manufacturing,Small Enterprise,11.0,3.0,14.0,10+ yrs,Yes
+EXP-01561,EMP-11561,2018-10-22,B.E/B.Tech,Electronics Manufacturing,MNC,19.0,8.1,27.1,10+ yrs,Yes
+EXP-01562,EMP-11562,2022-10-24,ITI,Electronics Manufacturing,MNC,9.0,4.1,13.1,10+ yrs,Yes
+EXP-01563,EMP-11563,2019-05-21,ITI,Automobile,Small Enterprise,5.0,7.3,12.3,10+ yrs,Yes
+EXP-01564,EMP-11564,2019-11-03,B.E/B.Tech,Electronics Manufacturing,Small Enterprise,6.0,7.0,13.0,10+ yrs,Yes
+EXP-01565,EMP-11565,2020-11-07,B.Sc,Electronics Manufacturing,Mid-size Company,12.0,6.0,18.0,10+ yrs,Yes
+EXP-01566,EMP-11566,2020-07-10,ITI,Retail,Mid-size Company,5.0,6.4,11.4,10+ yrs,Yes
+EXP-01567,EMP-11567,2023-01-11,10th,Automobile,Contract Staffing,6.0,3.9,9.9,6-10 yrs,Yes
+EXP-01568,EMP-11568,2020-05-18,ITI,Electronics Manufacturing,MNC,7.0,6.5,13.5,10+ yrs,Yes
+EXP-01569,EMP-11569,2022-07-10,ITI,FMCG,MNC,1.0,4.4,5.4,3-6 yrs,Yes
+EXP-01570,EMP-11570,2024-08-25,B.E/B.Tech,Electronics Manufacturing,Contract Staffing,3.0,2.2,5.2,3-6 yrs,Yes
+EXP-01571,EMP-11571,2026-06-18,12th,Fresher,None,0.0,0.4,0.4,<1 yr,No
+EXP-01572,EMP-11572,2021-01-26,10th,Electronics Manufacturing,Mid-size Company,5.0,5.8,10.8,10+ yrs,Yes
+EXP-01573,EMP-11573,2021-03-16,Diploma,Electronics Manufacturing,Large Indian Company,2.0,5.7,7.7,6-10 yrs,Yes
+EXP-01574,EMP-11574,2019-09-03,10th,Electronics Manufacturing,Large Indian Company,5.0,7.2,12.2,10+ yrs,Yes
+EXP-01575,EMP-11575,2022-06-21,ITI,Electronics Manufacturing,Large Indian Company,7.0,3.7,10.7,10+ yrs,Yes
+EXP-01576,EMP-11576,2021-07-30,ITI,Automobile,Large Indian Company,7.0,5.3,12.3,10+ yrs,Yes
+EXP-01577,EMP-11577,2020-05-18,Diploma,Automobile,Mid-size Company,4.0,6.5,10.5,10+ yrs,Yes
+EXP-01578,EMP-11578,2021-12-31,12th,Telecom,MNC,2.0,4.9,6.9,6-10 yrs,Yes
+EXP-01579,EMP-11579,2021-05-26,B.E/B.Tech,Electronics Manufacturing,Mid-size Company,9.0,5.5,14.5,10+ yrs,Yes
+EXP-01580,EMP-11580,2021-06-04,ITI,Logistics & Warehousing,Mid-size Company,17.0,5.5,22.5,10+ yrs,Yes
+EXP-01581,EMP-11581,2021-10-06,ITI,Textile & Garments,Contract Staffing,6.0,5.1,11.1,10+ yrs,Yes
+EXP-01582,EMP-11582,2025-02-23,B.Sc,Fresher,None,0.0,1.7,1.7,1-3 yrs,Yes
+EXP-01583,EMP-11583,2025-07-05,ITI,Fresher,None,0.0,1.4,1.4,1-3 yrs,Yes
+EXP-01584,EMP-11584,2022-02-02,Diploma,Electronics Manufacturing,Large Indian Company,15.0,4.8,19.8,10+ yrs,Yes
+EXP-01585,EMP-11585,2023-12-29,Diploma,Fresher,None,0.0,2.9,2.9,1-3 yrs,Yes
+EXP-01586,EMP-11586,2020-09-16,12th,Electronics Manufacturing,Small Enterprise,11.0,6.2,17.2,10+ yrs,Yes
+EXP-01587,EMP-11587,2021-11-19,10th,Logistics & Warehousing,Contract Staffing,4.0,5.0,9.0,6-10 yrs,Yes
+EXP-01588,EMP-11588,2020-11-20,B.Sc,Electronics Manufacturing,MNC,3.0,6.0,9.0,6-10 yrs,Yes
+EXP-01589,EMP-11589,2024-08-23,B.E/B.Tech,Telecom,Large Indian Company,7.0,2.2,9.2,6-10 yrs,Yes
+EXP-01590,EMP-11590,2023-02-14,Diploma,Electronics Manufacturing,Large Indian Company,4.0,3.1,7.1,6-10 yrs,Yes
+EXP-01591,EMP-11591,2023-08-21,12th,Fresher,None,0.0,3.2,3.2,3-6 yrs,Yes
+EXP-01592,EMP-11592,2020-08-31,ITI,Electronics Manufacturing,Large Indian Company,15.0,6.2,21.2,10+ yrs,Yes
+EXP-01593,EMP-11593,2025-08-07,12th,Fresher,None,0.0,1.3,1.3,1-3 yrs,Yes
+EXP-01594,EMP-11594,2020-10-01,Diploma,Automobile,MNC,12.0,6.1,18.1,10+ yrs,Yes
+EXP-01595,EMP-11595,2021-10-24,Diploma,Logistics & Warehousing,MNC,10.0,5.1,15.1,10+ yrs,Yes
+EXP-01596,EMP-11596,2020-08-02,ITI,Fresher,None,0.0,6.3,6.3,6-10 yrs,Yes
+EXP-01597,EMP-11597,2019-12-10,B.E/B.Tech,Retail,Large Indian Company,5.0,6.9,11.9,10+ yrs,Yes
+EXP-01598,EMP-11598,2023-11-01,ITI,Electronics Manufacturing,Contract Staffing,14.0,3.1,17.1,10+ yrs,Yes
+EXP-01599,EMP-11599,2021-03-17,ITI,Automobile,Mid-size Company,6.0,5.7,11.7,10+ yrs,Yes
+EXP-01600,EMP-11600,2025-07-03,Diploma,Fresher,None,0.0,1.4,1.4,1-3 yrs,Yes
+EXP-01601,EMP-11601,2024-06-06,10th,Telecom,Large Indian Company,9.0,2.5,11.5,10+ yrs,Yes
+EXP-01602,EMP-11602,2022-07-23,ITI,Fresher,None,0.0,4.3,4.3,3-6 yrs,Yes
+EXP-01603,EMP-11603,2018-11-25,ITI,Telecom,Contract Staffing,5.0,8.0,13.0,10+ yrs,Yes
+EXP-01604,EMP-11604,2023-11-07,10th,Fresher,None,0.0,3.0,3.0,1-3 yrs,Yes
+EXP-01605,EMP-11605,2022-08-11,MBA,Automobile,MNC,16.0,4.3,20.3,10+ yrs,Yes
+EXP-01606,EMP-11606,2022-11-02,ITI,Textile & Garments,Mid-size Company,2.0,4.0,6.0,3-6 yrs,Yes
+EXP-01607,EMP-11607,2020-09-04,Diploma,Electronics Manufacturing,Mid-size Company,15.0,6.2,21.2,10+ yrs,Yes
+EXP-01608,EMP-11608,2020-11-28,B.Sc,Electronics Manufacturing,Large Indian Company,5.0,6.0,11.0,10+ yrs,Yes
+EXP-01609,EMP-11609,2024-03-08,12th,Logistics & Warehousing,Large Indian Company,5.0,2.7,7.7,6-10 yrs,Yes
+EXP-01610,EMP-11610,2025-11-23,12th,Fresher,None,0.0,1.0,1.0,<1 yr,Yes
+EXP-01611,EMP-11611,2023-03-10,12th,Automobile,Large Indian Company,8.0,3.7,11.7,10+ yrs,Yes
+EXP-01612,EMP-11612,2020-09-03,B.E/B.Tech,Automobile,Mid-size Company,4.0,6.2,10.2,10+ yrs,Yes
+EXP-01613,EMP-11613,2021-12-28,10th,Textile & Garments,Mid-size Company,10.0,4.9,14.9,10+ yrs,Yes
+EXP-01614,EMP-11614,2020-03-06,10th,Telecom,MNC,6.0,6.4,12.4,10+ yrs,Yes
+EXP-01615,EMP-11615,2021-08-28,ITI,Electronics Manufacturing,Large Indian Company,3.0,5.2,8.2,6-10 yrs,Yes
+EXP-01616,EMP-11616,2025-08-20,ITI,Fresher,None,0.0,1.3,1.3,1-3 yrs,Yes
+EXP-01617,EMP-11617,2020-10-04,B.Sc,Textile & Garments,Large Indian Company,6.0,6.1,12.1,10+ yrs,Yes
+EXP-01618,EMP-11618,2022-06-19,12th,Electronics Manufacturing,Mid-size Company,7.0,4.4,11.4,10+ yrs,Yes
+EXP-01619,EMP-11619,2022-04-30,10th,Electronics Manufacturing,Contract Staffing,10.0,4.6,14.6,10+ yrs,Yes
+EXP-01620,EMP-11620,2023-12-11,10th,Automobile,Mid-size Company,10.0,2.9,12.9,10+ yrs,Yes
+EXP-01621,EMP-11621,2021-10-13,Diploma,Retail,MNC,11.0,5.1,16.1,10+ yrs,Yes
+EXP-01622,EMP-11622,2020-12-07,Diploma,Pharma,Mid-size Company,8.0,6.0,14.0,10+ yrs,Yes
+EXP-01623,EMP-11623,2023-12-18,ITI,Automobile,Large Indian Company,6.0,2.9,8.9,6-10 yrs,Yes
+EXP-01624,EMP-11624,2021-09-13,B.Sc,Fresher,None,0.0,5.2,5.2,3-6 yrs,Yes
+EXP-01625,EMP-11625,2022-09-14,Diploma,Logistics & Warehousing,Large Indian Company,8.0,4.2,12.2,10+ yrs,Yes
+EXP-01626,EMP-11626,2019-04-21,ITI,Logistics & Warehousing,Large Indian Company,9.0,7.6,16.6,10+ yrs,Yes
+EXP-01627,EMP-11627,2024-03-27,B.Sc,Logistics & Warehousing,Large Indian Company,10.0,2.7,12.7,10+ yrs,Yes
+EXP-01628,EMP-11628,2018-07-04,ITI,Logistics & Warehousing,Contract Staffing,1.0,8.4,9.4,6-10 yrs,Yes
+EXP-01629,EMP-11629,2022-03-14,ITI,Electronics Manufacturing,Mid-size Company,9.0,4.7,13.7,10+ yrs,Yes
+EXP-01630,EMP-11630,2022-07-22,B.E/B.Tech,Pharma,MNC,12.0,4.3,16.3,10+ yrs,Yes
+EXP-01631,EMP-11631,2021-11-29,10th,Automobile,Large Indian Company,1.0,5.0,6.0,3-6 yrs,Yes
+EXP-01632,EMP-11632,2020-10-05,ITI,Textile & Garments,MNC,2.0,6.1,8.1,6-10 yrs,Yes
+EXP-01633,EMP-11633,2022-01-16,ITI,FMCG,MNC,5.0,4.8,9.8,6-10 yrs,Yes
+EXP-01634,EMP-11634,2021-02-07,ITI,FMCG,Mid-size Company,5.0,5.8,10.8,10+ yrs,Yes
+EXP-01635,EMP-11635,2025-06-16,10th,Fresher,None,0.0,1.4,1.4,1-3 yrs,Yes
+EXP-01636,EMP-11636,2024-01-26,12th,Automobile,Large Indian Company,8.0,2.8,10.8,10+ yrs,Yes
+EXP-01637,EMP-11637,2020-06-13,12th,Fresher,None,0.0,6.4,6.4,6-10 yrs,Yes
+EXP-01638,EMP-11638,2019-03-23,Diploma,Electronics Manufacturing,Mid-size Company,5.0,7.7,12.7,10+ yrs,Yes
+EXP-01639,EMP-11639,2022-12-17,Diploma,Pharma,Mid-size Company,18.0,3.9,21.9,10+ yrs,Yes
+EXP-01640,EMP-11640,2023-08-16,Diploma,Fresher,None,0.0,3.3,3.3,3-6 yrs,Yes
+EXP-01641,EMP-11641,2023-02-17,12th,Electronics Manufacturing,Mid-size Company,10.0,3.8,13.8,10+ yrs,Yes
+EXP-01642,EMP-11642,2019-03-29,10th,Fresher,None,0.0,7.6,7.6,6-10 yrs,Yes
+EXP-01643,EMP-11643,2021-07-24,10th,FMCG,Large Indian Company,3.0,5.3,8.3,6-10 yrs,Yes
+EXP-01644,EMP-11644,2021-01-01,B.Sc,Electronics Manufacturing,Small Enterprise,9.0,5.9,14.9,10+ yrs,Yes
+EXP-01645,EMP-11645,2020-08-25,12th,Telecom,MNC,7.0,6.2,13.2,10+ yrs,Yes
+EXP-01646,EMP-11646,2020-04-11,Diploma,Textile & Garments,Large Indian Company,10.0,6.6,16.6,10+ yrs,Yes
+EXP-01647,EMP-11647,2023-02-21,ITI,Electronics Manufacturing,Mid-size Company,18.0,3.7,21.7,10+ yrs,Yes
+EXP-01648,EMP-11648,2021-04-02,10th,Fresher,None,0.0,5.6,5.6,3-6 yrs,Yes
+EXP-01649,EMP-11649,2022-10-29,ITI,Fresher,None,0.0,4.1,4.1,3-6 yrs,Yes
+EXP-01650,EMP-11650,2024-01-29,ITI,Fresher,None,0.0,2.8,2.8,1-3 yrs,Yes
+EXP-01651,EMP-11651,2024-06-17,ITI,Electronics Manufacturing,Contract Staffing,4.0,2.4,6.4,6-10 yrs,Yes
+EXP-01652,EMP-11652,2019-09-04,ITI,Logistics & Warehousing,Large Indian Company,2.0,7.2,9.2,6-10 yrs,Yes
+EXP-01653,EMP-11653,2025-09-05,ITI,Fresher,None,0.0,1.2,1.2,1-3 yrs,Yes
+EXP-01654,EMP-11654,2024-10-12,10th,Fresher,None,0.0,2.1,2.1,1-3 yrs,Yes
+EXP-01655,EMP-11655,2024-11-26,10th,Fresher,None,0.0,2.0,2.0,1-3 yrs,Yes
+EXP-01656,EMP-11656,2023-06-23,Diploma,Fresher,None,0.0,3.0,3.0,1-3 yrs,Yes
+EXP-01657,EMP-11657,2022-10-20,ITI,Textile & Garments,MNC,12.0,4.1,16.1,10+ yrs,Yes
+EXP-01658,EMP-11658,2021-09-03,B.E/B.Tech,Electronics Manufacturing,Large Indian Company,5.0,5.2,10.2,10+ yrs,Yes
+EXP-01659,EMP-11659,2022-08-04,Diploma,Logistics & Warehousing,Large Indian Company,11.0,4.3,15.3,10+ yrs,Yes
+EXP-01660,EMP-11660,2021-01-08,12th,Textile & Garments,Contract Staffing,2.0,5.9,7.9,6-10 yrs,Yes
+EXP-01661,EMP-11661,2023-02-16,12th,FMCG,Mid-size Company,2.0,3.8,5.8,3-6 yrs,Yes
+EXP-01662,EMP-11662,2018-10-05,ITI,Logistics & Warehousing,MNC,12.0,8.1,20.1,10+ yrs,Yes
+EXP-01663,EMP-11663,2022-03-04,B.Sc,Electronics Manufacturing,Contract Staffing,11.0,4.7,15.7,10+ yrs,Yes
+EXP-01664,EMP-11664,2025-06-21,10th,Fresher,None,0.0,1.4,1.4,1-3 yrs,Yes
+EXP-01665,EMP-11665,2020-07-11,12th,Textile & Garments,MNC,8.0,6.4,14.4,10+ yrs,Yes
+EXP-01666,EMP-11666,2022-11-26,Diploma,Textile & Garments,MNC,4.0,4.0,8.0,6-10 yrs,Yes
+EXP-01667,EMP-11667,2019-11-05,Diploma,Electronics Manufacturing,Large Indian Company,9.0,7.0,16.0,10+ yrs,Yes
+EXP-01668,EMP-11668,2018-11-02,ITI,Automobile,Small Enterprise,8.0,8.0,16.0,10+ yrs,Yes
+EXP-01669,EMP-11669,2021-09-20,10th,Logistics & Warehousing,MNC,10.0,5.2,15.2,10+ yrs,Yes
+EXP-01670,EMP-11670,2021-03-11,12th,FMCG,Small Enterprise,5.0,5.7,10.7,10+ yrs,Yes
+EXP-01671,EMP-11671,2021-01-26,ITI,Electronics Manufacturing,Large Indian Company,8.0,5.8,13.8,10+ yrs,Yes
+EXP-01672,EMP-11672,2023-10-27,10th,Logistics & Warehousing,Large Indian Company,6.0,3.0,9.0,6-10 yrs,Yes
+EXP-01673,EMP-11673,2020-10-27,10th,Electronics Manufacturing,MNC,9.0,6.1,15.1,10+ yrs,Yes
+EXP-01674,EMP-11674,2023-12-02,ITI,FMCG,MNC,10.0,3.0,13.0,10+ yrs,Yes
+EXP-01675,EMP-11675,2018-06-05,ITI,FMCG,Mid-size Company,11.0,8.5,19.5,10+ yrs,Yes
+EXP-01676,EMP-11676,2020-10-02,10th,Automobile,Mid-size Company,11.0,6.1,17.1,10+ yrs,Yes
+EXP-01677,EMP-11677,2022-03-31,12th,Fresher,None,0.0,4.6,4.6,3-6 yrs,Yes
+EXP-01678,EMP-11678,2020-10-15,Diploma,Electronics Manufacturing,Small Enterprise,8.0,6.1,14.1,10+ yrs,Yes
+EXP-01679,EMP-11679,2023-10-26,Diploma,Automobile,Large Indian Company,2.0,3.1,5.1,3-6 yrs,Yes
+EXP-01680,EMP-11680,2024-09-21,M.Tech,Textile & Garments,MNC,6.0,2.2,8.2,6-10 yrs,Yes
+EXP-01681,EMP-11681,2021-09-07,10th,Automobile,Mid-size Company,3.0,5.2,8.2,6-10 yrs,Yes
+EXP-01682,EMP-11682,2018-11-15,10th,Logistics & Warehousing,MNC,3.0,8.0,11.0,10+ yrs,Yes
+EXP-01683,EMP-11683,2020-04-22,Diploma,FMCG,MNC,14.0,6.6,20.6,10+ yrs,Yes
+EXP-01684,EMP-11684,2021-03-31,12th,Textile & Garments,Mid-size Company,7.0,5.6,12.6,10+ yrs,Yes
+EXP-01685,EMP-11685,2022-04-20,B.E/B.Tech,Textile & Garments,Mid-size Company,7.0,4.6,11.6,10+ yrs,Yes
+EXP-01686,EMP-11686,2022-01-24,10th,Textile & Garments,Mid-size Company,1.0,4.8,5.8,3-6 yrs,Yes
+EXP-01687,EMP-11687,2018-12-28,10th,FMCG,Mid-size Company,4.0,7.9,11.9,10+ yrs,Yes
+EXP-01688,EMP-11688,2023-08-22,Diploma,Fresher,None,0.0,3.2,3.2,3-6 yrs,Yes
+EXP-01689,EMP-11689,2021-05-06,Diploma,Retail,MNC,2.0,5.5,7.5,6-10 yrs,Yes
+EXP-01690,EMP-11690,2023-04-20,Diploma,Textile & Garments,Large Indian Company,5.0,3.6,8.6,6-10 yrs,Yes
+EXP-01691,EMP-11691,2020-03-02,10th,Automobile,Small Enterprise,2.0,6.7,8.7,6-10 yrs,Yes
+EXP-01692,EMP-11692,2025-07-15,Diploma,Fresher,None,0.0,1.3,1.3,1-3 yrs,Yes
+EXP-01693,EMP-11693,2019-03-25,Diploma,Retail,Mid-size Company,5.0,7.7,12.7,10+ yrs,Yes
+EXP-01694,EMP-11694,2024-01-04,ITI,Fresher,None,0.0,2.9,2.9,1-3 yrs,Yes
+EXP-01695,EMP-11695,2024-01-13,B.Sc,Pharma,Contract Staffing,11.0,2.9,13.9,10+ yrs,Yes
+EXP-01696,EMP-11696,2023-01-08,ITI,Automobile,Large Indian Company,4.0,3.9,7.9,6-10 yrs,Yes
+EXP-01697,EMP-11697,2024-04-08,Diploma,Textile & Garments,Large Indian Company,7.0,2.6,9.6,6-10 yrs,Yes
+EXP-01698,EMP-11698,2024-09-05,ITI,Electronics Manufacturing,Large Indian Company,8.0,2.2,10.2,10+ yrs,Yes
+EXP-01699,EMP-11699,2022-03-07,12th,FMCG,Mid-size Company,4.0,4.4,8.4,6-10 yrs,Yes
+EXP-01700,EMP-11700,2021-06-22,Diploma,Retail,MNC,9.0,5.4,14.4,10+ yrs,Yes

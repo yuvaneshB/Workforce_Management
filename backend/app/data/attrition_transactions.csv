@@ -1,0 +1,121 @@
+attrition_id,employee_id,plant_id,department_id,section_id,employment_type,vendor_id,designation,grade,gender,date_of_joining,resignation_date,last_working_day,notice_period_days,tenure_months,exit_type,exit_reason,regrettable_loss,exit_interview_done,rehire_eligible,destination,last_drawn_monthly_inr
+ATR-0001,EMP-10010,IN-TN-01,D05,S019,Permanent,,Quality Inspector,G2,Male,2021-08-18,2025-11-29,2025-12-29,30,52.4,Resignation,Health Issues,Yes,Yes,Yes,Not Applicable / Unknown,23300
+ATR-0002,EMP-10023,IN-TN-01,D06,S023,Vendor,V02,Maintenance Technician,G3,Male,2024-07-01,2025-12-17,2025-12-24,7,17.8,Resignation,Family / Personal Reasons,Yes,Yes,Yes,Not Applicable / Unknown,26000
+ATR-0003,EMP-10043,IN-TN-01,D04,S014,Vendor,V02,Test Operator,G2,Female,2018-11-22,2025-12-09,2025-12-09,0,84.6,Contract End,Contract Completed,No,No,Yes,Not Applicable / Unknown,19266
+ATR-0004,EMP-10070,IN-TN-01,D05,S019,Vendor,V02,Quality Inspector,G2,Male,2020-02-08,2026-07-11,2026-07-11,0,77.0,Contract End,Contract Completed,No,No,Yes,Not Applicable / Unknown,21554
+ATR-0005,EMP-10071,IN-KA-01,D02,S007,Permanent,,Line Leader,G3,Male,2020-10-29,2026-09-11,2026-10-11,30,71.4,Resignation,Higher Studies,Yes,Yes,Yes,Higher Studies,28870
+ATR-0006,EMP-10106,IN-TN-01,D10,S035,Permanent,,EHS Officer,G4,Male,2024-10-11,2026-04-09,2026-05-09,30,18.9,Resignation,Family / Personal Reasons,Yes,No,Yes,Not Applicable / Unknown,37140
+ATR-0007,EMP-10120,IN-KA-01,D04,S015,Vendor,V03,Test Operator,G2,Female,2020-04-25,2026-05-10,2026-05-10,0,72.5,Termination,Poor Performance,No,No,No,Not Applicable / Unknown,19422
+ATR-0008,EMP-10123,IN-TN-01,D05,S019,Permanent,,Quality Supervisor,G4,Male,2020-06-02,2026-04-22,2026-05-22,30,71.6,Resignation,Relocation,Yes,Yes,Yes,Not Applicable / Unknown,41690
+ATR-0009,EMP-10136,IN-TN-01,D02,S006,Vendor,V04,Assembly Operator,G1,Female,2024-01-23,2026-03-30,2026-03-30,0,26.2,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,17264
+ATR-0010,EMP-10156,IN-TN-01,D02,S008,Vendor,V01,Assembly Operator,G1,Female,2019-02-05,2026-08-02,2026-08-09,7,90.1,Resignation,Higher Studies,Yes,Yes,Yes,Higher Studies,16952
+ATR-0011,EMP-10168,IN-TN-01,D02,S007,Permanent,,Assembly Operator,G1,Male,2019-10-17,2026-04-11,2026-05-11,30,78.8,Resignation,Better Career Opportunity,Yes,Yes,Yes,Other Industry,17910
+ATR-0012,EMP-10182,IN-TN-01,D12,S039,Vendor,V01,Store Assistant,G1,Male,2024-11-29,2025-12-20,2025-12-20,0,12.7,Termination,Disciplinary Action,No,No,No,Not Applicable / Unknown,18070
+ATR-0013,EMP-10189,IN-KA-01,D06,S022,Vendor,V05,Maintenance Technician,G3,Male,2023-08-05,2026-03-05,2026-03-12,7,31.2,Resignation,Commute Distance,Yes,Yes,Yes,Not Applicable / Unknown,25246
+ATR-0014,EMP-10195,IN-TN-01,D10,S034,Vendor,V04,Security Guard,G1,Male,2018-12-12,2026-05-26,2026-06-02,7,89.7,Resignation,Better Salary Offer,Yes,Yes,Yes,Competitor - Electronics Mfg,16744
+ATR-0015,EMP-10221,IN-TN-01,D04,S014,Permanent,,Test Technician,G3,Male,2019-07-08,2025-12-29,2026-01-28,30,78.7,Resignation,Better Salary Offer,Yes,Yes,Yes,Other Industry,29150
+ATR-0016,EMP-10237,IN-KA-01,D05,S017,Vendor,V05,Quality Inspector,G2,Female,2020-04-16,2026-08-27,2026-08-27,0,76.3,Termination,Disciplinary Action,No,No,No,Not Applicable / Unknown,20046
+ATR-0017,EMP-10244,IN-KA-01,D03,S012,Vendor,V05,Module Operator,G1,Female,2026-01-31,2026-07-31,2026-07-31,0,5.9,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,18408
+ATR-0018,EMP-10246,IN-TN-01,D03,S010,Vendor,V01,Module Operator,G1,Male,2021-12-25,2025-12-23,2025-12-23,0,47.9,Contract End,Contract Completed,No,No,Yes,Not Applicable / Unknown,17394
+ATR-0019,EMP-10263,IN-TN-01,D08,S029,Vendor,V04,Dispatch Clerk,G2,Female,2019-06-09,2026-01-11,2026-01-18,7,79.3,Resignation,Work Pressure,Yes,Yes,Yes,Not Applicable / Unknown,20800
+ATR-0020,EMP-10267,IN-TN-01,D07,S024,Vendor,V06,Material Handler,G1,Female,2018-10-05,2026-10-18,2026-10-18,0,96.4,Contract End,Contract Completed,No,No,Yes,Not Applicable / Unknown,15964
+ATR-0021,EMP-10280,IN-KA-01,D06,S021,Permanent,,Maintenance Technician,G3,Male,2024-11-21,2026-09-05,2026-10-05,30,22.4,Resignation,Family / Personal Reasons,Yes,Yes,Yes,Not Applicable / Unknown,25980
+ATR-0022,EMP-10282,IN-KA-01,D01,S003,Permanent,,Line Supervisor,G4,Male,2021-08-04,2026-09-27,2026-10-27,30,62.7,Resignation,Better Career Opportunity,Yes,Yes,Yes,Competitor - Electronics Mfg,40280
+ATR-0023,EMP-10285,IN-TN-01,D07,S026,Vendor,V01,Material Handler,G1,Male,2019-05-08,2026-01-11,2026-01-11,0,80.2,Contract End,Contract Completed,No,No,Yes,Not Applicable / Unknown,17082
+ATR-0024,EMP-10295,IN-KA-01,D02,S008,Vendor,V05,Assembly Operator,G1,Female,2020-12-04,2026-01-26,2026-01-26,0,61.7,Contract End,Contract Completed,No,No,Yes,Not Applicable / Unknown,16328
+ATR-0025,EMP-10329,IN-TN-01,D05,S017,Permanent,,Quality Inspector,G2,Male,2024-05-25,2026-05-12,2026-05-12,0,23.6,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,21090
+ATR-0026,EMP-10337,IN-KA-01,D07,S025,Permanent,,Material Handler,G1,Female,2022-02-03,2026-01-07,2026-02-06,30,48.1,Resignation,Marriage / Family Relocation,Yes,Yes,Yes,Not Applicable / Unknown,17470
+ATR-0027,EMP-10363,IN-TN-01,D02,S005,Permanent,,Line Leader,G3,Female,2018-09-10,2026-03-04,2026-04-03,30,90.7,Resignation,Better Salary Offer,Yes,Yes,Yes,Competitor - Electronics Mfg,27990
+ATR-0028,EMP-10388,IN-TN-01,D03,S012,Vendor,V02,Module Operator,G1,Male,2023-05-20,2026-04-11,2026-04-11,0,34.7,Termination,Poor Performance,No,No,No,Not Applicable / Unknown,17160
+ATR-0029,EMP-10393,IN-TN-01,D02,S006,Permanent,,Assembly Operator,G1,Female,2022-05-26,2026-08-30,2026-09-29,30,52.1,Resignation,Work Pressure,Yes,Yes,Yes,Not Applicable / Unknown,18290
+ATR-0030,EMP-10394,IN-TN-01,D01,S002,Vendor,V04,AOI/SPI Inspector,G3,Male,2021-03-01,2026-10-31,2026-10-31,0,68.0,Contract End,Contract Completed,No,No,Yes,Not Applicable / Unknown,26078
+ATR-0031,EMP-10411,IN-TN-01,D02,S007,Vendor,V04,Assembly Operator,G1,Male,2020-08-15,2026-05-12,2026-05-12,0,68.9,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,17212
+ATR-0032,EMP-10416,IN-KA-01,D12,S041,Permanent,,Stores Executive,G4,Male,2021-07-08,2025-12-30,2025-12-30,0,53.7,Termination,Poor Performance,No,No,No,Not Applicable / Unknown,39490
+ATR-0033,EMP-10419,IN-KA-01,D03,S012,Permanent,,Senior Operator,G2,Female,2023-07-25,2026-07-04,2026-08-03,30,36.3,Resignation,Health Issues,Yes,No,Yes,Not Applicable / Unknown,21320
+ATR-0034,EMP-10433,IN-TN-01,D03,S010,Vendor,V02,Senior Operator,G2,Male,2025-08-12,2025-12-05,2025-12-05,0,3.8,Contract End,Contract Completed,No,No,Yes,Not Applicable / Unknown,20202
+ATR-0035,EMP-10451,IN-TN-01,D02,S009,Permanent,,Production Executive,G5,Female,2020-06-23,2026-04-03,2026-06-02,60,71.3,Resignation,Family / Personal Reasons,Yes,Yes,Yes,Not Applicable / Unknown,57580
+ATR-0036,EMP-10504,IN-TN-01,D02,S007,Vendor,V01,Assembly Operator,G1,Male,2018-10-10,2026-10-22,2026-10-29,7,96.6,Resignation,Shift Timing Issues,Yes,Yes,Yes,Not Applicable / Unknown,15860
+ATR-0037,EMP-10508,IN-KA-01,D07,S024,Vendor,V03,Material Handler,G1,Male,2021-03-25,2026-09-05,2026-09-05,0,65.4,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,17056
+ATR-0038,EMP-10524,IN-TN-01,D03,S010,Vendor,V02,Module Operator,G1,Male,2023-12-18,2026-01-31,2026-01-31,0,25.5,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,17160
+ATR-0039,EMP-10555,IN-TN-01,D01,S004,Vendor,V01,SMT Operator,G2,Male,2020-09-18,2026-02-02,2026-02-09,7,64.7,Resignation,Family / Personal Reasons,Yes,Yes,Yes,Not Applicable / Unknown,21606
+ATR-0040,EMP-10565,IN-KA-01,D07,S024,Vendor,V05,Material Handler,G1,Male,2026-04-10,2026-08-25,2026-08-25,0,4.5,Contract End,Contract Completed,No,No,Yes,Not Applicable / Unknown,17056
+ATR-0041,EMP-10569,IN-TN-01,D02,S008,Vendor,V04,Senior Operator,G2,Male,2021-05-26,2026-01-08,2026-01-08,0,55.5,Termination,Disciplinary Action,No,No,No,Not Applicable / Unknown,21762
+ATR-0042,EMP-10582,IN-TN-01,D10,S034,Vendor,V01,Security Guard,G1,Male,2024-09-09,2026-07-05,2026-07-12,7,22.0,Resignation,Shift Timing Issues,No,Yes,Yes,Not Applicable / Unknown,16042
+ATR-0043,EMP-10598,IN-KA-01,D06,S023,Vendor,V05,Maintenance Technician,G3,Male,2020-04-12,2026-03-16,2026-03-16,0,71.1,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,23894
+ATR-0044,EMP-10599,IN-TN-01,D06,S022,Permanent,,Maintenance Supervisor,G5,Female,2020-01-25,2026-03-02,2026-05-01,60,75.2,Resignation,Marriage / Family Relocation,Yes,Yes,Yes,Not Applicable / Unknown,61110
+ATR-0045,EMP-10625,IN-KA-01,D11,S037,Vendor,V05,Housekeeping Staff,G1,Female,2025-02-24,2026-04-24,2026-05-01,7,14.2,Resignation,Family / Personal Reasons,Yes,Yes,Yes,Not Applicable / Unknown,15860
+ATR-0046,EMP-10628,IN-TN-01,D06,S021,Permanent,,Senior Technician,G4,Male,2025-02-24,2026-04-17,2026-05-17,30,14.7,Resignation,Better Salary Offer,Yes,Yes,Yes,Competitor - Electronics Mfg,38790
+ATR-0047,EMP-10646,IN-TN-01,D02,S008,Permanent,,Senior Operator,G2,Male,2021-07-04,2026-09-11,2026-10-11,30,63.2,Resignation,Better Salary Offer,Yes,Yes,Yes,Competitor - Electronics Mfg,22870
+ATR-0048,EMP-10647,IN-KA-01,D02,S007,Vendor,V03,Senior Operator,G2,Male,2025-07-15,2026-03-28,2026-03-28,0,8.4,Contract End,Contract Completed,No,No,Yes,Not Applicable / Unknown,19474
+ATR-0049,EMP-10652,IN-TN-01,D06,S021,Permanent,,Maintenance Engineer,G5,Male,2019-09-14,2026-04-19,2026-06-18,60,81.1,Resignation,Better Salary Offer,Yes,No,Yes,Competitor - Electronics Mfg,62720
+ATR-0050,EMP-10671,IN-KA-01,D04,S016,Permanent,,Calibration Technician,G3,Male,2021-03-09,2026-03-17,2026-04-16,30,61.2,Resignation,Better Career Opportunity,Yes,Yes,Yes,Competitor - Electronics Mfg,27670
+ATR-0051,EMP-10685,IN-TN-01,D01,S001,Vendor,V01,SMT Operator,G2,Male,2018-09-10,2026-08-02,2026-08-09,7,94.9,Resignation,Supervisor Conflict,Yes,Yes,Yes,Not Applicable / Unknown,19708
+ATR-0052,EMP-10741,IN-KA-01,D02,S008,Vendor,V03,Assembly Operator,G1,Male,2022-09-17,2026-02-24,2026-03-03,7,41.5,Resignation,Higher Studies,Yes,Yes,Yes,Higher Studies,18304
+ATR-0053,EMP-10783,IN-KA-01,D11,S036,Permanent,,Admin Executive,G3,Female,2026-03-14,2026-05-14,2026-06-13,30,3.0,Resignation,Better Career Opportunity,Yes,No,Yes,Competitor - Electronics Mfg,28200
+ATR-0054,EMP-10808,IN-TN-01,D07,S025,Permanent,,Logistics Executive,G4,Male,2019-12-13,2026-05-03,2026-06-02,30,77.6,Resignation,Family / Personal Reasons,Yes,Yes,Yes,Not Applicable / Unknown,42960
+ATR-0055,EMP-10814,IN-TN-01,D08,S029,Vendor,V04,Labeling Operator,G1,Male,2019-01-10,2026-02-17,2026-02-24,7,85.5,Resignation,Health Issues,Yes,Yes,Yes,Not Applicable / Unknown,16822
+ATR-0056,EMP-10815,IN-TN-01,D11,S038,Permanent,,HR Executive,G4,Female,2019-10-11,2026-03-25,2026-04-24,30,78.4,Resignation,Higher Studies,Yes,Yes,Yes,Higher Studies,38620
+ATR-0057,EMP-10818,IN-TN-01,D04,S014,Vendor,V01,Test Operator,G2,Female,2019-09-12,2025-11-13,2025-11-20,7,74.3,Resignation,Supervisor Conflict,Yes,Yes,Yes,Not Applicable / Unknown,19864
+ATR-0058,EMP-10821,IN-KA-01,D02,S009,Permanent,,Line Leader,G3,Male,2022-02-25,2026-02-02,2026-03-04,30,48.2,Resignation,Better Career Opportunity,Yes,No,Yes,Other Industry,27360
+ATR-0059,EMP-10828,IN-KA-01,D08,S028,Vendor,V03,Packer,G1,Female,2020-09-17,2026-09-29,2026-09-29,0,72.4,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,17238
+ATR-0060,EMP-10830,IN-TN-01,D02,S009,Permanent,,Line Supervisor,G4,Male,2023-12-21,2026-03-24,2026-04-23,30,28.1,Resignation,Higher Studies,Yes,Yes,Yes,Higher Studies,37130
+ATR-0061,EMP-10835,IN-TN-01,D04,S014,Permanent,,Test Technician,G3,Male,2019-01-09,2026-02-23,2026-03-25,30,86.5,Resignation,Better Career Opportunity,Yes,Yes,Yes,Other Industry,29160
+ATR-0062,EMP-10854,IN-KA-01,D05,S017,Vendor,V05,Quality Inspector,G2,Female,2023-02-19,2026-05-30,2026-05-30,0,39.3,Termination,Poor Performance,No,No,No,Not Applicable / Unknown,20410
+ATR-0063,EMP-10862,IN-TN-01,D04,S016,Permanent,,Test Technician,G3,Male,2020-07-04,2026-08-06,2026-09-05,30,74.0,Resignation,Supervisor Conflict,Yes,Yes,Yes,Not Applicable / Unknown,29410
+ATR-0064,EMP-10865,IN-KA-01,D02,S007,Permanent,,Senior Operator,G2,Female,2023-06-02,2026-10-15,2026-10-15,0,40.4,Termination,Poor Performance,No,No,No,Not Applicable / Unknown,20320
+ATR-0065,EMP-10957,IN-TN-01,D03,S010,Vendor,V01,Module Operator,G1,Female,2023-09-14,2026-01-26,2026-01-26,0,28.4,Termination,Poor Performance,No,No,No,Not Applicable / Unknown,18018
+ATR-0066,EMP-10958,IN-KA-01,D10,S033,Vendor,V05,Security Guard,G1,Male,2020-05-12,2026-07-08,2026-07-08,0,73.9,Contract End,Contract Completed,No,No,Yes,Not Applicable / Unknown,18408
+ATR-0067,EMP-11003,IN-KA-01,D08,S029,Permanent,,Labeling Operator,G1,Male,2022-05-21,2026-08-18,2026-09-17,30,51.9,Resignation,Better Career Opportunity,Yes,Yes,Yes,Competitor - Electronics Mfg,17820
+ATR-0068,EMP-11006,IN-TN-01,D02,S009,Vendor,V01,Senior Operator,G2,Male,2019-02-10,2026-01-05,2026-01-05,0,82.8,Contract End,Contract Completed,No,No,Yes,Not Applicable / Unknown,19318
+ATR-0069,EMP-11031,IN-KA-01,D02,S009,Vendor,V05,Assembly Operator,G1,Male,2023-04-17,2025-12-17,2025-12-17,0,32.0,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,16406
+ATR-0070,EMP-11039,IN-TN-01,D02,S009,Vendor,V04,Assembly Operator,G1,Female,2021-03-08,2025-11-25,2025-12-02,7,56.8,Resignation,Supervisor Conflict,Yes,No,Yes,Not Applicable / Unknown,18044
+ATR-0071,EMP-11053,IN-TN-01,D02,S007,Vendor,V01,Assembly Operator,G1,Female,2020-08-25,2026-04-26,2026-05-03,7,68.2,Resignation,Better Salary Offer,Yes,Yes,Yes,Other Industry,17056
+ATR-0072,EMP-11063,IN-KA-01,D02,S006,Vendor,V05,Assembly Operator,G1,Male,2020-09-20,2026-06-11,2026-06-18,7,68.9,Resignation,Relocation,Yes,No,Yes,Not Applicable / Unknown,16042
+ATR-0073,EMP-11077,IN-KA-01,D06,S021,Vendor,V05,Maintenance Technician,G3,Male,2020-11-20,2026-01-23,2026-01-23,0,62.1,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,25506
+ATR-0074,EMP-11079,IN-TN-01,D02,S007,Vendor,V01,Assembly Operator,G1,Male,2020-06-23,2026-07-07,2026-07-07,0,72.4,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,17602
+ATR-0075,EMP-11091,IN-KA-01,D05,S020,Permanent,,Quality Inspector,G2,Male,2022-08-11,2026-08-27,2026-09-26,30,49.5,Resignation,Family / Personal Reasons,Yes,Yes,Yes,Not Applicable / Unknown,20990
+ATR-0076,EMP-11093,IN-TN-01,D03,S010,Vendor,V04,Senior Operator,G2,Female,2019-06-19,2026-02-14,2026-02-21,7,80.1,Resignation,Better Salary Offer,Yes,Yes,Yes,Other Industry,21606
+ATR-0077,EMP-11141,IN-TN-01,D01,S004,Vendor,V01,SMT Operator,G2,Female,2019-11-05,2026-06-21,2026-06-21,0,79.5,Contract End,Contract Completed,No,No,Yes,Not Applicable / Unknown,20358
+ATR-0078,EMP-11149,IN-TN-01,D02,S006,Vendor,V02,Assembly Operator,G1,Female,2018-09-05,2026-11-02,2026-11-09,7,98.1,Resignation,Better Salary Offer,Yes,Yes,Yes,Other Industry,16796
+ATR-0079,EMP-11184,IN-KA-01,D03,S011,Permanent,,Senior Operator,G2,Male,2023-11-30,2025-11-08,2025-12-08,30,24.3,Resignation,Family / Personal Reasons,Yes,Yes,Yes,Not Applicable / Unknown,22230
+ATR-0080,EMP-11187,IN-KA-01,D01,S004,Permanent,,AOI/SPI Inspector,G3,Male,2021-01-02,2026-01-28,2026-02-27,30,61.8,Resignation,Better Salary Offer,Yes,Yes,Yes,Competitor - Electronics Mfg,27630
+ATR-0081,EMP-11202,IN-TN-01,D02,S007,Vendor,V01,Assembly Operator,G1,Female,2021-11-23,2026-10-19,2026-10-19,0,58.8,Termination,Disciplinary Action,No,No,No,Not Applicable / Unknown,18304
+ATR-0082,EMP-11204,IN-KA-01,D12,S041,Vendor,V03,Store Assistant,G1,Male,2022-05-16,2026-09-13,2026-09-13,0,51.9,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,18174
+ATR-0083,EMP-11210,IN-KA-01,D03,S012,Vendor,V05,Module Operator,G1,Male,2024-07-23,2026-05-09,2026-05-16,7,21.7,Resignation,Higher Studies,No,Yes,Yes,Higher Studies,17602
+ATR-0084,EMP-11212,IN-KA-01,D07,S026,Vendor,V03,Forklift Operator,G2,Male,2023-01-22,2026-03-17,2026-03-17,0,37.8,Contract End,Contract Completed,No,No,Yes,Not Applicable / Unknown,19344
+ATR-0085,EMP-11217,IN-TN-01,D08,S027,Permanent,,Labeling Operator,G1,Female,2025-08-09,2025-11-29,2025-12-29,30,4.7,Resignation,Better Salary Offer,No,Yes,Yes,Competitor - Electronics Mfg,18570
+ATR-0086,EMP-11218,IN-TN-01,D08,S028,Vendor,V04,Packer,G1,Male,2020-08-31,2026-07-07,2026-07-07,0,70.2,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,16276
+ATR-0087,EMP-11225,IN-TN-01,D02,S009,Vendor,V01,Assembly Operator,G1,Female,2025-02-04,2026-05-26,2026-06-02,7,15.9,Resignation,Better Salary Offer,No,Yes,Yes,Competitor - Electronics Mfg,17186
+ATR-0088,EMP-11240,IN-TN-01,D08,S028,Vendor,V01,Packer,G1,Male,2025-11-08,2026-02-02,2026-02-02,0,2.8,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,16380
+ATR-0089,EMP-11250,IN-TN-01,D01,S004,Vendor,V04,AOI/SPI Inspector,G3,Male,2019-05-17,2026-08-13,2026-08-13,0,86.9,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,24050
+ATR-0090,EMP-11251,IN-KA-01,D10,S035,Vendor,V05,Security Guard,G1,Male,2020-08-26,2026-08-19,2026-08-19,0,71.7,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,16822
+ATR-0091,EMP-11279,IN-KA-01,D07,S024,Vendor,V05,Material Handler,G1,Male,2023-09-20,2025-12-06,2025-12-13,7,26.8,Resignation,Commute Distance,Yes,Yes,Yes,Not Applicable / Unknown,15860
+ATR-0092,EMP-11286,IN-TN-01,D04,S016,Permanent,,Calibration Technician,G3,Female,2022-01-17,2026-02-10,2026-03-12,30,49.8,Resignation,Better Career Opportunity,Yes,Yes,Yes,Competitor - Electronics Mfg,27950
+ATR-0093,EMP-11298,IN-KA-01,D03,S012,Permanent,,Production Executive,G5,Male,2024-11-10,2026-08-09,2026-10-08,60,22.9,Resignation,Better Salary Offer,Yes,Yes,Yes,Competitor - Electronics Mfg,56140
+ATR-0094,EMP-11301,IN-KA-01,D02,S008,Permanent,,Senior Operator,G2,Female,2021-11-22,2026-08-07,2026-09-06,30,57.5,Resignation,Better Salary Offer,Yes,Yes,Yes,Competitor - Electronics Mfg,20740
+ATR-0095,EMP-11309,IN-KA-01,D02,S009,Permanent,,Assembly Operator,G1,Female,2025-08-05,2025-10-25,2025-11-24,30,3.6,Resignation,Better Salary Offer,No,Yes,Yes,Competitor - Electronics Mfg,18640
+ATR-0096,EMP-11326,IN-TN-01,D05,S017,Vendor,V01,Quality Inspector,G2,Male,2022-04-07,2026-04-06,2026-04-06,0,48.0,Contract End,Contract Completed,No,No,Yes,Not Applicable / Unknown,20202
+ATR-0097,EMP-11331,IN-KA-01,D05,S018,Permanent,,Quality Inspector,G2,Female,2023-06-01,2026-07-30,2026-08-29,30,38.9,Resignation,Better Career Opportunity,Yes,Yes,Yes,Competitor - Electronics Mfg,21960
+ATR-0098,EMP-11364,IN-TN-01,D02,S008,Vendor,V01,Assembly Operator,G1,Female,2022-07-03,2026-08-09,2026-08-09,0,49.2,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,17004
+ATR-0099,EMP-11369,IN-TN-01,D04,S013,Vendor,V01,Test Operator,G2,Female,2019-09-28,2026-03-01,2026-03-01,0,77.1,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,20254
+ATR-0100,EMP-11376,IN-TN-01,D01,S001,Permanent,,Line Technician,G3,Male,2021-01-19,2026-07-07,2026-08-06,30,66.5,Resignation,Work Pressure,Yes,Yes,Yes,Not Applicable / Unknown,29100
+ATR-0101,EMP-11428,IN-TN-01,D03,S010,Vendor,V02,Module Operator,G1,Male,2018-12-30,2026-01-14,2026-01-14,0,84.5,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,16380
+ATR-0102,EMP-11446,IN-KA-01,D10,S034,Permanent,,Fire & Safety Officer,G3,Male,2021-09-17,2026-06-24,2026-06-24,0,57.2,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,27790
+ATR-0103,EMP-11459,IN-KA-01,D04,S013,Permanent,,Test Technician,G3,Female,2020-03-12,2026-09-01,2026-10-01,30,78.6,Resignation,Shift Timing Issues,Yes,Yes,Yes,Not Applicable / Unknown,29710
+ATR-0104,EMP-11461,IN-KA-01,D08,S028,Permanent,,Dispatch Clerk,G2,Male,2021-12-21,2026-05-31,2026-06-30,30,54.3,Resignation,Family / Personal Reasons,Yes,Yes,Yes,Not Applicable / Unknown,21120
+ATR-0105,EMP-11469,IN-KA-01,D01,S001,Permanent,,AOI/SPI Inspector,G3,Female,2021-01-07,2026-02-14,2026-03-16,30,62.2,Resignation,Marriage / Family Relocation,Yes,Yes,Yes,Not Applicable / Unknown,28090
+ATR-0106,EMP-11471,IN-TN-01,D03,S010,Vendor,V04,Module Operator,G1,Female,2019-03-02,2026-09-08,2026-09-08,0,90.2,Contract End,Contract Completed,No,No,Yes,Not Applicable / Unknown,16952
+ATR-0107,EMP-11482,IN-KA-01,D01,S003,Permanent,,Production Executive,G4,Male,2020-09-13,2026-09-03,2026-09-03,0,71.6,Termination,Poor Performance,No,No,No,Not Applicable / Unknown,42050
+ATR-0108,EMP-11497,IN-TN-01,D02,S009,Vendor,V01,Assembly Operator,G1,Male,2021-12-10,2026-03-22,2026-03-22,0,51.3,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,17082
+ATR-0109,EMP-11507,IN-KA-01,D03,S010,Vendor,V03,Module Operator,G1,Female,2022-12-18,2025-12-22,2025-12-22,0,36.1,Termination,Poor Performance,No,No,No,Not Applicable / Unknown,18304
+ATR-0110,EMP-11526,IN-KA-01,D07,S026,Vendor,V06,Forklift Operator,G2,Male,2022-01-31,2026-03-03,2026-03-03,0,49.0,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,19864
+ATR-0111,EMP-11529,IN-TN-01,D03,S012,Vendor,V02,Module Operator,G1,Female,2019-07-08,2025-11-22,2025-11-29,7,76.7,Resignation,Supervisor Conflict,Yes,Yes,Yes,Not Applicable / Unknown,17004
+ATR-0112,EMP-11553,IN-TN-01,D03,S011,Permanent,,Module Operator,G1,Male,2025-04-24,2026-09-03,2026-10-03,30,17.3,Resignation,Better Salary Offer,Yes,Yes,Yes,Competitor - Electronics Mfg,16510
+ATR-0113,EMP-11559,IN-KA-01,D06,S021,Vendor,V03,Maintenance Technician,G3,Male,2023-04-18,2026-02-08,2026-02-15,7,34.0,Resignation,Health Issues,Yes,Yes,Yes,Not Applicable / Unknown,24830
+ATR-0114,EMP-11563,IN-TN-01,D04,S016,Vendor,V04,Test Operator,G2,Female,2019-05-21,2026-08-26,2026-08-26,0,87.2,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,19578
+ATR-0115,EMP-11575,IN-KA-01,D02,S007,Permanent,,Assembly Operator,G1,Male,2022-06-21,2026-01-19,2026-02-18,30,44.0,Resignation,Better Salary Offer,Yes,Yes,Yes,Competitor - Electronics Mfg,18720
+ATR-0116,EMP-11590,IN-KA-01,D06,S022,Vendor,V03,Maintenance Technician,G3,Female,2023-02-14,2026-03-15,2026-03-15,0,37.0,Absconding,Absconding (No Contact),No,No,No,Not Applicable / Unknown,24596
+ATR-0117,EMP-11614,IN-KA-01,D08,S028,Vendor,V05,Labeling Operator,G1,Female,2020-03-06,2026-08-03,2026-08-10,7,77.1,Resignation,Better Salary Offer,Yes,Yes,Yes,Other Industry,18174
+ATR-0118,EMP-11656,IN-KA-01,D02,S009,Vendor,V03,Senior Operator,G2,Female,2023-06-23,2026-06-15,2026-06-15,0,35.7,Termination,Disciplinary Action,No,No,No,Not Applicable / Unknown,19968
+ATR-0119,EMP-11672,IN-KA-01,D10,S034,Vendor,V06,Security Guard,G1,Female,2023-10-27,2026-10-03,2026-10-10,7,35.4,Resignation,Family / Personal Reasons,Yes,Yes,Yes,Not Applicable / Unknown,15860
+ATR-0120,EMP-11699,IN-KA-01,D07,S025,Vendor,V05,Forklift Operator,G2,Male,2022-03-07,2026-07-15,2026-07-22,7,52.5,Resignation,Better Career Opportunity,Yes,No,Yes,Other Industry,19916

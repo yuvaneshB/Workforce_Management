@@ -1,0 +1,13 @@
+department_id,department_name,department_type,cost_centre,is_shift_based
+D01,SMT Production,Production,CC-100,1
+D02,Final Assembly,Production,CC-200,1
+D03,Module Assembly,Production,CC-300,1
+D04,Testing & Calibration,Production,CC-400,1
+D05,Quality Assurance,Quality,CC-500,1
+D06,Maintenance,Support,CC-600,1
+D07,Material Handling & Logistics,Support,CC-700,1
+D08,Packing & Dispatch,Production,CC-800,1
+D09,Production Engineering,Support,CC-900,0
+D10,EHS & Security,Support,CC-000,1
+D11,HR & Admin,Support,CC-100,0
+D12,Supply Chain & Stores,Support,CC-200,1

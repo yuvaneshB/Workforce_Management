@@ -1,0 +1,4 @@
+shift_id,shift_name,start_time,end_time,duration_hours,break_minutes,planned_minutes,night_allowance_applicable,night_allowance_inr_per_shift
+A,Morning,06:00,14:00,8,30,420,0,0
+B,Evening,14:00,22:00,8,30,420,0,0
+C,Night,22:00,06:00,8,30,420,1,150

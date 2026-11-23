@@ -1,0 +1,52 @@
+[
+  {
+    "vendor_id": "VEND-01",
+    "vendor_name": "Apex Industrial Services",
+    "vendor_details": "Workforce staffing and industrial support"
+  },
+  {
+    "vendor_id": "VEND-02",
+    "vendor_name": "Prime Technical Services",
+    "vendor_details": "Technical and maintenance support"
+  },
+  {
+    "vendor_id": "VEND-03",
+    "vendor_name": "Core Facility Partners",
+    "vendor_details": "Facility and operations support"
+  },
+  {
+    "vendor_id": "VEND-04",
+    "vendor_name": "Summit Workforce Solutions",
+    "vendor_details": "Contract workforce services"
+  },
+  {
+    "vendor_id": "V01",
+    "vendor_name": "Sri Vignesh Manpower Services",
+    "vendor_details": "Operators & Helpers (Chennai)"
+  },
+  {
+    "vendor_id": "V02",
+    "vendor_name": "Kovai Talent Solutions",
+    "vendor_details": "Operators & Inspectors (Coimbatore)"
+  },
+  {
+    "vendor_id": "V03",
+    "vendor_name": "Namma Workforce Pvt Ltd",
+    "vendor_details": "Operators & Material Handlers (Bengaluru)"
+  },
+  {
+    "vendor_id": "V04",
+    "vendor_name": "Anand Industrial Staffing",
+    "vendor_details": "Technicians & Helpers (Hosur)"
+  },
+  {
+    "vendor_id": "V05",
+    "vendor_name": "Karnataka Skill Force",
+    "vendor_details": "Operators & Packers (Mysuru)"
+  },
+  {
+    "vendor_id": "V06",
+    "vendor_name": "Prime HR Outsourcing",
+    "vendor_details": "Housekeeping, Security & Logistics (Chennai)"
+  }
+]

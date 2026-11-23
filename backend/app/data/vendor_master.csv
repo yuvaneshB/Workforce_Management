@@ -1,0 +1,7 @@
+vendor_id,vendor_name,city,state,contact_person,service_category,performance_rating,payment_terms_days,contract_start,contract_end,contract_status
+V01,Sri Vignesh Manpower Services,Chennai,Tamil Nadu,Ramesh Babu,Operators & Helpers,4.3,30,2024-04-01,2027-03-31,Active
+V02,Kovai Talent Solutions,Coimbatore,Tamil Nadu,Anitha Selvaraj,Operators & Inspectors,4.1,30,2024-06-01,2027-05-31,Active
+V03,Namma Workforce Pvt Ltd,Bengaluru,Karnataka,Manjunath Gowda,Operators & Material Handlers,4.0,45,2023-10-01,2026-09-30,Renewal Pending
+V04,Anand Industrial Staffing,Hosur,Tamil Nadu,Anand Kumar,Technicians & Helpers,3.8,30,2025-01-01,2027-12-31,Active
+V05,Karnataka Skill Force,Mysuru,Karnataka,Lakshmi Narayana,Operators & Packers,4.4,30,2024-09-01,2027-08-31,Active
+V06,Prime HR Outsourcing,Chennai,Tamil Nadu,Fathima Begum,"Housekeeping, Security & Logistics",3.9,45,2025-04-01,2028-03-31,Active

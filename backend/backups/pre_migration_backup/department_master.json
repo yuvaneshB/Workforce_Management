@@ -1,0 +1,74 @@
+[
+  {
+    "department_id": "DEPT-01",
+    "department_name": "Production"
+  },
+  {
+    "department_id": "DEPT-02",
+    "department_name": "Quality"
+  },
+  {
+    "department_id": "DEPT-03",
+    "department_name": "Maintenance"
+  },
+  {
+    "department_id": "DEPT-04",
+    "department_name": "Warehouse"
+  },
+  {
+    "department_id": "DEPT-05",
+    "department_name": "Operations"
+  },
+  {
+    "department_id": "DEPT-06",
+    "department_name": "Engineering"
+  },
+  {
+    "department_id": "D01",
+    "department_name": "SMT Production"
+  },
+  {
+    "department_id": "D02",
+    "department_name": "Final Assembly"
+  },
+  {
+    "department_id": "D03",
+    "department_name": "Module Assembly"
+  },
+  {
+    "department_id": "D04",
+    "department_name": "Testing & Calibration"
+  },
+  {
+    "department_id": "D05",
+    "department_name": "Quality Assurance"
+  },
+  {
+    "department_id": "D06",
+    "department_name": "Maintenance"
+  },
+  {
+    "department_id": "D07",
+    "department_name": "Material Handling & Logistics"
+  },
+  {
+    "department_id": "D08",
+    "department_name": "Packing & Dispatch"
+  },
+  {
+    "department_id": "D09",
+    "department_name": "Production Engineering"
+  },
+  {
+    "department_id": "D10",
+    "department_name": "EHS & Security"
+  },
+  {
+    "department_id": "D11",
+    "department_name": "HR & Admin"
+  },
+  {
+    "department_id": "D12",
+    "department_name": "Supply Chain & Stores"
+  }
+]

@@ -1,0 +1,42 @@
+section_id,section_name,department_id
+S001,Solder Paste Printing,D01
+S002,Pick & Place,D01
+S003,Reflow Soldering,D01
+S004,SPI/AOI Inspection,D01
+S005,Mainboard Assembly,D02
+S006,Battery & Frame Fitting,D02
+S007,Display Assembly,D02
+S008,Back Cover Fitting,D02
+S009,Final Assembly Line Support,D02
+S010,Camera Module,D03
+S011,Display Module,D03
+S012,Battery Pack Module,D03
+S013,RF Testing,D04
+S014,Functional Testing,D04
+S015,Camera Calibration,D04
+S016,Burn-in & Ageing,D04
+S017,Incoming Quality (IQC),D05
+S018,In-Process Quality (IPQC),D05
+S019,Final Quality (OQC),D05
+S020,Quality Lab,D05
+S021,Mechanical Maintenance,D06
+S022,Electrical Maintenance,D06
+S023,Preventive Maintenance,D06
+S024,Line Feeding,D07
+S025,Material Movement,D07
+S026,Forklift & Tugger,D07
+S027,Packing,D08
+S028,Labeling,D08
+S029,Dispatch,D08
+S030,Process Engineering,D09
+S031,Industrial Engineering,D09
+S032,Automation,D09
+S033,Environment Health & Safety,D10
+S034,Security,D10
+S035,Fire & Emergency,D10
+S036,Human Resources,D11
+S037,Administration,D11
+S038,Canteen & Housekeeping,D11
+S039,Raw Material Stores,D12
+S040,Finished Goods Store,D12
+S041,Procurement Coordination,D12

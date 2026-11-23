@@ -1,0 +1,1262 @@
+[
+  {
+    "employee_id": "EMP-0001",
+    "employee_name": "Ajay Patel",
+    "gender": "Female",
+    "date_of_joining": "2019-04-08",
+    "employee_details": "Role: Material Handler; Skill grade: L2; Certification: IPC-A-610; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0002",
+    "employee_name": "Rahul Pillai",
+    "gender": "Male",
+    "date_of_joining": "2020-07-15",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L4; Certification: LOTO; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0003",
+    "employee_name": "Suresh Iyer",
+    "gender": "Female",
+    "date_of_joining": "2021-10-22",
+    "employee_details": "Role: Supervisor; Skill grade: L2; Certification: First Aid; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0004",
+    "employee_name": "Divya Menon",
+    "gender": "Male",
+    "date_of_joining": "2022-01-02",
+    "employee_details": "Role: Quality Inspector; Skill grade: L1; Certification: IPC-A-610; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0005",
+    "employee_name": "Deepa Sharma",
+    "gender": "Female",
+    "date_of_joining": "2023-04-09",
+    "employee_details": "Role: Operator; Skill grade: L3; Certification: RF Test; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0006",
+    "employee_name": "Naveen Das",
+    "gender": "Male",
+    "date_of_joining": "2024-07-16",
+    "employee_details": "Role: Quality Inspector; Skill grade: L1; Certification: IPC-A-610; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0007",
+    "employee_name": "Sneha Joshi",
+    "gender": "Female",
+    "date_of_joining": "2025-10-23",
+    "employee_details": "Role: Material Handler; Skill grade: L3; Certification: IPC-A-610; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0008",
+    "employee_name": "Ravi Nair",
+    "gender": "Male",
+    "date_of_joining": "2018-01-03",
+    "employee_details": "Role: Supervisor; Skill grade: L4; Certification: RF Test; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0009",
+    "employee_name": "Priya Singh",
+    "gender": "Female",
+    "date_of_joining": "2019-04-10",
+    "employee_details": "Role: Supervisor; Skill grade: L4; Certification: IPC-A-610; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0010",
+    "employee_name": "Nila Reddy",
+    "gender": "Male",
+    "date_of_joining": "2020-07-17",
+    "employee_details": "Role: Quality Inspector; Skill grade: L2; Certification: IPC-A-610; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0011",
+    "employee_name": "Prakash Rao",
+    "gender": "Female",
+    "date_of_joining": "2021-10-24",
+    "employee_details": "Role: Supervisor; Skill grade: L3; Certification: First Aid; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0012",
+    "employee_name": "Anitha Kumar",
+    "gender": "Male",
+    "date_of_joining": "2022-01-04",
+    "employee_details": "Role: Material Handler; Skill grade: L4; Certification: Forklift; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0013",
+    "employee_name": "Kavin Patel",
+    "gender": "Female",
+    "date_of_joining": "2023-04-11",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L3; Certification: IPC-A-610; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0014",
+    "employee_name": "Meena Pillai",
+    "gender": "Male",
+    "date_of_joining": "2024-07-18",
+    "employee_details": "Role: Line Leader; Skill grade: L4; Certification: ESD; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0015",
+    "employee_name": "Mohan Iyer",
+    "gender": "Female",
+    "date_of_joining": "2025-10-25",
+    "employee_details": "Role: Operator; Skill grade: L1; Certification: IPC-A-610; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0016",
+    "employee_name": "Vijay Menon",
+    "gender": "Male",
+    "date_of_joining": "2018-01-05",
+    "employee_details": "Role: Supervisor; Skill grade: L2; Certification: First Aid; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0017",
+    "employee_name": "Kavitha Sharma",
+    "gender": "Female",
+    "date_of_joining": "2019-04-12",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L1; Certification: RF Test; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0018",
+    "employee_name": "Arun Das",
+    "gender": "Male",
+    "date_of_joining": "2020-07-19",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L4; Certification: Forklift; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0019",
+    "employee_name": "Ajay Joshi",
+    "gender": "Female",
+    "date_of_joining": "2021-10-26",
+    "employee_details": "Role: Quality Inspector; Skill grade: L1; Certification: First Aid; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0020",
+    "employee_name": "Rahul Nair",
+    "gender": "Male",
+    "date_of_joining": "2022-01-06",
+    "employee_details": "Role: Supervisor; Skill grade: L1; Certification: First Aid; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0021",
+    "employee_name": "Suresh Singh",
+    "gender": "Female",
+    "date_of_joining": "2023-04-13",
+    "employee_details": "Role: Material Handler; Skill grade: L3; Certification: First Aid; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0022",
+    "employee_name": "Divya Reddy",
+    "gender": "Male",
+    "date_of_joining": "2024-07-20",
+    "employee_details": "Role: Quality Inspector; Skill grade: L1; Certification: LOTO; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0023",
+    "employee_name": "Deepa Rao",
+    "gender": "Female",
+    "date_of_joining": "2025-10-27",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L2; Certification: RF Test; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0024",
+    "employee_name": "Naveen Kumar",
+    "gender": "Male",
+    "date_of_joining": "2018-01-07",
+    "employee_details": "Role: Operator; Skill grade: L3; Certification: Forklift; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0025",
+    "employee_name": "Sneha Patel",
+    "gender": "Female",
+    "date_of_joining": "2019-04-14",
+    "employee_details": "Role: Line Leader; Skill grade: L1; Certification: First Aid; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0026",
+    "employee_name": "Ravi Pillai",
+    "gender": "Male",
+    "date_of_joining": "2020-07-21",
+    "employee_details": "Role: Quality Inspector; Skill grade: L2; Certification: IPC-A-610; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0027",
+    "employee_name": "Priya Iyer",
+    "gender": "Female",
+    "date_of_joining": "2021-10-01",
+    "employee_details": "Role: Quality Inspector; Skill grade: L2; Certification: Forklift; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0028",
+    "employee_name": "Nila Menon",
+    "gender": "Male",
+    "date_of_joining": "2022-01-08",
+    "employee_details": "Role: Material Handler; Skill grade: L1; Certification: Forklift; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0029",
+    "employee_name": "Prakash Sharma",
+    "gender": "Female",
+    "date_of_joining": "2023-04-15",
+    "employee_details": "Role: Quality Inspector; Skill grade: L4; Certification: ESD; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0030",
+    "employee_name": "Anitha Das",
+    "gender": "Male",
+    "date_of_joining": "2024-07-22",
+    "employee_details": "Role: Operator; Skill grade: L3; Certification: LOTO; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0031",
+    "employee_name": "Kavin Joshi",
+    "gender": "Female",
+    "date_of_joining": "2025-10-02",
+    "employee_details": "Role: Line Leader; Skill grade: L1; Certification: IPC-A-610; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0032",
+    "employee_name": "Meena Nair",
+    "gender": "Male",
+    "date_of_joining": "2018-01-09",
+    "employee_details": "Role: Material Handler; Skill grade: L1; Certification: ESD; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0033",
+    "employee_name": "Mohan Singh",
+    "gender": "Female",
+    "date_of_joining": "2019-04-16",
+    "employee_details": "Role: Supervisor; Skill grade: L4; Certification: ESD; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0034",
+    "employee_name": "Vijay Reddy",
+    "gender": "Male",
+    "date_of_joining": "2020-07-23",
+    "employee_details": "Role: Material Handler; Skill grade: L2; Certification: IPC-A-610; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0035",
+    "employee_name": "Kavitha Rao",
+    "gender": "Female",
+    "date_of_joining": "2021-10-03",
+    "employee_details": "Role: Supervisor; Skill grade: L4; Certification: Forklift; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0036",
+    "employee_name": "Arun Kumar",
+    "gender": "Male",
+    "date_of_joining": "2022-01-10",
+    "employee_details": "Role: Line Leader; Skill grade: L3; Certification: Forklift; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0037",
+    "employee_name": "Ajay Patel",
+    "gender": "Female",
+    "date_of_joining": "2023-04-17",
+    "employee_details": "Role: Material Handler; Skill grade: L4; Certification: IPC-A-610; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0038",
+    "employee_name": "Rahul Pillai",
+    "gender": "Male",
+    "date_of_joining": "2024-07-24",
+    "employee_details": "Role: Material Handler; Skill grade: L2; Certification: First Aid; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0039",
+    "employee_name": "Suresh Iyer",
+    "gender": "Female",
+    "date_of_joining": "2025-10-04",
+    "employee_details": "Role: Quality Inspector; Skill grade: L4; Certification: First Aid; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0040",
+    "employee_name": "Divya Menon",
+    "gender": "Male",
+    "date_of_joining": "2018-01-11",
+    "employee_details": "Role: Supervisor; Skill grade: L3; Certification: RF Test; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0041",
+    "employee_name": "Deepa Sharma",
+    "gender": "Female",
+    "date_of_joining": "2019-04-18",
+    "employee_details": "Role: Material Handler; Skill grade: L4; Certification: ESD; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0042",
+    "employee_name": "Naveen Das",
+    "gender": "Male",
+    "date_of_joining": "2020-07-25",
+    "employee_details": "Role: Line Leader; Skill grade: L2; Certification: ESD; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0043",
+    "employee_name": "Sneha Joshi",
+    "gender": "Female",
+    "date_of_joining": "2021-10-05",
+    "employee_details": "Role: Quality Inspector; Skill grade: L1; Certification: Forklift; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0044",
+    "employee_name": "Ravi Nair",
+    "gender": "Male",
+    "date_of_joining": "2022-01-12",
+    "employee_details": "Role: Material Handler; Skill grade: L2; Certification: Forklift; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0045",
+    "employee_name": "Priya Singh",
+    "gender": "Female",
+    "date_of_joining": "2023-04-19",
+    "employee_details": "Role: Line Leader; Skill grade: L1; Certification: ESD; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0046",
+    "employee_name": "Nila Reddy",
+    "gender": "Male",
+    "date_of_joining": "2024-07-26",
+    "employee_details": "Role: Supervisor; Skill grade: L1; Certification: IPC-A-610; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0047",
+    "employee_name": "Prakash Rao",
+    "gender": "Female",
+    "date_of_joining": "2025-10-06",
+    "employee_details": "Role: Operator; Skill grade: L1; Certification: LOTO; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0048",
+    "employee_name": "Anitha Kumar",
+    "gender": "Male",
+    "date_of_joining": "2018-01-13",
+    "employee_details": "Role: Operator; Skill grade: L2; Certification: LOTO; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0049",
+    "employee_name": "Kavin Patel",
+    "gender": "Female",
+    "date_of_joining": "2019-04-20",
+    "employee_details": "Role: Supervisor; Skill grade: L4; Certification: IPC-A-610; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0050",
+    "employee_name": "Meena Pillai",
+    "gender": "Male",
+    "date_of_joining": "2020-07-27",
+    "employee_details": "Role: Material Handler; Skill grade: L2; Certification: First Aid; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0051",
+    "employee_name": "Mohan Iyer",
+    "gender": "Female",
+    "date_of_joining": "2021-10-07",
+    "employee_details": "Role: Material Handler; Skill grade: L4; Certification: IPC-A-610; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0052",
+    "employee_name": "Vijay Menon",
+    "gender": "Male",
+    "date_of_joining": "2022-01-14",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L4; Certification: IPC-A-610; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0053",
+    "employee_name": "Kavitha Sharma",
+    "gender": "Female",
+    "date_of_joining": "2023-04-21",
+    "employee_details": "Role: Operator; Skill grade: L1; Certification: First Aid; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0054",
+    "employee_name": "Arun Das",
+    "gender": "Male",
+    "date_of_joining": "2024-07-01",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L3; Certification: RF Test; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0055",
+    "employee_name": "Ajay Joshi",
+    "gender": "Female",
+    "date_of_joining": "2025-10-08",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L4; Certification: First Aid; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0056",
+    "employee_name": "Rahul Nair",
+    "gender": "Male",
+    "date_of_joining": "2018-01-15",
+    "employee_details": "Role: Operator; Skill grade: L1; Certification: ESD; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0057",
+    "employee_name": "Suresh Singh",
+    "gender": "Female",
+    "date_of_joining": "2019-04-22",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L3; Certification: ESD; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0058",
+    "employee_name": "Divya Reddy",
+    "gender": "Male",
+    "date_of_joining": "2020-07-02",
+    "employee_details": "Role: Line Leader; Skill grade: L2; Certification: IPC-A-610; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0059",
+    "employee_name": "Deepa Rao",
+    "gender": "Female",
+    "date_of_joining": "2021-10-09",
+    "employee_details": "Role: Material Handler; Skill grade: L4; Certification: IPC-A-610; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0060",
+    "employee_name": "Naveen Kumar",
+    "gender": "Male",
+    "date_of_joining": "2022-01-16",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L2; Certification: LOTO; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0061",
+    "employee_name": "Sneha Patel",
+    "gender": "Female",
+    "date_of_joining": "2023-04-23",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L2; Certification: ESD; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0062",
+    "employee_name": "Ravi Pillai",
+    "gender": "Male",
+    "date_of_joining": "2024-07-03",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L1; Certification: ESD; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0063",
+    "employee_name": "Priya Iyer",
+    "gender": "Female",
+    "date_of_joining": "2025-10-10",
+    "employee_details": "Role: Supervisor; Skill grade: L1; Certification: ESD; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0064",
+    "employee_name": "Nila Menon",
+    "gender": "Male",
+    "date_of_joining": "2018-01-17",
+    "employee_details": "Role: Line Leader; Skill grade: L2; Certification: RF Test; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0065",
+    "employee_name": "Prakash Sharma",
+    "gender": "Female",
+    "date_of_joining": "2019-04-24",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L4; Certification: IPC-A-610; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0066",
+    "employee_name": "Anitha Das",
+    "gender": "Male",
+    "date_of_joining": "2020-07-04",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L1; Certification: IPC-A-610; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0067",
+    "employee_name": "Kavin Joshi",
+    "gender": "Female",
+    "date_of_joining": "2021-10-11",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L1; Certification: RF Test; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0068",
+    "employee_name": "Meena Nair",
+    "gender": "Male",
+    "date_of_joining": "2022-01-18",
+    "employee_details": "Role: Quality Inspector; Skill grade: L4; Certification: LOTO; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0069",
+    "employee_name": "Mohan Singh",
+    "gender": "Female",
+    "date_of_joining": "2023-04-25",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L4; Certification: IPC-A-610; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0070",
+    "employee_name": "Vijay Reddy",
+    "gender": "Male",
+    "date_of_joining": "2024-07-05",
+    "employee_details": "Role: Line Leader; Skill grade: L3; Certification: IPC-A-610; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0071",
+    "employee_name": "Kavitha Rao",
+    "gender": "Female",
+    "date_of_joining": "2025-10-12",
+    "employee_details": "Role: Operator; Skill grade: L1; Certification: First Aid; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0072",
+    "employee_name": "Arun Kumar",
+    "gender": "Male",
+    "date_of_joining": "2018-01-19",
+    "employee_details": "Role: Quality Inspector; Skill grade: L1; Certification: ESD; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0073",
+    "employee_name": "Ajay Patel",
+    "gender": "Female",
+    "date_of_joining": "2019-04-26",
+    "employee_details": "Role: Material Handler; Skill grade: L4; Certification: Forklift; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0074",
+    "employee_name": "Rahul Pillai",
+    "gender": "Male",
+    "date_of_joining": "2020-07-06",
+    "employee_details": "Role: Material Handler; Skill grade: L2; Certification: ESD; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0075",
+    "employee_name": "Suresh Iyer",
+    "gender": "Female",
+    "date_of_joining": "2021-10-13",
+    "employee_details": "Role: Material Handler; Skill grade: L1; Certification: IPC-A-610; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0076",
+    "employee_name": "Divya Menon",
+    "gender": "Male",
+    "date_of_joining": "2022-01-20",
+    "employee_details": "Role: Operator; Skill grade: L1; Certification: First Aid; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0077",
+    "employee_name": "Deepa Sharma",
+    "gender": "Female",
+    "date_of_joining": "2023-04-27",
+    "employee_details": "Role: Line Leader; Skill grade: L4; Certification: ESD; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0078",
+    "employee_name": "Naveen Das",
+    "gender": "Male",
+    "date_of_joining": "2024-07-07",
+    "employee_details": "Role: Material Handler; Skill grade: L2; Certification: Forklift; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0079",
+    "employee_name": "Sneha Joshi",
+    "gender": "Female",
+    "date_of_joining": "2025-10-14",
+    "employee_details": "Role: Material Handler; Skill grade: L1; Certification: Forklift; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0080",
+    "employee_name": "Ravi Nair",
+    "gender": "Male",
+    "date_of_joining": "2018-01-21",
+    "employee_details": "Role: Operator; Skill grade: L4; Certification: First Aid; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0081",
+    "employee_name": "Priya Singh",
+    "gender": "Female",
+    "date_of_joining": "2019-04-01",
+    "employee_details": "Role: Material Handler; Skill grade: L3; Certification: LOTO; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0082",
+    "employee_name": "Nila Reddy",
+    "gender": "Male",
+    "date_of_joining": "2020-07-08",
+    "employee_details": "Role: Line Leader; Skill grade: L3; Certification: IPC-A-610; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0083",
+    "employee_name": "Prakash Rao",
+    "gender": "Female",
+    "date_of_joining": "2021-10-15",
+    "employee_details": "Role: Quality Inspector; Skill grade: L4; Certification: IPC-A-610; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0084",
+    "employee_name": "Anitha Kumar",
+    "gender": "Male",
+    "date_of_joining": "2022-01-22",
+    "employee_details": "Role: Supervisor; Skill grade: L3; Certification: RF Test; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0085",
+    "employee_name": "Kavin Patel",
+    "gender": "Female",
+    "date_of_joining": "2023-04-02",
+    "employee_details": "Role: Quality Inspector; Skill grade: L1; Certification: ESD; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0086",
+    "employee_name": "Meena Pillai",
+    "gender": "Male",
+    "date_of_joining": "2024-07-09",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L1; Certification: ESD; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0087",
+    "employee_name": "Mohan Iyer",
+    "gender": "Female",
+    "date_of_joining": "2025-10-16",
+    "employee_details": "Role: Material Handler; Skill grade: L2; Certification: Forklift; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0088",
+    "employee_name": "Vijay Menon",
+    "gender": "Male",
+    "date_of_joining": "2018-01-23",
+    "employee_details": "Role: Quality Inspector; Skill grade: L2; Certification: LOTO; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0089",
+    "employee_name": "Kavitha Sharma",
+    "gender": "Female",
+    "date_of_joining": "2019-04-03",
+    "employee_details": "Role: Operator; Skill grade: L2; Certification: LOTO; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0090",
+    "employee_name": "Arun Das",
+    "gender": "Male",
+    "date_of_joining": "2020-07-10",
+    "employee_details": "Role: Quality Inspector; Skill grade: L2; Certification: RF Test; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0091",
+    "employee_name": "Ajay Joshi",
+    "gender": "Female",
+    "date_of_joining": "2021-10-17",
+    "employee_details": "Role: Material Handler; Skill grade: L3; Certification: Forklift; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0092",
+    "employee_name": "Rahul Nair",
+    "gender": "Male",
+    "date_of_joining": "2022-01-24",
+    "employee_details": "Role: Supervisor; Skill grade: L1; Certification: First Aid; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0093",
+    "employee_name": "Suresh Singh",
+    "gender": "Female",
+    "date_of_joining": "2023-04-04",
+    "employee_details": "Role: Material Handler; Skill grade: L3; Certification: First Aid; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0094",
+    "employee_name": "Divya Reddy",
+    "gender": "Male",
+    "date_of_joining": "2024-07-11",
+    "employee_details": "Role: Operator; Skill grade: L2; Certification: LOTO; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0095",
+    "employee_name": "Deepa Rao",
+    "gender": "Female",
+    "date_of_joining": "2025-10-18",
+    "employee_details": "Role: Operator; Skill grade: L1; Certification: First Aid; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0096",
+    "employee_name": "Naveen Kumar",
+    "gender": "Male",
+    "date_of_joining": "2018-01-25",
+    "employee_details": "Role: Material Handler; Skill grade: L2; Certification: LOTO; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0097",
+    "employee_name": "Sneha Patel",
+    "gender": "Female",
+    "date_of_joining": "2019-04-05",
+    "employee_details": "Role: Quality Inspector; Skill grade: L2; Certification: First Aid; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0098",
+    "employee_name": "Ravi Pillai",
+    "gender": "Male",
+    "date_of_joining": "2020-07-12",
+    "employee_details": "Role: Quality Inspector; Skill grade: L2; Certification: First Aid; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0099",
+    "employee_name": "Priya Iyer",
+    "gender": "Female",
+    "date_of_joining": "2021-10-19",
+    "employee_details": "Role: Supervisor; Skill grade: L3; Certification: Forklift; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0100",
+    "employee_name": "Nila Menon",
+    "gender": "Male",
+    "date_of_joining": "2022-01-26",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L3; Certification: ESD; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0101",
+    "employee_name": "Prakash Sharma",
+    "gender": "Female",
+    "date_of_joining": "2023-04-06",
+    "employee_details": "Role: Operator; Skill grade: L4; Certification: LOTO; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0102",
+    "employee_name": "Anitha Das",
+    "gender": "Male",
+    "date_of_joining": "2024-07-13",
+    "employee_details": "Role: Operator; Skill grade: L1; Certification: LOTO; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0103",
+    "employee_name": "Kavin Joshi",
+    "gender": "Female",
+    "date_of_joining": "2025-10-20",
+    "employee_details": "Role: Line Leader; Skill grade: L3; Certification: IPC-A-610; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0104",
+    "employee_name": "Meena Nair",
+    "gender": "Male",
+    "date_of_joining": "2018-01-27",
+    "employee_details": "Role: Supervisor; Skill grade: L4; Certification: Forklift; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0105",
+    "employee_name": "Mohan Singh",
+    "gender": "Female",
+    "date_of_joining": "2019-04-07",
+    "employee_details": "Role: Supervisor; Skill grade: L4; Certification: Forklift; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0106",
+    "employee_name": "Vijay Reddy",
+    "gender": "Male",
+    "date_of_joining": "2020-07-14",
+    "employee_details": "Role: Operator; Skill grade: L1; Certification: ESD; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0107",
+    "employee_name": "Kavitha Rao",
+    "gender": "Female",
+    "date_of_joining": "2021-10-21",
+    "employee_details": "Role: Supervisor; Skill grade: L2; Certification: Forklift; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0108",
+    "employee_name": "Arun Kumar",
+    "gender": "Male",
+    "date_of_joining": "2022-01-01",
+    "employee_details": "Role: Operator; Skill grade: L3; Certification: Forklift; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0109",
+    "employee_name": "Ajay Patel",
+    "gender": "Female",
+    "date_of_joining": "2023-04-08",
+    "employee_details": "Role: Material Handler; Skill grade: L2; Certification: RF Test; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0110",
+    "employee_name": "Rahul Pillai",
+    "gender": "Male",
+    "date_of_joining": "2024-07-15",
+    "employee_details": "Role: Line Leader; Skill grade: L1; Certification: LOTO; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0111",
+    "employee_name": "Suresh Iyer",
+    "gender": "Female",
+    "date_of_joining": "2025-10-22",
+    "employee_details": "Role: Quality Inspector; Skill grade: L1; Certification: LOTO; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0112",
+    "employee_name": "Divya Menon",
+    "gender": "Male",
+    "date_of_joining": "2018-01-02",
+    "employee_details": "Role: Line Leader; Skill grade: L2; Certification: First Aid; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0113",
+    "employee_name": "Deepa Sharma",
+    "gender": "Female",
+    "date_of_joining": "2019-04-09",
+    "employee_details": "Role: Operator; Skill grade: L3; Certification: Forklift; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0114",
+    "employee_name": "Naveen Das",
+    "gender": "Male",
+    "date_of_joining": "2020-07-16",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L2; Certification: IPC-A-610; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0115",
+    "employee_name": "Sneha Joshi",
+    "gender": "Female",
+    "date_of_joining": "2021-10-23",
+    "employee_details": "Role: Line Leader; Skill grade: L2; Certification: RF Test; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0116",
+    "employee_name": "Ravi Nair",
+    "gender": "Male",
+    "date_of_joining": "2022-01-03",
+    "employee_details": "Role: Operator; Skill grade: L2; Certification: First Aid; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0117",
+    "employee_name": "Priya Singh",
+    "gender": "Female",
+    "date_of_joining": "2023-04-10",
+    "employee_details": "Role: Quality Inspector; Skill grade: L4; Certification: First Aid; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0118",
+    "employee_name": "Nila Reddy",
+    "gender": "Male",
+    "date_of_joining": "2024-07-17",
+    "employee_details": "Role: Supervisor; Skill grade: L2; Certification: LOTO; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0119",
+    "employee_name": "Prakash Rao",
+    "gender": "Female",
+    "date_of_joining": "2025-10-24",
+    "employee_details": "Role: Line Leader; Skill grade: L1; Certification: RF Test; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0120",
+    "employee_name": "Anitha Kumar",
+    "gender": "Male",
+    "date_of_joining": "2018-01-04",
+    "employee_details": "Role: Operator; Skill grade: L4; Certification: IPC-A-610; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0121",
+    "employee_name": "Kavin Patel",
+    "gender": "Female",
+    "date_of_joining": "2019-04-11",
+    "employee_details": "Role: Line Leader; Skill grade: L4; Certification: LOTO; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0122",
+    "employee_name": "Meena Pillai",
+    "gender": "Male",
+    "date_of_joining": "2020-07-18",
+    "employee_details": "Role: Quality Inspector; Skill grade: L2; Certification: IPC-A-610; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0123",
+    "employee_name": "Mohan Iyer",
+    "gender": "Female",
+    "date_of_joining": "2021-10-25",
+    "employee_details": "Role: Operator; Skill grade: L2; Certification: RF Test; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0124",
+    "employee_name": "Vijay Menon",
+    "gender": "Male",
+    "date_of_joining": "2022-01-05",
+    "employee_details": "Role: Quality Inspector; Skill grade: L3; Certification: ESD; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0125",
+    "employee_name": "Kavitha Sharma",
+    "gender": "Female",
+    "date_of_joining": "2023-04-12",
+    "employee_details": "Role: Quality Inspector; Skill grade: L3; Certification: First Aid; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0126",
+    "employee_name": "Arun Das",
+    "gender": "Male",
+    "date_of_joining": "2024-07-19",
+    "employee_details": "Role: Material Handler; Skill grade: L4; Certification: First Aid; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0127",
+    "employee_name": "Ajay Joshi",
+    "gender": "Female",
+    "date_of_joining": "2025-10-26",
+    "employee_details": "Role: Material Handler; Skill grade: L3; Certification: ESD; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0128",
+    "employee_name": "Rahul Nair",
+    "gender": "Male",
+    "date_of_joining": "2018-01-06",
+    "employee_details": "Role: Operator; Skill grade: L3; Certification: IPC-A-610; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0129",
+    "employee_name": "Suresh Singh",
+    "gender": "Female",
+    "date_of_joining": "2019-04-13",
+    "employee_details": "Role: Material Handler; Skill grade: L3; Certification: ESD; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0130",
+    "employee_name": "Divya Reddy",
+    "gender": "Male",
+    "date_of_joining": "2020-07-20",
+    "employee_details": "Role: Operator; Skill grade: L4; Certification: LOTO; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0131",
+    "employee_name": "Deepa Rao",
+    "gender": "Female",
+    "date_of_joining": "2021-10-27",
+    "employee_details": "Role: Supervisor; Skill grade: L3; Certification: RF Test; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0132",
+    "employee_name": "Naveen Kumar",
+    "gender": "Male",
+    "date_of_joining": "2022-01-07",
+    "employee_details": "Role: Material Handler; Skill grade: L1; Certification: RF Test; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0133",
+    "employee_name": "Sneha Patel",
+    "gender": "Female",
+    "date_of_joining": "2023-04-14",
+    "employee_details": "Role: Material Handler; Skill grade: L2; Certification: LOTO; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0134",
+    "employee_name": "Ravi Pillai",
+    "gender": "Male",
+    "date_of_joining": "2024-07-21",
+    "employee_details": "Role: Operator; Skill grade: L4; Certification: ESD; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0135",
+    "employee_name": "Priya Iyer",
+    "gender": "Female",
+    "date_of_joining": "2025-10-01",
+    "employee_details": "Role: Material Handler; Skill grade: L2; Certification: LOTO; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0136",
+    "employee_name": "Nila Menon",
+    "gender": "Male",
+    "date_of_joining": "2018-01-08",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L1; Certification: First Aid; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0137",
+    "employee_name": "Prakash Sharma",
+    "gender": "Female",
+    "date_of_joining": "2019-04-15",
+    "employee_details": "Role: Quality Inspector; Skill grade: L3; Certification: First Aid; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0138",
+    "employee_name": "Anitha Das",
+    "gender": "Male",
+    "date_of_joining": "2020-07-22",
+    "employee_details": "Role: Operator; Skill grade: L3; Certification: Forklift; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0139",
+    "employee_name": "Kavin Joshi",
+    "gender": "Female",
+    "date_of_joining": "2021-10-02",
+    "employee_details": "Role: Quality Inspector; Skill grade: L4; Certification: LOTO; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0140",
+    "employee_name": "Meena Nair",
+    "gender": "Male",
+    "date_of_joining": "2022-01-09",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L3; Certification: Forklift; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0141",
+    "employee_name": "Mohan Singh",
+    "gender": "Female",
+    "date_of_joining": "2023-04-16",
+    "employee_details": "Role: Line Leader; Skill grade: L2; Certification: RF Test; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0142",
+    "employee_name": "Vijay Reddy",
+    "gender": "Male",
+    "date_of_joining": "2024-07-23",
+    "employee_details": "Role: Supervisor; Skill grade: L4; Certification: First Aid; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0143",
+    "employee_name": "Kavitha Rao",
+    "gender": "Female",
+    "date_of_joining": "2025-10-03",
+    "employee_details": "Role: Supervisor; Skill grade: L2; Certification: Forklift; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0144",
+    "employee_name": "Arun Kumar",
+    "gender": "Male",
+    "date_of_joining": "2018-01-10",
+    "employee_details": "Role: Material Handler; Skill grade: L3; Certification: RF Test; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0145",
+    "employee_name": "Ajay Patel",
+    "gender": "Female",
+    "date_of_joining": "2019-04-17",
+    "employee_details": "Role: Material Handler; Skill grade: L1; Certification: LOTO; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0146",
+    "employee_name": "Rahul Pillai",
+    "gender": "Male",
+    "date_of_joining": "2020-07-24",
+    "employee_details": "Role: Quality Inspector; Skill grade: L2; Certification: RF Test; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0147",
+    "employee_name": "Suresh Iyer",
+    "gender": "Female",
+    "date_of_joining": "2021-10-04",
+    "employee_details": "Role: Material Handler; Skill grade: L3; Certification: RF Test; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0148",
+    "employee_name": "Divya Menon",
+    "gender": "Male",
+    "date_of_joining": "2022-01-11",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L4; Certification: First Aid; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0149",
+    "employee_name": "Deepa Sharma",
+    "gender": "Female",
+    "date_of_joining": "2023-04-18",
+    "employee_details": "Role: Line Leader; Skill grade: L4; Certification: First Aid; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0150",
+    "employee_name": "Naveen Das",
+    "gender": "Male",
+    "date_of_joining": "2024-07-25",
+    "employee_details": "Role: Line Leader; Skill grade: L1; Certification: LOTO; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0151",
+    "employee_name": "Sneha Joshi",
+    "gender": "Female",
+    "date_of_joining": "2025-10-05",
+    "employee_details": "Role: Material Handler; Skill grade: L3; Certification: ESD; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0152",
+    "employee_name": "Ravi Nair",
+    "gender": "Male",
+    "date_of_joining": "2018-01-12",
+    "employee_details": "Role: Line Leader; Skill grade: L3; Certification: IPC-A-610; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0153",
+    "employee_name": "Priya Singh",
+    "gender": "Female",
+    "date_of_joining": "2019-04-19",
+    "employee_details": "Role: Line Leader; Skill grade: L2; Certification: ESD; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0154",
+    "employee_name": "Nila Reddy",
+    "gender": "Male",
+    "date_of_joining": "2020-07-26",
+    "employee_details": "Role: Operator; Skill grade: L2; Certification: RF Test; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0155",
+    "employee_name": "Prakash Rao",
+    "gender": "Female",
+    "date_of_joining": "2021-10-06",
+    "employee_details": "Role: Material Handler; Skill grade: L1; Certification: RF Test; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0156",
+    "employee_name": "Anitha Kumar",
+    "gender": "Male",
+    "date_of_joining": "2022-01-13",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L2; Certification: First Aid; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0157",
+    "employee_name": "Kavin Patel",
+    "gender": "Female",
+    "date_of_joining": "2023-04-20",
+    "employee_details": "Role: Supervisor; Skill grade: L4; Certification: RF Test; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0158",
+    "employee_name": "Meena Pillai",
+    "gender": "Male",
+    "date_of_joining": "2024-07-27",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L2; Certification: IPC-A-610; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0159",
+    "employee_name": "Mohan Iyer",
+    "gender": "Female",
+    "date_of_joining": "2025-10-07",
+    "employee_details": "Role: Supervisor; Skill grade: L1; Certification: ESD; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0160",
+    "employee_name": "Vijay Menon",
+    "gender": "Male",
+    "date_of_joining": "2018-01-14",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L2; Certification: IPC-A-610; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0161",
+    "employee_name": "Kavitha Sharma",
+    "gender": "Female",
+    "date_of_joining": "2019-04-21",
+    "employee_details": "Role: Supervisor; Skill grade: L4; Certification: ESD; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0162",
+    "employee_name": "Arun Das",
+    "gender": "Male",
+    "date_of_joining": "2020-07-01",
+    "employee_details": "Role: Material Handler; Skill grade: L2; Certification: ESD; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0163",
+    "employee_name": "Ajay Joshi",
+    "gender": "Female",
+    "date_of_joining": "2021-10-08",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L2; Certification: RF Test; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0164",
+    "employee_name": "Rahul Nair",
+    "gender": "Male",
+    "date_of_joining": "2022-01-15",
+    "employee_details": "Role: Supervisor; Skill grade: L3; Certification: RF Test; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0165",
+    "employee_name": "Suresh Singh",
+    "gender": "Female",
+    "date_of_joining": "2023-04-22",
+    "employee_details": "Role: Material Handler; Skill grade: L4; Certification: Forklift; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0166",
+    "employee_name": "Divya Reddy",
+    "gender": "Male",
+    "date_of_joining": "2024-07-02",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L2; Certification: First Aid; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0167",
+    "employee_name": "Deepa Rao",
+    "gender": "Female",
+    "date_of_joining": "2025-10-09",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L4; Certification: LOTO; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0168",
+    "employee_name": "Naveen Kumar",
+    "gender": "Male",
+    "date_of_joining": "2018-01-16",
+    "employee_details": "Role: Line Leader; Skill grade: L3; Certification: Forklift; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0169",
+    "employee_name": "Sneha Patel",
+    "gender": "Female",
+    "date_of_joining": "2019-04-23",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L2; Certification: LOTO; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0170",
+    "employee_name": "Ravi Pillai",
+    "gender": "Male",
+    "date_of_joining": "2020-07-03",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L1; Certification: First Aid; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0171",
+    "employee_name": "Priya Iyer",
+    "gender": "Female",
+    "date_of_joining": "2021-10-10",
+    "employee_details": "Role: Quality Inspector; Skill grade: L2; Certification: LOTO; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0172",
+    "employee_name": "Nila Menon",
+    "gender": "Male",
+    "date_of_joining": "2022-01-17",
+    "employee_details": "Role: Quality Inspector; Skill grade: L3; Certification: Forklift; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0173",
+    "employee_name": "Prakash Sharma",
+    "gender": "Female",
+    "date_of_joining": "2023-04-24",
+    "employee_details": "Role: Operator; Skill grade: L2; Certification: IPC-A-610; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0174",
+    "employee_name": "Anitha Das",
+    "gender": "Male",
+    "date_of_joining": "2024-07-04",
+    "employee_details": "Role: Line Leader; Skill grade: L4; Certification: First Aid; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0175",
+    "employee_name": "Kavin Joshi",
+    "gender": "Female",
+    "date_of_joining": "2025-10-11",
+    "employee_details": "Role: Line Leader; Skill grade: L2; Certification: ESD; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0176",
+    "employee_name": "Meena Nair",
+    "gender": "Male",
+    "date_of_joining": "2018-01-18",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L4; Certification: LOTO; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0177",
+    "employee_name": "Mohan Singh",
+    "gender": "Female",
+    "date_of_joining": "2019-04-25",
+    "employee_details": "Role: Material Handler; Skill grade: L4; Certification: RF Test; Home shift: A; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0178",
+    "employee_name": "Vijay Reddy",
+    "gender": "Male",
+    "date_of_joining": "2020-07-05",
+    "employee_details": "Role: Operator; Skill grade: L2; Certification: RF Test; Home shift: B; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0179",
+    "employee_name": "Kavitha Rao",
+    "gender": "Female",
+    "date_of_joining": "2021-10-12",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L1; Certification: Forklift; Home shift: C; Status: ACTIVE"
+  },
+  {
+    "employee_id": "EMP-0180",
+    "employee_name": "Arun Kumar",
+    "gender": "Male",
+    "date_of_joining": "2022-01-19",
+    "employee_details": "Role: Maintenance Technician; Skill grade: L4; Certification: ESD; Home shift: A; Status: ACTIVE"
+  }
+]

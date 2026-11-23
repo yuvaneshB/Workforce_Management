@@ -1,0 +1,869 @@
+requirement_id,month,plant_id,department_id,section_id,section_name,shift_id,required_headcount,actual_headcount,actual_permanent,actual_vendor,gap,fill_rate_pct,required_skilled_L3_plus,gap_status
+REQ-00001,2026-08,IN-KA-01,D01,S001,Solder Paste Printing,A,9,8,4,4,1,88.9,3,Shortage
+REQ-00002,2026-08,IN-KA-01,D01,S001,Solder Paste Printing,B,10,10,7,3,0,100.0,4,Balanced
+REQ-00003,2026-08,IN-KA-01,D01,S001,Solder Paste Printing,C,5,5,2,3,0,100.0,2,Balanced
+REQ-00004,2026-08,IN-KA-01,D01,S002,Pick & Place,A,8,8,8,0,0,100.0,3,Balanced
+REQ-00005,2026-08,IN-KA-01,D01,S002,Pick & Place,B,6,6,3,3,0,100.0,2,Balanced
+REQ-00006,2026-08,IN-KA-01,D01,S002,Pick & Place,C,6,6,2,4,0,100.0,2,Balanced
+REQ-00007,2026-08,IN-KA-01,D01,S003,Reflow Soldering,A,12,12,7,5,0,100.0,4,Balanced
+REQ-00008,2026-08,IN-KA-01,D01,S003,Reflow Soldering,B,5,5,4,1,0,100.0,2,Balanced
+REQ-00009,2026-08,IN-KA-01,D01,S003,Reflow Soldering,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00010,2026-08,IN-KA-01,D01,S004,SPI/AOI Inspection,A,10,10,6,4,0,100.0,4,Balanced
+REQ-00011,2026-08,IN-KA-01,D01,S004,SPI/AOI Inspection,B,7,7,5,2,0,100.0,2,Balanced
+REQ-00012,2026-08,IN-KA-01,D01,S004,SPI/AOI Inspection,C,3,2,1,1,1,66.7,1,Shortage
+REQ-00013,2026-08,IN-KA-01,D02,S005,Mainboard Assembly,A,8,8,3,5,0,100.0,3,Balanced
+REQ-00014,2026-08,IN-KA-01,D02,S005,Mainboard Assembly,B,16,16,12,4,0,100.0,6,Balanced
+REQ-00015,2026-08,IN-KA-01,D02,S005,Mainboard Assembly,C,4,4,2,2,0,100.0,1,Balanced
+REQ-00016,2026-08,IN-KA-01,D02,S006,Battery & Frame Fitting,A,16,15,8,7,1,93.8,6,Shortage
+REQ-00017,2026-08,IN-KA-01,D02,S006,Battery & Frame Fitting,B,18,19,12,7,-1,105.6,6,Surplus
+REQ-00018,2026-08,IN-KA-01,D02,S006,Battery & Frame Fitting,C,8,8,4,4,0,100.0,3,Balanced
+REQ-00019,2026-08,IN-KA-01,D02,S007,Display Assembly,A,19,17,13,4,2,89.5,7,Shortage
+REQ-00020,2026-08,IN-KA-01,D02,S007,Display Assembly,B,15,15,10,5,0,100.0,5,Balanced
+REQ-00021,2026-08,IN-KA-01,D02,S007,Display Assembly,C,4,3,1,2,1,75.0,1,Shortage
+REQ-00022,2026-08,IN-KA-01,D02,S008,Back Cover Fitting,A,19,19,9,10,0,100.0,7,Balanced
+REQ-00023,2026-08,IN-KA-01,D02,S008,Back Cover Fitting,B,14,13,8,5,1,92.9,5,Shortage
+REQ-00024,2026-08,IN-KA-01,D02,S008,Back Cover Fitting,C,5,4,2,2,1,80.0,2,Shortage
+REQ-00025,2026-08,IN-KA-01,D02,S009,Final Assembly Line Support,A,21,19,9,10,2,90.5,7,Shortage
+REQ-00026,2026-08,IN-KA-01,D02,S009,Final Assembly Line Support,B,13,11,5,6,2,84.6,5,Shortage
+REQ-00027,2026-08,IN-KA-01,D02,S009,Final Assembly Line Support,C,6,6,3,3,0,100.0,2,Balanced
+REQ-00028,2026-08,IN-KA-01,D03,S010,Camera Module,A,10,9,7,2,1,90.0,4,Shortage
+REQ-00029,2026-08,IN-KA-01,D03,S010,Camera Module,B,9,9,6,3,0,100.0,3,Balanced
+REQ-00030,2026-08,IN-KA-01,D03,S010,Camera Module,C,2,2,1,1,0,100.0,1,Balanced
+REQ-00031,2026-08,IN-KA-01,D03,S011,Display Module,A,6,5,5,0,1,83.3,2,Shortage
+REQ-00032,2026-08,IN-KA-01,D03,S011,Display Module,B,7,7,3,4,0,100.0,2,Balanced
+REQ-00033,2026-08,IN-KA-01,D03,S011,Display Module,C,5,5,3,2,0,100.0,2,Balanced
+REQ-00034,2026-08,IN-KA-01,D03,S012,Battery Pack Module,A,17,15,9,6,2,88.2,6,Shortage
+REQ-00035,2026-08,IN-KA-01,D03,S012,Battery Pack Module,B,13,13,5,8,0,100.0,5,Balanced
+REQ-00036,2026-08,IN-KA-01,D03,S012,Battery Pack Module,C,8,8,5,3,0,100.0,3,Balanced
+REQ-00037,2026-08,IN-KA-01,D04,S013,RF Testing,A,9,9,8,1,0,100.0,3,Balanced
+REQ-00038,2026-08,IN-KA-01,D04,S013,RF Testing,B,8,8,6,2,0,100.0,3,Balanced
+REQ-00039,2026-08,IN-KA-01,D04,S013,RF Testing,C,1,1,1,0,0,100.0,0,Balanced
+REQ-00040,2026-08,IN-KA-01,D04,S014,Functional Testing,A,8,8,6,2,0,100.0,3,Balanced
+REQ-00041,2026-08,IN-KA-01,D04,S014,Functional Testing,B,9,9,8,1,0,100.0,3,Balanced
+REQ-00042,2026-08,IN-KA-01,D04,S014,Functional Testing,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00043,2026-08,IN-KA-01,D04,S015,Camera Calibration,A,10,10,10,0,0,100.0,4,Balanced
+REQ-00044,2026-08,IN-KA-01,D04,S015,Camera Calibration,B,6,5,4,1,1,83.3,2,Shortage
+REQ-00045,2026-08,IN-KA-01,D04,S015,Camera Calibration,C,3,3,2,1,0,100.0,1,Balanced
+REQ-00046,2026-08,IN-KA-01,D04,S016,Burn-in & Ageing,A,10,10,10,0,0,100.0,4,Balanced
+REQ-00047,2026-08,IN-KA-01,D04,S016,Burn-in & Ageing,B,10,9,8,1,1,90.0,4,Shortage
+REQ-00048,2026-08,IN-KA-01,D04,S016,Burn-in & Ageing,C,2,2,1,1,0,100.0,1,Balanced
+REQ-00049,2026-08,IN-KA-01,D05,S017,Incoming Quality (IQC),A,4,4,3,1,0,100.0,1,Balanced
+REQ-00050,2026-08,IN-KA-01,D05,S017,Incoming Quality (IQC),B,9,8,7,1,1,88.9,3,Shortage
+REQ-00051,2026-08,IN-KA-01,D05,S017,Incoming Quality (IQC),C,4,4,2,2,0,100.0,1,Balanced
+REQ-00052,2026-08,IN-KA-01,D05,S018,In-Process Quality (IPQC),A,11,11,9,2,0,100.0,4,Balanced
+REQ-00053,2026-08,IN-KA-01,D05,S018,In-Process Quality (IPQC),B,5,5,4,1,0,100.0,2,Balanced
+REQ-00054,2026-08,IN-KA-01,D05,S018,In-Process Quality (IPQC),C,2,2,2,0,0,100.0,1,Balanced
+REQ-00055,2026-08,IN-KA-01,D05,S019,Final Quality (OQC),A,4,4,2,2,0,100.0,1,Balanced
+REQ-00056,2026-08,IN-KA-01,D05,S019,Final Quality (OQC),B,8,8,7,1,0,100.0,3,Balanced
+REQ-00057,2026-08,IN-KA-01,D05,S019,Final Quality (OQC),C,5,5,3,2,0,100.0,2,Balanced
+REQ-00058,2026-08,IN-KA-01,D05,S020,Quality Lab,A,3,3,2,1,0,100.0,1,Balanced
+REQ-00059,2026-08,IN-KA-01,D05,S020,Quality Lab,B,4,4,3,1,0,100.0,1,Balanced
+REQ-00060,2026-08,IN-KA-01,D05,S020,Quality Lab,C,1,1,1,0,0,100.0,0,Balanced
+REQ-00061,2026-08,IN-KA-01,D06,S021,Mechanical Maintenance,A,5,3,3,0,2,60.0,2,Shortage
+REQ-00062,2026-08,IN-KA-01,D06,S021,Mechanical Maintenance,B,3,3,2,1,0,100.0,1,Balanced
+REQ-00063,2026-08,IN-KA-01,D06,S021,Mechanical Maintenance,C,5,5,4,1,0,100.0,2,Balanced
+REQ-00064,2026-08,IN-KA-01,D06,S022,Electrical Maintenance,A,5,3,2,1,2,60.0,2,Shortage
+REQ-00065,2026-08,IN-KA-01,D06,S022,Electrical Maintenance,B,8,8,7,1,0,100.0,3,Balanced
+REQ-00066,2026-08,IN-KA-01,D06,S022,Electrical Maintenance,C,5,5,4,1,0,100.0,2,Balanced
+REQ-00067,2026-08,IN-KA-01,D06,S023,Preventive Maintenance,A,5,5,4,1,0,100.0,2,Balanced
+REQ-00068,2026-08,IN-KA-01,D06,S023,Preventive Maintenance,B,10,9,6,3,1,90.0,4,Shortage
+REQ-00069,2026-08,IN-KA-01,D06,S023,Preventive Maintenance,C,3,3,3,0,0,100.0,1,Balanced
+REQ-00070,2026-08,IN-KA-01,D07,S024,Line Feeding,A,7,6,4,2,1,85.7,2,Shortage
+REQ-00071,2026-08,IN-KA-01,D07,S024,Line Feeding,B,4,4,1,3,0,100.0,1,Balanced
+REQ-00072,2026-08,IN-KA-01,D07,S024,Line Feeding,C,9,9,3,6,0,100.0,3,Balanced
+REQ-00073,2026-08,IN-KA-01,D07,S025,Material Movement,A,7,6,3,3,1,85.7,2,Shortage
+REQ-00074,2026-08,IN-KA-01,D07,S025,Material Movement,B,7,6,1,5,1,85.7,2,Shortage
+REQ-00075,2026-08,IN-KA-01,D07,S025,Material Movement,C,4,4,1,3,0,100.0,1,Balanced
+REQ-00076,2026-08,IN-KA-01,D07,S026,Forklift & Tugger,A,9,8,4,4,1,88.9,3,Shortage
+REQ-00077,2026-08,IN-KA-01,D07,S026,Forklift & Tugger,B,7,6,2,4,1,85.7,2,Shortage
+REQ-00078,2026-08,IN-KA-01,D07,S026,Forklift & Tugger,C,2,2,1,1,0,100.0,1,Balanced
+REQ-00079,2026-08,IN-KA-01,D08,S027,Packing,A,10,10,3,7,0,100.0,4,Balanced
+REQ-00080,2026-08,IN-KA-01,D08,S027,Packing,B,4,4,0,4,0,100.0,1,Balanced
+REQ-00081,2026-08,IN-KA-01,D08,S027,Packing,C,3,3,1,2,0,100.0,1,Balanced
+REQ-00082,2026-08,IN-KA-01,D08,S028,Labeling,A,8,8,2,6,0,100.0,3,Balanced
+REQ-00083,2026-08,IN-KA-01,D08,S028,Labeling,B,9,9,6,3,0,100.0,3,Balanced
+REQ-00084,2026-08,IN-KA-01,D08,S028,Labeling,C,3,2,1,1,1,66.7,1,Shortage
+REQ-00085,2026-08,IN-KA-01,D08,S029,Dispatch,A,11,11,6,5,0,100.0,4,Balanced
+REQ-00086,2026-08,IN-KA-01,D08,S029,Dispatch,B,4,4,4,0,0,100.0,1,Balanced
+REQ-00087,2026-08,IN-KA-01,D08,S029,Dispatch,C,3,3,0,3,0,100.0,1,Balanced
+REQ-00088,2026-08,IN-KA-01,D09,S030,Process Engineering,A,10,10,10,0,0,100.0,4,Balanced
+REQ-00089,2026-08,IN-KA-01,D09,S031,Industrial Engineering,A,11,11,11,0,0,100.0,4,Balanced
+REQ-00090,2026-08,IN-KA-01,D09,S032,Automation,A,6,6,6,0,0,100.0,2,Balanced
+REQ-00091,2026-08,IN-KA-01,D10,S033,Environment Health & Safety,A,5,4,2,2,1,80.0,2,Shortage
+REQ-00092,2026-08,IN-KA-01,D10,S033,Environment Health & Safety,B,1,1,0,1,0,100.0,0,Balanced
+REQ-00093,2026-08,IN-KA-01,D10,S033,Environment Health & Safety,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00094,2026-08,IN-KA-01,D10,S034,Security,A,4,4,2,2,0,100.0,1,Balanced
+REQ-00095,2026-08,IN-KA-01,D10,S034,Security,B,6,5,1,4,1,83.3,2,Shortage
+REQ-00096,2026-08,IN-KA-01,D10,S035,Fire & Emergency,A,4,4,3,1,0,100.0,1,Balanced
+REQ-00097,2026-08,IN-KA-01,D10,S035,Fire & Emergency,C,2,2,0,2,0,100.0,1,Balanced
+REQ-00098,2026-08,IN-KA-01,D11,S036,Human Resources,A,4,3,3,0,1,75.0,1,Shortage
+REQ-00099,2026-08,IN-KA-01,D11,S037,Administration,A,8,7,4,3,1,87.5,3,Shortage
+REQ-00100,2026-08,IN-KA-01,D11,S038,Canteen & Housekeeping,A,6,6,3,3,0,100.0,2,Balanced
+REQ-00101,2026-08,IN-KA-01,D12,S039,Raw Material Stores,A,3,3,2,1,0,100.0,1,Balanced
+REQ-00102,2026-08,IN-KA-01,D12,S039,Raw Material Stores,B,3,3,1,2,0,100.0,1,Balanced
+REQ-00103,2026-08,IN-KA-01,D12,S040,Finished Goods Store,A,6,6,4,2,0,100.0,2,Balanced
+REQ-00104,2026-08,IN-KA-01,D12,S040,Finished Goods Store,B,3,3,1,2,0,100.0,1,Balanced
+REQ-00105,2026-08,IN-KA-01,D12,S041,Procurement Coordination,A,4,4,2,2,0,100.0,1,Balanced
+REQ-00106,2026-08,IN-KA-01,D12,S041,Procurement Coordination,B,2,1,0,1,1,50.0,1,Shortage
+REQ-00107,2026-08,IN-KA-01,D12,S041,Procurement Coordination,C,4,4,4,0,0,100.0,1,Balanced
+REQ-00108,2026-08,IN-TN-01,D01,S001,Solder Paste Printing,A,20,20,13,7,0,100.0,7,Balanced
+REQ-00109,2026-08,IN-TN-01,D01,S001,Solder Paste Printing,B,11,11,6,5,0,100.0,4,Balanced
+REQ-00110,2026-08,IN-TN-01,D01,S001,Solder Paste Printing,C,8,8,4,4,0,100.0,3,Balanced
+REQ-00111,2026-08,IN-TN-01,D01,S002,Pick & Place,A,12,12,8,4,0,100.0,4,Balanced
+REQ-00112,2026-08,IN-TN-01,D01,S002,Pick & Place,B,8,8,3,5,0,100.0,3,Balanced
+REQ-00113,2026-08,IN-TN-01,D01,S002,Pick & Place,C,5,5,1,4,0,100.0,2,Balanced
+REQ-00114,2026-08,IN-TN-01,D01,S003,Reflow Soldering,A,9,9,6,3,0,100.0,3,Balanced
+REQ-00115,2026-08,IN-TN-01,D01,S003,Reflow Soldering,B,10,10,9,1,0,100.0,4,Balanced
+REQ-00116,2026-08,IN-TN-01,D01,S003,Reflow Soldering,C,5,5,1,4,0,100.0,2,Balanced
+REQ-00117,2026-08,IN-TN-01,D01,S004,SPI/AOI Inspection,A,14,13,9,4,1,92.9,5,Shortage
+REQ-00118,2026-08,IN-TN-01,D01,S004,SPI/AOI Inspection,B,14,13,8,5,1,92.9,5,Shortage
+REQ-00119,2026-08,IN-TN-01,D01,S004,SPI/AOI Inspection,C,5,5,1,4,0,100.0,2,Balanced
+REQ-00120,2026-08,IN-TN-01,D02,S005,Mainboard Assembly,A,25,24,11,13,1,96.0,9,Shortage
+REQ-00121,2026-08,IN-TN-01,D02,S005,Mainboard Assembly,B,17,17,9,8,0,100.0,6,Balanced
+REQ-00122,2026-08,IN-TN-01,D02,S005,Mainboard Assembly,C,8,8,3,5,0,100.0,3,Balanced
+REQ-00123,2026-08,IN-TN-01,D02,S006,Battery & Frame Fitting,A,11,11,9,2,0,100.0,4,Balanced
+REQ-00124,2026-08,IN-TN-01,D02,S006,Battery & Frame Fitting,B,22,20,12,8,2,90.9,8,Shortage
+REQ-00125,2026-08,IN-TN-01,D02,S006,Battery & Frame Fitting,C,10,10,3,7,0,100.0,4,Balanced
+REQ-00126,2026-08,IN-TN-01,D02,S007,Display Assembly,A,16,15,11,4,1,93.8,6,Shortage
+REQ-00127,2026-08,IN-TN-01,D02,S007,Display Assembly,B,25,22,12,10,3,88.0,9,Shortage
+REQ-00128,2026-08,IN-TN-01,D02,S007,Display Assembly,C,12,11,9,2,1,91.7,4,Shortage
+REQ-00129,2026-08,IN-TN-01,D02,S008,Back Cover Fitting,A,18,17,6,11,1,94.4,6,Shortage
+REQ-00130,2026-08,IN-TN-01,D02,S008,Back Cover Fitting,B,18,17,9,8,1,94.4,6,Shortage
+REQ-00131,2026-08,IN-TN-01,D02,S008,Back Cover Fitting,C,9,9,3,6,0,100.0,3,Balanced
+REQ-00132,2026-08,IN-TN-01,D02,S009,Final Assembly Line Support,A,25,19,13,6,6,76.0,9,Shortage
+REQ-00133,2026-08,IN-TN-01,D02,S009,Final Assembly Line Support,B,21,19,11,8,2,90.5,7,Shortage
+REQ-00134,2026-08,IN-TN-01,D02,S009,Final Assembly Line Support,C,6,6,2,4,0,100.0,2,Balanced
+REQ-00135,2026-08,IN-TN-01,D03,S010,Camera Module,A,20,17,7,10,3,85.0,7,Shortage
+REQ-00136,2026-08,IN-TN-01,D03,S010,Camera Module,B,12,12,7,5,0,100.0,4,Balanced
+REQ-00137,2026-08,IN-TN-01,D03,S010,Camera Module,C,5,2,2,0,3,40.0,2,Shortage
+REQ-00138,2026-08,IN-TN-01,D03,S011,Display Module,A,8,8,7,1,0,100.0,3,Balanced
+REQ-00139,2026-08,IN-TN-01,D03,S011,Display Module,B,22,22,14,8,0,100.0,8,Balanced
+REQ-00140,2026-08,IN-TN-01,D03,S011,Display Module,C,4,4,2,2,0,100.0,1,Balanced
+REQ-00141,2026-08,IN-TN-01,D03,S012,Battery Pack Module,A,9,9,6,3,0,100.0,3,Balanced
+REQ-00142,2026-08,IN-TN-01,D03,S012,Battery Pack Module,B,10,8,5,3,2,80.0,4,Shortage
+REQ-00143,2026-08,IN-TN-01,D03,S012,Battery Pack Module,C,3,3,2,1,0,100.0,1,Balanced
+REQ-00144,2026-08,IN-TN-01,D04,S013,RF Testing,A,14,13,12,1,1,92.9,5,Shortage
+REQ-00145,2026-08,IN-TN-01,D04,S013,RF Testing,B,8,8,6,2,0,100.0,3,Balanced
+REQ-00146,2026-08,IN-TN-01,D04,S013,RF Testing,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00147,2026-08,IN-TN-01,D04,S014,Functional Testing,A,5,3,3,0,2,60.0,2,Shortage
+REQ-00148,2026-08,IN-TN-01,D04,S014,Functional Testing,B,7,6,3,3,1,85.7,2,Shortage
+REQ-00149,2026-08,IN-TN-01,D04,S014,Functional Testing,C,5,4,2,2,1,80.0,2,Shortage
+REQ-00150,2026-08,IN-TN-01,D04,S015,Camera Calibration,A,5,5,5,0,0,100.0,2,Balanced
+REQ-00151,2026-08,IN-TN-01,D04,S015,Camera Calibration,B,6,6,5,1,0,100.0,2,Balanced
+REQ-00152,2026-08,IN-TN-01,D04,S015,Camera Calibration,C,1,1,1,0,0,100.0,0,Balanced
+REQ-00153,2026-08,IN-TN-01,D04,S016,Burn-in & Ageing,A,11,10,7,3,1,90.9,4,Shortage
+REQ-00154,2026-08,IN-TN-01,D04,S016,Burn-in & Ageing,B,5,5,4,1,0,100.0,2,Balanced
+REQ-00155,2026-08,IN-TN-01,D04,S016,Burn-in & Ageing,C,6,6,6,0,0,100.0,2,Balanced
+REQ-00156,2026-08,IN-TN-01,D05,S017,Incoming Quality (IQC),A,9,8,7,1,1,88.9,3,Shortage
+REQ-00157,2026-08,IN-TN-01,D05,S017,Incoming Quality (IQC),B,5,5,3,2,0,100.0,2,Balanced
+REQ-00158,2026-08,IN-TN-01,D05,S017,Incoming Quality (IQC),C,9,8,6,2,1,88.9,3,Shortage
+REQ-00159,2026-08,IN-TN-01,D05,S018,In-Process Quality (IPQC),A,9,9,8,1,0,100.0,3,Balanced
+REQ-00160,2026-08,IN-TN-01,D05,S018,In-Process Quality (IPQC),B,5,5,5,0,0,100.0,2,Balanced
+REQ-00161,2026-08,IN-TN-01,D05,S018,In-Process Quality (IPQC),C,3,3,1,2,0,100.0,1,Balanced
+REQ-00162,2026-08,IN-TN-01,D05,S019,Final Quality (OQC),A,16,15,15,0,1,93.8,6,Shortage
+REQ-00163,2026-08,IN-TN-01,D05,S019,Final Quality (OQC),B,5,5,2,3,0,100.0,2,Balanced
+REQ-00164,2026-08,IN-TN-01,D05,S019,Final Quality (OQC),C,5,4,2,2,1,80.0,2,Shortage
+REQ-00165,2026-08,IN-TN-01,D05,S020,Quality Lab,A,9,9,8,1,0,100.0,3,Balanced
+REQ-00166,2026-08,IN-TN-01,D05,S020,Quality Lab,B,7,7,6,1,0,100.0,2,Balanced
+REQ-00167,2026-08,IN-TN-01,D05,S020,Quality Lab,C,10,10,8,2,0,100.0,4,Balanced
+REQ-00168,2026-08,IN-TN-01,D06,S021,Mechanical Maintenance,A,9,8,7,1,1,88.9,3,Shortage
+REQ-00169,2026-08,IN-TN-01,D06,S021,Mechanical Maintenance,B,4,4,3,1,0,100.0,1,Balanced
+REQ-00170,2026-08,IN-TN-01,D06,S021,Mechanical Maintenance,C,8,7,6,1,1,87.5,3,Shortage
+REQ-00171,2026-08,IN-TN-01,D06,S022,Electrical Maintenance,A,9,9,8,1,0,100.0,3,Balanced
+REQ-00172,2026-08,IN-TN-01,D06,S022,Electrical Maintenance,B,4,3,2,1,1,75.0,1,Shortage
+REQ-00173,2026-08,IN-TN-01,D06,S022,Electrical Maintenance,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00174,2026-08,IN-TN-01,D06,S023,Preventive Maintenance,A,10,9,8,1,1,90.0,4,Shortage
+REQ-00175,2026-08,IN-TN-01,D06,S023,Preventive Maintenance,B,5,5,2,3,0,100.0,2,Balanced
+REQ-00176,2026-08,IN-TN-01,D06,S023,Preventive Maintenance,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00177,2026-08,IN-TN-01,D07,S024,Line Feeding,A,14,14,7,7,0,100.0,5,Balanced
+REQ-00178,2026-08,IN-TN-01,D07,S024,Line Feeding,B,10,10,1,9,0,100.0,4,Balanced
+REQ-00179,2026-08,IN-TN-01,D07,S024,Line Feeding,C,6,6,3,3,0,100.0,2,Balanced
+REQ-00180,2026-08,IN-TN-01,D07,S025,Material Movement,A,8,8,4,4,0,100.0,3,Balanced
+REQ-00181,2026-08,IN-TN-01,D07,S025,Material Movement,B,6,6,3,3,0,100.0,2,Balanced
+REQ-00182,2026-08,IN-TN-01,D07,S025,Material Movement,C,6,5,3,2,1,83.3,2,Shortage
+REQ-00183,2026-08,IN-TN-01,D07,S026,Forklift & Tugger,A,10,10,4,6,0,100.0,4,Balanced
+REQ-00184,2026-08,IN-TN-01,D07,S026,Forklift & Tugger,B,14,12,6,6,2,85.7,5,Shortage
+REQ-00185,2026-08,IN-TN-01,D07,S026,Forklift & Tugger,C,7,7,2,5,0,100.0,2,Balanced
+REQ-00186,2026-08,IN-TN-01,D08,S027,Packing,A,15,13,6,7,2,86.7,5,Shortage
+REQ-00187,2026-08,IN-TN-01,D08,S027,Packing,B,12,11,8,3,1,91.7,4,Shortage
+REQ-00188,2026-08,IN-TN-01,D08,S027,Packing,C,2,2,0,2,0,100.0,1,Balanced
+REQ-00189,2026-08,IN-TN-01,D08,S028,Labeling,A,5,5,3,2,0,100.0,2,Balanced
+REQ-00190,2026-08,IN-TN-01,D08,S028,Labeling,B,12,11,3,8,1,91.7,4,Shortage
+REQ-00191,2026-08,IN-TN-01,D08,S028,Labeling,C,4,3,1,2,1,75.0,1,Shortage
+REQ-00192,2026-08,IN-TN-01,D08,S029,Dispatch,A,4,3,1,2,1,75.0,1,Shortage
+REQ-00193,2026-08,IN-TN-01,D08,S029,Dispatch,B,8,7,3,4,1,87.5,3,Shortage
+REQ-00194,2026-08,IN-TN-01,D08,S029,Dispatch,C,4,4,1,3,0,100.0,1,Balanced
+REQ-00195,2026-08,IN-TN-01,D09,S030,Process Engineering,A,9,9,9,0,0,100.0,3,Balanced
+REQ-00196,2026-08,IN-TN-01,D09,S031,Industrial Engineering,A,19,18,18,0,1,94.7,7,Shortage
+REQ-00197,2026-08,IN-TN-01,D09,S032,Automation,A,15,14,14,0,1,93.3,5,Shortage
+REQ-00198,2026-08,IN-TN-01,D10,S033,Environment Health & Safety,A,2,2,1,1,0,100.0,1,Balanced
+REQ-00199,2026-08,IN-TN-01,D10,S033,Environment Health & Safety,B,3,3,2,1,0,100.0,1,Balanced
+REQ-00200,2026-08,IN-TN-01,D10,S034,Security,A,3,3,1,2,0,100.0,1,Balanced
+REQ-00201,2026-08,IN-TN-01,D10,S034,Security,B,4,3,0,3,1,75.0,1,Shortage
+REQ-00202,2026-08,IN-TN-01,D10,S034,Security,C,3,2,1,1,1,66.7,1,Shortage
+REQ-00203,2026-08,IN-TN-01,D10,S035,Fire & Emergency,A,6,5,3,2,1,83.3,2,Shortage
+REQ-00204,2026-08,IN-TN-01,D10,S035,Fire & Emergency,B,4,4,2,2,0,100.0,1,Balanced
+REQ-00205,2026-08,IN-TN-01,D10,S035,Fire & Emergency,C,2,2,0,2,0,100.0,1,Balanced
+REQ-00206,2026-08,IN-TN-01,D11,S036,Human Resources,A,12,12,6,6,0,100.0,4,Balanced
+REQ-00207,2026-08,IN-TN-01,D11,S037,Administration,A,10,11,10,1,-1,110.0,4,Surplus
+REQ-00208,2026-08,IN-TN-01,D11,S038,Canteen & Housekeeping,A,10,9,8,1,1,90.0,4,Shortage
+REQ-00209,2026-08,IN-TN-01,D12,S039,Raw Material Stores,A,7,7,6,1,0,100.0,2,Balanced
+REQ-00210,2026-08,IN-TN-01,D12,S039,Raw Material Stores,B,6,5,3,2,1,83.3,2,Shortage
+REQ-00211,2026-08,IN-TN-01,D12,S039,Raw Material Stores,C,3,3,2,1,0,100.0,1,Balanced
+REQ-00212,2026-08,IN-TN-01,D12,S040,Finished Goods Store,A,8,8,7,1,0,100.0,3,Balanced
+REQ-00213,2026-08,IN-TN-01,D12,S040,Finished Goods Store,B,3,3,2,1,0,100.0,1,Balanced
+REQ-00214,2026-08,IN-TN-01,D12,S040,Finished Goods Store,C,2,2,0,2,0,100.0,1,Balanced
+REQ-00215,2026-08,IN-TN-01,D12,S041,Procurement Coordination,A,7,7,6,1,0,100.0,2,Balanced
+REQ-00216,2026-08,IN-TN-01,D12,S041,Procurement Coordination,B,6,6,5,1,0,100.0,2,Balanced
+REQ-00217,2026-08,IN-TN-01,D12,S041,Procurement Coordination,C,1,1,1,0,0,100.0,0,Balanced
+REQ-00218,2026-09,IN-KA-01,D01,S001,Solder Paste Printing,A,9,8,4,4,1,88.9,3,Shortage
+REQ-00219,2026-09,IN-KA-01,D01,S001,Solder Paste Printing,B,10,10,7,3,0,100.0,4,Balanced
+REQ-00220,2026-09,IN-KA-01,D01,S001,Solder Paste Printing,C,5,5,2,3,0,100.0,2,Balanced
+REQ-00221,2026-09,IN-KA-01,D01,S002,Pick & Place,A,8,8,8,0,0,100.0,3,Balanced
+REQ-00222,2026-09,IN-KA-01,D01,S002,Pick & Place,B,6,6,3,3,0,100.0,2,Balanced
+REQ-00223,2026-09,IN-KA-01,D01,S002,Pick & Place,C,6,6,2,4,0,100.0,2,Balanced
+REQ-00224,2026-09,IN-KA-01,D01,S003,Reflow Soldering,A,13,12,7,5,1,92.3,5,Shortage
+REQ-00225,2026-09,IN-KA-01,D01,S003,Reflow Soldering,B,5,5,4,1,0,100.0,2,Balanced
+REQ-00226,2026-09,IN-KA-01,D01,S003,Reflow Soldering,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00227,2026-09,IN-KA-01,D01,S004,SPI/AOI Inspection,A,10,10,6,4,0,100.0,4,Balanced
+REQ-00228,2026-09,IN-KA-01,D01,S004,SPI/AOI Inspection,B,7,7,5,2,0,100.0,2,Balanced
+REQ-00229,2026-09,IN-KA-01,D01,S004,SPI/AOI Inspection,C,3,2,1,1,1,66.7,1,Shortage
+REQ-00230,2026-09,IN-KA-01,D02,S005,Mainboard Assembly,A,8,8,3,5,0,100.0,3,Balanced
+REQ-00231,2026-09,IN-KA-01,D02,S005,Mainboard Assembly,B,16,16,12,4,0,100.0,6,Balanced
+REQ-00232,2026-09,IN-KA-01,D02,S005,Mainboard Assembly,C,4,4,2,2,0,100.0,1,Balanced
+REQ-00233,2026-09,IN-KA-01,D02,S006,Battery & Frame Fitting,A,17,15,8,7,2,88.2,6,Shortage
+REQ-00234,2026-09,IN-KA-01,D02,S006,Battery & Frame Fitting,B,20,19,12,7,1,95.0,7,Shortage
+REQ-00235,2026-09,IN-KA-01,D02,S006,Battery & Frame Fitting,C,9,8,4,4,1,88.9,3,Shortage
+REQ-00236,2026-09,IN-KA-01,D02,S007,Display Assembly,A,19,17,13,4,2,89.5,7,Shortage
+REQ-00237,2026-09,IN-KA-01,D02,S007,Display Assembly,B,16,15,10,5,1,93.8,6,Shortage
+REQ-00238,2026-09,IN-KA-01,D02,S007,Display Assembly,C,4,3,1,2,1,75.0,1,Shortage
+REQ-00239,2026-09,IN-KA-01,D02,S008,Back Cover Fitting,A,20,19,9,10,1,95.0,7,Shortage
+REQ-00240,2026-09,IN-KA-01,D02,S008,Back Cover Fitting,B,14,13,8,5,1,92.9,5,Shortage
+REQ-00241,2026-09,IN-KA-01,D02,S008,Back Cover Fitting,C,5,4,2,2,1,80.0,2,Shortage
+REQ-00242,2026-09,IN-KA-01,D02,S009,Final Assembly Line Support,A,21,19,9,10,2,90.5,7,Shortage
+REQ-00243,2026-09,IN-KA-01,D02,S009,Final Assembly Line Support,B,13,11,5,6,2,84.6,5,Shortage
+REQ-00244,2026-09,IN-KA-01,D02,S009,Final Assembly Line Support,C,6,6,3,3,0,100.0,2,Balanced
+REQ-00245,2026-09,IN-KA-01,D03,S010,Camera Module,A,11,9,7,2,2,81.8,4,Shortage
+REQ-00246,2026-09,IN-KA-01,D03,S010,Camera Module,B,9,9,6,3,0,100.0,3,Balanced
+REQ-00247,2026-09,IN-KA-01,D03,S010,Camera Module,C,2,2,1,1,0,100.0,1,Balanced
+REQ-00248,2026-09,IN-KA-01,D03,S011,Display Module,A,6,5,5,0,1,83.3,2,Shortage
+REQ-00249,2026-09,IN-KA-01,D03,S011,Display Module,B,7,7,3,4,0,100.0,2,Balanced
+REQ-00250,2026-09,IN-KA-01,D03,S011,Display Module,C,5,5,3,2,0,100.0,2,Balanced
+REQ-00251,2026-09,IN-KA-01,D03,S012,Battery Pack Module,A,18,14,8,6,4,77.8,6,Shortage
+REQ-00252,2026-09,IN-KA-01,D03,S012,Battery Pack Module,B,14,13,5,8,1,92.9,5,Shortage
+REQ-00253,2026-09,IN-KA-01,D03,S012,Battery Pack Module,C,9,8,5,3,1,88.9,3,Shortage
+REQ-00254,2026-09,IN-KA-01,D04,S013,RF Testing,A,10,9,8,1,1,90.0,4,Shortage
+REQ-00255,2026-09,IN-KA-01,D04,S013,RF Testing,B,8,8,6,2,0,100.0,3,Balanced
+REQ-00256,2026-09,IN-KA-01,D04,S013,RF Testing,C,1,1,1,0,0,100.0,0,Balanced
+REQ-00257,2026-09,IN-KA-01,D04,S014,Functional Testing,A,8,8,6,2,0,100.0,3,Balanced
+REQ-00258,2026-09,IN-KA-01,D04,S014,Functional Testing,B,10,9,8,1,1,90.0,4,Shortage
+REQ-00259,2026-09,IN-KA-01,D04,S014,Functional Testing,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00260,2026-09,IN-KA-01,D04,S015,Camera Calibration,A,10,10,10,0,0,100.0,4,Balanced
+REQ-00261,2026-09,IN-KA-01,D04,S015,Camera Calibration,B,6,5,4,1,1,83.3,2,Shortage
+REQ-00262,2026-09,IN-KA-01,D04,S015,Camera Calibration,C,3,3,2,1,0,100.0,1,Balanced
+REQ-00263,2026-09,IN-KA-01,D04,S016,Burn-in & Ageing,A,11,10,10,0,1,90.9,4,Shortage
+REQ-00264,2026-09,IN-KA-01,D04,S016,Burn-in & Ageing,B,10,9,8,1,1,90.0,4,Shortage
+REQ-00265,2026-09,IN-KA-01,D04,S016,Burn-in & Ageing,C,2,2,1,1,0,100.0,1,Balanced
+REQ-00266,2026-09,IN-KA-01,D05,S017,Incoming Quality (IQC),A,4,3,3,0,1,75.0,1,Shortage
+REQ-00267,2026-09,IN-KA-01,D05,S017,Incoming Quality (IQC),B,9,8,7,1,1,88.9,3,Shortage
+REQ-00268,2026-09,IN-KA-01,D05,S017,Incoming Quality (IQC),C,4,4,2,2,0,100.0,1,Balanced
+REQ-00269,2026-09,IN-KA-01,D05,S018,In-Process Quality (IPQC),A,11,10,8,2,1,90.9,4,Shortage
+REQ-00270,2026-09,IN-KA-01,D05,S018,In-Process Quality (IPQC),B,5,5,4,1,0,100.0,2,Balanced
+REQ-00271,2026-09,IN-KA-01,D05,S018,In-Process Quality (IPQC),C,2,2,2,0,0,100.0,1,Balanced
+REQ-00272,2026-09,IN-KA-01,D05,S019,Final Quality (OQC),A,4,4,2,2,0,100.0,1,Balanced
+REQ-00273,2026-09,IN-KA-01,D05,S019,Final Quality (OQC),B,8,8,7,1,0,100.0,3,Balanced
+REQ-00274,2026-09,IN-KA-01,D05,S019,Final Quality (OQC),C,5,5,3,2,0,100.0,2,Balanced
+REQ-00275,2026-09,IN-KA-01,D05,S020,Quality Lab,A,3,3,2,1,0,100.0,1,Balanced
+REQ-00276,2026-09,IN-KA-01,D05,S020,Quality Lab,B,4,4,3,1,0,100.0,1,Balanced
+REQ-00277,2026-09,IN-KA-01,D05,S020,Quality Lab,C,1,1,1,0,0,100.0,0,Balanced
+REQ-00278,2026-09,IN-KA-01,D06,S021,Mechanical Maintenance,A,5,3,3,0,2,60.0,2,Shortage
+REQ-00279,2026-09,IN-KA-01,D06,S021,Mechanical Maintenance,B,3,3,2,1,0,100.0,1,Balanced
+REQ-00280,2026-09,IN-KA-01,D06,S021,Mechanical Maintenance,C,5,5,4,1,0,100.0,2,Balanced
+REQ-00281,2026-09,IN-KA-01,D06,S022,Electrical Maintenance,A,5,3,2,1,2,60.0,2,Shortage
+REQ-00282,2026-09,IN-KA-01,D06,S022,Electrical Maintenance,B,8,8,7,1,0,100.0,3,Balanced
+REQ-00283,2026-09,IN-KA-01,D06,S022,Electrical Maintenance,C,5,5,4,1,0,100.0,2,Balanced
+REQ-00284,2026-09,IN-KA-01,D06,S023,Preventive Maintenance,A,5,5,4,1,0,100.0,2,Balanced
+REQ-00285,2026-09,IN-KA-01,D06,S023,Preventive Maintenance,B,10,9,6,3,1,90.0,4,Shortage
+REQ-00286,2026-09,IN-KA-01,D06,S023,Preventive Maintenance,C,3,3,3,0,0,100.0,1,Balanced
+REQ-00287,2026-09,IN-KA-01,D07,S024,Line Feeding,A,7,6,4,2,1,85.7,2,Shortage
+REQ-00288,2026-09,IN-KA-01,D07,S024,Line Feeding,B,4,4,1,3,0,100.0,1,Balanced
+REQ-00289,2026-09,IN-KA-01,D07,S024,Line Feeding,C,9,8,3,5,1,88.9,3,Shortage
+REQ-00290,2026-09,IN-KA-01,D07,S025,Material Movement,A,7,6,3,3,1,85.7,2,Shortage
+REQ-00291,2026-09,IN-KA-01,D07,S025,Material Movement,B,7,6,1,5,1,85.7,2,Shortage
+REQ-00292,2026-09,IN-KA-01,D07,S025,Material Movement,C,4,4,1,3,0,100.0,1,Balanced
+REQ-00293,2026-09,IN-KA-01,D07,S026,Forklift & Tugger,A,9,8,4,4,1,88.9,3,Shortage
+REQ-00294,2026-09,IN-KA-01,D07,S026,Forklift & Tugger,B,7,6,2,4,1,85.7,2,Shortage
+REQ-00295,2026-09,IN-KA-01,D07,S026,Forklift & Tugger,C,2,2,1,1,0,100.0,1,Balanced
+REQ-00296,2026-09,IN-KA-01,D08,S027,Packing,A,11,10,3,7,1,90.9,4,Shortage
+REQ-00297,2026-09,IN-KA-01,D08,S027,Packing,B,4,4,0,4,0,100.0,1,Balanced
+REQ-00298,2026-09,IN-KA-01,D08,S027,Packing,C,3,3,1,2,0,100.0,1,Balanced
+REQ-00299,2026-09,IN-KA-01,D08,S028,Labeling,A,9,7,2,5,2,77.8,3,Shortage
+REQ-00300,2026-09,IN-KA-01,D08,S028,Labeling,B,9,9,6,3,0,100.0,3,Balanced
+REQ-00301,2026-09,IN-KA-01,D08,S028,Labeling,C,3,2,1,1,1,66.7,1,Shortage
+REQ-00302,2026-09,IN-KA-01,D08,S029,Dispatch,A,12,11,6,5,1,91.7,4,Shortage
+REQ-00303,2026-09,IN-KA-01,D08,S029,Dispatch,B,4,4,4,0,0,100.0,1,Balanced
+REQ-00304,2026-09,IN-KA-01,D08,S029,Dispatch,C,3,3,0,3,0,100.0,1,Balanced
+REQ-00305,2026-09,IN-KA-01,D09,S030,Process Engineering,A,10,10,10,0,0,100.0,4,Balanced
+REQ-00306,2026-09,IN-KA-01,D09,S031,Industrial Engineering,A,11,11,11,0,0,100.0,4,Balanced
+REQ-00307,2026-09,IN-KA-01,D09,S032,Automation,A,6,6,6,0,0,100.0,2,Balanced
+REQ-00308,2026-09,IN-KA-01,D10,S033,Environment Health & Safety,A,5,4,2,2,1,80.0,2,Shortage
+REQ-00309,2026-09,IN-KA-01,D10,S033,Environment Health & Safety,B,1,1,0,1,0,100.0,0,Balanced
+REQ-00310,2026-09,IN-KA-01,D10,S033,Environment Health & Safety,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00311,2026-09,IN-KA-01,D10,S034,Security,A,4,4,2,2,0,100.0,1,Balanced
+REQ-00312,2026-09,IN-KA-01,D10,S034,Security,B,6,5,1,4,1,83.3,2,Shortage
+REQ-00313,2026-09,IN-KA-01,D10,S035,Fire & Emergency,A,4,4,3,1,0,100.0,1,Balanced
+REQ-00314,2026-09,IN-KA-01,D10,S035,Fire & Emergency,C,2,1,0,1,1,50.0,1,Shortage
+REQ-00315,2026-09,IN-KA-01,D11,S036,Human Resources,A,4,3,3,0,1,75.0,1,Shortage
+REQ-00316,2026-09,IN-KA-01,D11,S037,Administration,A,8,7,4,3,1,87.5,3,Shortage
+REQ-00317,2026-09,IN-KA-01,D11,S038,Canteen & Housekeeping,A,6,6,3,3,0,100.0,2,Balanced
+REQ-00318,2026-09,IN-KA-01,D12,S039,Raw Material Stores,A,3,3,2,1,0,100.0,1,Balanced
+REQ-00319,2026-09,IN-KA-01,D12,S039,Raw Material Stores,B,3,3,1,2,0,100.0,1,Balanced
+REQ-00320,2026-09,IN-KA-01,D12,S040,Finished Goods Store,A,6,6,4,2,0,100.0,2,Balanced
+REQ-00321,2026-09,IN-KA-01,D12,S040,Finished Goods Store,B,3,3,1,2,0,100.0,1,Balanced
+REQ-00322,2026-09,IN-KA-01,D12,S041,Procurement Coordination,A,4,4,2,2,0,100.0,1,Balanced
+REQ-00323,2026-09,IN-KA-01,D12,S041,Procurement Coordination,B,2,1,0,1,1,50.0,1,Shortage
+REQ-00324,2026-09,IN-KA-01,D12,S041,Procurement Coordination,C,4,4,4,0,0,100.0,1,Balanced
+REQ-00325,2026-09,IN-TN-01,D01,S001,Solder Paste Printing,A,21,18,12,6,3,85.7,7,Shortage
+REQ-00326,2026-09,IN-TN-01,D01,S001,Solder Paste Printing,B,11,11,6,5,0,100.0,4,Balanced
+REQ-00327,2026-09,IN-TN-01,D01,S001,Solder Paste Printing,C,9,8,4,4,1,88.9,3,Shortage
+REQ-00328,2026-09,IN-TN-01,D01,S002,Pick & Place,A,12,12,8,4,0,100.0,4,Balanced
+REQ-00329,2026-09,IN-TN-01,D01,S002,Pick & Place,B,8,8,3,5,0,100.0,3,Balanced
+REQ-00330,2026-09,IN-TN-01,D01,S002,Pick & Place,C,5,5,1,4,0,100.0,2,Balanced
+REQ-00331,2026-09,IN-TN-01,D01,S003,Reflow Soldering,A,9,9,6,3,0,100.0,3,Balanced
+REQ-00332,2026-09,IN-TN-01,D01,S003,Reflow Soldering,B,10,10,9,1,0,100.0,4,Balanced
+REQ-00333,2026-09,IN-TN-01,D01,S003,Reflow Soldering,C,5,5,1,4,0,100.0,2,Balanced
+REQ-00334,2026-09,IN-TN-01,D01,S004,SPI/AOI Inspection,A,15,13,9,4,2,86.7,5,Shortage
+REQ-00335,2026-09,IN-TN-01,D01,S004,SPI/AOI Inspection,B,14,12,8,4,2,85.7,5,Shortage
+REQ-00336,2026-09,IN-TN-01,D01,S004,SPI/AOI Inspection,C,5,5,1,4,0,100.0,2,Balanced
+REQ-00337,2026-09,IN-TN-01,D02,S005,Mainboard Assembly,A,26,24,11,13,2,92.3,9,Shortage
+REQ-00338,2026-09,IN-TN-01,D02,S005,Mainboard Assembly,B,18,17,9,8,1,94.4,6,Shortage
+REQ-00339,2026-09,IN-TN-01,D02,S005,Mainboard Assembly,C,8,8,3,5,0,100.0,3,Balanced
+REQ-00340,2026-09,IN-TN-01,D02,S006,Battery & Frame Fitting,A,11,11,9,2,0,100.0,4,Balanced
+REQ-00341,2026-09,IN-TN-01,D02,S006,Battery & Frame Fitting,B,21,20,12,8,1,95.2,7,Shortage
+REQ-00342,2026-09,IN-TN-01,D02,S006,Battery & Frame Fitting,C,11,10,3,7,1,90.9,4,Shortage
+REQ-00343,2026-09,IN-TN-01,D02,S007,Display Assembly,A,17,15,11,4,2,88.2,6,Shortage
+REQ-00344,2026-09,IN-TN-01,D02,S007,Display Assembly,B,26,22,12,10,4,84.6,9,Shortage
+REQ-00345,2026-09,IN-TN-01,D02,S007,Display Assembly,C,13,11,9,2,2,84.6,5,Shortage
+REQ-00346,2026-09,IN-TN-01,D02,S008,Back Cover Fitting,A,19,16,6,10,3,84.2,7,Shortage
+REQ-00347,2026-09,IN-TN-01,D02,S008,Back Cover Fitting,B,18,16,9,7,2,88.9,6,Shortage
+REQ-00348,2026-09,IN-TN-01,D02,S008,Back Cover Fitting,C,10,9,3,6,1,90.0,4,Shortage
+REQ-00349,2026-09,IN-TN-01,D02,S009,Final Assembly Line Support,A,26,19,13,6,7,73.1,9,Shortage
+REQ-00350,2026-09,IN-TN-01,D02,S009,Final Assembly Line Support,B,21,19,11,8,2,90.5,7,Shortage
+REQ-00351,2026-09,IN-TN-01,D02,S009,Final Assembly Line Support,C,6,6,2,4,0,100.0,2,Balanced
+REQ-00352,2026-09,IN-TN-01,D03,S010,Camera Module,A,20,17,7,10,3,85.0,7,Shortage
+REQ-00353,2026-09,IN-TN-01,D03,S010,Camera Module,B,13,12,7,5,1,92.3,5,Shortage
+REQ-00354,2026-09,IN-TN-01,D03,S010,Camera Module,C,5,2,2,0,3,40.0,2,Shortage
+REQ-00355,2026-09,IN-TN-01,D03,S011,Display Module,A,8,8,7,1,0,100.0,3,Balanced
+REQ-00356,2026-09,IN-TN-01,D03,S011,Display Module,B,22,22,14,8,0,100.0,8,Balanced
+REQ-00357,2026-09,IN-TN-01,D03,S011,Display Module,C,4,4,2,2,0,100.0,1,Balanced
+REQ-00358,2026-09,IN-TN-01,D03,S012,Battery Pack Module,A,9,9,6,3,0,100.0,3,Balanced
+REQ-00359,2026-09,IN-TN-01,D03,S012,Battery Pack Module,B,11,8,5,3,3,72.7,4,Shortage
+REQ-00360,2026-09,IN-TN-01,D03,S012,Battery Pack Module,C,3,3,2,1,0,100.0,1,Balanced
+REQ-00361,2026-09,IN-TN-01,D04,S013,RF Testing,A,14,13,12,1,1,92.9,5,Shortage
+REQ-00362,2026-09,IN-TN-01,D04,S013,RF Testing,B,8,8,6,2,0,100.0,3,Balanced
+REQ-00363,2026-09,IN-TN-01,D04,S013,RF Testing,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00364,2026-09,IN-TN-01,D04,S014,Functional Testing,A,5,3,3,0,2,60.0,2,Shortage
+REQ-00365,2026-09,IN-TN-01,D04,S014,Functional Testing,B,7,6,3,3,1,85.7,2,Shortage
+REQ-00366,2026-09,IN-TN-01,D04,S014,Functional Testing,C,5,4,2,2,1,80.0,2,Shortage
+REQ-00367,2026-09,IN-TN-01,D04,S015,Camera Calibration,A,5,5,5,0,0,100.0,2,Balanced
+REQ-00368,2026-09,IN-TN-01,D04,S015,Camera Calibration,B,6,6,5,1,0,100.0,2,Balanced
+REQ-00369,2026-09,IN-TN-01,D04,S015,Camera Calibration,C,1,1,1,0,0,100.0,0,Balanced
+REQ-00370,2026-09,IN-TN-01,D04,S016,Burn-in & Ageing,A,11,9,7,2,2,81.8,4,Shortage
+REQ-00371,2026-09,IN-TN-01,D04,S016,Burn-in & Ageing,B,5,5,4,1,0,100.0,2,Balanced
+REQ-00372,2026-09,IN-TN-01,D04,S016,Burn-in & Ageing,C,6,6,6,0,0,100.0,2,Balanced
+REQ-00373,2026-09,IN-TN-01,D05,S017,Incoming Quality (IQC),A,9,8,7,1,1,88.9,3,Shortage
+REQ-00374,2026-09,IN-TN-01,D05,S017,Incoming Quality (IQC),B,5,5,3,2,0,100.0,2,Balanced
+REQ-00375,2026-09,IN-TN-01,D05,S017,Incoming Quality (IQC),C,9,8,6,2,1,88.9,3,Shortage
+REQ-00376,2026-09,IN-TN-01,D05,S018,In-Process Quality (IPQC),A,9,9,8,1,0,100.0,3,Balanced
+REQ-00377,2026-09,IN-TN-01,D05,S018,In-Process Quality (IPQC),B,5,5,5,0,0,100.0,2,Balanced
+REQ-00378,2026-09,IN-TN-01,D05,S018,In-Process Quality (IPQC),C,3,3,1,2,0,100.0,1,Balanced
+REQ-00379,2026-09,IN-TN-01,D05,S019,Final Quality (OQC),A,17,15,15,0,2,88.2,6,Shortage
+REQ-00380,2026-09,IN-TN-01,D05,S019,Final Quality (OQC),B,5,5,2,3,0,100.0,2,Balanced
+REQ-00381,2026-09,IN-TN-01,D05,S019,Final Quality (OQC),C,5,4,2,2,1,80.0,2,Shortage
+REQ-00382,2026-09,IN-TN-01,D05,S020,Quality Lab,A,9,9,8,1,0,100.0,3,Balanced
+REQ-00383,2026-09,IN-TN-01,D05,S020,Quality Lab,B,7,7,6,1,0,100.0,2,Balanced
+REQ-00384,2026-09,IN-TN-01,D05,S020,Quality Lab,C,10,10,8,2,0,100.0,4,Balanced
+REQ-00385,2026-09,IN-TN-01,D06,S021,Mechanical Maintenance,A,9,8,7,1,1,88.9,3,Shortage
+REQ-00386,2026-09,IN-TN-01,D06,S021,Mechanical Maintenance,B,4,4,3,1,0,100.0,1,Balanced
+REQ-00387,2026-09,IN-TN-01,D06,S021,Mechanical Maintenance,C,8,7,6,1,1,87.5,3,Shortage
+REQ-00388,2026-09,IN-TN-01,D06,S022,Electrical Maintenance,A,9,9,8,1,0,100.0,3,Balanced
+REQ-00389,2026-09,IN-TN-01,D06,S022,Electrical Maintenance,B,4,3,2,1,1,75.0,1,Shortage
+REQ-00390,2026-09,IN-TN-01,D06,S022,Electrical Maintenance,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00391,2026-09,IN-TN-01,D06,S023,Preventive Maintenance,A,10,9,8,1,1,90.0,4,Shortage
+REQ-00392,2026-09,IN-TN-01,D06,S023,Preventive Maintenance,B,5,5,2,3,0,100.0,2,Balanced
+REQ-00393,2026-09,IN-TN-01,D06,S023,Preventive Maintenance,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00394,2026-09,IN-TN-01,D07,S024,Line Feeding,A,14,14,7,7,0,100.0,5,Balanced
+REQ-00395,2026-09,IN-TN-01,D07,S024,Line Feeding,B,10,10,1,9,0,100.0,4,Balanced
+REQ-00396,2026-09,IN-TN-01,D07,S024,Line Feeding,C,6,6,3,3,0,100.0,2,Balanced
+REQ-00397,2026-09,IN-TN-01,D07,S025,Material Movement,A,8,8,4,4,0,100.0,3,Balanced
+REQ-00398,2026-09,IN-TN-01,D07,S025,Material Movement,B,6,6,3,3,0,100.0,2,Balanced
+REQ-00399,2026-09,IN-TN-01,D07,S025,Material Movement,C,6,5,3,2,1,83.3,2,Shortage
+REQ-00400,2026-09,IN-TN-01,D07,S026,Forklift & Tugger,A,10,10,4,6,0,100.0,4,Balanced
+REQ-00401,2026-09,IN-TN-01,D07,S026,Forklift & Tugger,B,12,12,6,6,0,100.0,4,Balanced
+REQ-00402,2026-09,IN-TN-01,D07,S026,Forklift & Tugger,C,7,7,2,5,0,100.0,2,Balanced
+REQ-00403,2026-09,IN-TN-01,D08,S027,Packing,A,14,13,6,7,1,92.9,5,Shortage
+REQ-00404,2026-09,IN-TN-01,D08,S027,Packing,B,11,11,8,3,0,100.0,4,Balanced
+REQ-00405,2026-09,IN-TN-01,D08,S027,Packing,C,2,2,0,2,0,100.0,1,Balanced
+REQ-00406,2026-09,IN-TN-01,D08,S028,Labeling,A,5,5,3,2,0,100.0,2,Balanced
+REQ-00407,2026-09,IN-TN-01,D08,S028,Labeling,B,13,11,3,8,2,84.6,5,Shortage
+REQ-00408,2026-09,IN-TN-01,D08,S028,Labeling,C,4,3,1,2,1,75.0,1,Shortage
+REQ-00409,2026-09,IN-TN-01,D08,S029,Dispatch,A,4,3,1,2,1,75.0,1,Shortage
+REQ-00410,2026-09,IN-TN-01,D08,S029,Dispatch,B,8,7,3,4,1,87.5,3,Shortage
+REQ-00411,2026-09,IN-TN-01,D08,S029,Dispatch,C,4,4,1,3,0,100.0,1,Balanced
+REQ-00412,2026-09,IN-TN-01,D09,S030,Process Engineering,A,9,9,9,0,0,100.0,3,Balanced
+REQ-00413,2026-09,IN-TN-01,D09,S031,Industrial Engineering,A,18,18,18,0,0,100.0,6,Balanced
+REQ-00414,2026-09,IN-TN-01,D09,S032,Automation,A,14,14,14,0,0,100.0,5,Balanced
+REQ-00415,2026-09,IN-TN-01,D10,S033,Environment Health & Safety,A,2,2,1,1,0,100.0,1,Balanced
+REQ-00416,2026-09,IN-TN-01,D10,S033,Environment Health & Safety,B,3,3,2,1,0,100.0,1,Balanced
+REQ-00417,2026-09,IN-TN-01,D10,S034,Security,A,3,3,1,2,0,100.0,1,Balanced
+REQ-00418,2026-09,IN-TN-01,D10,S034,Security,B,4,3,0,3,1,75.0,1,Shortage
+REQ-00419,2026-09,IN-TN-01,D10,S034,Security,C,3,2,1,1,1,66.7,1,Shortage
+REQ-00420,2026-09,IN-TN-01,D10,S035,Fire & Emergency,A,6,5,3,2,1,83.3,2,Shortage
+REQ-00421,2026-09,IN-TN-01,D10,S035,Fire & Emergency,B,4,4,2,2,0,100.0,1,Balanced
+REQ-00422,2026-09,IN-TN-01,D10,S035,Fire & Emergency,C,2,2,0,2,0,100.0,1,Balanced
+REQ-00423,2026-09,IN-TN-01,D11,S036,Human Resources,A,12,12,6,6,0,100.0,4,Balanced
+REQ-00424,2026-09,IN-TN-01,D11,S037,Administration,A,11,11,10,1,0,100.0,4,Balanced
+REQ-00425,2026-09,IN-TN-01,D11,S038,Canteen & Housekeeping,A,10,9,8,1,1,90.0,4,Shortage
+REQ-00426,2026-09,IN-TN-01,D12,S039,Raw Material Stores,A,7,7,6,1,0,100.0,2,Balanced
+REQ-00427,2026-09,IN-TN-01,D12,S039,Raw Material Stores,B,6,5,3,2,1,83.3,2,Shortage
+REQ-00428,2026-09,IN-TN-01,D12,S039,Raw Material Stores,C,3,3,2,1,0,100.0,1,Balanced
+REQ-00429,2026-09,IN-TN-01,D12,S040,Finished Goods Store,A,8,8,7,1,0,100.0,3,Balanced
+REQ-00430,2026-09,IN-TN-01,D12,S040,Finished Goods Store,B,3,3,2,1,0,100.0,1,Balanced
+REQ-00431,2026-09,IN-TN-01,D12,S040,Finished Goods Store,C,2,2,0,2,0,100.0,1,Balanced
+REQ-00432,2026-09,IN-TN-01,D12,S041,Procurement Coordination,A,7,7,6,1,0,100.0,2,Balanced
+REQ-00433,2026-09,IN-TN-01,D12,S041,Procurement Coordination,B,6,6,5,1,0,100.0,2,Balanced
+REQ-00434,2026-09,IN-TN-01,D12,S041,Procurement Coordination,C,1,1,1,0,0,100.0,0,Balanced
+REQ-00435,2026-10,IN-KA-01,D01,S001,Solder Paste Printing,A,10,8,4,4,2,80.0,4,Shortage
+REQ-00436,2026-10,IN-KA-01,D01,S001,Solder Paste Printing,B,11,10,7,3,1,90.9,4,Shortage
+REQ-00437,2026-10,IN-KA-01,D01,S001,Solder Paste Printing,C,5,5,2,3,0,100.0,2,Balanced
+REQ-00438,2026-10,IN-KA-01,D01,S002,Pick & Place,A,9,8,8,0,1,88.9,3,Shortage
+REQ-00439,2026-10,IN-KA-01,D01,S002,Pick & Place,B,6,6,3,3,0,100.0,2,Balanced
+REQ-00440,2026-10,IN-KA-01,D01,S002,Pick & Place,C,6,6,2,4,0,100.0,2,Balanced
+REQ-00441,2026-10,IN-KA-01,D01,S003,Reflow Soldering,A,13,11,6,5,2,84.6,5,Shortage
+REQ-00442,2026-10,IN-KA-01,D01,S003,Reflow Soldering,B,5,5,4,1,0,100.0,2,Balanced
+REQ-00443,2026-10,IN-KA-01,D01,S003,Reflow Soldering,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00444,2026-10,IN-KA-01,D01,S004,SPI/AOI Inspection,A,11,10,6,4,1,90.9,4,Shortage
+REQ-00445,2026-10,IN-KA-01,D01,S004,SPI/AOI Inspection,B,8,7,5,2,1,87.5,3,Shortage
+REQ-00446,2026-10,IN-KA-01,D01,S004,SPI/AOI Inspection,C,3,2,1,1,1,66.7,1,Shortage
+REQ-00447,2026-10,IN-KA-01,D02,S005,Mainboard Assembly,A,8,8,3,5,0,100.0,3,Balanced
+REQ-00448,2026-10,IN-KA-01,D02,S005,Mainboard Assembly,B,17,16,12,4,1,94.1,6,Shortage
+REQ-00449,2026-10,IN-KA-01,D02,S005,Mainboard Assembly,C,4,4,2,2,0,100.0,1,Balanced
+REQ-00450,2026-10,IN-KA-01,D02,S006,Battery & Frame Fitting,A,16,15,8,7,1,93.8,6,Shortage
+REQ-00451,2026-10,IN-KA-01,D02,S006,Battery & Frame Fitting,B,21,19,12,7,2,90.5,7,Shortage
+REQ-00452,2026-10,IN-KA-01,D02,S006,Battery & Frame Fitting,C,9,8,4,4,1,88.9,3,Shortage
+REQ-00453,2026-10,IN-KA-01,D02,S007,Display Assembly,A,20,17,13,4,3,85.0,7,Shortage
+REQ-00454,2026-10,IN-KA-01,D02,S007,Display Assembly,B,16,15,10,5,1,93.8,6,Shortage
+REQ-00455,2026-10,IN-KA-01,D02,S007,Display Assembly,C,4,3,1,2,1,75.0,1,Shortage
+REQ-00456,2026-10,IN-KA-01,D02,S008,Back Cover Fitting,A,21,19,9,10,2,90.5,7,Shortage
+REQ-00457,2026-10,IN-KA-01,D02,S008,Back Cover Fitting,B,16,12,7,5,4,75.0,6,Shortage
+REQ-00458,2026-10,IN-KA-01,D02,S008,Back Cover Fitting,C,6,4,2,2,2,66.7,2,Shortage
+REQ-00459,2026-10,IN-KA-01,D02,S009,Final Assembly Line Support,A,23,19,9,10,4,82.6,8,Shortage
+REQ-00460,2026-10,IN-KA-01,D02,S009,Final Assembly Line Support,B,14,11,5,6,3,78.6,5,Shortage
+REQ-00461,2026-10,IN-KA-01,D02,S009,Final Assembly Line Support,C,6,6,3,3,0,100.0,2,Balanced
+REQ-00462,2026-10,IN-KA-01,D03,S010,Camera Module,A,11,9,7,2,2,81.8,4,Shortage
+REQ-00463,2026-10,IN-KA-01,D03,S010,Camera Module,B,9,9,6,3,0,100.0,3,Balanced
+REQ-00464,2026-10,IN-KA-01,D03,S010,Camera Module,C,2,2,1,1,0,100.0,1,Balanced
+REQ-00465,2026-10,IN-KA-01,D03,S011,Display Module,A,6,5,5,0,1,83.3,2,Shortage
+REQ-00466,2026-10,IN-KA-01,D03,S011,Display Module,B,8,7,3,4,1,87.5,3,Shortage
+REQ-00467,2026-10,IN-KA-01,D03,S011,Display Module,C,5,5,3,2,0,100.0,2,Balanced
+REQ-00468,2026-10,IN-KA-01,D03,S012,Battery Pack Module,A,18,14,8,6,4,77.8,6,Shortage
+REQ-00469,2026-10,IN-KA-01,D03,S012,Battery Pack Module,B,14,13,5,8,1,92.9,5,Shortage
+REQ-00470,2026-10,IN-KA-01,D03,S012,Battery Pack Module,C,9,8,5,3,1,88.9,3,Shortage
+REQ-00471,2026-10,IN-KA-01,D04,S013,RF Testing,A,9,9,8,1,0,100.0,3,Balanced
+REQ-00472,2026-10,IN-KA-01,D04,S013,RF Testing,B,9,7,5,2,2,77.8,3,Shortage
+REQ-00473,2026-10,IN-KA-01,D04,S013,RF Testing,C,1,1,1,0,0,100.0,0,Balanced
+REQ-00474,2026-10,IN-KA-01,D04,S014,Functional Testing,A,9,8,6,2,1,88.9,3,Shortage
+REQ-00475,2026-10,IN-KA-01,D04,S014,Functional Testing,B,9,9,8,1,0,100.0,3,Balanced
+REQ-00476,2026-10,IN-KA-01,D04,S014,Functional Testing,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00477,2026-10,IN-KA-01,D04,S015,Camera Calibration,A,11,10,10,0,1,90.9,4,Shortage
+REQ-00478,2026-10,IN-KA-01,D04,S015,Camera Calibration,B,7,5,4,1,2,71.4,2,Shortage
+REQ-00479,2026-10,IN-KA-01,D04,S015,Camera Calibration,C,3,3,2,1,0,100.0,1,Balanced
+REQ-00480,2026-10,IN-KA-01,D04,S016,Burn-in & Ageing,A,11,10,10,0,1,90.9,4,Shortage
+REQ-00481,2026-10,IN-KA-01,D04,S016,Burn-in & Ageing,B,10,9,8,1,1,90.0,4,Shortage
+REQ-00482,2026-10,IN-KA-01,D04,S016,Burn-in & Ageing,C,2,2,1,1,0,100.0,1,Balanced
+REQ-00483,2026-10,IN-KA-01,D05,S017,Incoming Quality (IQC),A,4,3,3,0,1,75.0,1,Shortage
+REQ-00484,2026-10,IN-KA-01,D05,S017,Incoming Quality (IQC),B,9,8,7,1,1,88.9,3,Shortage
+REQ-00485,2026-10,IN-KA-01,D05,S017,Incoming Quality (IQC),C,4,4,2,2,0,100.0,1,Balanced
+REQ-00486,2026-10,IN-KA-01,D05,S018,In-Process Quality (IPQC),A,11,10,8,2,1,90.9,4,Shortage
+REQ-00487,2026-10,IN-KA-01,D05,S018,In-Process Quality (IPQC),B,5,5,4,1,0,100.0,2,Balanced
+REQ-00488,2026-10,IN-KA-01,D05,S018,In-Process Quality (IPQC),C,2,2,2,0,0,100.0,1,Balanced
+REQ-00489,2026-10,IN-KA-01,D05,S019,Final Quality (OQC),A,4,4,2,2,0,100.0,1,Balanced
+REQ-00490,2026-10,IN-KA-01,D05,S019,Final Quality (OQC),B,8,8,7,1,0,100.0,3,Balanced
+REQ-00491,2026-10,IN-KA-01,D05,S019,Final Quality (OQC),C,5,5,3,2,0,100.0,2,Balanced
+REQ-00492,2026-10,IN-KA-01,D05,S020,Quality Lab,A,3,3,2,1,0,100.0,1,Balanced
+REQ-00493,2026-10,IN-KA-01,D05,S020,Quality Lab,B,4,4,3,1,0,100.0,1,Balanced
+REQ-00494,2026-10,IN-KA-01,D05,S020,Quality Lab,C,1,0,0,0,1,0.0,0,Shortage
+REQ-00495,2026-10,IN-KA-01,D06,S021,Mechanical Maintenance,A,5,3,3,0,2,60.0,2,Shortage
+REQ-00496,2026-10,IN-KA-01,D06,S021,Mechanical Maintenance,B,3,3,2,1,0,100.0,1,Balanced
+REQ-00497,2026-10,IN-KA-01,D06,S021,Mechanical Maintenance,C,5,5,4,1,0,100.0,2,Balanced
+REQ-00498,2026-10,IN-KA-01,D06,S022,Electrical Maintenance,A,5,3,2,1,2,60.0,2,Shortage
+REQ-00499,2026-10,IN-KA-01,D06,S022,Electrical Maintenance,B,8,8,7,1,0,100.0,3,Balanced
+REQ-00500,2026-10,IN-KA-01,D06,S022,Electrical Maintenance,C,5,5,4,1,0,100.0,2,Balanced
+REQ-00501,2026-10,IN-KA-01,D06,S023,Preventive Maintenance,A,5,5,4,1,0,100.0,2,Balanced
+REQ-00502,2026-10,IN-KA-01,D06,S023,Preventive Maintenance,B,10,9,6,3,1,90.0,4,Shortage
+REQ-00503,2026-10,IN-KA-01,D06,S023,Preventive Maintenance,C,3,3,3,0,0,100.0,1,Balanced
+REQ-00504,2026-10,IN-KA-01,D07,S024,Line Feeding,A,7,6,4,2,1,85.7,2,Shortage
+REQ-00505,2026-10,IN-KA-01,D07,S024,Line Feeding,B,4,4,1,3,0,100.0,1,Balanced
+REQ-00506,2026-10,IN-KA-01,D07,S024,Line Feeding,C,9,7,3,4,2,77.8,3,Shortage
+REQ-00507,2026-10,IN-KA-01,D07,S025,Material Movement,A,7,6,3,3,1,85.7,2,Shortage
+REQ-00508,2026-10,IN-KA-01,D07,S025,Material Movement,B,7,6,1,5,1,85.7,2,Shortage
+REQ-00509,2026-10,IN-KA-01,D07,S025,Material Movement,C,4,4,1,3,0,100.0,1,Balanced
+REQ-00510,2026-10,IN-KA-01,D07,S026,Forklift & Tugger,A,9,8,4,4,1,88.9,3,Shortage
+REQ-00511,2026-10,IN-KA-01,D07,S026,Forklift & Tugger,B,7,6,2,4,1,85.7,2,Shortage
+REQ-00512,2026-10,IN-KA-01,D07,S026,Forklift & Tugger,C,2,2,1,1,0,100.0,1,Balanced
+REQ-00513,2026-10,IN-KA-01,D08,S027,Packing,A,11,10,3,7,1,90.9,4,Shortage
+REQ-00514,2026-10,IN-KA-01,D08,S027,Packing,B,4,4,0,4,0,100.0,1,Balanced
+REQ-00515,2026-10,IN-KA-01,D08,S027,Packing,C,3,3,1,2,0,100.0,1,Balanced
+REQ-00516,2026-10,IN-KA-01,D08,S028,Labeling,A,9,7,2,5,2,77.8,3,Shortage
+REQ-00517,2026-10,IN-KA-01,D08,S028,Labeling,B,10,8,6,2,2,80.0,4,Shortage
+REQ-00518,2026-10,IN-KA-01,D08,S028,Labeling,C,3,2,1,1,1,66.7,1,Shortage
+REQ-00519,2026-10,IN-KA-01,D08,S029,Dispatch,A,12,11,6,5,1,91.7,4,Shortage
+REQ-00520,2026-10,IN-KA-01,D08,S029,Dispatch,B,4,3,3,0,1,75.0,1,Shortage
+REQ-00521,2026-10,IN-KA-01,D08,S029,Dispatch,C,3,3,0,3,0,100.0,1,Balanced
+REQ-00522,2026-10,IN-KA-01,D09,S030,Process Engineering,A,10,10,10,0,0,100.0,4,Balanced
+REQ-00523,2026-10,IN-KA-01,D09,S031,Industrial Engineering,A,11,11,11,0,0,100.0,4,Balanced
+REQ-00524,2026-10,IN-KA-01,D09,S032,Automation,A,6,6,6,0,0,100.0,2,Balanced
+REQ-00525,2026-10,IN-KA-01,D10,S033,Environment Health & Safety,A,5,4,2,2,1,80.0,2,Shortage
+REQ-00526,2026-10,IN-KA-01,D10,S033,Environment Health & Safety,B,1,1,0,1,0,100.0,0,Balanced
+REQ-00527,2026-10,IN-KA-01,D10,S033,Environment Health & Safety,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00528,2026-10,IN-KA-01,D10,S034,Security,A,4,4,2,2,0,100.0,1,Balanced
+REQ-00529,2026-10,IN-KA-01,D10,S034,Security,B,6,5,1,4,1,83.3,2,Shortage
+REQ-00530,2026-10,IN-KA-01,D10,S035,Fire & Emergency,A,4,4,3,1,0,100.0,1,Balanced
+REQ-00531,2026-10,IN-KA-01,D10,S035,Fire & Emergency,C,2,1,0,1,1,50.0,1,Shortage
+REQ-00532,2026-10,IN-KA-01,D11,S036,Human Resources,A,4,3,3,0,1,75.0,1,Shortage
+REQ-00533,2026-10,IN-KA-01,D11,S037,Administration,A,8,7,4,3,1,87.5,3,Shortage
+REQ-00534,2026-10,IN-KA-01,D11,S038,Canteen & Housekeeping,A,6,6,3,3,0,100.0,2,Balanced
+REQ-00535,2026-10,IN-KA-01,D12,S039,Raw Material Stores,A,3,3,2,1,0,100.0,1,Balanced
+REQ-00536,2026-10,IN-KA-01,D12,S039,Raw Material Stores,B,3,3,1,2,0,100.0,1,Balanced
+REQ-00537,2026-10,IN-KA-01,D12,S040,Finished Goods Store,A,6,6,4,2,0,100.0,2,Balanced
+REQ-00538,2026-10,IN-KA-01,D12,S040,Finished Goods Store,B,3,3,1,2,0,100.0,1,Balanced
+REQ-00539,2026-10,IN-KA-01,D12,S041,Procurement Coordination,A,4,3,2,1,1,75.0,1,Shortage
+REQ-00540,2026-10,IN-KA-01,D12,S041,Procurement Coordination,B,2,1,0,1,1,50.0,1,Shortage
+REQ-00541,2026-10,IN-KA-01,D12,S041,Procurement Coordination,C,4,4,4,0,0,100.0,1,Balanced
+REQ-00542,2026-10,IN-TN-01,D01,S001,Solder Paste Printing,A,22,18,12,6,4,81.8,8,Shortage
+REQ-00543,2026-10,IN-TN-01,D01,S001,Solder Paste Printing,B,11,11,6,5,0,100.0,4,Balanced
+REQ-00544,2026-10,IN-TN-01,D01,S001,Solder Paste Printing,C,8,8,4,4,0,100.0,3,Balanced
+REQ-00545,2026-10,IN-TN-01,D01,S002,Pick & Place,A,13,12,8,4,1,92.3,5,Shortage
+REQ-00546,2026-10,IN-TN-01,D01,S002,Pick & Place,B,9,8,3,5,1,88.9,3,Shortage
+REQ-00547,2026-10,IN-TN-01,D01,S002,Pick & Place,C,5,5,1,4,0,100.0,2,Balanced
+REQ-00548,2026-10,IN-TN-01,D01,S003,Reflow Soldering,A,10,9,6,3,1,90.0,4,Shortage
+REQ-00549,2026-10,IN-TN-01,D01,S003,Reflow Soldering,B,11,10,9,1,1,90.9,4,Shortage
+REQ-00550,2026-10,IN-TN-01,D01,S003,Reflow Soldering,C,5,5,1,4,0,100.0,2,Balanced
+REQ-00551,2026-10,IN-TN-01,D01,S004,SPI/AOI Inspection,A,14,13,9,4,1,92.9,5,Shortage
+REQ-00552,2026-10,IN-TN-01,D01,S004,SPI/AOI Inspection,B,16,12,8,4,4,75.0,6,Shortage
+REQ-00553,2026-10,IN-TN-01,D01,S004,SPI/AOI Inspection,C,5,5,1,4,0,100.0,2,Balanced
+REQ-00554,2026-10,IN-TN-01,D02,S005,Mainboard Assembly,A,27,24,11,13,3,88.9,9,Shortage
+REQ-00555,2026-10,IN-TN-01,D02,S005,Mainboard Assembly,B,18,17,9,8,1,94.4,6,Shortage
+REQ-00556,2026-10,IN-TN-01,D02,S005,Mainboard Assembly,C,9,8,3,5,1,88.9,3,Shortage
+REQ-00557,2026-10,IN-TN-01,D02,S006,Battery & Frame Fitting,A,12,11,9,2,1,91.7,4,Shortage
+REQ-00558,2026-10,IN-TN-01,D02,S006,Battery & Frame Fitting,B,23,19,11,8,4,82.6,8,Shortage
+REQ-00559,2026-10,IN-TN-01,D02,S006,Battery & Frame Fitting,C,10,10,3,7,0,100.0,4,Balanced
+REQ-00560,2026-10,IN-TN-01,D02,S007,Display Assembly,A,17,15,11,4,2,88.2,6,Shortage
+REQ-00561,2026-10,IN-TN-01,D02,S007,Display Assembly,B,25,22,12,10,3,88.0,9,Shortage
+REQ-00562,2026-10,IN-TN-01,D02,S007,Display Assembly,C,13,11,9,2,2,84.6,5,Shortage
+REQ-00563,2026-10,IN-TN-01,D02,S008,Back Cover Fitting,A,20,16,6,10,4,80.0,7,Shortage
+REQ-00564,2026-10,IN-TN-01,D02,S008,Back Cover Fitting,B,18,16,9,7,2,88.9,6,Shortage
+REQ-00565,2026-10,IN-TN-01,D02,S008,Back Cover Fitting,C,10,9,3,6,1,90.0,4,Shortage
+REQ-00566,2026-10,IN-TN-01,D02,S009,Final Assembly Line Support,A,26,20,14,6,6,76.9,9,Shortage
+REQ-00567,2026-10,IN-TN-01,D02,S009,Final Assembly Line Support,B,23,19,11,8,4,82.6,8,Shortage
+REQ-00568,2026-10,IN-TN-01,D02,S009,Final Assembly Line Support,C,7,6,2,4,1,85.7,2,Shortage
+REQ-00569,2026-10,IN-TN-01,D03,S010,Camera Module,A,21,17,7,10,4,81.0,7,Shortage
+REQ-00570,2026-10,IN-TN-01,D03,S010,Camera Module,B,13,11,7,4,2,84.6,5,Shortage
+REQ-00571,2026-10,IN-TN-01,D03,S010,Camera Module,C,5,2,2,0,3,40.0,2,Shortage
+REQ-00572,2026-10,IN-TN-01,D03,S011,Display Module,A,9,8,7,1,1,88.9,3,Shortage
+REQ-00573,2026-10,IN-TN-01,D03,S011,Display Module,B,24,22,14,8,2,91.7,8,Shortage
+REQ-00574,2026-10,IN-TN-01,D03,S011,Display Module,C,4,4,2,2,0,100.0,1,Balanced
+REQ-00575,2026-10,IN-TN-01,D03,S012,Battery Pack Module,A,10,9,6,3,1,90.0,4,Shortage
+REQ-00576,2026-10,IN-TN-01,D03,S012,Battery Pack Module,B,11,8,5,3,3,72.7,4,Shortage
+REQ-00577,2026-10,IN-TN-01,D03,S012,Battery Pack Module,C,3,3,2,1,0,100.0,1,Balanced
+REQ-00578,2026-10,IN-TN-01,D04,S013,RF Testing,A,15,13,12,1,2,86.7,5,Shortage
+REQ-00579,2026-10,IN-TN-01,D04,S013,RF Testing,B,8,8,6,2,0,100.0,3,Balanced
+REQ-00580,2026-10,IN-TN-01,D04,S013,RF Testing,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00581,2026-10,IN-TN-01,D04,S014,Functional Testing,A,5,3,3,0,2,60.0,2,Shortage
+REQ-00582,2026-10,IN-TN-01,D04,S014,Functional Testing,B,8,6,3,3,2,75.0,3,Shortage
+REQ-00583,2026-10,IN-TN-01,D04,S014,Functional Testing,C,5,4,2,2,1,80.0,2,Shortage
+REQ-00584,2026-10,IN-TN-01,D04,S015,Camera Calibration,A,6,5,5,0,1,83.3,2,Shortage
+REQ-00585,2026-10,IN-TN-01,D04,S015,Camera Calibration,B,7,6,5,1,1,85.7,2,Shortage
+REQ-00586,2026-10,IN-TN-01,D04,S015,Camera Calibration,C,1,1,1,0,0,100.0,0,Balanced
+REQ-00587,2026-10,IN-TN-01,D04,S016,Burn-in & Ageing,A,12,8,6,2,4,66.7,4,Shortage
+REQ-00588,2026-10,IN-TN-01,D04,S016,Burn-in & Ageing,B,5,5,4,1,0,100.0,2,Balanced
+REQ-00589,2026-10,IN-TN-01,D04,S016,Burn-in & Ageing,C,6,6,6,0,0,100.0,2,Balanced
+REQ-00590,2026-10,IN-TN-01,D05,S017,Incoming Quality (IQC),A,9,8,7,1,1,88.9,3,Shortage
+REQ-00591,2026-10,IN-TN-01,D05,S017,Incoming Quality (IQC),B,5,5,3,2,0,100.0,2,Balanced
+REQ-00592,2026-10,IN-TN-01,D05,S017,Incoming Quality (IQC),C,9,8,6,2,1,88.9,3,Shortage
+REQ-00593,2026-10,IN-TN-01,D05,S018,In-Process Quality (IPQC),A,9,9,8,1,0,100.0,3,Balanced
+REQ-00594,2026-10,IN-TN-01,D05,S018,In-Process Quality (IPQC),B,5,5,5,0,0,100.0,2,Balanced
+REQ-00595,2026-10,IN-TN-01,D05,S018,In-Process Quality (IPQC),C,3,3,1,2,0,100.0,1,Balanced
+REQ-00596,2026-10,IN-TN-01,D05,S019,Final Quality (OQC),A,17,15,15,0,2,88.2,6,Shortage
+REQ-00597,2026-10,IN-TN-01,D05,S019,Final Quality (OQC),B,5,5,2,3,0,100.0,2,Balanced
+REQ-00598,2026-10,IN-TN-01,D05,S019,Final Quality (OQC),C,5,4,2,2,1,80.0,2,Shortage
+REQ-00599,2026-10,IN-TN-01,D05,S020,Quality Lab,A,9,9,8,1,0,100.0,3,Balanced
+REQ-00600,2026-10,IN-TN-01,D05,S020,Quality Lab,B,7,7,6,1,0,100.0,2,Balanced
+REQ-00601,2026-10,IN-TN-01,D05,S020,Quality Lab,C,10,10,8,2,0,100.0,4,Balanced
+REQ-00602,2026-10,IN-TN-01,D06,S021,Mechanical Maintenance,A,9,8,7,1,1,88.9,3,Shortage
+REQ-00603,2026-10,IN-TN-01,D06,S021,Mechanical Maintenance,B,4,4,3,1,0,100.0,1,Balanced
+REQ-00604,2026-10,IN-TN-01,D06,S021,Mechanical Maintenance,C,8,7,6,1,1,87.5,3,Shortage
+REQ-00605,2026-10,IN-TN-01,D06,S022,Electrical Maintenance,A,9,9,8,1,0,100.0,3,Balanced
+REQ-00606,2026-10,IN-TN-01,D06,S022,Electrical Maintenance,B,4,3,2,1,1,75.0,1,Shortage
+REQ-00607,2026-10,IN-TN-01,D06,S022,Electrical Maintenance,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00608,2026-10,IN-TN-01,D06,S023,Preventive Maintenance,A,10,9,8,1,1,90.0,4,Shortage
+REQ-00609,2026-10,IN-TN-01,D06,S023,Preventive Maintenance,B,5,5,2,3,0,100.0,2,Balanced
+REQ-00610,2026-10,IN-TN-01,D06,S023,Preventive Maintenance,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00611,2026-10,IN-TN-01,D07,S024,Line Feeding,A,14,14,7,7,0,100.0,5,Balanced
+REQ-00612,2026-10,IN-TN-01,D07,S024,Line Feeding,B,10,10,1,9,0,100.0,4,Balanced
+REQ-00613,2026-10,IN-TN-01,D07,S024,Line Feeding,C,6,6,3,3,0,100.0,2,Balanced
+REQ-00614,2026-10,IN-TN-01,D07,S025,Material Movement,A,8,8,4,4,0,100.0,3,Balanced
+REQ-00615,2026-10,IN-TN-01,D07,S025,Material Movement,B,6,6,3,3,0,100.0,2,Balanced
+REQ-00616,2026-10,IN-TN-01,D07,S025,Material Movement,C,6,5,3,2,1,83.3,2,Shortage
+REQ-00617,2026-10,IN-TN-01,D07,S026,Forklift & Tugger,A,10,10,4,6,0,100.0,4,Balanced
+REQ-00618,2026-10,IN-TN-01,D07,S026,Forklift & Tugger,B,13,12,6,6,1,92.3,5,Shortage
+REQ-00619,2026-10,IN-TN-01,D07,S026,Forklift & Tugger,C,7,7,2,5,0,100.0,2,Balanced
+REQ-00620,2026-10,IN-TN-01,D08,S027,Packing,A,15,13,6,7,2,86.7,5,Shortage
+REQ-00621,2026-10,IN-TN-01,D08,S027,Packing,B,12,11,8,3,1,91.7,4,Shortage
+REQ-00622,2026-10,IN-TN-01,D08,S027,Packing,C,2,2,0,2,0,100.0,1,Balanced
+REQ-00623,2026-10,IN-TN-01,D08,S028,Labeling,A,5,5,3,2,0,100.0,2,Balanced
+REQ-00624,2026-10,IN-TN-01,D08,S028,Labeling,B,13,11,3,8,2,84.6,5,Shortage
+REQ-00625,2026-10,IN-TN-01,D08,S028,Labeling,C,4,3,1,2,1,75.0,1,Shortage
+REQ-00626,2026-10,IN-TN-01,D08,S029,Dispatch,A,4,3,1,2,1,75.0,1,Shortage
+REQ-00627,2026-10,IN-TN-01,D08,S029,Dispatch,B,9,7,3,4,2,77.8,3,Shortage
+REQ-00628,2026-10,IN-TN-01,D08,S029,Dispatch,C,4,4,1,3,0,100.0,1,Balanced
+REQ-00629,2026-10,IN-TN-01,D09,S030,Process Engineering,A,9,9,9,0,0,100.0,3,Balanced
+REQ-00630,2026-10,IN-TN-01,D09,S031,Industrial Engineering,A,17,18,18,0,-1,105.9,6,Surplus
+REQ-00631,2026-10,IN-TN-01,D09,S032,Automation,A,14,14,14,0,0,100.0,5,Balanced
+REQ-00632,2026-10,IN-TN-01,D10,S033,Environment Health & Safety,A,2,2,1,1,0,100.0,1,Balanced
+REQ-00633,2026-10,IN-TN-01,D10,S033,Environment Health & Safety,B,3,3,2,1,0,100.0,1,Balanced
+REQ-00634,2026-10,IN-TN-01,D10,S034,Security,A,3,3,1,2,0,100.0,1,Balanced
+REQ-00635,2026-10,IN-TN-01,D10,S034,Security,B,4,3,0,3,1,75.0,1,Shortage
+REQ-00636,2026-10,IN-TN-01,D10,S034,Security,C,3,2,1,1,1,66.7,1,Shortage
+REQ-00637,2026-10,IN-TN-01,D10,S035,Fire & Emergency,A,6,5,3,2,1,83.3,2,Shortage
+REQ-00638,2026-10,IN-TN-01,D10,S035,Fire & Emergency,B,4,4,2,2,0,100.0,1,Balanced
+REQ-00639,2026-10,IN-TN-01,D10,S035,Fire & Emergency,C,2,2,0,2,0,100.0,1,Balanced
+REQ-00640,2026-10,IN-TN-01,D11,S036,Human Resources,A,12,12,6,6,0,100.0,4,Balanced
+REQ-00641,2026-10,IN-TN-01,D11,S037,Administration,A,11,11,10,1,0,100.0,4,Balanced
+REQ-00642,2026-10,IN-TN-01,D11,S038,Canteen & Housekeeping,A,10,9,8,1,1,90.0,4,Shortage
+REQ-00643,2026-10,IN-TN-01,D12,S039,Raw Material Stores,A,7,7,6,1,0,100.0,2,Balanced
+REQ-00644,2026-10,IN-TN-01,D12,S039,Raw Material Stores,B,6,5,3,2,1,83.3,2,Shortage
+REQ-00645,2026-10,IN-TN-01,D12,S039,Raw Material Stores,C,3,3,2,1,0,100.0,1,Balanced
+REQ-00646,2026-10,IN-TN-01,D12,S040,Finished Goods Store,A,8,8,7,1,0,100.0,3,Balanced
+REQ-00647,2026-10,IN-TN-01,D12,S040,Finished Goods Store,B,3,3,2,1,0,100.0,1,Balanced
+REQ-00648,2026-10,IN-TN-01,D12,S040,Finished Goods Store,C,2,2,0,2,0,100.0,1,Balanced
+REQ-00649,2026-10,IN-TN-01,D12,S041,Procurement Coordination,A,7,7,6,1,0,100.0,2,Balanced
+REQ-00650,2026-10,IN-TN-01,D12,S041,Procurement Coordination,B,6,6,5,1,0,100.0,2,Balanced
+REQ-00651,2026-10,IN-TN-01,D12,S041,Procurement Coordination,C,1,1,1,0,0,100.0,0,Balanced
+REQ-00652,2026-11,IN-KA-01,D01,S001,Solder Paste Printing,A,10,8,4,4,2,80.0,4,Shortage
+REQ-00653,2026-11,IN-KA-01,D01,S001,Solder Paste Printing,B,11,10,7,3,1,90.9,4,Shortage
+REQ-00654,2026-11,IN-KA-01,D01,S001,Solder Paste Printing,C,5,5,2,3,0,100.0,2,Balanced
+REQ-00655,2026-11,IN-KA-01,D01,S002,Pick & Place,A,9,8,8,0,1,88.9,3,Shortage
+REQ-00656,2026-11,IN-KA-01,D01,S002,Pick & Place,B,6,6,3,3,0,100.0,2,Balanced
+REQ-00657,2026-11,IN-KA-01,D01,S002,Pick & Place,C,7,6,2,4,1,85.7,2,Shortage
+REQ-00658,2026-11,IN-KA-01,D01,S003,Reflow Soldering,A,13,11,6,5,2,84.6,5,Shortage
+REQ-00659,2026-11,IN-KA-01,D01,S003,Reflow Soldering,B,5,5,4,1,0,100.0,2,Balanced
+REQ-00660,2026-11,IN-KA-01,D01,S003,Reflow Soldering,C,2,1,1,0,1,50.0,1,Shortage
+REQ-00661,2026-11,IN-KA-01,D01,S004,SPI/AOI Inspection,A,11,10,6,4,1,90.9,4,Shortage
+REQ-00662,2026-11,IN-KA-01,D01,S004,SPI/AOI Inspection,B,8,7,5,2,1,87.5,3,Shortage
+REQ-00663,2026-11,IN-KA-01,D01,S004,SPI/AOI Inspection,C,3,2,1,1,1,66.7,1,Shortage
+REQ-00664,2026-11,IN-KA-01,D02,S005,Mainboard Assembly,A,8,8,3,5,0,100.0,3,Balanced
+REQ-00665,2026-11,IN-KA-01,D02,S005,Mainboard Assembly,B,17,16,12,4,1,94.1,6,Shortage
+REQ-00666,2026-11,IN-KA-01,D02,S005,Mainboard Assembly,C,4,4,2,2,0,100.0,1,Balanced
+REQ-00667,2026-11,IN-KA-01,D02,S006,Battery & Frame Fitting,A,17,15,8,7,2,88.2,6,Shortage
+REQ-00668,2026-11,IN-KA-01,D02,S006,Battery & Frame Fitting,B,19,19,12,7,0,100.0,7,Balanced
+REQ-00669,2026-11,IN-KA-01,D02,S006,Battery & Frame Fitting,C,8,8,4,4,0,100.0,3,Balanced
+REQ-00670,2026-11,IN-KA-01,D02,S007,Display Assembly,A,19,16,12,4,3,84.2,7,Shortage
+REQ-00671,2026-11,IN-KA-01,D02,S007,Display Assembly,B,16,15,10,5,1,93.8,6,Shortage
+REQ-00672,2026-11,IN-KA-01,D02,S007,Display Assembly,C,4,2,0,2,2,50.0,1,Shortage
+REQ-00673,2026-11,IN-KA-01,D02,S008,Back Cover Fitting,A,20,19,9,10,1,95.0,7,Shortage
+REQ-00674,2026-11,IN-KA-01,D02,S008,Back Cover Fitting,B,14,12,7,5,2,85.7,5,Shortage
+REQ-00675,2026-11,IN-KA-01,D02,S008,Back Cover Fitting,C,5,4,2,2,1,80.0,2,Shortage
+REQ-00676,2026-11,IN-KA-01,D02,S009,Final Assembly Line Support,A,22,19,9,10,3,86.4,8,Shortage
+REQ-00677,2026-11,IN-KA-01,D02,S009,Final Assembly Line Support,B,14,11,5,6,3,78.6,5,Shortage
+REQ-00678,2026-11,IN-KA-01,D02,S009,Final Assembly Line Support,C,6,6,3,3,0,100.0,2,Balanced
+REQ-00679,2026-11,IN-KA-01,D03,S010,Camera Module,A,11,9,7,2,2,81.8,4,Shortage
+REQ-00680,2026-11,IN-KA-01,D03,S010,Camera Module,B,10,9,6,3,1,90.0,4,Shortage
+REQ-00681,2026-11,IN-KA-01,D03,S010,Camera Module,C,2,2,1,1,0,100.0,1,Balanced
+REQ-00682,2026-11,IN-KA-01,D03,S011,Display Module,A,6,5,5,0,1,83.3,2,Shortage
+REQ-00683,2026-11,IN-KA-01,D03,S011,Display Module,B,7,7,3,4,0,100.0,2,Balanced
+REQ-00684,2026-11,IN-KA-01,D03,S011,Display Module,C,5,5,3,2,0,100.0,2,Balanced
+REQ-00685,2026-11,IN-KA-01,D03,S012,Battery Pack Module,A,18,14,8,6,4,77.8,6,Shortage
+REQ-00686,2026-11,IN-KA-01,D03,S012,Battery Pack Module,B,13,13,5,8,0,100.0,5,Balanced
+REQ-00687,2026-11,IN-KA-01,D03,S012,Battery Pack Module,C,9,7,4,3,2,77.8,3,Shortage
+REQ-00688,2026-11,IN-KA-01,D04,S013,RF Testing,A,10,9,8,1,1,90.0,4,Shortage
+REQ-00689,2026-11,IN-KA-01,D04,S013,RF Testing,B,9,7,5,2,2,77.8,3,Shortage
+REQ-00690,2026-11,IN-KA-01,D04,S013,RF Testing,C,1,1,1,0,0,100.0,0,Balanced
+REQ-00691,2026-11,IN-KA-01,D04,S014,Functional Testing,A,9,8,6,2,1,88.9,3,Shortage
+REQ-00692,2026-11,IN-KA-01,D04,S014,Functional Testing,B,10,9,8,1,1,90.0,4,Shortage
+REQ-00693,2026-11,IN-KA-01,D04,S014,Functional Testing,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00694,2026-11,IN-KA-01,D04,S015,Camera Calibration,A,10,10,10,0,0,100.0,4,Balanced
+REQ-00695,2026-11,IN-KA-01,D04,S015,Camera Calibration,B,6,5,4,1,1,83.3,2,Shortage
+REQ-00696,2026-11,IN-KA-01,D04,S015,Camera Calibration,C,3,3,2,1,0,100.0,1,Balanced
+REQ-00697,2026-11,IN-KA-01,D04,S016,Burn-in & Ageing,A,11,10,10,0,1,90.9,4,Shortage
+REQ-00698,2026-11,IN-KA-01,D04,S016,Burn-in & Ageing,B,11,9,8,1,2,81.8,4,Shortage
+REQ-00699,2026-11,IN-KA-01,D04,S016,Burn-in & Ageing,C,2,2,1,1,0,100.0,1,Balanced
+REQ-00700,2026-11,IN-KA-01,D05,S017,Incoming Quality (IQC),A,4,3,3,0,1,75.0,1,Shortage
+REQ-00701,2026-11,IN-KA-01,D05,S017,Incoming Quality (IQC),B,9,8,7,1,1,88.9,3,Shortage
+REQ-00702,2026-11,IN-KA-01,D05,S017,Incoming Quality (IQC),C,4,4,2,2,0,100.0,1,Balanced
+REQ-00703,2026-11,IN-KA-01,D05,S018,In-Process Quality (IPQC),A,11,10,8,2,1,90.9,4,Shortage
+REQ-00704,2026-11,IN-KA-01,D05,S018,In-Process Quality (IPQC),B,5,5,4,1,0,100.0,2,Balanced
+REQ-00705,2026-11,IN-KA-01,D05,S018,In-Process Quality (IPQC),C,2,2,2,0,0,100.0,1,Balanced
+REQ-00706,2026-11,IN-KA-01,D05,S019,Final Quality (OQC),A,4,4,2,2,0,100.0,1,Balanced
+REQ-00707,2026-11,IN-KA-01,D05,S019,Final Quality (OQC),B,8,8,7,1,0,100.0,3,Balanced
+REQ-00708,2026-11,IN-KA-01,D05,S019,Final Quality (OQC),C,5,5,3,2,0,100.0,2,Balanced
+REQ-00709,2026-11,IN-KA-01,D05,S020,Quality Lab,A,3,3,2,1,0,100.0,1,Balanced
+REQ-00710,2026-11,IN-KA-01,D05,S020,Quality Lab,B,4,4,3,1,0,100.0,1,Balanced
+REQ-00711,2026-11,IN-KA-01,D05,S020,Quality Lab,C,1,0,0,0,1,0.0,0,Shortage
+REQ-00712,2026-11,IN-KA-01,D06,S021,Mechanical Maintenance,A,5,2,2,0,3,40.0,2,Shortage
+REQ-00713,2026-11,IN-KA-01,D06,S021,Mechanical Maintenance,B,3,3,2,1,0,100.0,1,Balanced
+REQ-00714,2026-11,IN-KA-01,D06,S021,Mechanical Maintenance,C,5,5,4,1,0,100.0,2,Balanced
+REQ-00715,2026-11,IN-KA-01,D06,S022,Electrical Maintenance,A,5,3,2,1,2,60.0,2,Shortage
+REQ-00716,2026-11,IN-KA-01,D06,S022,Electrical Maintenance,B,8,8,7,1,0,100.0,3,Balanced
+REQ-00717,2026-11,IN-KA-01,D06,S022,Electrical Maintenance,C,5,5,4,1,0,100.0,2,Balanced
+REQ-00718,2026-11,IN-KA-01,D06,S023,Preventive Maintenance,A,5,5,4,1,0,100.0,2,Balanced
+REQ-00719,2026-11,IN-KA-01,D06,S023,Preventive Maintenance,B,10,9,6,3,1,90.0,4,Shortage
+REQ-00720,2026-11,IN-KA-01,D06,S023,Preventive Maintenance,C,3,3,3,0,0,100.0,1,Balanced
+REQ-00721,2026-11,IN-KA-01,D07,S024,Line Feeding,A,7,6,4,2,1,85.7,2,Shortage
+REQ-00722,2026-11,IN-KA-01,D07,S024,Line Feeding,B,4,4,1,3,0,100.0,1,Balanced
+REQ-00723,2026-11,IN-KA-01,D07,S024,Line Feeding,C,9,7,3,4,2,77.8,3,Shortage
+REQ-00724,2026-11,IN-KA-01,D07,S025,Material Movement,A,7,6,3,3,1,85.7,2,Shortage
+REQ-00725,2026-11,IN-KA-01,D07,S025,Material Movement,B,7,6,1,5,1,85.7,2,Shortage
+REQ-00726,2026-11,IN-KA-01,D07,S025,Material Movement,C,4,4,1,3,0,100.0,1,Balanced
+REQ-00727,2026-11,IN-KA-01,D07,S026,Forklift & Tugger,A,9,8,4,4,1,88.9,3,Shortage
+REQ-00728,2026-11,IN-KA-01,D07,S026,Forklift & Tugger,B,7,6,2,4,1,85.7,2,Shortage
+REQ-00729,2026-11,IN-KA-01,D07,S026,Forklift & Tugger,C,2,2,1,1,0,100.0,1,Balanced
+REQ-00730,2026-11,IN-KA-01,D08,S027,Packing,A,11,10,3,7,1,90.9,4,Shortage
+REQ-00731,2026-11,IN-KA-01,D08,S027,Packing,B,4,4,0,4,0,100.0,1,Balanced
+REQ-00732,2026-11,IN-KA-01,D08,S027,Packing,C,3,3,1,2,0,100.0,1,Balanced
+REQ-00733,2026-11,IN-KA-01,D08,S028,Labeling,A,9,7,2,5,2,77.8,3,Shortage
+REQ-00734,2026-11,IN-KA-01,D08,S028,Labeling,B,10,8,6,2,2,80.0,4,Shortage
+REQ-00735,2026-11,IN-KA-01,D08,S028,Labeling,C,3,2,1,1,1,66.7,1,Shortage
+REQ-00736,2026-11,IN-KA-01,D08,S029,Dispatch,A,11,11,6,5,0,100.0,4,Balanced
+REQ-00737,2026-11,IN-KA-01,D08,S029,Dispatch,B,4,3,3,0,1,75.0,1,Shortage
+REQ-00738,2026-11,IN-KA-01,D08,S029,Dispatch,C,3,3,0,3,0,100.0,1,Balanced
+REQ-00739,2026-11,IN-KA-01,D09,S030,Process Engineering,A,10,10,10,0,0,100.0,4,Balanced
+REQ-00740,2026-11,IN-KA-01,D09,S031,Industrial Engineering,A,11,11,11,0,0,100.0,4,Balanced
+REQ-00741,2026-11,IN-KA-01,D09,S032,Automation,A,6,6,6,0,0,100.0,2,Balanced
+REQ-00742,2026-11,IN-KA-01,D10,S033,Environment Health & Safety,A,5,4,2,2,1,80.0,2,Shortage
+REQ-00743,2026-11,IN-KA-01,D10,S033,Environment Health & Safety,B,1,1,0,1,0,100.0,0,Balanced
+REQ-00744,2026-11,IN-KA-01,D10,S033,Environment Health & Safety,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00745,2026-11,IN-KA-01,D10,S034,Security,A,4,3,2,1,1,75.0,1,Shortage
+REQ-00746,2026-11,IN-KA-01,D10,S034,Security,B,6,5,1,4,1,83.3,2,Shortage
+REQ-00747,2026-11,IN-KA-01,D10,S035,Fire & Emergency,A,4,4,3,1,0,100.0,1,Balanced
+REQ-00748,2026-11,IN-KA-01,D10,S035,Fire & Emergency,C,2,1,0,1,1,50.0,1,Shortage
+REQ-00749,2026-11,IN-KA-01,D11,S036,Human Resources,A,4,3,3,0,1,75.0,1,Shortage
+REQ-00750,2026-11,IN-KA-01,D11,S037,Administration,A,8,7,4,3,1,87.5,3,Shortage
+REQ-00751,2026-11,IN-KA-01,D11,S038,Canteen & Housekeeping,A,6,6,3,3,0,100.0,2,Balanced
+REQ-00752,2026-11,IN-KA-01,D12,S039,Raw Material Stores,A,3,3,2,1,0,100.0,1,Balanced
+REQ-00753,2026-11,IN-KA-01,D12,S039,Raw Material Stores,B,3,3,1,2,0,100.0,1,Balanced
+REQ-00754,2026-11,IN-KA-01,D12,S040,Finished Goods Store,A,6,6,4,2,0,100.0,2,Balanced
+REQ-00755,2026-11,IN-KA-01,D12,S040,Finished Goods Store,B,3,3,1,2,0,100.0,1,Balanced
+REQ-00756,2026-11,IN-KA-01,D12,S041,Procurement Coordination,A,4,3,2,1,1,75.0,1,Shortage
+REQ-00757,2026-11,IN-KA-01,D12,S041,Procurement Coordination,B,2,1,0,1,1,50.0,1,Shortage
+REQ-00758,2026-11,IN-KA-01,D12,S041,Procurement Coordination,C,4,4,4,0,0,100.0,1,Balanced
+REQ-00759,2026-11,IN-TN-01,D01,S001,Solder Paste Printing,A,20,18,12,6,2,90.0,7,Shortage
+REQ-00760,2026-11,IN-TN-01,D01,S001,Solder Paste Printing,B,11,11,6,5,0,100.0,4,Balanced
+REQ-00761,2026-11,IN-TN-01,D01,S001,Solder Paste Printing,C,8,8,4,4,0,100.0,3,Balanced
+REQ-00762,2026-11,IN-TN-01,D01,S002,Pick & Place,A,13,11,8,3,2,84.6,5,Shortage
+REQ-00763,2026-11,IN-TN-01,D01,S002,Pick & Place,B,8,8,3,5,0,100.0,3,Balanced
+REQ-00764,2026-11,IN-TN-01,D01,S002,Pick & Place,C,5,5,1,4,0,100.0,2,Balanced
+REQ-00765,2026-11,IN-TN-01,D01,S003,Reflow Soldering,A,9,9,6,3,0,100.0,3,Balanced
+REQ-00766,2026-11,IN-TN-01,D01,S003,Reflow Soldering,B,11,10,9,1,1,90.9,4,Shortage
+REQ-00767,2026-11,IN-TN-01,D01,S003,Reflow Soldering,C,5,5,1,4,0,100.0,2,Balanced
+REQ-00768,2026-11,IN-TN-01,D01,S004,SPI/AOI Inspection,A,15,13,9,4,2,86.7,5,Shortage
+REQ-00769,2026-11,IN-TN-01,D01,S004,SPI/AOI Inspection,B,15,12,8,4,3,80.0,5,Shortage
+REQ-00770,2026-11,IN-TN-01,D01,S004,SPI/AOI Inspection,C,5,5,1,4,0,100.0,2,Balanced
+REQ-00771,2026-11,IN-TN-01,D02,S005,Mainboard Assembly,A,26,24,11,13,2,92.3,9,Shortage
+REQ-00772,2026-11,IN-TN-01,D02,S005,Mainboard Assembly,B,18,17,9,8,1,94.4,6,Shortage
+REQ-00773,2026-11,IN-TN-01,D02,S005,Mainboard Assembly,C,9,8,3,5,1,88.9,3,Shortage
+REQ-00774,2026-11,IN-TN-01,D02,S006,Battery & Frame Fitting,A,11,11,9,2,0,100.0,4,Balanced
+REQ-00775,2026-11,IN-TN-01,D02,S006,Battery & Frame Fitting,B,23,19,11,8,4,82.6,8,Shortage
+REQ-00776,2026-11,IN-TN-01,D02,S006,Battery & Frame Fitting,C,10,10,3,7,0,100.0,4,Balanced
+REQ-00777,2026-11,IN-TN-01,D02,S007,Display Assembly,A,17,14,11,3,3,82.4,6,Shortage
+REQ-00778,2026-11,IN-TN-01,D02,S007,Display Assembly,B,24,21,12,9,3,87.5,8,Shortage
+REQ-00779,2026-11,IN-TN-01,D02,S007,Display Assembly,C,12,11,9,2,1,91.7,4,Shortage
+REQ-00780,2026-11,IN-TN-01,D02,S008,Back Cover Fitting,A,18,16,6,10,2,88.9,6,Shortage
+REQ-00781,2026-11,IN-TN-01,D02,S008,Back Cover Fitting,B,19,16,9,7,3,84.2,7,Shortage
+REQ-00782,2026-11,IN-TN-01,D02,S008,Back Cover Fitting,C,10,8,2,6,2,80.0,4,Shortage
+REQ-00783,2026-11,IN-TN-01,D02,S009,Final Assembly Line Support,A,25,20,14,6,5,80.0,9,Shortage
+REQ-00784,2026-11,IN-TN-01,D02,S009,Final Assembly Line Support,B,21,19,11,8,2,90.5,7,Shortage
+REQ-00785,2026-11,IN-TN-01,D02,S009,Final Assembly Line Support,C,6,6,2,4,0,100.0,2,Balanced
+REQ-00786,2026-11,IN-TN-01,D03,S010,Camera Module,A,22,17,7,10,5,77.3,8,Shortage
+REQ-00787,2026-11,IN-TN-01,D03,S010,Camera Module,B,13,11,7,4,2,84.6,5,Shortage
+REQ-00788,2026-11,IN-TN-01,D03,S010,Camera Module,C,5,2,2,0,3,40.0,2,Shortage
+REQ-00789,2026-11,IN-TN-01,D03,S011,Display Module,A,8,8,7,1,0,100.0,3,Balanced
+REQ-00790,2026-11,IN-TN-01,D03,S011,Display Module,B,23,22,14,8,1,95.7,8,Shortage
+REQ-00791,2026-11,IN-TN-01,D03,S011,Display Module,C,4,3,1,2,1,75.0,1,Shortage
+REQ-00792,2026-11,IN-TN-01,D03,S012,Battery Pack Module,A,9,9,6,3,0,100.0,3,Balanced
+REQ-00793,2026-11,IN-TN-01,D03,S012,Battery Pack Module,B,10,8,5,3,2,80.0,4,Shortage
+REQ-00794,2026-11,IN-TN-01,D03,S012,Battery Pack Module,C,3,3,2,1,0,100.0,1,Balanced
+REQ-00795,2026-11,IN-TN-01,D04,S013,RF Testing,A,15,13,12,1,2,86.7,5,Shortage
+REQ-00796,2026-11,IN-TN-01,D04,S013,RF Testing,B,9,8,6,2,1,88.9,3,Shortage
+REQ-00797,2026-11,IN-TN-01,D04,S013,RF Testing,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00798,2026-11,IN-TN-01,D04,S014,Functional Testing,A,5,3,3,0,2,60.0,2,Shortage
+REQ-00799,2026-11,IN-TN-01,D04,S014,Functional Testing,B,7,6,3,3,1,85.7,2,Shortage
+REQ-00800,2026-11,IN-TN-01,D04,S014,Functional Testing,C,5,4,2,2,1,80.0,2,Shortage
+REQ-00801,2026-11,IN-TN-01,D04,S015,Camera Calibration,A,5,5,5,0,0,100.0,2,Balanced
+REQ-00802,2026-11,IN-TN-01,D04,S015,Camera Calibration,B,6,6,5,1,0,100.0,2,Balanced
+REQ-00803,2026-11,IN-TN-01,D04,S015,Camera Calibration,C,1,1,1,0,0,100.0,0,Balanced
+REQ-00804,2026-11,IN-TN-01,D04,S016,Burn-in & Ageing,A,11,8,6,2,3,72.7,4,Shortage
+REQ-00805,2026-11,IN-TN-01,D04,S016,Burn-in & Ageing,B,5,5,4,1,0,100.0,2,Balanced
+REQ-00806,2026-11,IN-TN-01,D04,S016,Burn-in & Ageing,C,6,6,6,0,0,100.0,2,Balanced
+REQ-00807,2026-11,IN-TN-01,D05,S017,Incoming Quality (IQC),A,9,8,7,1,1,88.9,3,Shortage
+REQ-00808,2026-11,IN-TN-01,D05,S017,Incoming Quality (IQC),B,5,5,3,2,0,100.0,2,Balanced
+REQ-00809,2026-11,IN-TN-01,D05,S017,Incoming Quality (IQC),C,9,8,6,2,1,88.9,3,Shortage
+REQ-00810,2026-11,IN-TN-01,D05,S018,In-Process Quality (IPQC),A,9,9,8,1,0,100.0,3,Balanced
+REQ-00811,2026-11,IN-TN-01,D05,S018,In-Process Quality (IPQC),B,5,5,5,0,0,100.0,2,Balanced
+REQ-00812,2026-11,IN-TN-01,D05,S018,In-Process Quality (IPQC),C,3,3,1,2,0,100.0,1,Balanced
+REQ-00813,2026-11,IN-TN-01,D05,S019,Final Quality (OQC),A,17,15,15,0,2,88.2,6,Shortage
+REQ-00814,2026-11,IN-TN-01,D05,S019,Final Quality (OQC),B,5,5,2,3,0,100.0,2,Balanced
+REQ-00815,2026-11,IN-TN-01,D05,S019,Final Quality (OQC),C,5,4,2,2,1,80.0,2,Shortage
+REQ-00816,2026-11,IN-TN-01,D05,S020,Quality Lab,A,9,9,8,1,0,100.0,3,Balanced
+REQ-00817,2026-11,IN-TN-01,D05,S020,Quality Lab,B,7,7,6,1,0,100.0,2,Balanced
+REQ-00818,2026-11,IN-TN-01,D05,S020,Quality Lab,C,10,10,8,2,0,100.0,4,Balanced
+REQ-00819,2026-11,IN-TN-01,D06,S021,Mechanical Maintenance,A,9,8,7,1,1,88.9,3,Shortage
+REQ-00820,2026-11,IN-TN-01,D06,S021,Mechanical Maintenance,B,4,4,3,1,0,100.0,1,Balanced
+REQ-00821,2026-11,IN-TN-01,D06,S021,Mechanical Maintenance,C,8,7,6,1,1,87.5,3,Shortage
+REQ-00822,2026-11,IN-TN-01,D06,S022,Electrical Maintenance,A,9,9,8,1,0,100.0,3,Balanced
+REQ-00823,2026-11,IN-TN-01,D06,S022,Electrical Maintenance,B,4,3,2,1,1,75.0,1,Shortage
+REQ-00824,2026-11,IN-TN-01,D06,S022,Electrical Maintenance,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00825,2026-11,IN-TN-01,D06,S023,Preventive Maintenance,A,10,9,8,1,1,90.0,4,Shortage
+REQ-00826,2026-11,IN-TN-01,D06,S023,Preventive Maintenance,B,5,5,2,3,0,100.0,2,Balanced
+REQ-00827,2026-11,IN-TN-01,D06,S023,Preventive Maintenance,C,2,2,2,0,0,100.0,1,Balanced
+REQ-00828,2026-11,IN-TN-01,D07,S024,Line Feeding,A,14,13,7,6,1,92.9,5,Shortage
+REQ-00829,2026-11,IN-TN-01,D07,S024,Line Feeding,B,10,10,1,9,0,100.0,4,Balanced
+REQ-00830,2026-11,IN-TN-01,D07,S024,Line Feeding,C,6,6,3,3,0,100.0,2,Balanced
+REQ-00831,2026-11,IN-TN-01,D07,S025,Material Movement,A,8,8,4,4,0,100.0,3,Balanced
+REQ-00832,2026-11,IN-TN-01,D07,S025,Material Movement,B,6,6,3,3,0,100.0,2,Balanced
+REQ-00833,2026-11,IN-TN-01,D07,S025,Material Movement,C,6,5,3,2,1,83.3,2,Shortage
+REQ-00834,2026-11,IN-TN-01,D07,S026,Forklift & Tugger,A,10,10,4,6,0,100.0,4,Balanced
+REQ-00835,2026-11,IN-TN-01,D07,S026,Forklift & Tugger,B,12,12,6,6,0,100.0,4,Balanced
+REQ-00836,2026-11,IN-TN-01,D07,S026,Forklift & Tugger,C,7,7,2,5,0,100.0,2,Balanced
+REQ-00837,2026-11,IN-TN-01,D08,S027,Packing,A,15,13,6,7,2,86.7,5,Shortage
+REQ-00838,2026-11,IN-TN-01,D08,S027,Packing,B,11,11,8,3,0,100.0,4,Balanced
+REQ-00839,2026-11,IN-TN-01,D08,S027,Packing,C,2,2,0,2,0,100.0,1,Balanced
+REQ-00840,2026-11,IN-TN-01,D08,S028,Labeling,A,5,5,3,2,0,100.0,2,Balanced
+REQ-00841,2026-11,IN-TN-01,D08,S028,Labeling,B,13,11,3,8,2,84.6,5,Shortage
+REQ-00842,2026-11,IN-TN-01,D08,S028,Labeling,C,4,3,1,2,1,75.0,1,Shortage
+REQ-00843,2026-11,IN-TN-01,D08,S029,Dispatch,A,4,3,1,2,1,75.0,1,Shortage
+REQ-00844,2026-11,IN-TN-01,D08,S029,Dispatch,B,8,7,3,4,1,87.5,3,Shortage
+REQ-00845,2026-11,IN-TN-01,D08,S029,Dispatch,C,4,4,1,3,0,100.0,1,Balanced
+REQ-00846,2026-11,IN-TN-01,D09,S030,Process Engineering,A,9,9,9,0,0,100.0,3,Balanced
+REQ-00847,2026-11,IN-TN-01,D09,S031,Industrial Engineering,A,18,18,18,0,0,100.0,6,Balanced
+REQ-00848,2026-11,IN-TN-01,D09,S032,Automation,A,14,14,14,0,0,100.0,5,Balanced
+REQ-00849,2026-11,IN-TN-01,D10,S033,Environment Health & Safety,A,2,2,1,1,0,100.0,1,Balanced
+REQ-00850,2026-11,IN-TN-01,D10,S033,Environment Health & Safety,B,3,3,2,1,0,100.0,1,Balanced
+REQ-00851,2026-11,IN-TN-01,D10,S034,Security,A,3,3,1,2,0,100.0,1,Balanced
+REQ-00852,2026-11,IN-TN-01,D10,S034,Security,B,4,3,0,3,1,75.0,1,Shortage
+REQ-00853,2026-11,IN-TN-01,D10,S034,Security,C,3,2,1,1,1,66.7,1,Shortage
+REQ-00854,2026-11,IN-TN-01,D10,S035,Fire & Emergency,A,6,5,3,2,1,83.3,2,Shortage
+REQ-00855,2026-11,IN-TN-01,D10,S035,Fire & Emergency,B,4,4,2,2,0,100.0,1,Balanced
+REQ-00856,2026-11,IN-TN-01,D10,S035,Fire & Emergency,C,2,2,0,2,0,100.0,1,Balanced
+REQ-00857,2026-11,IN-TN-01,D11,S036,Human Resources,A,12,12,6,6,0,100.0,4,Balanced
+REQ-00858,2026-11,IN-TN-01,D11,S037,Administration,A,12,11,10,1,1,91.7,4,Shortage
+REQ-00859,2026-11,IN-TN-01,D11,S038,Canteen & Housekeeping,A,10,9,8,1,1,90.0,4,Shortage
+REQ-00860,2026-11,IN-TN-01,D12,S039,Raw Material Stores,A,7,7,6,1,0,100.0,2,Balanced
+REQ-00861,2026-11,IN-TN-01,D12,S039,Raw Material Stores,B,6,5,3,2,1,83.3,2,Shortage
+REQ-00862,2026-11,IN-TN-01,D12,S039,Raw Material Stores,C,3,3,2,1,0,100.0,1,Balanced
+REQ-00863,2026-11,IN-TN-01,D12,S040,Finished Goods Store,A,8,8,7,1,0,100.0,3,Balanced
+REQ-00864,2026-11,IN-TN-01,D12,S040,Finished Goods Store,B,3,3,2,1,0,100.0,1,Balanced
+REQ-00865,2026-11,IN-TN-01,D12,S040,Finished Goods Store,C,2,2,0,2,0,100.0,1,Balanced
+REQ-00866,2026-11,IN-TN-01,D12,S041,Procurement Coordination,A,7,7,6,1,0,100.0,2,Balanced
+REQ-00867,2026-11,IN-TN-01,D12,S041,Procurement Coordination,B,6,6,5,1,0,100.0,2,Balanced
+REQ-00868,2026-11,IN-TN-01,D12,S041,Procurement Coordination,C,1,1,1,0,0,100.0,0,Balanced

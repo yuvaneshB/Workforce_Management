@@ -1,0 +1,190 @@
+[
+  {
+    "section_id": "SEC-01",
+    "section_name": "SMT Production"
+  },
+  {
+    "section_id": "SEC-02",
+    "section_name": "Final Assembly"
+  },
+  {
+    "section_id": "SEC-03",
+    "section_name": "Quality Inspection"
+  },
+  {
+    "section_id": "SEC-04",
+    "section_name": "Maintenance"
+  },
+  {
+    "section_id": "SEC-05",
+    "section_name": "Material Handling"
+  },
+  {
+    "section_id": "SEC-06",
+    "section_name": "Packaging"
+  },
+  {
+    "section_id": "S001",
+    "section_name": "Solder Paste Printing"
+  },
+  {
+    "section_id": "S002",
+    "section_name": "Pick & Place"
+  },
+  {
+    "section_id": "S003",
+    "section_name": "Reflow Soldering"
+  },
+  {
+    "section_id": "S004",
+    "section_name": "SPI/AOI Inspection"
+  },
+  {
+    "section_id": "S005",
+    "section_name": "Mainboard Assembly"
+  },
+  {
+    "section_id": "S006",
+    "section_name": "Battery & Frame Fitting"
+  },
+  {
+    "section_id": "S007",
+    "section_name": "Display Assembly"
+  },
+  {
+    "section_id": "S008",
+    "section_name": "Back Cover Fitting"
+  },
+  {
+    "section_id": "S009",
+    "section_name": "Final Assembly Line Support"
+  },
+  {
+    "section_id": "S010",
+    "section_name": "Camera Module"
+  },
+  {
+    "section_id": "S011",
+    "section_name": "Display Module"
+  },
+  {
+    "section_id": "S012",
+    "section_name": "Battery Pack Module"
+  },
+  {
+    "section_id": "S013",
+    "section_name": "RF Testing"
+  },
+  {
+    "section_id": "S014",
+    "section_name": "Functional Testing"
+  },
+  {
+    "section_id": "S015",
+    "section_name": "Camera Calibration"
+  },
+  {
+    "section_id": "S016",
+    "section_name": "Burn-in & Ageing"
+  },
+  {
+    "section_id": "S017",
+    "section_name": "Incoming Quality (IQC)"
+  },
+  {
+    "section_id": "S018",
+    "section_name": "In-Process Quality (IPQC)"
+  },
+  {
+    "section_id": "S019",
+    "section_name": "Final Quality (OQC)"
+  },
+  {
+    "section_id": "S020",
+    "section_name": "Quality Lab"
+  },
+  {
+    "section_id": "S021",
+    "section_name": "Mechanical Maintenance"
+  },
+  {
+    "section_id": "S022",
+    "section_name": "Electrical Maintenance"
+  },
+  {
+    "section_id": "S023",
+    "section_name": "Preventive Maintenance"
+  },
+  {
+    "section_id": "S024",
+    "section_name": "Line Feeding"
+  },
+  {
+    "section_id": "S025",
+    "section_name": "Material Movement"
+  },
+  {
+    "section_id": "S026",
+    "section_name": "Forklift & Tugger"
+  },
+  {
+    "section_id": "S027",
+    "section_name": "Packing"
+  },
+  {
+    "section_id": "S028",
+    "section_name": "Labeling"
+  },
+  {
+    "section_id": "S029",
+    "section_name": "Dispatch"
+  },
+  {
+    "section_id": "S030",
+    "section_name": "Process Engineering"
+  },
+  {
+    "section_id": "S031",
+    "section_name": "Industrial Engineering"
+  },
+  {
+    "section_id": "S032",
+    "section_name": "Automation"
+  },
+  {
+    "section_id": "S033",
+    "section_name": "Environment Health & Safety"
+  },
+  {
+    "section_id": "S034",
+    "section_name": "Security"
+  },
+  {
+    "section_id": "S035",
+    "section_name": "Fire & Emergency"
+  },
+  {
+    "section_id": "S036",
+    "section_name": "Human Resources"
+  },
+  {
+    "section_id": "S037",
+    "section_name": "Administration"
+  },
+  {
+    "section_id": "S038",
+    "section_name": "Canteen & Housekeeping"
+  },
+  {
+    "section_id": "S039",
+    "section_name": "Raw Material Stores"
+  },
+  {
+    "section_id": "S040",
+    "section_name": "Finished Goods Store"
+  },
+  {
+    "section_id": "S041",
+    "section_name": "Procurement Coordination"
+  }
+]

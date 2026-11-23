@@ -1,0 +1,3 @@
+plant_id,plant_name,city,state,country,timezone,established_year,plant_type,total_headcount_budget
+IN-TN-01,Chennai Electronics Plant,Chennai,Tamil Nadu,India,Asia/Kolkata,2018,Smartphone Assembly,980
+IN-KA-01,Bengaluru Electronics Plant,Bengaluru,Karnataka,India,Asia/Kolkata,2020,Smartphone Assembly,820

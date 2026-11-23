@@ -1,0 +1,74 @@
+{
+  "department_master": {
+    "source_count": 18,
+    "db_backup_count": 18,
+    "local_backup_file": "D:\\workforce_management_source1\\backend\\backups\\pre_migration_backup\\department_master.json",
+    "verified": true
+  },
+  "dim_shift_calendar": {
+    "source_count": 276,
+    "db_backup_count": 276,
+    "local_backup_file": "D:\\workforce_management_source1\\backend\\backups\\pre_migration_backup\\dim_shift_calendar.json",
+    "verified": true
+  },
+  "dim_workforce": {
+    "source_count": 180,
+    "db_backup_count": 180,
+    "local_backup_file": "D:\\workforce_management_source1\\backend\\backups\\pre_migration_backup\\dim_workforce.json",
+    "verified": true
+  },
+  "employee_department_mapping": {
+    "source_count": 180,
+    "db_backup_count": 180,
+    "local_backup_file": "D:\\workforce_management_source1\\backend\\backups\\pre_migration_backup\\employee_department_mapping.json",
+    "verified": true
+  },
+  "employee_experience": {
+    "source_count": 180,
+    "db_backup_count": 180,
+    "local_backup_file": "D:\\workforce_management_source1\\backend\\backups\\pre_migration_backup\\employee_experience.json",
+    "verified": true
+  },
+  "employee_master": {
+    "source_count": 180,
+    "db_backup_count": 180,
+    "local_backup_file": "D:\\workforce_management_source1\\backend\\backups\\pre_migration_backup\\employee_master.json",
+    "verified": true
+  },
+  "employee_section_mapping": {
+    "source_count": 180,
+    "db_backup_count": 180,
+    "local_backup_file": "D:\\workforce_management_source1\\backend\\backups\\pre_migration_backup\\employee_section_mapping.json",
+    "verified": true
+  },
+  "employee_vendor_mapping": {
+    "source_count": 180,
+    "db_backup_count": 180,
+    "local_backup_file": "D:\\workforce_management_source1\\backend\\backups\\pre_migration_backup\\employee_vendor_mapping.json",
+    "verified": true
+  },
+  "fact_hourly_production": {
+    "source_count": 8832,
+    "db_backup_count": 8832,
+    "local_backup_file": "D:\\workforce_management_source1\\backend\\backups\\pre_migration_backup\\fact_hourly_production.json",
+    "verified": true
+  },
+  "fact_workforce_attendance": {
+    "source_count": 16560,
+    "db_backup_count": 16560,
+    "local_backup_file": "D:\\workforce_management_source1\\backend\\backups\\pre_migration_backup\\fact_workforce_attendance.json",
+    "verified": true
+  },
+  "section_master": {
+    "source_count": 47,
+    "db_backup_count": 47,
+    "local_backup_file": "D:\\workforce_management_source1\\backend\\backups\\pre_migration_backup\\section_master.json",
+    "verified": true
+  },
+  "vendor_master": {
+    "source_count": 10,
+    "db_backup_count": 10,
+    "local_backup_file": "D:\\workforce_management_source1\\backend\\backups\\pre_migration_backup\\vendor_master.json",
+    "verified": true
+  }
+}

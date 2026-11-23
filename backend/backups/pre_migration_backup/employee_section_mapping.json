@@ -1,0 +1,722 @@
+[
+  {
+    "employee_id": "EMP-0001",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0002",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0003",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0004",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0005",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0006",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0007",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0008",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0009",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0010",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0011",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0012",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0013",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0014",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0015",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0016",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0017",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0018",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0019",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0020",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0021",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0022",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0023",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0024",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0025",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0026",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0027",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0028",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0029",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0030",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0031",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0032",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0033",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0034",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0035",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0036",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0037",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0038",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0039",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0040",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0041",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0042",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0043",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0044",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0045",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0046",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0047",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0048",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0049",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0050",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0051",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0052",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0053",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0054",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0055",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0056",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0057",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0058",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0059",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0060",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0061",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0062",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0063",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0064",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0065",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0066",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0067",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0068",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0069",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0070",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0071",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0072",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0073",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0074",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0075",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0076",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0077",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0078",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0079",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0080",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0081",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0082",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0083",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0084",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0085",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0086",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0087",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0088",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0089",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0090",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0091",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0092",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0093",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0094",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0095",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0096",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0097",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0098",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0099",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0100",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0101",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0102",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0103",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0104",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0105",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0106",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0107",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0108",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0109",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0110",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0111",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0112",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0113",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0114",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0115",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0116",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0117",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0118",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0119",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0120",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0121",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0122",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0123",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0124",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0125",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0126",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0127",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0128",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0129",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0130",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0131",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0132",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0133",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0134",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0135",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0136",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0137",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0138",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0139",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0140",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0141",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0142",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0143",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0144",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0145",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0146",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0147",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0148",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0149",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0150",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0151",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0152",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0153",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0154",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0155",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0156",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0157",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0158",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0159",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0160",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0161",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0162",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0163",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0164",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0165",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0166",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0167",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0168",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0169",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0170",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0171",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0172",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0173",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0174",
+    "section_id": "SEC-06"
+  },
+  {
+    "employee_id": "EMP-0175",
+    "section_id": "SEC-01"
+  },
+  {
+    "employee_id": "EMP-0176",
+    "section_id": "SEC-02"
+  },
+  {
+    "employee_id": "EMP-0177",
+    "section_id": "SEC-03"
+  },
+  {
+    "employee_id": "EMP-0178",
+    "section_id": "SEC-04"
+  },
+  {
+    "employee_id": "EMP-0179",
+    "section_id": "SEC-05"
+  },
+  {
+    "employee_id": "EMP-0180",
+    "section_id": "SEC-06"
+  }
+]

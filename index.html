@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workforce AI | Prototype</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        fontFamily: { sans: ['Montserrat', 'sans-serif'] },
+        colors: {
+          brand: { purple:'#6F3DBA', blue:'#4D8EEB', orange:'#F58A3A', navy:'#1F2F59', cyan:'#31B7C3' }
+        }
+      }}
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --page-bg:#F5F7FA; --surface:#FFFFFF; --brand-bg:#FCFCFE;
+      --text:#1F2F59; --secondary:#54627E; --muted:#98A2B3;
+      --border:#E3E8F0; --blue-soft:#EAF4FF; --purple-soft:#F3EEFF;
+      --peach-soft:#FFF2EB; --muted-fill:#EEF1F6; --shadow:0 8px 24px rgba(31,47,89,.06);
+    }
+    :root[data-theme="dark"] {
+      --page-bg:#090E1A; --surface:#26334D; --brand-bg:#151E30;
+      --text:#F1F5FD; --secondary:#B3C0D8; --muted:#7D8BA6;
+      --border:#394761; --blue-soft:#142339; --purple-soft:#1E1836;
+      --peach-soft:#2B1D17; --muted-fill:#151E30; --shadow:0 8px 24px rgba(0,0,0,.18);
+    }
+    * { box-sizing:border-box; }
+    body { font-family:'Montserrat',sans-serif; background:var(--page-bg); color:var(--text); }
+    .surface { background:var(--surface); border:1px solid var(--border); box-shadow:var(--shadow); }
+    .muted { color:var(--secondary); }
+    .nav-item { display:flex; align-items:center; gap:12px; padding:11px 13px; border-radius:10px; color:var(--secondary); font-size:12px; font-weight:600; transition:.18s; width:100%; text-align:left; }
+    .nav-item:hover { background:var(--muted-fill); color:var(--text); }
+    .nav-item.active { background:var(--purple-soft); color:#6F3DBA; }
+    [data-theme="dark"] .nav-item.active { color:#B99AF2; }
+    .kpi-icon { width:38px;height:38px;border-radius:11px;display:grid;place-items:center; }
+    .pill { display:inline-flex;align-items:center;border-radius:999px;padding:5px 9px;font-size:10px;font-weight:700; }
+    .page { display:none; } .page.active { display:block; }
+    .chart-grid { background-image:linear-gradient(to right, var(--border) 1px, transparent 1px),linear-gradient(to bottom, var(--border) 1px, transparent 1px);background-size:25% 25%; }
+    .bar { border-radius:6px 6px 0 0; min-width:14px; }
+    .mobile-overlay { display:none; }
+    @media(max-width:900px){ #sidebar{position:fixed;z-index:30;transform:translateX(-105%);transition:.2s;height:100vh;} #sidebar.open{transform:translateX(0)} .mobile-overlay.show{display:block;position:fixed;inset:0;background:#0b1220a6;z-index:20;} }
+  </style>
+</head>
+<body>
+<div class="mobile-overlay" id="overlay" onclick="toggleSidebar(false)"></div>
+<div class="min-h-screen flex">
+  <aside id="sidebar" class="w-[250px] shrink-0 border-r flex flex-col p-4" style="background:var(--surface);border-color:var(--border)">
+    <div class="flex items-center gap-3 px-2 py-3 mb-6">
+      <div class="w-10 h-10 rounded-xl grid place-items-center text-white" style="background:linear-gradient(135deg,#6F3DBA,#4D8EEB)"><i data-lucide="factory" class="w-5 h-5"></i></div>
+      <div><div class="font-extrabold text-[14px] tracking-tight">Workforce <span style="color:#6F3DBA">AI</span></div><div class="text-[9px] muted tracking-[.12em] font-bold mt-1">MANUFACTURING INTELLIGENCE</div></div>
+      <button class="ml-auto lg:hidden muted" onclick="toggleSidebar(false)"><i data-lucide="x"></i></button>
+    </div>
+    <div class="text-[9px] font-bold tracking-[.16em] muted px-3 mb-2">WORKSPACE</div>
+    <nav class="space-y-1" id="nav">
+      <button class="nav-item active" data-page="overview"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Overview</button>
+      <button class="nav-item" data-page="employees"><i data-lucide="users" class="w-4 h-4"></i> Employees</button>
+      <button class="nav-item" data-page="attendance"><i data-lucide="calendar-check" class="w-4 h-4"></i> Attendance</button>
+      <button class="nav-item" data-page="shifts"><i data-lucide="calendar-clock" class="w-4 h-4"></i> Shift management</button>
+      <button class="nav-item" data-page="operations"><i data-lucide="factory" class="w-4 h-4"></i> Production operations</button>
+      <button class="nav-item" data-page="analytics"><i data-lucide="chart-no-axes-combined" class="w-4 h-4"></i> Workforce analytics</button>
+    </nav>
+    <div class="text-[9px] font-bold tracking-[.16em] muted px-3 mt-7 mb-2">AI WORKSPACE</div>
+    <nav class="space-y-1">
+      <button class="nav-item" data-page="assistant"><i data-lucide="bot" class="w-4 h-4"></i> AI assistant <span class="ml-auto pill" style="background:var(--purple-soft);color:#6F3DBA">AI</span></button>
+      <button class="nav-item" data-page="recommendations"><i data-lucide="lightbulb" class="w-4 h-4"></i> Recommendations</button>
+      <button class="nav-item" data-page="approvals"><i data-lucide="clipboard-check" class="w-4 h-4"></i> Approvals</button>
+    </nav>
+    <div class="mt-auto surface rounded-xl p-3 !shadow-none" style="background:var(--brand-bg)">
+      <div class="flex items-center gap-2 mb-2"><span class="w-2 h-2 rounded-full" style="background:#0E9C86"></span><span class="text-[10px] font-bold">Prototype environment</span></div>
+      <p class="text-[10px] leading-5 muted">Data integrations are not connected. Workforce figures will appear after approved data is loaded.</p>
+    </div>
+    <div class="flex items-center gap-2 px-2 pt-4 mt-3 border-t" style="border-color:var(--border)">
+      <div class="w-8 h-8 rounded-full grid place-items-center text-xs font-bold" style="background:var(--blue-soft);color:#4D8EEB">WM</div>
+      <div class="min-w-0"><div class="text-[11px] font-bold">Workspace User</div><div class="text-[9px] muted">HR workspace</div></div>
+      <i data-lucide="more-horizontal" class="w-4 h-4 ml-auto muted"></i>
+    </div>
+  </aside>
+
+  <main class="flex-1 min-w-0">
+    <header class="h-[68px] flex items-center justify-between px-5 lg:px-8 border-b sticky top-0 z-10" style="background:var(--surface);border-color:var(--border)">
+      <div class="flex items-center gap-3">
+        <button class="lg:hidden muted" onclick="toggleSidebar(true)"><i data-lucide="menu"></i></button>
+        <div><div class="text-[10px] muted font-medium">Manufacturing / <span id="crumb">Overview</span></div><div class="font-bold text-sm mt-1" id="topTitle">Workforce Overview</div></div>
+      </div>
+      <div class="flex items-center gap-2 sm:gap-4">
+        <div class="hidden md:flex items-center gap-2 rounded-lg px-3 py-2 w-56" style="background:var(--page-bg);border:1px solid var(--border)"><i data-lucide="search" class="w-4 h-4 muted"></i><span class="text-[10px] muted">Search workspace</span><span class="ml-auto text-[9px] muted">⌘ K</span></div>
+        <button class="w-9 h-9 rounded-lg grid place-items-center" style="background:var(--page-bg)" title="Notifications"><i data-lucide="bell" class="w-4 h-4"></i></button>
+        <button id="themeToggle" class="w-9 h-9 rounded-lg grid place-items-center" style="background:var(--page-bg)" title="Toggle theme"><i data-lucide="moon" class="w-4 h-4"></i></button>
+        <div class="w-8 h-8 rounded-full grid place-items-center text-[10px] font-bold" style="background:var(--purple-soft);color:#6F3DBA">YU</div>
+      </div>
+    </header>
+
+    <div class="p-5 lg:p-8 max-w-[1600px] mx-auto">
+      <section id="overview" class="page active">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6">
+          <div><div class="text-[10px] font-bold tracking-[.14em] uppercase mb-2" style="color:#31B7C3">Workforce intelligence</div><h1 class="text-2xl font-extrabold tracking-tight">Workforce Overview</h1><p class="text-xs muted mt-2">Monitor staffing readiness, attendance and production coverage.</p></div>
+          <div class="flex gap-2"><button class="rounded-lg px-3 py-2 text-[10px] font-semibold border" style="border-color:var(--border)"> <i data-lucide="calendar" class="w-3 h-3 inline mr-1"></i> Date range</button><button class="rounded-lg px-3 py-2 text-[10px] font-semibold text-white" style="background:#6F3DBA"><i data-lucide="download" class="w-3 h-3 inline mr-1"></i> Export report</button></div>
+        </div>
+        <div class="rounded-xl p-4 md:p-5 mb-5 text-white relative overflow-hidden" style="background:linear-gradient(110deg,#1F2F59,#34245F 70%,#4B3880)">
+          <div class="relative z-10 max-w-2xl"><div class="text-[9px] font-bold tracking-[.16em] text-cyan-300 mb-2">WORKFORCE MANAGEMENT AGENT</div><h2 class="text-lg md:text-xl font-bold">Make workforce decisions with clarity.</h2><p class="text-[11px] text-blue-100 mt-2 leading-5 max-w-xl">Understand manpower demand, employee availability, skill coverage and shift readiness from one intelligent workspace.</p><button onclick="showPage('assistant')" class="mt-4 rounded-lg px-3 py-2 text-[10px] font-bold" style="background:#fff;color:#34245F">Open AI assistant <i data-lucide="arrow-up-right" class="w-3 h-3 inline ml-1"></i></button></div>
+          <div class="absolute right-8 -top-14 w-64 h-64 rounded-full border opacity-20" style="border-color:#fff"></div><div class="absolute right-20 -top-4 w-44 h-44 rounded-full border opacity-20" style="border-color:#fff"></div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 mb-5">
+          <div class="surface rounded-xl p-4"><div class="flex justify-between"><span class="text-[11px] muted font-semibold">Total employees</span><span class="kpi-icon" style="background:var(--blue-soft);color:#4D8EEB"><i data-lucide="users"></i></span></div><div class="text-xl font-extrabold mt-4">—</div><div class="text-[10px] muted mt-1">Awaiting workforce data</div></div>
+          <div class="surface rounded-xl p-4"><div class="flex justify-between"><span class="text-[11px] muted font-semibold">Available workforce</span><span class="kpi-icon" style="background:var(--purple-soft);color:#6F3DBA"><i data-lucide="user-check"></i></span></div><div class="text-xl font-extrabold mt-4">—</div><div class="text-[10px] muted mt-1">Awaiting workforce data</div></div>
+          <div class="surface rounded-xl p-4"><div class="flex justify-between"><span class="text-[11px] muted font-semibold">Attendance rate</span><span class="kpi-icon" style="background:var(--peach-soft);color:#D9701F"><i data-lucide="calendar-check"></i></span></div><div class="text-xl font-extrabold mt-4">—</div><div class="text-[10px] muted mt-1">Awaiting attendance data</div></div>
+          <div class="surface rounded-xl p-4"><div class="flex justify-between"><span class="text-[11px] muted font-semibold">Manpower shortages</span><span class="kpi-icon" style="background:var(--peach-soft);color:#D9701F"><i data-lucide="alert-triangle"></i></span></div><div class="text-xl font-extrabold mt-4">—</div><div class="text-[10px] muted mt-1">No analysis available yet</div></div>
+          <div class="surface rounded-xl p-4"><div class="flex justify-between"><span class="text-[11px] muted font-semibold">Skill coverage</span><span class="kpi-icon" style="background:var(--blue-soft);color:#4D8EEB"><i data-lucide="badge-check"></i></span></div><div class="text-xl font-extrabold mt-4">—</div><div class="text-[10px] muted mt-1">Awaiting skill matrix</div></div>
+          <div class="surface rounded-xl p-4"><div class="flex justify-between"><span class="text-[11px] muted font-semibold">Overtime risk</span><span class="kpi-icon" style="background:var(--purple-soft);color:#6F3DBA"><i data-lucide="clock-3"></i></span></div><div class="text-xl font-extrabold mt-4">—</div><div class="text-[10px] muted mt-1">Awaiting working-hour data</div></div>
+        </div>
+        <div class="grid grid-cols-1 xl:grid-cols-5 gap-4 mb-5">
+          <div class="surface rounded-xl p-5 xl:col-span-3"><div class="flex justify-between items-start"><div><h3 class="font-bold text-xs">Manpower demand vs. supply</h3><p class="text-[10px] muted mt-1">Compare required and available workforce by operation.</p></div><span class="pill" style="background:var(--blue-soft);color:#4D8EEB">Analytics</span></div><div class="h-52 mt-4 rounded-lg chart-grid flex items-center justify-center"><div class="text-center"><i data-lucide="chart-no-axes-column-increasing" class="w-7 h-7 mx-auto muted mb-2"></i><p class="text-[11px] font-semibold">Chart will appear when data is connected</p><p class="text-[10px] muted mt-1">No workforce figures are being simulated.</p></div></div></div>
+          <div class="surface rounded-xl p-5 xl:col-span-2"><h3 class="font-bold text-xs">Shift coverage</h3><p class="text-[10px] muted mt-1">Staffing readiness across production shifts.</p><div class="h-52 flex items-center justify-center"><div class="text-center"><i data-lucide="calendar-clock" class="w-7 h-7 mx-auto muted mb-2"></i><p class="text-[11px] font-semibold">No shift data available</p><p class="text-[10px] muted mt-1">Connect your roster to view coverage.</p></div></div></div>
+        </div>
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+          <div class="surface rounded-xl p-5"><h3 class="font-bold text-xs">Workforce alerts</h3><p class="text-[10px] muted mt-1">Items requiring HR attention.</p><div class="py-9 text-center"><i data-lucide="shield-check" class="w-7 h-7 mx-auto mb-2" style="color:#0E9C86"></i><p class="text-[11px] font-semibold">No alerts to display</p><p class="text-[10px] muted mt-1">Alerts will be generated after workforce analysis.</p></div></div>
+          <div class="surface rounded-xl p-5"><h3 class="font-bold text-xs">Recent recommendations</h3><p class="text-[10px] muted mt-1">AI-supported staffing actions for review.</p><div class="py-9 text-center"><i data-lucide="lightbulb" class="w-7 h-7 mx-auto mb-2" style="color:#6F3DBA"></i><p class="text-[11px] font-semibold">No recommendations yet</p><p class="text-[10px] muted mt-1">Recommendations require validated workforce data.</p></div></div>
+        </div>
+      </section>
+
+      <section id="assistant" class="page">
+        <div class="mb-6"><div class="text-[10px] font-bold tracking-[.14em] uppercase mb-2" style="color:#6F3DBA">AI workspace</div><h1 class="text-2xl font-extrabold">Workforce Intelligence Assistant</h1><p class="text-xs muted mt-2">Ask questions about manpower, attendance, skills and production staffing.</p></div>
+        <div class="surface rounded-xl overflow-hidden min-h-[620px] grid grid-cols-1 lg:grid-cols-[230px_1fr]">
+          <aside class="p-4 border-b lg:border-b-0 lg:border-r" style="border-color:var(--border);background:var(--brand-bg)"><button class="w-full rounded-lg px-3 py-2.5 text-[11px] text-white font-bold" style="background:#6F3DBA"><i data-lucide="plus" class="w-4 h-4 inline mr-2"></i>New conversation</button><div class="text-[9px] muted font-bold tracking-widest mt-7 mb-3">RECENT CONVERSATIONS</div><div class="text-[10px] muted py-3 text-center">No conversations yet</div><div class="mt-6 rounded-lg p-3" style="background:var(--purple-soft)"><div class="text-[10px] font-bold" style="color:#6F3DBA">Data-connected AI</div><p class="text-[9px] muted leading-4 mt-1">Answers will be grounded in approved workforce records.</p></div></aside>
+          <div class="flex flex-col min-h-[620px]"><div class="p-4 border-b flex items-center gap-3" style="border-color:var(--border)"><div class="w-9 h-9 rounded-xl grid place-items-center" style="background:var(--purple-soft);color:#6F3DBA"><i data-lucide="bot"></i></div><div><div class="text-xs font-bold">Workforce Assistant</div><div class="text-[9px] muted mt-1">Prototype · Backend not connected</div></div><span class="ml-auto pill" style="background:var(--muted-fill);color:var(--secondary)">Not connected</span></div>
+            <div class="flex-1 flex flex-col items-center justify-center p-6"><div class="w-14 h-14 rounded-2xl grid place-items-center mb-4" style="background:var(--purple-soft);color:#6F3DBA"><i data-lucide="sparkles" class="w-7 h-7"></i></div><h2 class="text-lg font-bold text-center">Your Workforce Intelligence Assistant</h2><p class="text-[11px] muted text-center max-w-md mt-2 leading-5">Ask questions about manpower availability, attendance, skills, shifts and production staffing.</p><div class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-w-2xl w-full mt-7">
+              <button class="suggestion text-left rounded-lg border p-3 text-[10px] font-semibold" style="border-color:var(--border)">Which operations have manpower shortages? <i data-lucide="arrow-up-right" class="w-3 h-3 inline float-right muted"></i></button>
+              <button class="suggestion text-left rounded-lg border p-3 text-[10px] font-semibold" style="border-color:var(--border)">Show workforce availability by shift <i data-lucide="arrow-up-right" class="w-3 h-3 inline float-right muted"></i></button>
+              <button class="suggestion text-left rounded-lg border p-3 text-[10px] font-semibold" style="border-color:var(--border)">Identify employees with skill gaps <i data-lucide="arrow-up-right" class="w-3 h-3 inline float-right muted"></i></button>
+              <button class="suggestion text-left rounded-lg border p-3 text-[10px] font-semibold" style="border-color:var(--border)">Which shifts have high absenteeism? <i data-lucide="arrow-up-right" class="w-3 h-3 inline float-right muted"></i></button>
+            </div><p class="text-[9px] muted mt-5">Suggested prompts are examples only. AI responses are not enabled in this prototype.</p></div>
+            <div class="p-4 border-t" style="border-color:var(--border)"><div class="flex items-center gap-2 rounded-xl border p-2" style="border-color:var(--border);background:var(--brand-bg)"><input id="chatInput" class="flex-1 bg-transparent outline-none px-2 text-[11px]" placeholder="Ask a workforce question..." /><button onclick="prototypeNotice()" class="rounded-lg w-9 h-9 grid place-items-center text-white" style="background:#6F3DBA"><i data-lucide="arrow-up" class="w-4 h-4"></i></button></div><div class="text-[9px] muted mt-2 text-center">Prototype only · No message is sent to an AI service.</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="generic" class="page">
+        <div class="mb-6"><div class="text-[10px] font-bold tracking-[.14em] uppercase mb-2" style="color:#31B7C3">Workforce workspace</div><h1 class="text-2xl font-extrabold" id="genericTitle">Employees</h1><p class="text-xs muted mt-2" id="genericDesc">Manage workforce information and operational readiness.</p></div>
+        <div class="surface rounded-xl p-5">
+          <div class="flex flex-col md:flex-row gap-3 justify-between mb-5"><div class="flex items-center gap-2 rounded-lg px-3 py-2 border max-w-sm w-full" style="border-color:var(--border)"><i data-lucide="search" class="w-4 h-4 muted"></i><input class="bg-transparent outline-none text-[10px] w-full" placeholder="Search records..." /></div><button class="rounded-lg border px-3 py-2 text-[10px] font-semibold" style="border-color:var(--border)"><i data-lucide="filter" class="w-3 h-3 inline mr-1"></i> Filters</button></div>
+          <div class="border rounded-lg overflow-hidden" style="border-color:var(--border)"><div class="grid grid-cols-4 gap-2 p-3 text-[9px] font-bold muted" style="background:var(--brand-bg)"><span>RECORD</span><span>DETAILS</span><span>STATUS</span><span>ACTION</span></div><div class="py-16 text-center"><i data-lucide="database" class="w-8 h-8 mx-auto muted mb-3"></i><p class="text-xs font-bold">No records to display</p><p class="text-[10px] muted mt-2">Connect and validate your workforce dataset to populate this page.</p></div></div>
+        </div>
+      </section>
+      <footer class="text-[9px] muted flex flex-col sm:flex-row justify-between gap-2 mt-8 pb-3"><span>WORKFORCE AI · MANUFACTURING INTELLIGENCE</span><span>UI prototype · No live data or AI connection</span></footer>
+    </div>
+  </main>
+</div>
+<script>
+  const titles = {
+    overview:['Overview','Workforce Overview','Monitor staffing readiness, attendance and production coverage.'],
+    employees:['Employees','Employee Management','Review employee information, skills and qualifications.'],
+    attendance:['Attendance','Attendance Management','Review attendance patterns and absenteeism.'],
+    shifts:['Shift management','Shift Management','Review shift rosters and staffing coverage.'],
+    operations:['Production operations','Production Operations','Review production operations and manpower requirements.'],
+    analytics:['Workforce analytics','Workforce Analytics','Explore workforce demand, supply, skills and risk indicators.'],
+    recommendations:['Recommendations','Staffing Recommendations','Review evidence-based workforce recommendations.'],
+    approvals:['Approvals','HR Approvals','Review and manage staffing recommendation decisions.']
+  };
+  function showPage(id){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.page===id));
+    if(id==='assistant'){document.getElementById('assistant').classList.add('active');}
+    else if(id==='overview'){document.getElementById('overview').classList.add('active');}
+    else {
+      document.getElementById('generic').classList.add('active');
+      const t=titles[id]||titles.employees;
+      document.getElementById('genericTitle').textContent=t[1];
+      document.getElementById('genericDesc').textContent=t[2];
+    }
+    const t=titles[id]||titles.overview;
+    document.getElementById('crumb').textContent=t[0];
+    document.getElementById('topTitle').textContent=t[1];
+    toggleSidebar(false);
+    lucide.createIcons();
+  }
+  document.querySelectorAll('[data-page]').forEach(n=>n.addEventListener('click',()=>showPage(n.dataset.page)));
+  function toggleSidebar(open){
+    document.getElementById('sidebar').classList.toggle('open',open);
+    document.getElementById('overlay').classList.toggle('show',open);
+  }
+  document.getElementById('themeToggle').addEventListener('click',()=>{
+    const root=document.documentElement;
+    root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';
+    localStorage.setItem('workforce-theme',root.dataset.theme);
+    document.getElementById('themeToggle').innerHTML=root.dataset.theme==='dark'?'<i data-lucide="sun" class="w-4 h-4"></i>':'<i data-lucide="moon" class="w-4 h-4"></i>';
+    lucide.createIcons();
+  });
+  const saved=localStorage.getItem('workforce-theme'); if(saved) document.documentElement.dataset.theme=saved;
+  document.querySelectorAll('.suggestion').forEach(b=>b.addEventListener('click',()=>{document.getElementById('chatInput').value=b.textContent.trim();document.getElementById('chatInput').focus();}));
+  function prototypeNotice(){alert('This is a UI prototype. AI chat will be connected during the backend and Domo integration phase.');}
+  lucide.createIcons();
+</script>
+</body>
+</html>
