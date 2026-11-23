@@ -48,6 +48,10 @@ class Settings(BaseSettings):
     # Agent orchestration mode: "legacy" or "tools" (Phase 7.3 Multi-Agent Supervisor)
     agent_mode: str = Field(default="legacy", alias="AGENT_MODE")
 
+    # Agent Timeout Settings (AGENT_TOTAL_TIMEOUT_SEC, AGENT_LLM_TIMEOUT_SEC)
+    agent_total_timeout_sec: float = Field(default=60.0, ge=1.0, le=600.0, alias="AGENT_TOTAL_TIMEOUT_SEC")
+    agent_llm_timeout_sec: float = Field(default=30.0, ge=1.0, le=300.0, alias="AGENT_LLM_TIMEOUT_SEC")
+
     # Workforce Intelligence Settings (Phase 7.1)
     dependency_backup_threshold: int = Field(default=1, alias="DEPENDENCY_BACKUP_THRESHOLD")
     max_overtime_hours_per_day: float | None = Field(default=None, alias="MAX_OVERTIME_HOURS_PER_DAY")

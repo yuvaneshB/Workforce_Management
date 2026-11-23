@@ -377,10 +377,11 @@ class AttritionAgentService:
                 llm_synthesis = None
 
         if not llm_synthesis:
+            vendor_share_pct = round(vendor_exits / total_exits * 100.0, 1) if total_exits > 0 else 0.0
             llm_synthesis = (
                 f"**Executive Attrition & Retention Summary**: Verified database records document **{total_exits} employee exits** "
                 f"across the enterprise, yielding an overall attrition rate of **{overall_attrition_rate}%** ({retention_rate}% retained out of a total base of {denominator:,} employees). "
-                f"Departures are led by **Vendor staff ({vendor_exits} exits, {round(vendor_exits/total_exits*100,1)}%)** and concentrated heavily in **{lead_dept['department'] if lead_dept else 'Final Assembly'}** "
+                f"Departures are led by **Vendor staff ({vendor_exits} exits, {vendor_share_pct}%)** and concentrated heavily in **{lead_dept['department'] if lead_dept else 'Final Assembly'}** "
                 f"({lead_dept['count'] if lead_dept else 0} exits, {lead_dept['pct'] if lead_dept else '0%'}). "
                 f"The primary recorded drivers are **{top_reason['reason'] if top_reason else 'Absconding'}** ({top_reason['count'] if top_reason else 0} cases) "
                 f"and **{second_reason['reason'] if second_reason else 'Compensation'}** ({second_reason['count'] if second_reason else 0} cases). "

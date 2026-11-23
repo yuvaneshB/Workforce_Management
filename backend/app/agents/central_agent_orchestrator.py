@@ -643,7 +643,21 @@ class CentralAgentOrchestrator:
                     trimmed[:80],
                     len(history_msgs),
                 )
-                sup_result = run_supervisor(question=trimmed, history=history_msgs)
+
+                try:
+                    total_timeout = float(os.getenv("AGENT_TOTAL_TIMEOUT_SEC", "60"))
+                except (ValueError, TypeError):
+                    total_timeout = 60.0
+
+                import concurrent.futures
+                with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+                    future = executor.submit(
+                        run_supervisor,
+                        question=trimmed,
+                        history=history_msgs,
+                    )
+                    sup_result = future.result(timeout=total_timeout)
+
                 answer_text = sup_result.get("answer", "")
                 tool_trace = sup_result.get("tool_trace", [])
                 selected_agents = sup_result.get("selected_agents", [])
@@ -670,6 +684,11 @@ class CentralAgentOrchestrator:
                     "error": None,
                     "status": "success",
                 }
+            except (concurrent.futures.TimeoutError, TimeoutError) as exc:
+                logger.warning(
+                    "Supervisor execution timed out: %s. Falling back to legacy orchestrator path.",
+                    exc,
+                )
             except Exception as exc:
                 logger.error(
                     "Supervisor execution failed in execute_query: %s. Falling back to legacy orchestrator path.",
@@ -1455,7 +1474,13 @@ class CentralAgentOrchestrator:
                     if ev is None:
                         break
 
-        sup_result = await supervisor_future
+        try:
+            total_timeout = float(os.getenv("AGENT_TOTAL_TIMEOUT_SEC", "60"))
+        except (ValueError, TypeError):
+            total_timeout = 60.0
+
+        remaining_time = max(5.0, total_timeout - (time.time() - start_time))
+        sup_result = await asyncio.wait_for(supervisor_future, timeout=remaining_time)
         answer_text = sup_result.get("answer", "")
         tool_trace = sup_result.get("tool_trace", [])
         selected_agents = sup_result.get("selected_agents", [])

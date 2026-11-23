@@ -5,8 +5,10 @@ Executes iterative agent loops:
 until the model returns a final answer or max_steps is hit.
 """
 
+import concurrent.futures
 import json
 import logging
+import os
 import time
 import uuid
 from collections.abc import Callable
@@ -33,6 +35,8 @@ def run_tool_agent(
     max_steps: int = 6,
     on_event: Callable[[dict[str, Any]], None] | None = None,
     model: BaseChatModel | None = None,
+    total_timeout: float | None = None,
+    llm_timeout: float | None = None,
     **kwargs: Any,
 ) -> dict[str, Any]:
     """Execute a multi-step tool agent loop until completion or max_steps limit.
@@ -45,6 +49,8 @@ def run_tool_agent(
         max_steps: Maximum reasoning / tool-calling iterations allowed.
         on_event: Optional callback receiving lifecycle events ("tool_start", "tool_end").
         model: Optional BaseChatModel instance. If None, resolves configured model.
+        total_timeout: Overall timeout in seconds (default from AGENT_TOTAL_TIMEOUT_SEC, 60s).
+        llm_timeout: Per-LLM-call timeout in seconds (default from AGENT_LLM_TIMEOUT_SEC, 30s).
 
     Returns:
         dict with keys:
@@ -52,6 +58,19 @@ def run_tool_agent(
           - tool_trace: List of executed tool call records [{tool, args, duration_ms, ok}]
           - steps: Total number of iterations taken
     """
+    if total_timeout is None:
+        try:
+            from app.core.config import get_settings
+            total_timeout = float(os.getenv("AGENT_TOTAL_TIMEOUT_SEC", str(get_settings().agent_total_timeout_sec)))
+        except Exception:
+            total_timeout = 60.0
+
+    if llm_timeout is None:
+        try:
+            from app.core.config import get_settings
+            llm_timeout = float(os.getenv("AGENT_LLM_TIMEOUT_SEC", str(get_settings().agent_llm_timeout_sec)))
+        except Exception:
+            llm_timeout = 30.0
     if model is None:
         from app.agents.llm.provider import get_chat_model
 
@@ -102,13 +121,32 @@ def run_tool_agent(
     tool_trace: list[dict[str, Any]] = []
     steps = 0
     answer = ""
+    start_time = time.perf_counter()
+
+    def _invoke_model(msgs: list[BaseMessage]) -> Any:
+        if llm_timeout and llm_timeout > 0:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=1) as ex:
+                fut = ex.submit(active_model.invoke, msgs)
+                try:
+                    return fut.result(timeout=llm_timeout)
+                except concurrent.futures.TimeoutError:
+                    logger.error("LLM call timed out after %.1fs (AGENT_LLM_TIMEOUT_SEC)", llm_timeout)
+                    raise TimeoutError(f"LLM call timed out after {llm_timeout:.1f}s")
+        return active_model.invoke(msgs)
 
     while steps < max_steps:
+        elapsed = time.perf_counter() - start_time
+        if total_timeout and total_timeout > 0 and elapsed >= total_timeout:
+            logger.error("Agent exceeded total timeout of %.1fs (AGENT_TOTAL_TIMEOUT_SEC)", total_timeout)
+            raise TimeoutError(f"Agent exceeded total timeout of {total_timeout:.1f}s")
+
         steps += 1
         logger.debug("Agent runner step %d/%d", steps, max_steps)
 
         try:
-            response = active_model.invoke(messages)
+            response = _invoke_model(messages)
+        except TimeoutError:
+            raise
         except Exception as exc:
             logger.error("Error invoking model at step %d: %s", steps, exc)
             answer = f"Agent encountered an error invoking the model: {type(exc).__name__}: {str(exc)}"
@@ -231,7 +269,7 @@ def run_tool_agent(
             )
             messages.append(force_prompt)
             try:
-                final_response = active_model.invoke(messages)
+                final_response = _invoke_model(messages)
                 if isinstance(final_response, AIMessage) and final_response.content:
                     answer = str(final_response.content)
                 elif hasattr(final_response, "content") and final_response.content:
