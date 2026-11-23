@@ -6,7 +6,7 @@ import {
   TrendingUp,
   Users,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AttendanceTrendChart } from '../components/dashboard/AttendanceTrendChart';
 import { AttritionReasonsChart } from '../components/dashboard/AttritionReasonsChart';
 import { AttritionTrendChart } from '../components/dashboard/AttritionTrendChart';
