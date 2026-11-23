@@ -3,8 +3,6 @@ import {
   Briefcase,
   CalendarCheck,
   Clock,
-  TrendingDown,
-  TrendingUp,
   UserCheck,
   UserMinus,
   Users,
@@ -45,8 +43,8 @@ export function WorkforceKPICards({
   const totalEmployeesRaw = workforceSummary?.total_employees ?? null;
   const activeEmployeesRaw = workforceSummary?.active_employees ?? null;
 
-  let permanentCount = workforceSummary?.permanent_count ?? (workforceSummary ? 1053 : null);
-  let vendorCount = workforceSummary?.vendor_count ?? (workforceSummary ? 647 : null);
+  let permanentCount = workforceSummary?.permanent_count ?? (hasData ? 0 : null);
+  let vendorCount = workforceSummary?.vendor_count ?? (hasData ? 0 : null);
 
   if (vendorId) {
     permanentCount = 0;
@@ -66,7 +64,7 @@ export function WorkforceKPICards({
 
   const activeVendorsCount = workforceSummary?.by_vendor
     ? workforceSummary.by_vendor.filter((v) => v.key !== 'Permanent' && v.count > 0).length
-    : 6;
+    : (hasData ? 0 : 0);
 
   const totalRecords = attendanceAnalytics?.total_records ?? 0;
   const presentCount = getStatusCount(attendanceAnalytics, 'PRESENT');
@@ -123,18 +121,25 @@ export function WorkforceKPICards({
       : null;
 
   // Attrition metrics
-  const attritionRate =
-    attritionAnalytics?.summary?.overall_attrition_rate != null
-      ? `${attritionAnalytics.summary.overall_attrition_rate.toFixed(1)}%`
-      : hasData
-      ? '7.1%'
-      : '—';
+  const totalEmployeesNum = totalEmployeesRaw != null ? Number(totalEmployeesRaw) : 0;
+  const resignedCount = workforceSummary?.resigned_employees ?? null;
   const totalExitsCount =
     attritionAnalytics?.summary?.total_exits != null
       ? attritionAnalytics.summary.total_exits
+      : resignedCount != null
+      ? resignedCount
       : hasData
-      ? 120
+      ? 0
       : null;
+
+  const attritionRate =
+    attritionAnalytics?.summary?.overall_attrition_rate != null
+      ? `${attritionAnalytics.summary.overall_attrition_rate.toFixed(1)}%`
+      : totalEmployeesNum > 0 && totalExitsCount != null
+      ? `${((totalExitsCount / totalEmployeesNum) * 100).toFixed(1)}%`
+      : hasData
+      ? '0.0%'
+      : '—';
 
   const cards = [
     {
@@ -143,7 +148,7 @@ export function WorkforceKPICards({
       value: totalEmployeesRaw != null ? String(totalEmployeesRaw) : '—',
       subtext: hasData ? 'Permanent + Vendor' : 'No backend connection',
       icon: Users,
-      badge: workforceSummary ? `${workforceSummary.distinct_teams || 41} Teams Active` : 'No Data',
+      badge: workforceSummary ? `${workforceSummary.distinct_teams || 0} Teams Active` : 'No Data',
       badgeColor: 'bg-[var(--brand-purple-soft)] text-[var(--brand-purple)] border border-[var(--brand-purple)]/20',
       iconBg: 'bg-[var(--brand-purple-soft)] text-[var(--brand-purple)]',
     },
@@ -191,9 +196,9 @@ export function WorkforceKPICards({
       id: 'attrition-rate',
       label: '6. Attrition Rate',
       value: attritionRate,
-      subtext: totalExitsCount != null ? `${totalExitsCount} Exits in Period` : (hasData ? '120 Exits in Period' : 'No backend connection'),
+      subtext: totalExitsCount != null ? `${totalExitsCount} Exits in Period` : (hasData ? '0 Exits in Period' : 'No backend connection'),
       icon: UserMinus,
-      badge: hasData ? `${activeEmployeesRaw || 1580}/${totalEmployeesRaw || 1700} Retained` : 'No Data',
+      badge: hasData ? `${activeEmployeesRaw ?? 0}/${totalEmployeesRaw ?? 0} Retained` : 'No Data',
       badgeColor: 'bg-slate-50 text-slate-700 border border-slate-200 dark:bg-slate-800 dark:text-slate-300',
       iconBg: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300',
     },

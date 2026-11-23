@@ -97,11 +97,30 @@ def get_employee_by_id(db: Session, employee_id: str) -> EmployeeMaster | None:
     return db.execute(stmt).scalar_one_or_none()
 
 
-def get_workforce_summary(db: Session, *, plant_id: str | None = None) -> dict:
-    """Compute aggregated workforce distributions and data coverage windows, optionally filtered by plant_id."""
+def get_workforce_summary(
+    db: Session,
+    *,
+    plant_id: str | None = None,
+    department_id: str | None = None,
+    section_id: str | None = None,
+    shift_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+) -> dict:
+    """Compute aggregated workforce distributions and data coverage windows, optionally filtered by dimensions."""
     emp_filters = []
-    if plant_id:
-        emp_filters.append(EmployeeMaster.plant_id == plant_id)
+    if plant_id and plant_id.strip():
+        emp_filters.append(EmployeeMaster.plant_id == plant_id.strip())
+    if department_id and department_id.strip():
+        emp_filters.append(EmployeeMaster.department_id == department_id.strip())
+    if section_id and section_id.strip():
+        emp_filters.append(EmployeeMaster.section_id == section_id.strip())
+    if shift_id and shift_id.strip():
+        emp_filters.append(EmployeeMaster.shift_id == shift_id.strip())
+    if employment_type and employment_type.strip():
+        emp_filters.append(EmployeeMaster.employment_type.ilike(employment_type.strip()))
+    if vendor_id and vendor_id.strip():
+        emp_filters.append(EmployeeMaster.vendor_id == vendor_id.strip())
 
     total_stmt = select(func.count(EmployeeMaster.employee_id)).select_from(EmployeeMaster)
     active_stmt = select(func.count(EmployeeMaster.employee_id)).select_from(EmployeeMaster).where(

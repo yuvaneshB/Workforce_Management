@@ -28,6 +28,8 @@ export function useDashboardData({
   shiftId = '',
   departmentId = '',
   sectionId = '',
+  employmentType = '',
+  vendorId = '',
   granularity = 'daily',
 } = {}) {
   const [workforceSummary, setWorkforceSummary] = useState(null);
@@ -107,9 +109,11 @@ export function useDashboardData({
         startDate,
         endDate,
         plantId: plantId || undefined,
-        shiftId,
-        departmentId,
-        sectionId,
+        shiftId: shiftId || undefined,
+        departmentId: departmentId || undefined,
+        sectionId: sectionId || undefined,
+        employmentType: employmentType || undefined,
+        vendorId: vendorId || undefined,
         signal: controller.signal,
       };
 
@@ -117,6 +121,11 @@ export function useDashboardData({
         const results = await Promise.allSettled([
           fetchWorkforceSummary({
             plantId: plantId || undefined,
+            departmentId: departmentId || undefined,
+            sectionId: sectionId || undefined,
+            shiftId: shiftId || undefined,
+            employmentType: employmentType || undefined,
+            vendorId: vendorId || undefined,
             signal: controller.signal,
           }),
           fetchAttendanceAnalytics({
@@ -124,9 +133,11 @@ export function useDashboardData({
             startDate,
             endDate,
             plantId: plantId || undefined,
-            shiftId,
+            shiftId: shiftId || undefined,
             departmentId: departmentId || undefined,
             sectionId: sectionId || undefined,
+            employmentType: employmentType || undefined,
+            vendorId: vendorId || undefined,
             signal: controller.signal,
           }),
           fetchGenderAnalytics(commonFilters),
@@ -142,14 +153,18 @@ export function useDashboardData({
             startDate,
             endDate,
             plantId: plantId || undefined,
-            shiftId,
+            shiftId: shiftId || undefined,
+            departmentId: departmentId || undefined,
+            sectionId: sectionId || undefined,
             signal: controller.signal,
           }),
           fetchShiftEfficiencyAnalytics({
             startDate,
             endDate,
             plantId: plantId || undefined,
-            shiftId,
+            shiftId: shiftId || undefined,
+            departmentId: departmentId || undefined,
+            sectionId: sectionId || undefined,
             signal: controller.signal,
           }),
           fetchComplianceAnalytics(commonFilters),
@@ -180,6 +195,7 @@ export function useDashboardData({
             plantId: plantId || undefined,
             departmentId: departmentId || undefined,
             sectionId: sectionId || undefined,
+            shiftId: shiftId || undefined,
             signal: controller.signal,
           }),
         ]);
@@ -324,7 +340,18 @@ export function useDashboardData({
       active = false;
       controller.abort();
     };
-  }, [startDate, endDate, plantId, shiftId, departmentId, sectionId, granularity, reloadToken]);
+  }, [
+    startDate,
+    endDate,
+    plantId,
+    shiftId,
+    departmentId,
+    sectionId,
+    employmentType,
+    vendorId,
+    granularity,
+    reloadToken,
+  ]);
 
   return {
     workforceSummary,

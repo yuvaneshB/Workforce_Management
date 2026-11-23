@@ -29,18 +29,11 @@ export function OvertimeAnalytics({
     hours: Math.round(d.overtime_hours || 0),
   }));
 
-  const vendorOvertime = hasData
-    ? (overtimeAnalytics?.vendor_wise && overtimeAnalytics.vendor_wise.length > 0
-        ? overtimeAnalytics.vendor_wise.slice(0, 4).map((v) => ({
-            name: `${v.vendor_id} (${v.vendor_name ? v.vendor_name.split(' ')[0] : 'Vendor'})`,
-            hours: Math.round(v.overtime_hours || 0),
-          }))
-        : [
-            { name: 'V05 (Karnataka)', hours: 5189 },
-            { name: 'V03 (Namma)', hours: 4875 },
-            { name: 'V02 (Kovai)', hours: 4347 },
-            { name: 'V01 (Sri Vignesh)', hours: 4206 },
-          ])
+  const vendorOvertime = hasData && overtimeAnalytics?.vendor_wise
+    ? overtimeAnalytics.vendor_wise.slice(0, 4).map((v) => ({
+        name: `${v.vendor_id} (${v.vendor_name ? v.vendor_name.split(' ')[0] : 'Vendor'})`,
+        hours: Math.round(v.overtime_hours || 0),
+      }))
     : [];
 
   return (

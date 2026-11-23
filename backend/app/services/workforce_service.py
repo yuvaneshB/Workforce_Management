@@ -135,9 +135,26 @@ def get_employee(db: Session, employee_id: str) -> WorkforceRecord | None:
     return WorkforceRecord.model_validate(row)
 
 
-def get_workforce_summary(db: Session, *, plant_id: str | None = None) -> WorkforceSummaryResponse:
-    """Return aggregated workforce metrics derived from Neon records, optionally filtered by plant_id."""
-    raw = workforce_repository.get_workforce_summary(db, plant_id=plant_id)
+def get_workforce_summary(
+    db: Session,
+    *,
+    plant_id: str | None = None,
+    department_id: str | None = None,
+    section_id: str | None = None,
+    shift_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+) -> WorkforceSummaryResponse:
+    """Return aggregated workforce metrics derived from Neon records, optionally filtered by dimensions."""
+    raw = workforce_repository.get_workforce_summary(
+        db,
+        plant_id=plant_id,
+        department_id=department_id,
+        section_id=section_id,
+        shift_id=shift_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+    )
     return WorkforceSummaryResponse(
         total_employees=raw["total_employees"],
         active_employees=raw["active_employees"],

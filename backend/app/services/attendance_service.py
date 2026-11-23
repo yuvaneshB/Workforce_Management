@@ -85,6 +85,8 @@ def get_attendance_analytics(
     department_id: str | None = None,
     section_id: str | None = None,
     operator_team: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
 ) -> AttendanceAnalyticsResponse:
     """Return aggregated attendance analytics, trends, and separate data-quality warnings."""
     validate_date_range(start_date, end_date)
@@ -99,6 +101,8 @@ def get_attendance_analytics(
         department_id=department_id,
         section_id=section_id,
         operator_team=operator_team,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
     )
     return AttendanceAnalyticsResponse(
         period=raw["period"],

@@ -12,10 +12,8 @@ export function EmploymentTypeDistribution({
   const { theme } = useTheme();
   const palette = CHART_COLORS[theme] || CHART_COLORS.light;
 
-  const totalEmployees = workforceSummary?.total_employees ?? 0;
-
-  let permanentCount = workforceSummary?.permanent_count ?? (workforceSummary ? 1053 : 0);
-  let vendorCount = workforceSummary?.vendor_count ?? (workforceSummary ? 647 : 0);
+  let permanentCount = workforceSummary?.permanent_count ?? 0;
+  let vendorCount = workforceSummary?.vendor_count ?? 0;
 
   if (vendorId) {
     permanentCount = 0;

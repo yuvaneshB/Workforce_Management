@@ -101,7 +101,24 @@ export function WorkforceInsights({
   }
 
   // 4. Vendor with highest workforce contribution (Only if data exists)
-  if (workforceSummary && workforceSummary.total_employees > 0) {
+  const vendorList = (workforceSummary?.by_vendor || [])
+    .filter((v) => v.key !== 'Permanent' && v.count > 0)
+    .sort((a, b) => b.count - a.count);
+
+  if (vendorList.length > 0) {
+    const topVendor = vendorList[0];
+    const totalVendorCount = workforceSummary?.vendor_count || vendorList.reduce((acc, v) => acc + v.count, 0);
+    const topPct = totalVendorCount > 0 ? ((topVendor.count / totalVendorCount) * 100).toFixed(1) : '0';
+    const vendorNames = {
+      V01: 'Sri Vignesh Manpower Services (V01)',
+      V02: 'Kovai Talent Solutions (V02)',
+      V03: 'Namma Workforce Pvt Ltd (V03)',
+      V04: 'Anand Industrial Staffing (V04)',
+      V05: 'Karnataka Skill Force (V05)',
+      V06: 'Prime HR Outsourcing (V06)',
+    };
+    const vendorLabel = vendorNames[topVendor.key] || `Contractor (${topVendor.key})`;
+
     insights.push({
       id: 'highest-vendor-share',
       icon: Building,
@@ -111,8 +128,8 @@ export function WorkforceInsights({
       title: 'Top Staffing Contractor Contribution',
       detail: (
         <span>
-          <strong>Apex Industrial Services (VEND-01)</strong> and <strong>Prime Technical Services (VEND-02)</strong> provide{' '}
-          <strong>45 workers each (25.0% share)</strong> with zero contract attrition.
+          <strong>{vendorLabel}</strong> provides{' '}
+          <strong>{topVendor.count} workers ({topPct}% vendor share)</strong> across active factory assignments.
         </span>
       ),
     });
@@ -136,11 +153,14 @@ export function WorkforceInsights({
     });
   }
 
-  // 6. Plant with lowest attendance (Only if attendanceAnalytics loaded)
+  // 6. Plant attendance comparison (Only if attendanceAnalytics loaded)
   const plantItems = attendanceAnalytics?.by_plant || [];
   if (plantItems.length > 0) {
-    const lowestPlantName = 'Plant 1 (IN-TN-01)';
-    const lowestRate = '91.7%';
+    const sortedPlants = [...plantItems].sort(
+      (a, b) => (b.count || 0) - (a.count || 0)
+    );
+    const topPlant = sortedPlants[0];
+    const topPlantName = topPlant.key === 'IN-KA-01' ? 'Bidadi Plant (IN-KA-01)' : topPlant.key === 'IN-TN-01' ? 'Hosur Plant (IN-TN-01)' : `Plant (${topPlant.key})`;
     insights.push({
       id: 'plant-attendance',
       icon: MapPin,
@@ -150,8 +170,8 @@ export function WorkforceInsights({
       title: 'Facility Attendance Comparison',
       detail: (
         <span>
-          <strong>{lowestPlantName}</strong> verified an operational attendance rate of{' '}
-          <strong>{lowestRate}</strong> against the standard factory baseline.
+          <strong>{topPlantName}</strong> recorded{' '}
+          <strong>{topPlant.count.toLocaleString()} verified attendance logs</strong> across the selected filter period.
         </span>
       ),
     });

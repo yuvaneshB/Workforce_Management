@@ -11,7 +11,6 @@ import { AttendanceTrendChart } from '../components/dashboard/AttendanceTrendCha
 import { AttritionReasonsChart } from '../components/dashboard/AttritionReasonsChart';
 import { AttritionTrendChart } from '../components/dashboard/AttritionTrendChart';
 import { DashboardFilters } from '../components/dashboard/DashboardFilters';
-import { DashboardHeader } from '../components/dashboard/DashboardHeader';
 import { DepartmentWorkforceChart } from '../components/dashboard/DepartmentWorkforceChart';
 import { EmploymentTypeDistribution } from '../components/dashboard/EmploymentTypeDistribution';
 import { OvertimeAnalytics } from '../components/dashboard/OvertimeAnalytics';
@@ -49,7 +48,6 @@ export function Dashboard() {
     attritionAnalytics,
     planningAvailability,
     planningShortages,
-    singlePersonDependency,
     filterOptions,
     loading,
     error,
@@ -62,6 +60,8 @@ export function Dashboard() {
     shiftId,
     departmentId: department,
     sectionId: section,
+    employmentType,
+    vendorId,
     granularity,
   });
 
@@ -118,16 +118,6 @@ export function Dashboard() {
     setEmploymentType('');
     setVendorId('');
   }
-
-  const activeFiltersCount = [
-    startDate || endDate,
-    plantId,
-    shiftId,
-    department,
-    section,
-    employmentType,
-    vendorId,
-  ].filter(Boolean).length;
 
   return (
     <section

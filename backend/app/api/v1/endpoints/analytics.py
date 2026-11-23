@@ -46,6 +46,8 @@ def get_attendance_analytics(
     department_id: str | None = Query(default=None, description="Filter by department_id"),
     section_id: str | None = Query(default=None, description="Filter by section_id"),
     operator_team: str | None = Query(default=None, description="Filter by operator_team"),
+    employment_type: str | None = Query(default=None, description="Filter by employment_type (Permanent, Vendor)"),
+    vendor_id: str | None = Query(default=None, description="Filter by vendor_id (e.g. V01)"),
     db: Session = Depends(get_readonly_db),
 ) -> AttendanceAnalyticsResponse:
     """Return attendance analytics, period trends, and data-quality warnings from Neon."""
@@ -60,6 +62,8 @@ def get_attendance_analytics(
         department_id=department_id,
         section_id=section_id,
         operator_team=operator_team,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
     )
 
 

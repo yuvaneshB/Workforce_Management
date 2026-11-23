@@ -29,7 +29,7 @@ export function VendorWorkforceChart({
   const { theme } = useTheme();
   const palette = CHART_COLORS[theme] || CHART_COLORS.light;
 
-  const totalVendorCount = workforceSummary?.vendor_count || 647;
+  const totalVendorCount = workforceSummary?.vendor_count ?? 0;
 
   const chartData = hasData
     ? ALL_SIX_VENDORS.map((v) => {
@@ -37,8 +37,8 @@ export function VendorWorkforceChart({
         const vendorRow = workforceSummary?.by_vendor?.find(
           (r) => r.key.toUpperCase() === v.id.toUpperCase()
         );
-        const count = vendorRow ? vendorRow.count : v.assigned;
-        const pct = totalVendorCount > 0 ? ((count / totalVendorCount) * 100).toFixed(1) : v.pct;
+        const count = vendorRow ? vendorRow.count : 0;
+        const pct = totalVendorCount > 0 ? ((count / totalVendorCount) * 100).toFixed(1) : '0.0';
         return {
           ...v,
           assigned: count,

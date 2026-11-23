@@ -98,10 +98,23 @@ def get_employee(
 )
 def get_workforce_summary(
     plant_id: str | None = Query(default=None, description="Filter by plant_id (e.g. IN-TN-01, IN-KA-01, IN-TN-02)"),
+    department_id: str | None = Query(default=None, description="Filter by department_id"),
+    section_id: str | None = Query(default=None, description="Filter by section_id"),
+    shift_id: str | None = Query(default=None, description="Filter by shift_id (A, B, C)"),
+    employment_type: str | None = Query(default=None, description="Filter by employment_type (Permanent, Vendor)"),
+    vendor_id: str | None = Query(default=None, description="Filter by vendor_id (e.g. V01)"),
     db: Session = Depends(get_readonly_db),
 ) -> WorkforceSummaryResponse:
-    """Return workforce counts and data coverage windows from Neon, optionally filtered by plant_id."""
-    return workforce_service.get_workforce_summary(db, plant_id=plant_id)
+    """Return workforce counts and data coverage windows from Neon, optionally filtered by dimensions."""
+    return workforce_service.get_workforce_summary(
+        db,
+        plant_id=plant_id,
+        department_id=department_id,
+        section_id=section_id,
+        shift_id=shift_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+    )
 
 
 @router.get(

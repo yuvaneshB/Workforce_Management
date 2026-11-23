@@ -10,12 +10,12 @@ import { PLANT_OPTIONS } from '../../utils/constants';
 
 export const VENDOR_OPTIONS = [
   { id: '', label: 'All Vendors' },
-  { id: 'VEND-01', label: 'VEND-01: Apex Industrial Services' },
-  { id: 'VEND-02', label: 'VEND-02: Prime Technical Services' },
-  { id: 'VEND-03', label: 'VEND-03: Core Facility Partners' },
-  { id: 'VEND-04', label: 'VEND-04: Summit Workforce Solutions' },
-  { id: 'VEND-05', label: 'VEND-05: Global Tech Staffing' },
-  { id: 'VEND-06', label: 'VEND-06: Precision Workforce' },
+  { id: 'V01', label: 'V01: Sri Vignesh Manpower Services' },
+  { id: 'V02', label: 'V02: Kovai Talent Solutions' },
+  { id: 'V03', label: 'V03: Namma Workforce Pvt Ltd' },
+  { id: 'V04', label: 'V04: Anand Industrial Staffing' },
+  { id: 'V05', label: 'V05: Karnataka Skill Force' },
+  { id: 'V06', label: 'V06: Prime HR Outsourcing' },
 ];
 
 export const EMPLOYMENT_TYPE_OPTIONS = [

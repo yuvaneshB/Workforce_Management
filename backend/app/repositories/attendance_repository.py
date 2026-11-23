@@ -36,6 +36,8 @@ def _build_attendance_filters(
     attendance_status: str | None = None,
     skill_match: str | None = None,
     training_compliance: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
 ) -> list:
     filters = []
     if search and search.strip():
@@ -73,6 +75,22 @@ def _build_attendance_filters(
         )
     if attendance_status:
         filters.append(func.upper(WorkforceAttendance.attendance_status) == attendance_status.upper())
+    if employment_type and employment_type.strip():
+        filters.append(
+            WorkforceAttendance.employee_id.in_(
+                select(EmployeeMaster.employee_id).where(
+                    EmployeeMaster.employment_type.ilike(employment_type.strip())
+                )
+            )
+        )
+    if vendor_id and vendor_id.strip():
+        filters.append(
+            WorkforceAttendance.employee_id.in_(
+                select(EmployeeMaster.employee_id).where(
+                    EmployeeMaster.vendor_id == vendor_id.strip()
+                )
+            )
+        )
     return filters
 
 
@@ -326,6 +344,8 @@ def get_attendance_analytics(
     department_id: str | None = None,
     section_id: str | None = None,
     operator_team: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
 ) -> dict:
     """Compute attendance totals, period trends, weekly comparison, shift breakdown, and warnings."""
     filters = _build_attendance_filters(
@@ -337,6 +357,8 @@ def get_attendance_analytics(
         department_id=department_id,
         section_id=section_id,
         operator_team=operator_team,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
     )
 
     totals_stmt = select(

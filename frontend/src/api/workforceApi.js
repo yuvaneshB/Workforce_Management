@@ -9,9 +9,23 @@ export async function checkBackendHealth({ signal } = {}) {
   return data;
 }
 
-export async function fetchWorkforceSummary({ plantId, signal, forceRefresh } = {}) {
+export async function fetchWorkforceSummary({
+  plantId,
+  departmentId,
+  sectionId,
+  shiftId,
+  employmentType,
+  vendorId,
+  signal,
+  forceRefresh,
+} = {}) {
   const params = {};
   if (plantId) params.plant_id = plantId;
+  if (departmentId) params.department_id = departmentId;
+  if (sectionId) params.section_id = sectionId;
+  if (shiftId) params.shift_id = shiftId;
+  if (employmentType) params.employment_type = employmentType;
+  if (vendorId) params.vendor_id = vendorId;
   return cachedGet('/api/v1/workforce/summary', { params, signal }, {
     ttlMs: CACHE_TTL.ANALYTICS,
     forceRefresh,
@@ -89,6 +103,8 @@ export async function fetchAttendanceAnalytics({
   departmentId,
   sectionId,
   operatorTeam,
+  employmentType,
+  vendorId,
   signal,
   forceRefresh,
 } = {}) {
@@ -101,6 +117,8 @@ export async function fetchAttendanceAnalytics({
   if (departmentId) params.department_id = departmentId;
   if (sectionId) params.section_id = sectionId;
   if (operatorTeam) params.operator_team = operatorTeam;
+  if (employmentType) params.employment_type = employmentType;
+  if (vendorId) params.vendor_id = vendorId;
 
   return cachedGet('/api/v1/analytics/attendance', { params, signal }, {
     ttlMs: CACHE_TTL.ANALYTICS,
