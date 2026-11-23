@@ -12,7 +12,8 @@ def test_root_endpoint() -> None:
     assert response.status_code == 200
     payload = response.json()
     assert payload["status"] == "ok"
-    assert payload["health"] == "/api/v1/health"
+    assert payload["health"] == "/health"
+    assert payload["api_v1_health"] == "/api/v1/health"
 
 
 def test_api_health_endpoint() -> None:
@@ -22,6 +23,62 @@ def test_api_health_endpoint() -> None:
     payload = response.json()
     assert payload["status"] == "ok"
     assert "app_name" in payload
+
+
+def test_root_health_endpoints() -> None:
+    with TestClient(app) as client:
+        for path in ["/health", "/healthz", "/api/health"]:
+            response = client.get(path)
+            assert response.status_code == 200
+            data = response.json()
+            assert data["status"] == "ok"
+            assert "app_name" in data
+            assert "environment" in data
+
+
+def test_cross_origin_cors() -> None:
+    with TestClient(app) as client:
+        # Cross origin preflight from Vite frontend port 5173
+        res_5173 = client.options(
+            "/health",
+            headers={
+                "Origin": "http://localhost:5173",
+                "Access-Control-Request-Method": "GET",
+            },
+        )
+        assert res_5173.status_code == 200
+        assert res_5173.headers.get("access-control-allow-origin") in {
+            "http://localhost:5173",
+            "*",
+        }
+
+        # Cross origin preflight from 127.0.0.1:5173
+        res_127 = client.options(
+            "/api/v1/departments",
+            headers={
+                "Origin": "http://127.0.0.1:5173",
+                "Access-Control-Request-Method": "GET",
+            },
+        )
+        assert res_127.status_code == 200
+        assert res_127.headers.get("access-control-allow-origin") in {
+            "http://127.0.0.1:5173",
+            "*",
+        }
+
+        # Cross origin request from alternate port (e.g. React 3000)
+        res_3000 = client.options(
+            "/api/v1/health",
+            headers={
+                "Origin": "http://localhost:3000",
+                "Access-Control-Request-Method": "GET",
+            },
+        )
+        assert res_3000.status_code == 200
+        assert res_3000.headers.get("access-control-allow-origin") in {
+            "http://localhost:3000",
+            "*",
+        }
 
 
 def test_database_health_unconfigured_returns_503() -> None:

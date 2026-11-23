@@ -4,6 +4,11 @@ import { streamAgentAnalysis } from './agentStreamClient';
 
 export { invalidateCache, streamAgentAnalysis };
 
+export async function checkBackendHealth({ signal } = {}) {
+  const { data } = await apiClient.get('/health', { signal });
+  return data;
+}
+
 export async function fetchWorkforceSummary({ plantId, signal, forceRefresh } = {}) {
   const params = {};
   if (plantId) params.plant_id = plantId;

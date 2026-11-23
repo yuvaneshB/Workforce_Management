@@ -3,15 +3,17 @@
 import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Request, status
+from fastapi import Depends, FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from sqlalchemy.exc import SQLAlchemyError
 
 from app.api.v1.router import api_router
-from app.core.config import get_settings
+from app.core.config import Settings, get_settings
 from app.core.database import DatabaseNotConfiguredError, db_manager
 from app.core.logging import configure_logging
+from app.schemas.health import HealthResponse
+from app.services.health_service import get_api_health
 
 settings = get_settings()
 configure_logging(settings.log_level)
@@ -35,13 +37,25 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=settings.cors_origin_list,
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "OPTIONS"],
-    allow_headers=["*"],
-)
+cors_origins = settings.cors_origin_list
+
+if "*" in cors_origins:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=False,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+else:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=cors_origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+        allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$",
+    )
 
 
 @app.exception_handler(ValueError)
@@ -81,6 +95,29 @@ async def handle_unexpected_error(_request: Request, exc: Exception) -> JSONResp
 app.include_router(api_router, prefix=settings.api_v1_prefix)
 
 
+@app.get(
+    "/health",
+    response_model=HealthResponse,
+    tags=["Health"],
+    summary="Application health check",
+)
+@app.get(
+    "/healthz",
+    response_model=HealthResponse,
+    tags=["Health"],
+    summary="Kubernetes liveness probe",
+)
+@app.get(
+    "/api/health",
+    response_model=HealthResponse,
+    tags=["Health"],
+    summary="API health check alias",
+)
+def root_health_check(settings: Settings = Depends(get_settings)) -> HealthResponse:
+    """Verify application health and availability."""
+    return get_api_health(settings)
+
+
 @app.get("/", tags=["Root"])
 def root() -> dict[str, str]:
     """Root metadata endpoint."""
@@ -88,7 +125,8 @@ def root() -> dict[str, str]:
         "service": settings.app_name,
         "status": "ok",
         "docs": "/docs",
-        "health": f"{settings.api_v1_prefix}/health",
+        "health": "/health",
+        "api_v1_health": f"{settings.api_v1_prefix}/health",
         "database_health": f"{settings.api_v1_prefix}/health/db",
         "database_status": f"{settings.api_v1_prefix}/database/status",
         "agent_chat": f"{settings.api_v1_prefix}/agent/chat",
