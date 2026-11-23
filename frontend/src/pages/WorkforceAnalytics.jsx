@@ -205,14 +205,25 @@ export function WorkforceAnalytics() {
     setOperatorTeam('');
   }, []);
 
-  // Fetch departments & sections for filter dropdowns on mount
+  const handlePlantChange = useCallback((newPlantId) => {
+    setPlantId(newPlantId);
+    setDepartmentId('');
+    setSectionId('');
+  }, []);
+
+  const handleDepartmentChange = useCallback((newDeptId) => {
+    setDepartmentId(newDeptId);
+    setSectionId('');
+  }, []);
+
+  // Fetch departments & sections for filter dropdowns on mount or when plant/dept changes
   useEffect(() => {
     const controller = new AbortController();
     async function loadDropdowns() {
       try {
         const [dRes, sRes] = await Promise.all([
-          fetchDepartments({ limit: 50, signal: controller.signal }),
-          fetchSections({ limit: 50, signal: controller.signal }),
+          fetchDepartments({ plantId: plantId || undefined, limit: 100, signal: controller.signal }),
+          fetchSections({ departmentId: departmentId || undefined, plantId: plantId || undefined, limit: 100, signal: controller.signal }),
         ]);
         setDepartments(dRes?.items ?? []);
         setSections(sRes?.items ?? []);
@@ -222,7 +233,27 @@ export function WorkforceAnalytics() {
     }
     loadDropdowns();
     return () => controller.abort();
-  }, []);
+  }, [plantId, departmentId]);
+
+  // Auto-reset department or section if selection becomes invalid
+  useEffect(() => {
+    if (departmentId && departments.length > 0) {
+      const isValid = departments.some((d) => (d.department_id || d.id) === departmentId);
+      if (!isValid) {
+        setDepartmentId('');
+        setSectionId('');
+      }
+    }
+  }, [departments, departmentId]);
+
+  useEffect(() => {
+    if (sectionId && sections.length > 0) {
+      const isValid = sections.some((s) => (s.section_id || s.id) === sectionId);
+      if (!isValid) {
+        setSectionId('');
+      }
+    }
+  }, [sections, sectionId]);
 
   // Fetch Base Workforce, Demographics & Attendance Data
   useEffect(() => {
@@ -542,9 +573,9 @@ export function WorkforceAnalytics() {
         onStartDateChange={setStartDate}
         onEndDateChange={setEndDate}
         onShiftChange={setShiftId}
-        onDepartmentChange={setDepartmentId}
+        onDepartmentChange={handleDepartmentChange}
         onSectionChange={setSectionId}
-        onPlantChange={setPlantId}
+        onPlantChange={handlePlantChange}
         onTeamChange={setOperatorTeam}
         onReset={handleResetFilters}
         onReload={refetchAll}

@@ -13,10 +13,15 @@ from app.utils.query_helpers import build_pagination_meta
 
 
 def list_departments(
-    db: Session, *, search: str | None = None, limit: int = 50, offset: int = 0
+    db: Session,
+    *,
+    plant_id: str | None = None,
+    search: str | None = None,
+    limit: int = 50,
+    offset: int = 0,
 ) -> DepartmentListResponse:
     available, rows, total = organization_repository.list_departments(
-        db, search=search, limit=limit, offset=offset
+        db, plant_id=plant_id, search=search, limit=limit, offset=offset
     )
     items = [DepartmentItem(**r) for r in rows]
     return DepartmentListResponse(
@@ -29,10 +34,21 @@ def list_departments(
 
 
 def list_sections(
-    db: Session, *, search: str | None = None, limit: int = 50, offset: int = 0
+    db: Session,
+    *,
+    department_id: str | None = None,
+    plant_id: str | None = None,
+    search: str | None = None,
+    limit: int = 50,
+    offset: int = 0,
 ) -> SectionListResponse:
     available, rows, total = organization_repository.list_sections(
-        db, search=search, limit=limit, offset=offset
+        db,
+        department_id=department_id,
+        plant_id=plant_id,
+        search=search,
+        limit=limit,
+        offset=offset,
     )
     items = [SectionItem(**r) for r in rows]
     return SectionListResponse(

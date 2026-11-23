@@ -72,6 +72,42 @@ export function Dashboard() {
     setEndDate(newEnd || '');
   }
 
+  function handlePlantChange(newPlantId) {
+    setPlantId(newPlantId);
+    setDepartment('');
+    setSection('');
+  }
+
+  function handleDepartmentChange(newDeptId) {
+    setDepartment(newDeptId);
+    setSection('');
+  }
+
+  // Auto-reset department and section if currently selected value is invalid for filtered plant
+  useEffect(() => {
+    if (department && filterOptions.departments?.length > 0) {
+      const isValid = filterOptions.departments.some(
+        (d) => (d.department_id || d.id) === department
+      );
+      if (!isValid) {
+        setDepartment('');
+        setSection('');
+      }
+    }
+  }, [filterOptions.departments, department]);
+
+  // Auto-reset section if currently selected value is invalid for filtered department/plant
+  useEffect(() => {
+    if (section && filterOptions.sections?.length > 0) {
+      const isValid = filterOptions.sections.some(
+        (s) => (s.section_id || s.id) === section
+      );
+      if (!isValid) {
+        setSection('');
+      }
+    }
+  }, [filterOptions.sections, section]);
+
   function handleResetFilters() {
     setStartDate('');
     setEndDate('');
@@ -139,9 +175,9 @@ export function Dashboard() {
         onRefresh={refetch}
         loading={loading}
         onDateRangeChange={handleDateRangeChange}
-        onPlantChange={setPlantId}
+        onPlantChange={handlePlantChange}
         onShiftChange={setShiftId}
-        onDepartmentChange={setDepartment}
+        onDepartmentChange={handleDepartmentChange}
         onSectionChange={setSection}
         onEmploymentTypeChange={setEmploymentType}
         onVendorChange={setVendorId}

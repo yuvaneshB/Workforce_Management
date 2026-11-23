@@ -24,26 +24,6 @@ export const EMPLOYMENT_TYPE_OPTIONS = [
   { id: 'vendor', label: 'Vendor Contract' },
 ];
 
-export const MANUFACTURING_DEPARTMENTS = [
-  { id: 'DEPT-01', name: 'Production' },
-  { id: 'DEPT-02', name: 'Quality' },
-  { id: 'DEPT-03', name: 'Maintenance' },
-  { id: 'DEPT-04', name: 'Warehouse' },
-  { id: 'DEPT-05', name: 'Operations' },
-  { id: 'DEPT-06', name: 'Engineering' },
-  { id: 'DEPT-07', name: 'HR' },
-  { id: 'DEPT-08', name: 'Administration' },
-];
-
-export const MANUFACTURING_SECTIONS = [
-  { id: 'SEC-01', name: 'SMT Production' },
-  { id: 'SEC-02', name: 'Final Assembly' },
-  { id: 'SEC-03', name: 'Quality Inspection' },
-  { id: 'SEC-04', name: 'Maintenance' },
-  { id: 'SEC-05', name: 'Material Handling' },
-  { id: 'SEC-06', name: 'Packaging' },
-];
-
 function formatDisplayDate(dateStr) {
   if (!dateStr) return '';
   try {
@@ -160,16 +140,9 @@ export function DashboardFilters({
     setDateOpen(false);
   }
 
-  // Combine fetched options with standard manufacturing master lists
-  const availableDepts =
-    filterOptions.departments?.length > 0
-      ? filterOptions.departments
-      : MANUFACTURING_DEPARTMENTS;
-
-  const availableSecs =
-    filterOptions.sections?.length > 0
-      ? filterOptions.sections
-      : MANUFACTURING_SECTIONS;
+  // Filter options derived exclusively from active employee database records
+  const availableDepts = filterOptions.departments || [];
+  const availableSecs = filterOptions.sections || [];
 
   const hasActiveFilters = Boolean(
     startDate ||

@@ -65,8 +65,17 @@ export function useDashboardData({
     let active = true;
 
     Promise.all([
-      fetchDepartments({ signal: controller.signal }),
-      fetchSections({ signal: controller.signal }),
+      fetchDepartments({
+        plantId: plantId || undefined,
+        limit: 100,
+        signal: controller.signal,
+      }),
+      fetchSections({
+        departmentId: departmentId || undefined,
+        plantId: plantId || undefined,
+        limit: 100,
+        signal: controller.signal,
+      }),
     ])
       .then(([deptRes, secRes]) => {
         if (!active) return;
@@ -83,7 +92,7 @@ export function useDashboardData({
       active = false;
       controller.abort();
     };
-  }, []);
+  }, [plantId, departmentId]);
 
   useEffect(() => {
     const controller = new AbortController();

@@ -20,6 +20,7 @@ class DepartmentListResponse(BaseModel):
 class SectionItem(BaseModel):
     section_id: str
     section_name: str
+    department_id: str | None = None
     employee_count: int
 
 

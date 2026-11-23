@@ -181,8 +181,8 @@ export function WorkforceManagement() {
     async function loadOptions() {
       try {
         const [deptRes, secRes] = await Promise.all([
-          fetchDepartments({ limit: 50, signal: controller.signal }),
-          fetchSections({ limit: 50, signal: controller.signal }),
+          fetchDepartments({ plantId: plantId || undefined, limit: 100, signal: controller.signal }),
+          fetchSections({ departmentId: departmentId || undefined, plantId: plantId || undefined, limit: 100, signal: controller.signal }),
         ]);
         if (!active) return;
         setDepartments(deptRes?.items ?? []);
@@ -198,7 +198,27 @@ export function WorkforceManagement() {
       active = false;
       controller.abort();
     };
-  }, []);
+  }, [plantId, departmentId]);
+
+  // Auto-reset department and section if selection becomes invalid
+  useEffect(() => {
+    if (departmentId && departments.length > 0) {
+      const isValid = departments.some((d) => d.department_id === departmentId);
+      if (!isValid) {
+        setDepartmentId('');
+        setSectionId('');
+      }
+    }
+  }, [departments, departmentId]);
+
+  useEffect(() => {
+    if (sectionId && sections.length > 0) {
+      const isValid = sections.some((s) => s.section_id === sectionId);
+      if (!isValid) {
+        setSectionId('');
+      }
+    }
+  }, [sections, sectionId]);
 
   // ---------------------------------------------------------------------------
   // LOAD WORKFORCE SUMMARY (For Top KPI cards across tabs)
@@ -469,6 +489,8 @@ export function WorkforceManagement() {
               value={plantId}
               onChange={(e) => {
                 setPlantId(e.target.value);
+                setDepartmentId('');
+                setSectionId('');
                 setWorkforceOffset(0);
                 setAttendanceOffset(0);
               }}
@@ -486,7 +508,12 @@ export function WorkforceManagement() {
             {/* Department Dropdown */}
             <select
               value={departmentId}
-              onChange={(e) => setDepartmentId(e.target.value)}
+              onChange={(e) => {
+                setDepartmentId(e.target.value);
+                setSectionId('');
+                setWorkforceOffset(0);
+                setAttendanceOffset(0);
+              }}
               aria-label="Filter by Department"
               className={selectClass}
               style={selectStyle}

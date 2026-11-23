@@ -195,8 +195,9 @@ export async function fetchProductionAnalytics({
   });
 }
 
-export async function fetchDepartments({ search, limit = 50, offset = 0, signal, forceRefresh } = {}) {
+export async function fetchDepartments({ plantId, search, limit = 100, offset = 0, signal, forceRefresh } = {}) {
   const params = { limit, offset };
+  if (plantId) params.plant_id = plantId;
   if (search) params.search = search;
   return cachedGet('/api/v1/departments', { params, signal }, {
     ttlMs: CACHE_TTL.STATIC_REFERENCE,
@@ -204,8 +205,10 @@ export async function fetchDepartments({ search, limit = 50, offset = 0, signal,
   });
 }
 
-export async function fetchSections({ search, limit = 50, offset = 0, signal, forceRefresh } = {}) {
+export async function fetchSections({ departmentId, plantId, search, limit = 100, offset = 0, signal, forceRefresh } = {}) {
   const params = { limit, offset };
+  if (departmentId) params.department_id = departmentId;
+  if (plantId) params.plant_id = plantId;
   if (search) params.search = search;
   return cachedGet('/api/v1/sections', { params, signal }, {
     ttlMs: CACHE_TTL.STATIC_REFERENCE,
