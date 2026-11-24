@@ -424,7 +424,7 @@ def get_attendance_streaks(
                         work_date - (DENSE_RANK() OVER (PARTITION BY employee_id ORDER BY work_date))::integer AS grp
                     FROM public.attendance_transactions
                     WHERE UPPER(attendance_status) = 'ABSENT'
-                      AND (:plant_id IS NULL OR plant_id = :plant_id)
+                      AND (CAST(:plant_id AS VARCHAR) IS NULL OR plant_id = :plant_id)
                 ),
                 absent_streaks AS (
                     SELECT
@@ -609,11 +609,31 @@ def get_vendor_breakdown(
             }
             for v in items
         ]
+        total_vendor = raw.get("total_vendor_workforce", 0)
+        active_vendor = raw.get("total_active_vendor_workforce", 0)
+        total_perm = raw.get("total_permanent_workforce", 0)
+        total_wf = total_vendor + total_perm
+
+        contractor_share_of_workforce_pct = round((total_vendor / max(1, total_wf)) * 100, 1)
+        active_contractor_share_pct = round((active_vendor / max(1, total_wf)) * 100, 1)
+        inactive_count = max(0, total_vendor - active_vendor)
+        inactive_pct = round((inactive_count / max(1, total_vendor)) * 100, 1) if total_vendor > 0 else 0.0
+
+        sorted_by_assigned = sorted(vendors, key=lambda x: x.get("assigned_count", 0), reverse=True)
+        top2_assigned = (sorted_by_assigned[0]["assigned_count"] + sorted_by_assigned[1]["assigned_count"]) if len(sorted_by_assigned) >= 2 else (sorted_by_assigned[0]["assigned_count"] if sorted_by_assigned else 0)
+        top2_vendor_share_pct = round((top2_assigned / max(1, total_vendor)) * 100, 1) if total_vendor > 0 else 0.0
+
         return {
             "total_vendors": raw.get("total_vendors", len(vendors)),
-            "total_vendor_workforce": raw.get("total_vendor_workforce", 0),
-            "total_active_vendor_workforce": raw.get("total_active_vendor_workforce", 0),
-            "total_permanent_workforce": raw.get("total_permanent_workforce", 0),
+            "total_workforce": total_wf,
+            "total_vendor_workforce": total_vendor,
+            "total_active_vendor_workforce": active_vendor,
+            "total_permanent_workforce": total_perm,
+            "contractor_share_of_workforce_pct": contractor_share_of_workforce_pct,
+            "active_contractor_share_pct": active_contractor_share_pct,
+            "top2_vendor_share_pct": top2_vendor_share_pct,
+            "inactive_count": inactive_count,
+            "inactive_pct": inactive_pct,
             "vendors": vendors,
         }
 

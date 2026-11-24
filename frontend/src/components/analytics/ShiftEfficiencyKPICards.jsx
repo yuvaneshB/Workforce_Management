@@ -102,9 +102,6 @@ export function ShiftEfficiencyKPICards({
               <div className="text-lg font-black text-[var(--text)] tracking-tight leading-tight my-0.5">
                 {c.value}
               </div>
-              <div className={`text-[10px] truncate ${c.subtextColor}`}>
-                {c.subtext}
-              </div>
             </div>
           </Card>
         );

@@ -51,6 +51,40 @@ def _parse_date(val: Any) -> dt.date | None:
         return None
 
 
+def compute_attendance_severity(
+    attendance_rate_working_days: float,
+    working_absenteeism_rate: float,
+    late_arrival_rate: float = 0.0,
+) -> str:
+    """Define operational severity from working-days attendance and absenteeism with clear numeric thresholds.
+
+    Thresholds:
+    - CRITICAL: working_absenteeism_rate >= 10.0% OR (attendance_rate_working_days < 75.0% AND working_absenteeism_rate >= 7.0%) OR attendance_rate_working_days < 70.0%
+    - HIGH:     working_absenteeism_rate >= 7.0%  OR (attendance_rate_working_days < 82.0% AND working_absenteeism_rate >= 5.0%) OR attendance_rate_working_days < 78.0%
+    - MEDIUM:   working_absenteeism_rate >= 4.5%  OR attendance_rate_working_days < 92.0% OR late_arrival_rate >= 8.0%
+    - LOW:      attendance_rate_working_days >= 92.0% AND working_absenteeism_rate < 4.5% AND late_arrival_rate < 8.0%
+    """
+    if (
+        working_absenteeism_rate >= 10.0
+        or (attendance_rate_working_days < 75.0 and working_absenteeism_rate >= 7.0)
+        or attendance_rate_working_days < 70.0
+    ):
+        return "CRITICAL"
+    elif (
+        working_absenteeism_rate >= 7.0
+        or (attendance_rate_working_days < 82.0 and working_absenteeism_rate >= 5.0)
+        or attendance_rate_working_days < 78.0
+    ):
+        return "HIGH"
+    elif (
+        working_absenteeism_rate >= 4.5
+        or attendance_rate_working_days < 92.0
+        or late_arrival_rate >= 8.0
+    ):
+        return "MEDIUM"
+    return "LOW"
+
+
 class AttendanceAgentService:
     """Service orchestrating evidence-based attendance intelligence analysis."""
 
@@ -125,6 +159,12 @@ class AttendanceAgentService:
         actual_hours = float(row.actual_hours or 0.0)
 
         # Operational rates
+        working_days_records = max(0, total_records - weekly_off_count - holiday_count)
+        attendance_rate_working_days = (
+            round((present_count * 100.0 / working_days_records), 1)
+            if working_days_records > 0
+            else 0.0
+        )
         working_roster = present_count + absent_count + late_count + leave_count + half_day_count
         attendance_rate = round((present_count * 100.0 / total_records), 1) if total_records > 0 else 0.0
         absenteeism_rate = round((absent_count * 100.0 / total_records), 1) if total_records > 0 else 0.0
@@ -387,15 +427,12 @@ class AttendanceAgentService:
         # ---------------------------------------------------------------------
         s5_start = time.time()
 
-        # Dynamic severity calculation based on real thresholds
-        severity = "LOW"
-        if absenteeism_rate > 7.0 or len(consecutive_streaks) >= 4 or (department_hotspots and department_hotspots[0]["absent"] > 1000):
-            severity = "HIGH"
-        elif absenteeism_rate > 4.5 or len(consecutive_streaks) >= 2 or late_arrival_rate > 5.5:
-            severity = "MEDIUM"
-
-        if absenteeism_rate > 10.0 or len(consecutive_streaks) >= 8:
-            severity = "CRITICAL"
+        # Dynamic severity calculation based on real working-days thresholds
+        severity = compute_attendance_severity(
+            attendance_rate_working_days=attendance_rate_working_days,
+            working_absenteeism_rate=working_absenteeism_rate,
+            late_arrival_rate=late_arrival_rate,
+        )
 
         # Evidence-based structured findings
         findings = []
@@ -417,7 +454,7 @@ class AttendanceAgentService:
                     f"Generates an estimated {highest_shift['absent'] * 8:,} uncovered production hours, "
                     "requiring overtime mobilization from subsequent shifts."
                 ),
-                "recommendation": "Deploy a 5-8% dynamic standby buffer specifically for this shift's line opening.",
+                "recommendation": "Deploy a dynamic standby buffer specifically for this shift's line opening.",
             })
 
         # Finding 2: Department concentration
@@ -504,7 +541,7 @@ class AttendanceAgentService:
             {
                 "id": "REC-01",
                 "category": "Roster & Standby Buffer",
-                "action": "Calibrate Shift Standby Pool by 5-8%",
+                "action": "Calibrate Shift Standby Pool",
                 "details": (
                     f"Maintain a verified standby buffer of {max(5, int(absent_count * 0.05))} certified operators "
                     f"specifically targeted at {highest_shift['shift_name'] if highest_shift else 'Shift A'} "
@@ -612,7 +649,10 @@ class AttendanceAgentService:
                 "half_day_count": half_day_count,
                 "weekly_off_count": weekly_off_count,
                 "holiday_count": holiday_count,
+                "working_days_records": working_days_records,
+                "attendance_rate_working_days": attendance_rate_working_days,
                 "attendance_rate": attendance_rate,
+                "attendance_rate_total_records": attendance_rate,
                 "absenteeism_rate": absenteeism_rate,
                 "working_absenteeism_rate": working_absenteeism_rate,
                 "late_arrival_rate": late_arrival_rate,

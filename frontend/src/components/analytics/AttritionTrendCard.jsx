@@ -10,11 +10,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import {
-  ATTRITION_DAILY_TREND,
-  ATTRITION_MONTHLY_TREND,
-  ATTRITION_WEEKLY_TREND,
-} from '../../data/attritionData';
 import { useTheme } from '../../hooks/useTheme';
 import { CHART_COLORS } from '../../utils/constants';
 import { Card } from '../common/Card';
@@ -25,14 +20,7 @@ export function AttritionTrendCard({ data = null, loading = false }) {
   const palette = CHART_COLORS[theme] || CHART_COLORS.light;
   const [period, setPeriod] = useState('monthly');
 
-  const baseData =
-    period === 'daily'
-      ? ATTRITION_DAILY_TREND
-      : period === 'weekly'
-        ? ATTRITION_WEEKLY_TREND
-        : data && data.length > 0
-          ? data
-          : ATTRITION_MONTHLY_TREND;
+  const baseData = Array.isArray(data) ? data : [];
 
   const chartData = baseData.map((item) => ({
     ...item,

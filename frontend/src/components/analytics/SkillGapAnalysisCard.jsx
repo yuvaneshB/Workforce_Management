@@ -40,14 +40,7 @@ export function SkillGapAnalysisCard({
               Skill Gap Analysis (Current vs Required)
             </h2>
           </div>
-          <span className="text-[9px] font-bold text-blue-600 bg-blue-50 dark:bg-blue-950/40 px-1.5 py-0.5 rounded border border-blue-200 dark:border-blue-800 shrink-0">
-            Competency Benchmark
-          </span>
         </div>
-
-        <p className="text-[10px] text-[var(--secondary)] mb-1">
-          Comparing required competency standards against evaluated workforce proficiency
-        </p>
 
         {loading ? (
           <LoadingSkeleton className="h-44 w-full rounded-lg" />

@@ -144,99 +144,75 @@ export function WorkforceKPICards({
   const cards = [
     {
       id: 'total-workforce',
-      label: '1. Total Workforce',
+      label: 'Total Workforce',
       value: totalEmployeesRaw != null ? String(totalEmployeesRaw) : '—',
-      subtext: hasData ? 'Permanent + Vendor' : 'No backend connection',
       icon: Users,
-      badge: workforceSummary ? `${workforceSummary.distinct_teams || 0} Teams Active` : 'No Data',
-      badgeColor: 'bg-[var(--brand-purple-soft)] text-[var(--brand-purple)] border border-[var(--brand-purple)]/20',
       iconBg: 'bg-[var(--brand-purple-soft)] text-[var(--brand-purple)]',
     },
     {
       id: 'permanent-employees',
-      label: '2. Permanent Staff',
+      label: 'Permanent Employees',
       value: permanentCount != null ? String(permanentCount) : '—',
-      subtext: hasData ? 'Direct Permanent Core' : 'No backend connection',
       icon: UserCheck,
-      badge: hasData ? 'Direct Core' : 'No Data',
-      badgeColor: 'bg-[var(--brand-blue-soft)] text-[var(--brand-blue)] border border-[var(--brand-blue)]/20',
       iconBg: 'bg-[var(--brand-blue-soft)] text-[var(--brand-blue)]',
     },
     {
       id: 'vendor-employees',
-      label: '3. Vendor Workforce',
+      label: 'Vendor Workforce',
       value: vendorCount != null ? String(vendorCount) : '—',
-      subtext: hasData ? 'Contractor Staff' : 'No backend connection',
       icon: Briefcase,
-      badge: hasData ? `${activeVendorsCount} Active Vendors` : 'No Data',
-      badgeColor: 'bg-[var(--brand-peach-soft)] text-[var(--brand-orange)] border border-[var(--brand-orange)]/20',
       iconBg: 'bg-[var(--brand-peach-soft)] text-[var(--brand-orange)]',
     },
     {
       id: 'attendance-rate',
-      label: '4. Attendance Rate',
+      label: 'Attendance Rate',
       value: attendanceRate !== '—' ? `${attendanceRate}%` : '—',
-      subtext: 'Present / Scheduled',
       icon: CalendarCheck,
-      badge: attChange != null ? `${attChange > 0 ? '+' : ''}${attChange.toFixed(1)}% vs Wk` : 'Target: 95%',
-      badgeColor: 'bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300',
       iconBg: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400',
     },
     {
       id: 'absenteeism-rate',
-      label: '5. Absenteeism Rate',
+      label: 'Absenteeism Rate',
       value: absenteeismRate !== '—' ? `${absenteeismRate}%` : '—',
-      subtext: 'Absent / Scheduled',
       icon: UserX,
-      badge: absenteeismRate !== '—' ? (Number(absenteeismRate) > 5 ? 'Above 5% Alert' : 'Within Norm') : 'No Data',
-      badgeColor: absenteeismRate !== '—' && Number(absenteeismRate) > 5 ? 'bg-rose-50 text-rose-700 border border-rose-200' : 'bg-slate-50 text-slate-700 border border-slate-200',
       iconBg: 'bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:text-rose-400',
     },
     {
       id: 'attrition-rate',
-      label: '6. Attrition Rate',
+      label: 'Attrition Rate',
       value: attritionRate,
-      subtext: totalExitsCount != null ? `${totalExitsCount} Exits in Period` : (hasData ? '0 Exits in Period' : 'No backend connection'),
       icon: UserMinus,
-      badge: hasData ? `${activeEmployeesRaw ?? 0}/${totalEmployeesRaw ?? 0} Retained` : 'No Data',
-      badgeColor: 'bg-slate-50 text-slate-700 border border-slate-200 dark:bg-slate-800 dark:text-slate-300',
       iconBg: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300',
     },
     {
       id: 'workforce-shortage',
-      label: '7. Workforce Shortage',
+      label: 'Workforce Shortage',
       value: shortageCount != null ? String(shortageCount) : '—',
-      subtext: 'Required - Available',
       icon: AlertTriangle,
-      badge: hasData ? shortageSeverity : 'No Data',
-      badgeColor:
-        shortageSeverity === 'CRITICAL'
-          ? 'bg-rose-50 text-rose-700 border border-rose-200'
-          : shortageSeverity === 'MODERATE'
-          ? 'bg-amber-50 text-amber-700 border border-amber-200'
-          : 'bg-emerald-50 text-emerald-700 border border-emerald-200',
       iconBg: 'bg-amber-50 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400',
     },
     {
       id: 'overtime-hours',
-      label: '8. Overtime Hours',
+      label: 'Overtime Hours',
       value: totalOvertime !== '—' ? `${totalOvertime} h` : '—',
-      subtext: 'Total Period Hours',
       icon: Clock,
-      badge: 'Logged OT',
-      badgeColor: 'bg-[var(--brand-purple-soft)] text-[var(--brand-purple)] border border-[var(--brand-purple)]/20',
       iconBg: 'bg-[var(--brand-purple-soft)] text-[var(--brand-purple)]',
     },
   ];
 
   if (loading && !workforceSummary) {
     return (
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-2.5">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
         {Array.from({ length: 8 }).map((_, i) => (
-          <div key={i} className="surface rounded-2xl p-3 border border-[var(--border)] shadow-xs">
-            <LoadingSkeleton className="h-4 w-20 mb-2" />
-            <LoadingSkeleton className="h-7 w-16 mb-2" />
-            <LoadingSkeleton className="h-3 w-24" />
+          <div
+            key={i}
+            className="surface rounded-2xl p-3.5 sm:p-4 border border-[var(--border)] shadow-xs flex flex-col justify-between min-h-[88px] sm:min-h-[94px]"
+          >
+            <div className="flex items-center justify-between gap-2">
+              <LoadingSkeleton className="h-4 w-28" />
+              <LoadingSkeleton className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl shrink-0" />
+            </div>
+            <LoadingSkeleton className="h-7 sm:h-8 w-24 mt-1" />
           </div>
         ))}
       </div>
@@ -244,35 +220,29 @@ export function WorkforceKPICards({
   }
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-2.5">
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
       {cards.map((c) => {
         const IconComponent = c.icon;
         return (
           <div
             key={c.id}
-            className="surface rounded-2xl p-3 border border-[var(--border)] shadow-xs hover:shadow-sm transition-all flex flex-col justify-between"
+            className="surface rounded-2xl p-3.5 sm:p-4 border border-[var(--border)] shadow-xs hover:shadow-sm transition-all flex flex-col justify-between min-h-[88px] sm:min-h-[94px]"
           >
-            <div>
-              <div className="flex items-center justify-between gap-1 mb-1.5">
-                <span className="text-[10px] font-bold text-[var(--secondary)] uppercase tracking-wider truncate" title={c.label}>
-                  {c.label}
-                </span>
-                <div className={`w-6 h-6 rounded-lg ${c.iconBg} flex items-center justify-center shrink-0`}>
-                  <IconComponent className="w-3.5 h-3.5" />
-                </div>
-              </div>
-              <div className="text-xl font-black text-[var(--text)] tracking-tight">
-                {c.value}
+            <div className="flex items-center justify-between gap-2">
+              <span
+                className="text-[11px] sm:text-xs font-bold text-[var(--secondary)] uppercase tracking-wider leading-tight truncate"
+                title={c.label}
+              >
+                {c.label}
+              </span>
+              <div
+                className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl ${c.iconBg} flex items-center justify-center shrink-0`}
+              >
+                <IconComponent className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
               </div>
             </div>
-
-            <div className="mt-2 pt-1.5 border-t border-[var(--border)]/60 flex items-center justify-between text-[10px]">
-              <span className="text-[var(--secondary)] truncate font-medium" title={c.subtext}>
-                {c.subtext}
-              </span>
-              <span className={`px-1.5 py-0.5 rounded-md text-[9px] font-extrabold shrink-0 ${c.badgeColor}`}>
-                {c.badge}
-              </span>
+            <div className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight tabular-nums whitespace-nowrap mt-1">
+              {c.value}
             </div>
           </div>
         );

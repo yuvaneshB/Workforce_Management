@@ -28,7 +28,7 @@ from app.agents.llm.provider import LLMProviderNotConfiguredError
 logger = logging.getLogger(__name__)
 
 DEFAULT_DOMO_MODEL = "domo.domo_ai.domogpt-large-v2.2:anthropic"
-DEFAULT_DOMO_TIMEOUT = 30.0
+DEFAULT_DOMO_TIMEOUT = 60.0
 
 
 def _extract_json_tool_call(text: str) -> dict[str, Any] | None:
@@ -135,7 +135,7 @@ def _extract_strict_json(text: str) -> dict[str, Any] | None:
     # 1. Direct JSON parse
     trimmed = text.strip()
     try:
-        parsed = json.loads(trimmed)
+        parsed = json.loads(trimmed, strict=False)
         norm = _normalize(parsed)
         if norm:
             return norm
@@ -146,7 +146,7 @@ def _extract_strict_json(text: str) -> dict[str, Any] | None:
     match_code = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL | re.IGNORECASE)
     if match_code:
         try:
-            parsed = json.loads(match_code.group(1).strip())
+            parsed = json.loads(match_code.group(1).strip(), strict=False)
             norm = _normalize(parsed)
             if norm:
                 return norm
@@ -178,7 +178,7 @@ def _extract_strict_json(text: str) -> dict[str, Any] | None:
                     if depth == 0:
                         candidate = text[start_idx : i + 1]
                         try:
-                            parsed = json.loads(candidate)
+                            parsed = json.loads(candidate, strict=False)
                             norm = _normalize(parsed)
                             if norm:
                                 return norm
@@ -186,6 +186,13 @@ def _extract_strict_json(text: str) -> dict[str, Any] | None:
                             pass
                         break
         start_idx = text.find("{", start_idx + 1)
+
+    # 4. Regex fallback for {"final": "..."} or {"final": "..." without closing brace
+    final_match = re.search(r'["\'](?:final|final_answer|answer)["\']\s*:\s*["\'](.*?)(?:["\']\s*\}|\Z)', text, re.DOTALL)
+    if final_match:
+        content = final_match.group(1).replace(r"\n", "\n").replace(r"\"", '"').strip()
+        if content:
+            return {"final": content}
 
     return None
 
@@ -232,13 +239,19 @@ class DomoChatModel(BaseChatModel):
         if system_prompt:
             payload["system"] = system_prompt
 
-        logger.info("Dispatching Domo AI Services request (timeout=%.1fs, model=%s)", self.timeout, self.model_name)
+        if self.timeout and self.timeout > 0:
+            effective_to = float(self.timeout)
+        elif os.getenv("DOMO_TIMEOUT"):
+            effective_to = float(os.getenv("DOMO_TIMEOUT"))
+        else:
+            effective_to = DEFAULT_DOMO_TIMEOUT
+        logger.info("Dispatching Domo AI Services request (timeout=%.1fs, model=%s)", effective_to, self.model_name)
         try:
-            with httpx.Client(timeout=self.timeout) as client:
+            with httpx.Client(timeout=effective_to) as client:
                 response = client.post(endpoint, headers=headers, json=payload)
         except httpx.TimeoutException:
-            logger.error("Domo AI Services request timed out after %.1f seconds", self.timeout)
-            raise RuntimeError(f"Domo AI Services request timed out after {self.timeout:.1f} seconds. Please try again.")
+            logger.error("Domo AI Services request timed out after %.1f seconds", effective_to)
+            raise RuntimeError(f"Domo AI Services request timed out after {effective_to:.1f} seconds. Please try again.")
         except httpx.RequestError as exc:
             logger.error("Failed to connect to Domo AI Services at %s: %s", self.base_url, exc)
             raise RuntimeError(f"Failed to communicate with Domo AI Services: {type(exc).__name__}")
@@ -511,85 +524,8 @@ class DomoChatModel(BaseChatModel):
                 )
                 return ChatResult(generations=[ChatGeneration(message=ai_msg)])
 
-            # Intent fallback: if Domo produced plain text but user query clearly targets a workforce domain
-            normalized_query = latest_user_query.lower()
-            fallback_tool: str | None = None
-            fallback_args: dict[str, Any] = {}
-
-            # Check replacement/substitution queries (e.g. "Who can replace EMP-0018 on 2026-08-01?")
-            emp_match = re.search(r"EMP-\d+", latest_user_query, re.IGNORECASE)
-            date_match = re.search(r"\d{4}-\d{2}-\d{2}", latest_user_query)
-            date_str = date_match.group(0) if date_match else None
-
-            if (any(k in normalized_query for k in ["replace", "replacement", "substitute", "who can replace", "replacements"])
-                    or (emp_match and any(k in normalized_query for k in ["cover", "swap", "fill in"]))):
-                if "recommend_replacement_employees" in registered_names:
-                    fallback_tool = "recommend_replacement_employees"
-                    if emp_match:
-                        fallback_args["employee_id"] = emp_match.group(0).upper()
-                    if date_str:
-                        fallback_args["date"] = date_str
-            elif any(k in normalized_query for k in ["shortage", "shortfall", "understaffed", "deficit", "manpower gap"]):
-                if "get_workforce_shortage" in registered_names:
-                    fallback_tool = "get_workforce_shortage"
-                    if date_str:
-                        fallback_args["date"] = date_str
-                    if "in-tn" in normalized_query or "tn" in normalized_query:
-                        fallback_args["plant_id"] = "IN-TN-01"
-                    elif "in-ka" in normalized_query or "ka" in normalized_query:
-                        fallback_args["plant_id"] = "IN-KA-01"
-                    if "shift a" in normalized_query or "gs1" in normalized_query:
-                        fallback_args["shift_id"] = "A"
-                    elif "shift b" in normalized_query or "s2" in normalized_query:
-                        fallback_args["shift_id"] = "B"
-                    elif "shift c" in normalized_query or "ns3" in normalized_query:
-                        fallback_args["shift_id"] = "C"
-            elif any(k in normalized_query for k in ["workforce availability", "shift availability", "shift a workforce availability", "shift b workforce availability", "shift c workforce availability"]) or ("availability" in normalized_query and any(s in normalized_query for s in ["shift", "department", "production", "maintenance", "quality"])):
-                if "get_shift_workforce_availability" in registered_names:
-                    fallback_tool = "get_shift_workforce_availability"
-                    if date_str:
-                        fallback_args["date"] = date_str
-                    if "shift a" in normalized_query or "gs1" in normalized_query:
-                        fallback_args["shift_id"] = "A"
-                    elif "shift b" in normalized_query or "s2" in normalized_query:
-                        fallback_args["shift_id"] = "B"
-                    elif "shift c" in normalized_query or "ns3" in normalized_query:
-                        fallback_args["shift_id"] = "C"
-                    if "production" in normalized_query:
-                        fallback_args["department_id"] = "DEPT-01"
-                    elif "maintenance" in normalized_query:
-                        fallback_args["department_id"] = "DEPT-02"
-                    elif "quality" in normalized_query:
-                        fallback_args["department_id"] = "DEPT-03"
-            elif any(k in normalized_query for k in ["line", "in line", "section"]):
-                fallback_tool = "get_section_analytics"
-            elif any(k in normalized_query for k in ["department", "dept"]):
-                fallback_tool = "get_department_analytics"
-            elif "shift" in normalized_query:
-                fallback_tool = "get_shift_analytics"
-            elif any(k in normalized_query for k in ["experience", "tenure"]):
-                fallback_tool = "get_experience_analytics"
-            elif any(k in normalized_query for k in ["attendance", "absent", "present", "absenteeism"]):
-                fallback_tool = "get_attendance_analytics"
-            elif any(k in normalized_query for k in ["summary", "headcount", "workforce", "total employees", "team"]):
-                fallback_tool = "get_workforce_summary"
-
-            if fallback_tool and fallback_tool in registered_names:
-                logger.info("Applying intent fallback tool: %s with args %s for query '%s'", fallback_tool, fallback_args, latest_user_query)
-                tool_call_id = f"domo_call_{fallback_tool}_{uuid.uuid4().hex[:8]}"
-                ai_msg = AIMessage(
-                    content="",
-                    tool_calls=[
-                        {
-                            "name": fallback_tool,
-                            "args": fallback_args,
-                            "id": tool_call_id,
-                        }
-                    ],
-                )
-                return ChatResult(generations=[ChatGeneration(message=ai_msg)])
-
             # Direct text answer without tools (for pure greetings, general remarks)
+            return ChatResult(generations=[ChatGeneration(message=AIMessage(content=domo_response))])
             return ChatResult(generations=[ChatGeneration(message=AIMessage(content=domo_response))])
 
         # 3. Direct execution without tools

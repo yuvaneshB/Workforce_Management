@@ -29,14 +29,12 @@ export function AttritionTrendChart({
           vendorAttrition: pt.vendor_exits,
           totalExits: pt.total_exits,
         }))
-      : hasData || ATTRITION_MONTHLY_TREND.length > 0
-      ? ATTRITION_MONTHLY_TREND
       : [];
 
   const totalExits =
     attritionAnalytics?.summary?.total_exits != null
       ? attritionAnalytics.summary.total_exits
-      : 120;
+      : 0;
 
   return (
     <div className="surface rounded-2xl p-4 border border-[var(--border)] shadow-xs flex flex-col justify-between h-full">
@@ -51,9 +49,6 @@ export function AttritionTrendChart({
               <h3 className="text-sm font-extrabold text-[var(--text)] tracking-tight">
                 Employee Attrition Trend
               </h3>
-              <p className="text-[11px] text-[var(--secondary)]">
-                Monthly exits: Permanent vs Vendor contract staff
-              </p>
             </div>
           </div>
 
@@ -69,27 +64,13 @@ export function AttritionTrendChart({
           </div>
         </div>
 
-        {/* Integration notice */}
-        <div className="bg-slate-50 dark:bg-slate-800/60 rounded-xl p-2 px-3 border border-[var(--border)] mb-2 flex items-center justify-between text-[11px]">
-          <div className="flex items-center gap-2">
-            <span className={`w-2 h-2 rounded-full ${hasData || chartData.length > 0 ? 'bg-emerald-500' : 'bg-slate-400'} shrink-0`} />
-            <span className="font-bold text-[var(--text)]">Database Status:</span>
-            <span className="text-[var(--secondary)]">
-              {hasData || chartData.length > 0 ? `${totalExits} verified exits in Neon DB` : 'No backend connection'}
-            </span>
-          </div>
-          <span className="text-[10px] font-mono text-[var(--secondary)]">
-            endpoint: /api/v1/analytics/attrition
-          </span>
-        </div>
-
         {/* Line Chart */}
-        {!hasData && chartData.length === 0 ? (
+        {chartData.length === 0 ? (
           <div className="w-full h-[180px] flex flex-col items-center justify-center text-center p-4 bg-[var(--surface-hover)]/30 rounded-lg border border-dashed border-[var(--border)]">
             <UserMinus className="w-6 h-6 text-slate-400 mb-2 opacity-60" />
             <p className="text-xs font-bold text-[var(--text)]">No Attrition Trend Data</p>
             <p className="text-[11px] text-[var(--secondary)] mt-0.5">
-              Connect to FastAPI backend to track monthly employee attrition.
+              No attrition records match the current filter selection.
             </p>
           </div>
         ) : (
@@ -104,11 +85,11 @@ export function AttritionTrendChart({
                 axisLine={{ stroke: palette.grid }}
               />
               <YAxis
-                domain={[0, 16]}
-                ticks={[0, 4, 8, 12, 16]}
+                domain={[0, (dataMax) => (dataMax > 0 ? Math.ceil(dataMax * 1.2) : 10)]}
                 tick={{ fill: palette.axisText, fontSize: 10 }}
                 tickLine={false}
                 axisLine={false}
+                allowDecimals={false}
               />
               <Tooltip
                 content={({ active, payload, label }) => {

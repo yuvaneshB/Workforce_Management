@@ -16,6 +16,8 @@ export async function fetchWorkforceSummary({
   shiftId,
   employmentType,
   vendorId,
+  teamId,
+  operatorTeam,
   signal,
   forceRefresh,
 } = {}) {
@@ -26,6 +28,8 @@ export async function fetchWorkforceSummary({
   if (shiftId) params.shift_id = shiftId;
   if (employmentType) params.employment_type = employmentType;
   if (vendorId) params.vendor_id = vendorId;
+  const team = teamId || operatorTeam;
+  if (team) params.team_id = team;
   return cachedGet('/api/v1/workforce/summary', { params, signal }, {
     ttlMs: CACHE_TTL.ANALYTICS,
     forceRefresh,
@@ -70,6 +74,7 @@ export async function fetchEmployees({
   role,
   skillGrade,
   homeShift,
+  shiftId,
   limit = 25,
   offset = 0,
   signal,
@@ -85,7 +90,7 @@ export async function fetchEmployees({
   if (employmentType) params.employment_type = employmentType;
   if (role) params.role = role;
   if (skillGrade) params.skill_grade = skillGrade;
-  if (homeShift) params.home_shift = homeShift;
+  if (homeShift || shiftId) params.home_shift = homeShift || shiftId;
 
   return cachedGet('/api/v1/employees', { params, signal }, {
     ttlMs: CACHE_TTL.WORKFORCE_LIST,
@@ -247,6 +252,10 @@ function buildAnalyticsParams({
   shiftId,
   departmentId,
   sectionId,
+  employmentType,
+  vendorId,
+  teamId,
+  operatorTeam,
 } = {}) {
   const params = {};
   if (period) params.period = period;
@@ -256,6 +265,10 @@ function buildAnalyticsParams({
   if (shiftId) params.shift_id = shiftId;
   if (departmentId) params.department_id = departmentId;
   if (sectionId) params.section_id = sectionId;
+  if (employmentType) params.employment_type = employmentType;
+  if (vendorId) params.vendor_id = vendorId;
+  const team = teamId || operatorTeam;
+  if (team) params.team_id = team;
   return params;
 }
 
@@ -309,9 +322,23 @@ export async function fetchSectionAnalytics(filters = {}) {
   });
 }
 
-export async function fetchVendorAnalytics({ plantId, signal, forceRefresh } = {}) {
+export async function fetchVendorAnalytics({
+  plantId,
+  shiftId,
+  departmentId,
+  sectionId,
+  teamId,
+  operatorTeam,
+  signal,
+  forceRefresh,
+} = {}) {
   const params = {};
   if (plantId) params.plant_id = plantId;
+  if (shiftId) params.shift_id = shiftId;
+  if (departmentId) params.department_id = departmentId;
+  if (sectionId) params.section_id = sectionId;
+  const team = teamId || operatorTeam;
+  if (team) params.team_id = team;
   return cachedGet('/api/v1/analytics/vendors', { params, signal }, {
     ttlMs: CACHE_TTL.ANALYTICS,
     forceRefresh,
@@ -325,6 +352,10 @@ export async function fetchOvertimeAnalytics({
   departmentId,
   sectionId,
   plantId,
+  employmentType,
+  vendorId,
+  teamId,
+  operatorTeam,
   signal,
   forceRefresh,
 } = {}) {
@@ -335,6 +366,10 @@ export async function fetchOvertimeAnalytics({
   if (departmentId) params.department_id = departmentId;
   if (sectionId) params.section_id = sectionId;
   if (plantId) params.plant_id = plantId;
+  if (employmentType) params.employment_type = employmentType;
+  if (vendorId) params.vendor_id = vendorId;
+  const team = teamId || operatorTeam;
+  if (team) params.team_id = team;
 
   return cachedGet('/api/v1/analytics/overtime', { params, signal }, {
     ttlMs: CACHE_TTL.ANALYTICS,
@@ -347,6 +382,10 @@ export async function fetchTeamProductionAnalytics({
   endDate,
   plantId,
   shiftId,
+  departmentId,
+  sectionId,
+  employmentType,
+  vendorId,
   operatorTeam,
   signal,
   forceRefresh,
@@ -356,6 +395,10 @@ export async function fetchTeamProductionAnalytics({
   if (endDate) params.end_date = endDate;
   if (plantId) params.plant_id = plantId;
   if (shiftId) params.shift_id = shiftId;
+  if (departmentId) params.department_id = departmentId;
+  if (sectionId) params.section_id = sectionId;
+  if (employmentType) params.employment_type = employmentType;
+  if (vendorId) params.vendor_id = vendorId;
   if (operatorTeam) params.operator_team = operatorTeam;
 
   return cachedGet('/api/v1/analytics/team-production', { params, signal }, {
@@ -369,6 +412,12 @@ export async function fetchShiftEfficiencyAnalytics({
   endDate,
   plantId,
   shiftId,
+  departmentId,
+  sectionId,
+  employmentType,
+  vendorId,
+  teamId,
+  operatorTeam,
   signal,
   forceRefresh,
 } = {}) {
@@ -377,6 +426,12 @@ export async function fetchShiftEfficiencyAnalytics({
   if (endDate) params.end_date = endDate;
   if (plantId) params.plant_id = plantId;
   if (shiftId) params.shift_id = shiftId;
+  if (departmentId) params.department_id = departmentId;
+  if (sectionId) params.section_id = sectionId;
+  if (employmentType) params.employment_type = employmentType;
+  if (vendorId) params.vendor_id = vendorId;
+  const team = teamId || operatorTeam;
+  if (team) params.team_id = team;
 
   return cachedGet('/api/v1/analytics/shift-efficiency', { params, signal }, {
     ttlMs: CACHE_TTL.ANALYTICS,
@@ -385,20 +440,28 @@ export async function fetchShiftEfficiencyAnalytics({
 }
 
 export async function fetchSkillsAnalytics({
+  startDate,
+  endDate,
   departmentId,
   sectionId,
   teamId,
   shiftId,
   plantId,
+  employmentType,
+  vendorId,
   signal,
   forceRefresh,
 } = {}) {
   const params = {};
+  if (startDate) params.start_date = startDate;
+  if (endDate) params.end_date = endDate;
   if (departmentId) params.department_id = departmentId;
   if (sectionId) params.section_id = sectionId;
   if (teamId) params.team_id = teamId;
   if (shiftId) params.shift_id = shiftId;
   if (plantId) params.plant_id = plantId;
+  if (employmentType) params.employment_type = employmentType;
+  if (vendorId) params.vendor_id = vendorId;
 
   return cachedGet('/api/v1/analytics/skills', { params, signal }, {
     ttlMs: CACHE_TTL.ANALYTICS,
@@ -412,6 +475,11 @@ export async function fetchAttritionAnalytics({
   plantId,
   departmentId,
   sectionId,
+  shiftId,
+  employmentType,
+  vendorId,
+  teamId,
+  operatorTeam,
   signal,
   forceRefresh,
 } = {}) {
@@ -421,6 +489,11 @@ export async function fetchAttritionAnalytics({
   if (plantId) params.plant_id = plantId;
   if (departmentId) params.department_id = departmentId;
   if (sectionId) params.section_id = sectionId;
+  if (shiftId) params.shift_id = shiftId;
+  if (employmentType) params.employment_type = employmentType;
+  if (vendorId) params.vendor_id = vendorId;
+  const team = teamId || operatorTeam;
+  if (team) params.team_id = team;
 
   return cachedGet('/api/v1/analytics/attrition', { params, signal }, {
     ttlMs: CACHE_TTL.ANALYTICS,
@@ -435,6 +508,10 @@ export async function fetchComplianceAnalytics({
   departmentId,
   sectionId,
   plantId,
+  employmentType,
+  vendorId,
+  teamId,
+  operatorTeam,
   signal,
   forceRefresh,
 } = {}) {
@@ -445,6 +522,10 @@ export async function fetchComplianceAnalytics({
   if (departmentId) params.department_id = departmentId;
   if (sectionId) params.section_id = sectionId;
   if (plantId) params.plant_id = plantId;
+  if (employmentType) params.employment_type = employmentType;
+  if (vendorId) params.vendor_id = vendorId;
+  const team = teamId || operatorTeam;
+  if (team) params.team_id = team;
 
   return cachedGet('/api/v1/analytics/compliance', { params, signal }, {
     ttlMs: CACHE_TTL.ANALYTICS,
@@ -462,6 +543,10 @@ export async function fetchWorkforceAvailability({
   shiftId,
   departmentId,
   sectionId,
+  employmentType,
+  vendorId,
+  teamId,
+  operatorTeam,
   signal,
   forceRefresh,
 } = {}) {
@@ -470,6 +555,10 @@ export async function fetchWorkforceAvailability({
   if (shiftId) params.shift_id = shiftId;
   if (departmentId) params.department_id = departmentId;
   if (sectionId) params.section_id = sectionId;
+  if (employmentType) params.employment_type = employmentType;
+  if (vendorId) params.vendor_id = vendorId;
+  const team = teamId || operatorTeam;
+  if (team) params.team_id = team;
 
   return cachedGet('/api/v1/planning/availability', { params, signal }, {
     ttlMs: CACHE_TTL.ANALYTICS,
@@ -481,12 +570,24 @@ export async function fetchWorkforceShortages({
   date,
   plantId,
   shiftId,
+  departmentId,
+  sectionId,
+  employmentType,
+  vendorId,
+  teamId,
+  operatorTeam,
   signal,
   forceRefresh,
 } = {}) {
   const params = { date };
   if (plantId) params.plant_id = plantId;
   if (shiftId) params.shift_id = shiftId;
+  if (departmentId) params.department_id = departmentId;
+  if (sectionId) params.section_id = sectionId;
+  if (employmentType) params.employment_type = employmentType;
+  if (vendorId) params.vendor_id = vendorId;
+  const team = teamId || operatorTeam;
+  if (team) params.team_id = team;
 
   return cachedGet('/api/v1/planning/shortages', { params, signal }, {
     ttlMs: CACHE_TTL.ANALYTICS,
@@ -643,11 +744,25 @@ export async function runSkillTrainingAgentAnalysis(filters = {}, signal) {
   return data;
 }
 
-export async function fetchSinglePersonDependency({ plantId, shiftId, date, signal, forceRefresh } = {}) {
+export async function fetchSinglePersonDependency({
+  plantId,
+  shiftId,
+  date,
+  departmentId,
+  sectionId,
+  employmentType,
+  vendorId,
+  signal,
+  forceRefresh,
+} = {}) {
   const params = {};
   if (plantId) params.plant_id = plantId;
   if (shiftId) params.shift_id = shiftId;
   if (date) params.date = date;
+  if (departmentId) params.department_id = departmentId;
+  if (sectionId) params.section_id = sectionId;
+  if (employmentType) params.employment_type = employmentType;
+  if (vendorId) params.vendor_id = vendorId;
 
   return cachedGet('/api/v1/intelligence/single-person-dependency', { params, signal }, {
     ttlMs: CACHE_TTL.ANALYTICS,

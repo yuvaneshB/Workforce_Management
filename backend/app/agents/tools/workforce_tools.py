@@ -19,6 +19,7 @@ from contextlib import contextmanager
 from typing import Any
 
 from langchain_core.tools import BaseTool, tool
+from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from app.core.database import db_manager
@@ -177,9 +178,11 @@ def get_attendance_analytics(
             absent_count = 0
             leave_count = 0
             late_count = 0
+            weekly_off_count = 0
+            holiday_count = 0
 
             for item in analytics.by_status:
-                status_name = getattr(item, "attendance_status", "")
+                status_name = str(getattr(item, "attendance_status", "") or "").strip().upper()
                 count = getattr(item, "record_count", 0)
                 if status_name == "PRESENT":
                     present_count = count
@@ -189,11 +192,27 @@ def get_attendance_analytics(
                     leave_count = count
                 elif status_name == "LATE":
                     late_count = count
+                elif status_name == "WEEKLY OFF":
+                    weekly_off_count = count
+                elif status_name == "HOLIDAY":
+                    holiday_count = count
+
+            if present_count == 0 and getattr(analytics, "present_count", 0) > 0:
+                present_count = analytics.present_count
+                absent_count = analytics.absent_count
+                leave_count = analytics.leave_count
+                late_count = analytics.late_count
 
             total_records = analytics.total_records
+            working_days_records = max(0, total_records - weekly_off_count - holiday_count)
             att_pct = (
                 round((present_count * 100.0 / total_records), 1)
                 if total_records > 0
+                else 0.0
+            )
+            att_working_days_pct = (
+                round((present_count * 100.0 / working_days_records), 1)
+                if working_days_records > 0
                 else 0.0
             )
             abs_pct = (
@@ -209,7 +228,12 @@ def get_attendance_analytics(
                 "absent_count": absent_count,
                 "leave_count": leave_count,
                 "late_count": late_count,
+                "weekly_off_count": weekly_off_count,
+                "holiday_count": holiday_count,
+                "working_days_records": working_days_records,
                 "attendance_percentage": att_pct,
+                "attendance_rate_total_records": att_pct,
+                "attendance_rate_working_days": att_working_days_pct,
                 "absenteeism_percentage": abs_pct,
                 "filters_applied": {
                     "start_date": parsed_start.isoformat() if parsed_start else None,
@@ -326,29 +350,54 @@ def get_shift_analytics(
         clean_shift = shift_id.strip().upper() if shift_id and shift_id.strip() else None
 
         with _get_tool_db_session() as session:
-            summary = workforce_service.get_workforce_summary(session)
-            headcount_map = {item.key: item.count for item in summary.by_home_shift}
+            hc_rows = session.execute(
+                text(
+                    "SELECT shift_id, COUNT(*) FROM employee_master "
+                    "WHERE (CAST(:shift_id AS VARCHAR) IS NULL OR shift_id = CAST(:shift_id AS VARCHAR)) "
+                    "GROUP BY shift_id ORDER BY shift_id"
+                ),
+                {"shift_id": clean_shift},
+            ).fetchall()
+            headcount_map = {str(r[0]): int(r[1]) for r in hc_rows if r[0] is not None}
 
-            att_analytics = attendance_service.get_attendance_analytics(
-                session,
-                period="daily",
-                start_date=parsed_start,
-                end_date=parsed_end,
-                shift_id=clean_shift,
-            )
+            att_rows = session.execute(
+                text(
+                    "SELECT "
+                    "  shift_id, "
+                    "  COUNT(*) as total_records, "
+                    "  COUNT(CASE WHEN UPPER(attendance_status) = 'PRESENT' THEN 1 END) as present_count, "
+                    "  COUNT(CASE WHEN UPPER(attendance_status) = 'ABSENT' THEN 1 END) as absent_count "
+                    "FROM attendance_transactions "
+                    "WHERE (CAST(:shift_id AS VARCHAR) IS NULL OR shift_id = CAST(:shift_id AS VARCHAR)) "
+                    "  AND (CAST(:start_date AS DATE) IS NULL OR work_date >= CAST(:start_date AS DATE)) "
+                    "  AND (CAST(:end_date AS DATE) IS NULL OR work_date <= CAST(:end_date AS DATE)) "
+                    "GROUP BY shift_id "
+                    "ORDER BY shift_id"
+                ),
+                {
+                    "shift_id": clean_shift,
+                    "start_date": parsed_start.isoformat() if parsed_start else None,
+                    "end_date": parsed_end.isoformat() if parsed_end else None,
+                },
+            ).fetchall()
 
             shift_items = []
-            for sb in att_analytics.shift_breakdown:
-                s_id = getattr(sb, "shift_id", "")
+            for r in att_rows:
+                s_id = str(r[0])
+                tot = int(r[1])
+                pres = int(r[2])
+                ab = int(r[3])
+                att_pct = round((pres * 100.0 / tot), 1) if tot > 0 else 0.0
+                abs_pct = round((ab * 100.0 / tot), 1) if tot > 0 else 0.0
                 shift_items.append(
                     {
                         "shift_id": s_id,
                         "headcount": headcount_map.get(s_id, 0),
-                        "present_count": getattr(sb, "present_count", 0),
-                        "absent_count": getattr(sb, "absent_count", 0),
-                        "total_records": getattr(sb, "total_records", 0),
-                        "attendance_percentage": getattr(sb, "attendance_pct", 0.0),
-                        "absenteeism_percentage": getattr(sb, "absenteeism_pct", 0.0),
+                        "present_count": pres,
+                        "absent_count": ab,
+                        "total_records": tot,
+                        "attendance_percentage": att_pct,
+                        "absenteeism_percentage": abs_pct,
                     }
                 )
 
@@ -496,7 +545,7 @@ def get_section_analytics(
             return {
                 "status": "success",
                 "total_sections": getattr(sec_res, "total_sections", len(sec_items)),
-                "sections": sec_items,
+                "sections": sec_items[:5],
                 "filters_applied": {
                     "start_date": parsed_start.isoformat() if parsed_start else None,
                     "end_date": parsed_end.isoformat() if parsed_end else None,
@@ -575,12 +624,12 @@ def get_overtime_analytics(
                 "overtime_record_count": result.get("overtime_record_count", 0),
                 "overtime_rate_pct": result.get("overtime_rate_pct", 0.0),
                 "avg_overtime_hours_per_employee": result.get("avg_overtime_hours_per_employee", 0.0),
-                "shift_wise": result.get("shift_wise", []),
-                "department_wise": result.get("department_wise", []),
-                "section_wise": result.get("section_wise", []),
-                "employee_wise": result.get("employee_wise", []),
-                "monthly_trend": result.get("monthly_trend", []),
-                "daily_trend": result.get("daily_trend", []),
+                "shift_wise": (result.get("shift_wise") or [])[:2],
+                "department_wise": (result.get("department_wise") or [])[:2],
+                "section_wise": (result.get("section_wise") or [])[:2],
+                "employee_wise": (result.get("employee_wise") or [])[:2],
+                "monthly_trend": (result.get("monthly_trend") or [])[:2],
+                "daily_trend": [],
                 "filters_applied": {
                     "start_date": parsed_start.isoformat() if parsed_start else None,
                     "end_date": parsed_end.isoformat() if parsed_end else None,
@@ -667,7 +716,7 @@ def get_team_production_analytics(
                 "total_present_employees": result.get("total_present_employees", 0),
                 "total_absent_employees": result.get("total_absent_employees", 0),
                 "overall_production_per_present_employee": result.get("overall_production_per_present_employee", 0.0),
-                "items": result.get("items", []),
+                "items": (result.get("items") or [])[:5],
                 "attribution_note": result.get(
                     "attribution_note",
                     "Production is tracked and attributed at the operator team level, not per individual employee.",
@@ -823,9 +872,9 @@ def get_skills_analytics(
                 "total_employees": result.get("total_employees", 0),
                 "skill_grade_distribution": result.get("skill_grade_distribution", []),
                 "certification_distribution": result.get("certification_distribution", []),
-                "department_skills": result.get("department_skills", []),
-                "section_skills": result.get("section_skills", []),
-                "team_skills": result.get("team_skills", []),
+                "department_skills": (result.get("department_skills") or [])[:3],
+                "section_skills": (result.get("section_skills") or [])[:3],
+                "team_skills": (result.get("team_skills") or [])[:3],
                 "active_skill_distribution": result.get("active_skill_distribution", []),
                 "filters_applied": {
                     "department_id": clean_dept,
@@ -916,10 +965,10 @@ def get_compliance_analytics(
                 "total_skill_match_records": result.get("total_skill_match_records", 0),
                 "matched_count": result.get("matched_count", 0),
                 "gap_count": result.get("gap_count", 0),
-                "department_wise": result.get("department_wise", []),
-                "section_wise": result.get("section_wise", []),
-                "shift_wise": result.get("shift_wise", []),
-                "daily_trend": result.get("daily_trend", []),
+                "department_wise": (result.get("department_wise") or [])[:3],
+                "section_wise": (result.get("section_wise") or [])[:3],
+                "shift_wise": (result.get("shift_wise") or [])[:3],
+                "daily_trend": [],
                 "denominator_note": result.get("denominator_note", ""),
                 "filters_applied": {
                     "start_date": parsed_start.isoformat() if parsed_start else None,

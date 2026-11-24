@@ -1,0 +1,99 @@
+[
+  {
+    "id": "q02_overtime",
+    "question": "Which departments logged the highest overtime hours and what is the total overtime spend?",
+    "category": "single-domain",
+    "latency_ms": 34078.0,
+    "is_fallback": false,
+    "fallback_reason": null,
+    "live_threads_at_start": 1,
+    "tools_used": [
+      "analyze_overtime",
+      "ask_overtime_agent"
+    ],
+    "llm_calls_count": 3,
+    "supervisor_llm_ms": 2698.2,
+    "specialist_llm_ms": 23437.6,
+    "tool_ms": 39303.7,
+    "answer_preview": "## Overtime Analysis: Department Concentration & Total Spend\n\n### Executive Summary\nAcross the period **2026-08-01 to 2026-11-19**, the factory logged **58,433 total overtime hours** across **23,700 s"
+  },
+  {
+    "id": "q05_production",
+    "question": "How did total production output compare against planned targets across shifts?",
+    "category": "single-domain",
+    "latency_ms": 34014.8,
+    "is_fallback": false,
+    "fallback_reason": null,
+    "live_threads_at_start": 1,
+    "tools_used": [
+      "analyze_production",
+      "ask_production_agent"
+    ],
+    "llm_calls_count": 4,
+    "supervisor_llm_ms": 9788.9,
+    "specialist_llm_ms": 15441.3,
+    "tool_ms": 32990.7,
+    "answer_preview": "**Production Output vs. Planned Targets \u2014 Cross-Shift Summary**\n\nAcross both plants (IN-KA-01 and IN-TN-01), total production achieved **16,639,033 actual units** against a planned target of **16,687,"
+  },
+  {
+    "id": "q07_cross_absenteeism_overtime",
+    "question": "Does high absenteeism in Shift C correlate with elevated overtime hours and costs?",
+    "category": "cross-domain",
+    "latency_ms": 49779.9,
+    "is_fallback": false,
+    "fallback_reason": null,
+    "live_threads_at_start": 1,
+    "tools_used": [
+      "analyze_attendance",
+      "analyze_overtime",
+      "analyze_overtime",
+      "ask_attendance_agent",
+      "ask_overtime_agent",
+      "ask_attendance_agent",
+      "ask_overtime_agent"
+    ],
+    "llm_calls_count": 7,
+    "supervisor_llm_ms": 18391.8,
+    "specialist_llm_ms": 39775.8,
+    "tool_ms": 78127.5,
+    "answer_preview": "**Yes \u2014 there is a clear and measurable correlation between high absenteeism on Shift C and elevated overtime hours and costs.** Here are the verified findings:\n\n**Absenteeism on Shift C (Both Plants "
+  },
+  {
+    "id": "q08_cross_vendor_attrition",
+    "question": "How does contractor reliance relate to employee attrition velocity and departure reasons?",
+    "category": "cross-domain",
+    "latency_ms": 41773.9,
+    "is_fallback": false,
+    "fallback_reason": null,
+    "live_threads_at_start": 1,
+    "tools_used": [
+      "analyze_vendor",
+      "analyze_attrition",
+      "ask_vendor_agent",
+      "ask_attrition_agent"
+    ],
+    "llm_calls_count": 6,
+    "supervisor_llm_ms": 13692.3,
+    "specialist_llm_ms": 29547.0,
+    "tool_ms": 60749.6,
+    "answer_preview": "**Contractor Reliance & Attrition Velocity \u2014 Cross-Domain Analysis**\n\nThe data reveals a strong and concerning link between contractor reliance and employee attrition:\n\n**Contractor Reliance Profile:*"
+  },
+  {
+    "id": "q09_cross_skills_planning",
+    "question": "Are shift staffing shortages driven by critical skill deficits or baseline absenteeism?",
+    "category": "cross-domain",
+    "latency_ms": 78503.4,
+    "is_fallback": true,
+    "fallback_reason": "timeout: ",
+    "live_threads_at_start": 1,
+    "tools_used": [
+      "Skill & Training Agent",
+      "Workforce Planning Agent"
+    ],
+    "llm_calls_count": 5,
+    "supervisor_llm_ms": 0,
+    "specialist_llm_ms": 38692.9,
+    "tool_ms": 26287.2,
+    "answer_preview": "Great question \u2014 based on the data, shift staffing shortages appear to be driven more by **critical skill deficits** than simple baseline absenteeism. The analysis flagged senior L3+ staffing shortfal"
+  }
+]

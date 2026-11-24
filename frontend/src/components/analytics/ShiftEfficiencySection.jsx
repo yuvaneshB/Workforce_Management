@@ -105,22 +105,8 @@ export function ShiftEfficiencySection({
             <h2 className="text-sm font-bold text-[var(--text)] tracking-tight">
               Shift-wise Production & Workforce Efficiency
             </h2>
-            <p className="text-[11px] text-[var(--secondary)]">
-              Comprehensive shift performance, workforce utilization, quality and downtime analysis
-            </p>
           </div>
         </div>
-      </div>
-
-      {/* Productivity Attribution Notice */}
-      <div
-        className="rounded-xl p-3 flex items-start gap-2.5 text-[11px] border"
-        style={{ borderColor: 'var(--border)', background: 'var(--surface)' }}
-      >
-        <Info className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
-        <span className="text-[var(--secondary)] leading-relaxed">
-          <strong className="text-[var(--text)] font-semibold">Productivity Notice:</strong> Production per present employee is a shift-level throughput indicator (actual production quantity divided by present attendance count), not individual operator output.
-        </span>
       </div>
 
       {/* Row 1: Overall Shift KPI Cards (4 cards) */}

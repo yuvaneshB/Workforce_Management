@@ -231,6 +231,9 @@ export function WorkforceManagement() {
       try {
         const data = await fetchWorkforceSummary({
           plantId: plantId || undefined,
+          departmentId: departmentId || undefined,
+          sectionId: sectionId || undefined,
+          shiftId: shiftId || undefined,
           signal: controller.signal,
         });
         if (!active) return;
@@ -245,7 +248,7 @@ export function WorkforceManagement() {
       active = false;
       controller.abort();
     };
-  }, [plantId]);
+  }, [plantId, departmentId, sectionId, shiftId, filterToken]);
 
   // ---------------------------------------------------------------------------
   // TAB 1: LOAD WORKFORCE EMPLOYEES
@@ -448,38 +451,31 @@ export function WorkforceManagement() {
   return (
     <div className="space-y-5">
       {/* ==================================================================== */}
-      {/* 1. SHARED FILTERS CONTAINER (Compact Horizontal Layout on Desktop)  */}
+      {/* 1. SHARED FILTERS CONTAINER (Clean 2-Row Layout)                    */}
       {/* ==================================================================== */}
-      <Card className="p-3.5 sm:p-4 border-slate-200/80 dark:border-slate-800 shadow-xs">
+      <Card className="p-4 border-slate-200/80 dark:border-slate-800 shadow-xs">
         <div className="flex flex-col gap-3">
-          {/* Row 1: Filter Label, Inputs, Reset, Apply */}
-          <div className="flex flex-wrap items-center gap-2.5">
-            {/* Filter Lead Pill */}
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 border border-purple-200/60 dark:border-purple-800/60 text-xs font-bold shrink-0">
-              <Filter className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-              <span>Filters:</span>
-            </div>
-
-            {/* Date Range Picker (Start & End Dates) */}
+          {/* Row 1: Date range, All Plants, All Departments, All Sections, All Shifts */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.25fr_1fr_1fr_1fr_1fr] gap-3 items-center w-full">
+            {/* Date Range Picker */}
             <div
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl border text-[11px] font-medium"
-              style={selectStyle}
+              className="h-10 rounded-xl border px-3 flex items-center gap-2 text-xs font-medium bg-[var(--surface)] border-[var(--border)] text-[var(--text)] transition-colors hover:border-purple-300 dark:hover:border-purple-700 shadow-2xs w-full min-w-0"
               title="Attendance & Shifts date window"
             >
-              <Calendar className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400 shrink-0" />
+              <Calendar className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0" />
               <input
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="bg-transparent text-[11px] outline-none cursor-pointer"
+                className="bg-transparent text-xs outline-none cursor-pointer flex-1 min-w-0 text-[var(--text)]"
                 aria-label="Start Date"
               />
-              <span className="text-slate-400 dark:text-slate-500 font-bold">–</span>
+              <span className="text-slate-400 dark:text-slate-500 font-bold shrink-0">–</span>
               <input
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="bg-transparent text-[11px] outline-none cursor-pointer"
+                className="bg-transparent text-xs outline-none cursor-pointer flex-1 min-w-0 text-[var(--text)]"
                 aria-label="End Date"
               />
             </div>
@@ -495,8 +491,7 @@ export function WorkforceManagement() {
                 setAttendanceOffset(0);
               }}
               aria-label="Filter by Plant"
-              className={selectClass}
-              style={selectStyle}
+              className="h-10 w-full rounded-xl border px-3 text-xs font-medium outline-none transition-colors shadow-2xs hover:border-purple-300 dark:hover:border-purple-700 focus:border-purple-500 bg-[var(--surface)] border-[var(--border)] text-[var(--text)] cursor-pointer"
             >
               {PLANTS.map((p) => (
                 <option key={p.id} value={p.id}>
@@ -515,8 +510,7 @@ export function WorkforceManagement() {
                 setAttendanceOffset(0);
               }}
               aria-label="Filter by Department"
-              className={selectClass}
-              style={selectStyle}
+              className="h-10 w-full rounded-xl border px-3 text-xs font-medium outline-none transition-colors shadow-2xs hover:border-purple-300 dark:hover:border-purple-700 focus:border-purple-500 bg-[var(--surface)] border-[var(--border)] text-[var(--text)] cursor-pointer"
             >
               <option value="">All Departments</option>
               {departments.map((d) => (
@@ -531,8 +525,7 @@ export function WorkforceManagement() {
               value={sectionId}
               onChange={(e) => setSectionId(e.target.value)}
               aria-label="Filter by Section"
-              className={selectClass}
-              style={selectStyle}
+              className="h-10 w-full rounded-xl border px-3 text-xs font-medium outline-none transition-colors shadow-2xs hover:border-purple-300 dark:hover:border-purple-700 focus:border-purple-500 bg-[var(--surface)] border-[var(--border)] text-[var(--text)] cursor-pointer"
             >
               <option value="">All Sections</option>
               {sections.map((s) => (
@@ -547,8 +540,7 @@ export function WorkforceManagement() {
               value={shiftId}
               onChange={(e) => setShiftId(e.target.value)}
               aria-label="Filter by Shift"
-              className={selectClass}
-              style={selectStyle}
+              className="h-10 w-full rounded-xl border px-3 text-xs font-medium outline-none transition-colors shadow-2xs hover:border-purple-300 dark:hover:border-purple-700 focus:border-purple-500 bg-[var(--surface)] border-[var(--border)] text-[var(--text)] cursor-pointer"
             >
               {SHIFTS.map((s) => (
                 <option key={s.id} value={s.id}>
@@ -556,27 +548,27 @@ export function WorkforceManagement() {
                 </option>
               ))}
             </select>
+          </div>
 
-            {/* Employee Search Input */}
-            <div className="relative flex-1 min-w-[200px] max-w-sm">
-              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+          {/* Row 2: Search Box (flex-1) + Reset & Apply Filters (far right) */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full">
+            <div className="relative flex-1 min-w-0">
+              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleApplyFilters()}
                 placeholder="Search by Employee ID, Name, Role..."
-                className="w-full h-9 pl-9 pr-3 rounded-xl border text-[11px] outline-none transition-colors shadow-2xs hover:border-purple-300 dark:hover:border-purple-700 focus:border-purple-500"
-                style={selectStyle}
+                className="w-full h-10 pl-10 pr-3.5 rounded-xl border text-xs outline-none transition-colors shadow-2xs hover:border-purple-300 dark:hover:border-purple-700 focus:border-purple-500 bg-[var(--surface)] border-[var(--border)] text-[var(--text)]"
               />
             </div>
 
-            {/* Action Buttons: Reset & Apply */}
-            <div className="flex items-center gap-2 ml-auto">
+            <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
               <button
                 type="button"
                 onClick={handleResetFilters}
-                className="h-9 px-3 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="h-10 px-4 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Reset</span>
@@ -585,7 +577,7 @@ export function WorkforceManagement() {
               <button
                 type="button"
                 onClick={handleApplyFilters}
-                className="h-9 px-4 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-xs cursor-pointer"
+                className="h-10 px-5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold flex items-center gap-2 transition-colors shadow-xs cursor-pointer"
               >
                 <Filter className="w-3.5 h-3.5" />
                 <span>Apply Filters</span>
@@ -610,17 +602,6 @@ export function WorkforceManagement() {
         >
           <Users className="w-4 h-4" />
           <span>Workforce</span>
-          {summaryData && (
-            <span
-              className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
-                activeTab === 'workforce'
-                  ? 'bg-purple-700 text-white'
-                  : 'bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300'
-              }`}
-            >
-              {summaryData.total_employees}
-            </span>
-          )}
         </button>
 
         <button
@@ -634,15 +615,6 @@ export function WorkforceManagement() {
         >
           <Building2 className="w-4 h-4" />
           <span>Vendor Workforce</span>
-          <span
-            className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
-              activeTab === 'vendor-workforce'
-                ? 'bg-purple-700 text-white'
-                : 'bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300'
-            }`}
-          >
-            {summaryData?.vendor_count ? `${summaryData.vendor_count} Contractors` : '647 Contractors'}
-          </span>
         </button>
 
         <button
@@ -656,17 +628,6 @@ export function WorkforceManagement() {
         >
           <CalendarCheck className="w-4 h-4" />
           <span>Attendance</span>
-          {attendanceAnalytics && attendanceAnalytics.overall_attendance_pct != null && (
-            <span
-              className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
-                activeTab === 'attendance'
-                  ? 'bg-purple-700 text-white'
-                  : 'bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300'
-              }`}
-            >
-              {attendanceAnalytics.overall_attendance_pct}% Rate
-            </span>
-          )}
         </button>
 
         <button
@@ -680,15 +641,6 @@ export function WorkforceManagement() {
         >
           <Layers className="w-4 h-4" />
           <span>Shifts</span>
-          <span
-            className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
-              activeTab === 'shifts'
-                ? 'bg-purple-700 text-white'
-                : 'bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300'
-            }`}
-          >
-            3 Shifts (GS1/S2/NS3)
-          </span>
         </button>
       </div>
 
@@ -717,7 +669,7 @@ export function WorkforceManagement() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
             <KPICard
               label="Total Employees"
-              value={summaryData?.total_employees != null ? summaryData.total_employees.toLocaleString() : '—'}
+              value={summaryData?.total_employees != null ? summaryData.total_employees.toLocaleString() : summaryData ? '0' : '—'}
               subtitle="Registered workforce"
               icon={Users}
               iconBg="var(--brand-purple-soft)"
@@ -727,9 +679,11 @@ export function WorkforceManagement() {
             <KPICard
               label="Active Employees"
               value={
-                summaryData?.active_employees != null && summaryData?.total_employees
-                  ? `${summaryData.active_employees} (${((summaryData.active_employees / summaryData.total_employees) * 100).toFixed(0)}%)`
-                  : '—'
+                summaryData?.active_employees != null && summaryData?.total_employees > 0
+                  ? `${summaryData.active_employees.toLocaleString()} (${((summaryData.active_employees / summaryData.total_employees) * 100).toFixed(0)}%)`
+                  : summaryData?.active_employees != null
+                  ? summaryData.active_employees.toLocaleString()
+                  : summaryData ? '0' : '—'
               }
               subtitle="Current active headcount"
               icon={UserCheck}
@@ -739,7 +693,7 @@ export function WorkforceManagement() {
             />
             <KPICard
               label="Active Operations Headcount"
-              value={summaryData?.active_employees != null ? summaryData.active_employees.toLocaleString() : '—'}
+              value={summaryData?.active_employees != null ? summaryData.active_employees.toLocaleString() : summaryData ? '0' : '—'}
               subtitle="Operational operators"
               icon={Clock}
               iconBg="var(--brand-peach-soft)"
@@ -748,7 +702,15 @@ export function WorkforceManagement() {
             />
             <KPICard
               label="Operational Departments"
-              value={summaryData?.distinct_departments != null ? summaryData.distinct_departments.toLocaleString() : '—'}
+              value={
+                summaryData?.total_employees === 0
+                  ? '0'
+                  : summaryData?.distinct_departments != null
+                  ? summaryData.distinct_departments.toLocaleString()
+                  : departments?.length > 0
+                  ? departments.length.toLocaleString()
+                  : '0'
+              }
               subtitle="Factory departments"
               icon={Layers}
               iconBg="var(--brand-blue-soft)"
@@ -757,7 +719,13 @@ export function WorkforceManagement() {
             />
             <KPICard
               label="Operational Teams"
-              value={summaryData?.distinct_teams != null ? summaryData.distinct_teams.toLocaleString() : '—'}
+              value={
+                summaryData?.total_employees === 0
+                  ? '0'
+                  : summaryData?.distinct_teams != null
+                  ? summaryData.distinct_teams.toLocaleString()
+                  : summaryData ? '0' : '—'
+              }
               subtitle="Roster production teams"
               icon={Users}
               iconBg="var(--rose-soft)"

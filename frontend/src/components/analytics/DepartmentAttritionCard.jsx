@@ -9,7 +9,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { DEPARTMENT_ATTRITION } from '../../data/attritionData';
 import { useTheme } from '../../hooks/useTheme';
 import { CHART_COLORS } from '../../utils/constants';
 import { Card } from '../common/Card';
@@ -19,7 +18,7 @@ export function DepartmentAttritionCard({ data = null, loading = false }) {
   const { theme } = useTheme();
   const palette = CHART_COLORS[theme] || CHART_COLORS.light;
 
-  const sourceData = data && data.length > 0 ? data : DEPARTMENT_ATTRITION;
+  const sourceData = data && Array.isArray(data) ? data : [];
   const chartData = sourceData.map((d) => ({
     ...d,
     label: d.label || `${d.count} (${d.pct})`,
@@ -40,9 +39,6 @@ export function DepartmentAttritionCard({ data = null, loading = false }) {
               Department-wise Attrition
             </h2>
           </div>
-          <span className="text-[9px] font-bold text-blue-600 bg-blue-50 dark:bg-blue-950/40 px-1.5 py-0.5 rounded border border-blue-200 dark:border-blue-800 shrink-0">
-            Headcount Exits
-          </span>
         </div>
 
         {loading ? (

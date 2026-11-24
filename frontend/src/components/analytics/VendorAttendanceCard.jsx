@@ -14,15 +14,6 @@ import { CHART_COLORS } from '../../utils/constants';
 import { Card } from '../common/Card';
 import { LoadingSkeleton } from '../common/LoadingSkeleton';
 
-const VENDOR_ATTENDANCE = [
-  { vendor: 'Vendor A', fullName: 'Apex Industrial Services', pct: 93.85, present: 3885, absent: 255 },
-  { vendor: 'Vendor B', fullName: 'Prime Technical Services', pct: 92.67, present: 3836, absent: 304 },
-  { vendor: 'Vendor C', fullName: 'Core Facility Partners', pct: 91.73, present: 3798, absent: 342 },
-  { vendor: 'Vendor D', fullName: 'Summit Workforce Solutions', pct: 90.96, present: 3766, absent: 374 },
-  { vendor: 'Vendor E', fullName: 'Global Tech Staffing', pct: 89.42, present: 0, absent: 0 },
-  { vendor: 'Vendor F', fullName: 'Precision Workforce', pct: 88.97, present: 0, absent: 0 },
-];
-
 export function VendorAttendanceCard({
   data = null,
   loading = false,
@@ -31,25 +22,19 @@ export function VendorAttendanceCard({
   const { theme } = useTheme();
   const palette = CHART_COLORS[theme] || CHART_COLORS.light;
 
-  const hasData = !error && data != null;
-  const chartData = hasData ? VENDOR_ATTENDANCE : [];
+  const chartData = !error && Array.isArray(data) ? data : [];
 
   return (
     <Card className="p-4 lg:col-span-4 flex flex-col justify-between min-h-[260px]">
       <div>
-        <div className="flex items-center justify-between gap-2 mb-2">
-          <div className="flex items-center gap-2 min-w-0">
-            <Users className="w-4 h-4 shrink-0 text-[#4D8EEB]" aria-hidden="true" />
-            <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Vendor-wise Attendance</h2>
-          </div>
-          <span className="text-[10px] font-semibold text-blue-600 bg-blue-50 dark:bg-blue-950/40 px-1.5 py-0.5 rounded border border-blue-200 dark:border-blue-800 shrink-0">
-            {hasData ? '6 Vendors' : 'No Connection'}
-          </span>
+        <div className="flex items-center gap-2 mb-2 min-w-0">
+          <Users className="w-4 h-4 shrink-0 text-[#4D8EEB]" aria-hidden="true" />
+          <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Vendor-wise Attendance</h2>
         </div>
 
         {loading ? (
           <LoadingSkeleton className="h-44 w-full rounded-lg" />
-        ) : !hasData || chartData.length === 0 ? (
+        ) : chartData.length === 0 ? (
           <div className="h-44 w-full my-1 flex flex-col items-center justify-center text-center p-4 bg-[var(--surface-hover)]/30 rounded-lg border border-dashed border-[var(--border)]">
             <Users className="w-6 h-6 text-slate-400 mb-2 opacity-60" />
             <p className="text-xs font-bold text-[var(--text)]">No Vendor Attendance Data</p>
@@ -108,20 +93,6 @@ export function VendorAttendanceCard({
               </BarChart>
             </ResponsiveContainer>
           </div>
-        )}
-      </div>
-
-      <div className="flex items-center justify-between pt-2 border-t border-[var(--border)] text-[9px] text-[var(--secondary)]">
-        {hasData ? (
-          <>
-            <span>Top Vendor: <strong className="text-emerald-600 font-bold">Vendor A (93.85%)</strong></span>
-            <span>Avg Rate: <strong className="text-[var(--text)]">91.42%</strong></span>
-          </>
-        ) : (
-          <>
-            <span>Vendor performance monitoring</span>
-            <span className="font-bold text-slate-400">No Connection</span>
-          </>
         )}
       </div>
     </Card>

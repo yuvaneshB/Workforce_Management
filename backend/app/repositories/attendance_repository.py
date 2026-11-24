@@ -9,6 +9,7 @@ from app.models.attendance import WorkforceAttendance
 from app.models.department import DepartmentMaster
 from app.models.employee_master import EmployeeMaster
 from app.models.section import EmployeeSectionMapping
+from app.models.vendor import VendorMaster
 
 ALLOWED_ATTENDANCE_SORT_COLUMNS = {
     "attendance_id": WorkforceAttendance.attendance_id,
@@ -61,15 +62,25 @@ def _build_attendance_filters(
         filters.append(WorkforceAttendance.shift_id == shift_id)
     if department_id:
         filters.append(WorkforceAttendance.department_id == department_id)
-    target_sec = section_id or operator_team
-    if target_sec:
-        sec_targets = [target_sec]
-        if target_sec.startswith("TEAM-"):
-            sec_targets.append(target_sec.replace("TEAM-", "S0"))
+    if section_id and section_id.strip():
+        sec_targets = [section_id.strip()]
+        if section_id.strip().startswith("TEAM-"):
+            sec_targets.append(section_id.strip().replace("TEAM-", "S0"))
         filters.append(
             WorkforceAttendance.employee_id.in_(
                 select(EmployeeSectionMapping.employee_id).where(
                     EmployeeSectionMapping.section_id.in_(sec_targets)
+                )
+            )
+        )
+    if operator_team and operator_team.strip():
+        team_targets = [operator_team.strip()]
+        if operator_team.strip().startswith("TEAM-"):
+            team_targets.append(operator_team.strip().replace("TEAM-", "S0"))
+        filters.append(
+            WorkforceAttendance.employee_id.in_(
+                select(EmployeeSectionMapping.employee_id).where(
+                    EmployeeSectionMapping.section_id.in_(team_targets)
                 )
             )
         )
@@ -101,7 +112,35 @@ def _status_case_sum(status_value: str):
     )
 
 
-def _format_trend_row(bucket_key, label: str, total: int, present: int, absent: int, late: int, leave: int) -> dict:
+def _status_gender_case_sum(status_value: str, gender_value: str):
+    return func.coalesce(
+        func.sum(
+            case(
+                (
+                    (func.upper(WorkforceAttendance.attendance_status) == status_value.upper())
+                    & (func.upper(EmployeeMaster.gender) == gender_value.upper()),
+                    1,
+                ),
+                else_=0,
+            )
+        ),
+        0,
+    )
+
+
+def _format_trend_row(
+    bucket_key,
+    label: str,
+    total: int,
+    present: int,
+    absent: int,
+    late: int,
+    leave: int,
+    male_present: int = 0,
+    female_present: int = 0,
+    male_absent: int = 0,
+    female_absent: int = 0,
+) -> dict:
     att_pct = round((present * 100.0 / total), 1) if total > 0 else 0.0
     abs_pct = round((absent * 100.0 / total), 1) if total > 0 else 0.0
     return {
@@ -114,6 +153,10 @@ def _format_trend_row(bucket_key, label: str, total: int, present: int, absent: 
         "leave_count": int(leave),
         "attendance_pct": att_pct,
         "absenteeism_pct": abs_pct,
+        "male_present_count": int(male_present),
+        "female_present_count": int(female_present),
+        "male_absent_count": int(male_absent),
+        "female_absent_count": int(female_absent),
     }
 
 
@@ -133,7 +176,13 @@ def _query_attendance_trends(db: Session, filters: list, period: str) -> list[di
             _status_case_sum("ABSENT").label("absent"),
             _status_case_sum("LATE").label("late"),
             _status_case_sum("LEAVE").label("leave"),
+            _status_gender_case_sum("PRESENT", "MALE").label("male_present"),
+            _status_gender_case_sum("PRESENT", "FEMALE").label("female_present"),
+            _status_gender_case_sum("ABSENT", "MALE").label("male_absent"),
+            _status_gender_case_sum("ABSENT", "FEMALE").label("female_absent"),
         )
+        .select_from(WorkforceAttendance)
+        .outerjoin(EmployeeMaster, WorkforceAttendance.employee_id == EmployeeMaster.employee_id)
         .group_by(bucket_expr)
         .order_by(asc(bucket_expr))
     )
@@ -141,7 +190,7 @@ def _query_attendance_trends(db: Session, filters: list, period: str) -> list[di
         stmt = stmt.where(*filters)
 
     points = []
-    for bucket, total, present, absent, late, leave in db.execute(stmt).all():
+    for bucket, total, present, absent, late, leave, m_pres, f_pres, m_abs, f_abs in db.execute(stmt).all():
         if isinstance(bucket, dt.datetime):
             bucket_date = bucket.date()
         else:
@@ -155,7 +204,21 @@ def _query_attendance_trends(db: Session, filters: list, period: str) -> list[di
         else:
             key = bucket_date.isoformat()
             label = bucket_date.strftime("%m-%d")
-        points.append(_format_trend_row(key, label, total, present, absent, late, leave))
+        points.append(
+            _format_trend_row(
+                key,
+                label,
+                total,
+                present,
+                absent,
+                late,
+                leave,
+                male_present=m_pres,
+                female_present=f_pres,
+                male_absent=m_abs,
+                female_absent=f_abs,
+            )
+        )
     return points
 
 
@@ -189,6 +252,40 @@ def _query_shift_breakdown(db: Session, filters: list) -> list[dict]:
                 "leave_count": int(leave),
                 "attendance_pct": att_pct,
                 "absenteeism_pct": abs_pct,
+            }
+        )
+    return rows
+
+
+def _query_vendor_breakdown(db: Session, filters: list) -> list[dict]:
+    stmt = (
+        select(
+            func.coalesce(VendorMaster.vendor_name, EmployeeMaster.vendor_id, "Unknown").label("vendor_name"),
+            EmployeeMaster.vendor_id,
+            func.count(),
+            _status_case_sum("PRESENT"),
+            _status_case_sum("ABSENT"),
+        )
+        .join(EmployeeMaster, WorkforceAttendance.employee_id == EmployeeMaster.employee_id)
+        .outerjoin(VendorMaster, EmployeeMaster.vendor_id == VendorMaster.vendor_id)
+        .where(EmployeeMaster.employment_type.ilike("%vendor%"))
+        .group_by(VendorMaster.vendor_name, EmployeeMaster.vendor_id)
+        .order_by(desc(func.count()))
+    )
+    if filters:
+        stmt = stmt.where(*filters)
+
+    rows = []
+    for vendor_name, vendor_id, total, present, absent in db.execute(stmt).all():
+        pct = round((present * 100.0 / total), 1) if total > 0 else 0.0
+        rows.append(
+            {
+                "vendor": str(vendor_id or "Unknown"),
+                "fullName": str(vendor_name or "Unknown"),
+                "pct": pct,
+                "present": int(present),
+                "absent": int(absent),
+                "total": int(total),
             }
         )
     return rows
@@ -401,6 +498,9 @@ def get_attendance_analytics(
     absent_count = 0
     leave_count = 0
     late_count = 0
+    weekly_off_count = 0
+    holiday_count = 0
+    half_day_count = 0
     for item in by_status:
         st = item["attendance_status"].upper()
         cnt = item["record_count"]
@@ -412,9 +512,25 @@ def get_attendance_analytics(
             leave_count += cnt
         elif st == "LATE":
             late_count += cnt
+        elif st == "WEEKLY OFF":
+            weekly_off_count += cnt
+        elif st == "HOLIDAY":
+            holiday_count += cnt
+        elif st == "HALF DAY":
+            half_day_count += cnt
 
     tot_rec = int(total_records)
-    attendance_rate = round((present_count * 100.0 / tot_rec), 2) if tot_rec > 0 else 0.0
+    scheduled_working_records = tot_rec - (weekly_off_count + holiday_count)
+    if scheduled_working_records > 0:
+        attended_count = present_count + late_count + half_day_count
+        attendance_rate = round((attended_count * 100.0 / scheduled_working_records), 2)
+        absenteeism_rate = round((absent_count * 100.0 / scheduled_working_records), 2)
+    elif tot_rec > 0:
+        attendance_rate = round((present_count * 100.0 / tot_rec), 2)
+        absenteeism_rate = round((absent_count * 100.0 / tot_rec), 2)
+    else:
+        attendance_rate = 0.0
+        absenteeism_rate = 0.0
 
     def _group_counts(col) -> list[tuple[str, int]]:
         q = select(col, func.count()).group_by(col).order_by(asc(col))
@@ -439,9 +555,11 @@ def get_attendance_analytics(
         "leave_count": leave_count,
         "late_count": late_count,
         "attendance_rate": attendance_rate,
+        "absenteeism_rate": absenteeism_rate,
         "by_status": by_status,
         "by_plant": _group_counts(WorkforceAttendance.plant_id),
         "by_shift": _group_counts(WorkforceAttendance.shift_id),
+        "by_vendor": _query_vendor_breakdown(db, filters),
         "by_skill_match": [],
         "by_training_compliance": [],
         "trends": trends,

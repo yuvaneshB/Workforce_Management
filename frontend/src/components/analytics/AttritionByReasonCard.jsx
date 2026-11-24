@@ -1,6 +1,5 @@
 import { PieChart as PieIcon } from 'lucide-react';
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
-import { ATTRITION_BY_REASON } from '../../data/attritionData';
 import { useTheme } from '../../hooks/useTheme';
 import { CHART_COLORS } from '../../utils/constants';
 import { Card } from '../common/Card';
@@ -10,7 +9,7 @@ export function AttritionByReasonCard({ data = null, loading = false }) {
   const { theme } = useTheme();
   const palette = CHART_COLORS[theme] || CHART_COLORS.light;
 
-  const reasons = data && data.length > 0 ? data : ATTRITION_BY_REASON;
+  const reasons = data && Array.isArray(data) ? data : [];
   const totalExits = reasons.reduce((acc, curr) => acc + (curr.count || 0), 0);
   const primaryDriver = reasons.length > 0 ? reasons[0] : null;
 
@@ -24,9 +23,6 @@ export function AttritionByReasonCard({ data = null, loading = false }) {
               Attrition by Reason
             </h2>
           </div>
-          <span className="text-[9px] font-bold text-blue-600 bg-blue-50 dark:bg-blue-950/40 px-1.5 py-0.5 rounded border border-blue-200 dark:border-blue-800 shrink-0">
-            {totalExits} Recorded
-          </span>
         </div>
 
         {loading ? (

@@ -37,16 +37,12 @@ export function Topbar({ onOpenSidebar }) {
               <h1 className="text-[20px] sm:text-[23px] font-extrabold tracking-tight leading-tight text-[var(--text)] whitespace-nowrap truncate">
                 {meta.title}
               </h1>
-              {pathname === '/dashboard' && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[var(--brand-purple-soft)] text-[var(--brand-purple)] border border-[var(--brand-purple)]/20 shrink-0">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-purple)] animate-pulse" />
-                  LIVE OPS
-                </span>
-              )}
             </div>
-            <p className="text-[11px] text-[var(--secondary)] mt-0.5 whitespace-nowrap truncate">
-              {meta.description}
-            </p>
+            {pathname !== '/dashboard' && pathname !== '/data-connectors' && meta.description && (
+              <p className="text-[11px] text-[var(--secondary)] mt-0.5 whitespace-nowrap truncate">
+                {meta.description}
+              </p>
+            )}
           </div>
         )}
       </div>

@@ -1,10 +1,12 @@
 import { Gauge } from 'lucide-react';
+import { LoadingSkeleton } from '../common/LoadingSkeleton';
 
 export function WorkforceAvailability({
   planningAvailability = null,
   workforceSummary = null,
   attendanceAnalytics = null,
   loading = false,
+  minimal = false,
 }) {
   const hasData = Boolean(planningAvailability || workforceSummary);
 
@@ -40,32 +42,34 @@ export function WorkforceAvailability({
             </div>
             <div>
               <h3 className="text-sm font-extrabold text-[var(--text)] tracking-tight">
-                Workforce Availability Gauge
+                {minimal ? 'Workforce Availability' : 'Workforce Availability Gauge'}
               </h3>
-              <p className="text-[11px] text-[var(--secondary)]">
-                Required vs Available immediate start-of-shift headcount
-              </p>
+              {!minimal && (
+                <p className="text-[11px] text-[var(--secondary)]">
+                  Required vs Available immediate start-of-shift headcount
+                </p>
+              )}
             </div>
           </div>
-          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-            loading && !hasData
-              ? 'bg-purple-50 text-purple-700 border border-purple-200 dark:bg-purple-950/40 dark:text-purple-300 dark:border-purple-800'
-              : hasData && availabilityRate >= 90
-              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-              : hasData
-              ? 'bg-amber-50 text-amber-700 border border-amber-200'
-              : 'bg-slate-50 text-slate-700 border border-slate-200'
-          }`}>
-            {loading && !hasData ? 'Loading...' : hasData ? (availabilityRate >= 90 ? 'Line Ready' : 'Low Availability') : 'No Data'}
-          </span>
+          {!minimal && (
+            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+              loading && !hasData
+                ? 'bg-purple-50 text-purple-700 border border-purple-200 dark:bg-purple-950/40 dark:text-purple-300 dark:border-purple-800'
+                : hasData && availabilityRate >= 90
+                ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                : hasData
+                ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                : 'bg-slate-50 text-slate-700 border border-slate-200'
+            }`}>
+              {loading && !hasData ? 'Loading...' : hasData ? (availabilityRate >= 90 ? 'Line Ready' : 'Low Availability') : 'No Data'}
+            </span>
+          )}
         </div>
 
         {/* Circular Gauge Visualization */}
         {loading && !hasData ? (
-          <div className="h-32 w-full my-2 flex flex-col items-center justify-center text-center p-3 text-[var(--secondary)]">
-            <div className="w-7 h-7 rounded-full border-2 border-purple-600 border-t-transparent animate-spin mb-2" />
-            <span className="text-xs font-semibold text-[var(--text)]">Loading availability data...</span>
-            <span className="text-[10px] text-[var(--secondary)] mt-0.5">Calculating shift rosters and attendance</span>
+          <div className="h-32 w-full my-2 flex items-center justify-center">
+            <LoadingSkeleton className="h-28 w-28 rounded-full" />
           </div>
         ) : !hasData || totalScheduled === 0 ? (
           <div className="h-32 w-full my-2 flex flex-col items-center justify-center text-center p-3 text-[var(--secondary)]">
@@ -151,9 +155,11 @@ export function WorkforceAvailability({
         </div>
       </div>
 
-      <div className="pt-2 border-t border-[var(--border)] text-[10px] text-[var(--secondary)]">
-        Late employees are tracked separately to protect start-of-shift line reliability.
-      </div>
+      {!minimal && (
+        <div className="pt-2 border-t border-[var(--border)] text-[10px] text-[var(--secondary)]">
+          Late employees are tracked separately to protect start-of-shift line reliability.
+        </div>
+      )}
     </div>
   );
 }

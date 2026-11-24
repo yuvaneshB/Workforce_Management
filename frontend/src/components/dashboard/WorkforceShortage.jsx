@@ -1,11 +1,13 @@
 import { AlertTriangle } from 'lucide-react';
 import { useState } from 'react';
+import { LoadingSkeleton } from '../common/LoadingSkeleton';
 
 export function WorkforceShortage({
   planningShortages = null,
   planningAvailability = null,
   attendanceAnalytics = null,
   loading = false,
+  minimal = false,
 }) {
   const [activeTab, setActiveTab] = useState('Shift');
 
@@ -39,9 +41,11 @@ export function WorkforceShortage({
               <h3 className="text-sm font-extrabold text-[var(--text)] tracking-tight">
                 Workforce Shortage Detection
               </h3>
-              <p className="text-[11px] text-[var(--secondary)]">
-                Required vs Available baseline gap analysis
-              </p>
+              {!minimal && (
+                <p className="text-[11px] text-[var(--secondary)]">
+                  Required vs Available baseline gap analysis
+                </p>
+              )}
             </div>
           </div>
 
@@ -66,10 +70,10 @@ export function WorkforceShortage({
 
         {/* Shortage Item Cards */}
         {loading && !hasData ? (
-          <div className="h-44 w-full flex flex-col items-center justify-center text-center p-3 text-[var(--secondary)]">
-            <div className="w-7 h-7 rounded-full border-2 border-amber-600 border-t-transparent animate-spin mb-2" />
-            <span className="text-xs font-semibold text-[var(--text)]">Analyzing workforce shortages...</span>
-            <span className="text-[10px] text-[var(--secondary)] mt-0.5">Evaluating baseline gaps across shifts & departments</span>
+          <div className="space-y-2 mt-2">
+            <LoadingSkeleton className="h-12 w-full rounded-xl" />
+            <LoadingSkeleton className="h-12 w-full rounded-xl" />
+            <LoadingSkeleton className="h-12 w-full rounded-xl" />
           </div>
         ) : !hasData || currentList.length === 0 ? (
           <div className="h-44 w-full flex flex-col items-center justify-center text-center p-3 text-[var(--secondary)]">
@@ -93,17 +97,19 @@ export function WorkforceShortage({
                   <div className="flex items-center justify-between text-xs mb-1.5">
                     <div className="font-bold text-[var(--text)] text-[11px] flex items-center gap-2">
                       <span className="truncate">{item.name}</span>
-                      <span
-                        className={`px-1.5 py-0.2 rounded text-[9px] font-extrabold uppercase ${
-                          item.severity === 'CRITICAL'
-                            ? 'bg-rose-50 text-rose-700 border border-rose-200'
-                            : item.severity === 'MODERATE'
-                            ? 'bg-amber-50 text-amber-700 border border-amber-200'
-                            : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                        }`}
-                      >
-                        {item.severity}
-                      </span>
+                      {!minimal && (
+                        <span
+                          className={`px-1.5 py-0.2 rounded text-[9px] font-extrabold uppercase ${
+                            item.severity === 'CRITICAL'
+                              ? 'bg-rose-50 text-rose-700 border border-rose-200'
+                              : item.severity === 'MODERATE'
+                              ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                              : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                          }`}
+                        >
+                          {item.severity}
+                        </span>
+                      )}
                     </div>
 
                     <div className="flex items-center gap-2 text-[11px] shrink-0">
@@ -140,10 +146,12 @@ export function WorkforceShortage({
         )}
       </div>
 
-      <div className="pt-2 border-t border-[var(--border)] text-[10px] text-[var(--secondary)] flex items-center justify-between">
-        <span>{hasData ? 'Live shortage monitoring active.' : 'No backend connection.'}</span>
-        <span className="font-bold text-[var(--text)]">{hasData ? 'Verified Records' : 'Disconnected'}</span>
-      </div>
+      {!minimal && (
+        <div className="pt-2 border-t border-[var(--border)] text-[10px] text-[var(--secondary)] flex items-center justify-between">
+          <span>{hasData ? 'Live shortage monitoring active.' : 'No backend connection.'}</span>
+          <span className="font-bold text-[var(--text)]">{hasData ? 'Verified Records' : 'Disconnected'}</span>
+        </div>
+      )}
     </div>
   );
 }

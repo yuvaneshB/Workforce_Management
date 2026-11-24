@@ -11,7 +11,7 @@ import {
   UserMinus,
   Users,
 } from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import {
   Bar,
@@ -40,8 +40,6 @@ import {
   fetchSkillsAnalytics,
   fetchTeamProductionAnalytics,
   fetchVendorAnalytics,
-  fetchWorkforceAvailability,
-  fetchWorkforceShortages,
   fetchWorkforceSummary,
 } from '../api/workforceApi';
 import { AnalyticsFilters } from '../components/analytics/AnalyticsFilters';
@@ -65,11 +63,11 @@ import { EmploymentTypeCard } from '../components/analytics/EmploymentTypeCard';
 import { LateArrivalCard } from '../components/analytics/LateArrivalCard';
 import { OvertimeSection } from '../components/analytics/OvertimeSection';
 import { PlantWorkforceCard } from '../components/analytics/PlantWorkforceCard';
+import { RoleDistributionCard } from '../components/analytics/RoleDistributionCard';
 import { ShiftEfficiencySection } from '../components/analytics/ShiftEfficiencySection';
 import { ShiftWiseAttendanceCard } from '../components/analytics/ShiftWiseAttendanceCard';
 import { SkillMatrixSection } from '../components/analytics/SkillMatrixSection';
 import { TeamProductionSection } from '../components/analytics/TeamProductionSection';
-import { TeamWorkforceCard } from '../components/analytics/TeamWorkforceCard';
 import { VendorAttendanceCard } from '../components/analytics/VendorAttendanceCard';
 import { VendorWorkforceCard } from '../components/analytics/VendorWorkforceCard';
 import { Button } from '../components/common/Button';
@@ -80,8 +78,6 @@ import { ExperienceAnalytics } from '../components/dashboard/ExperienceAnalytics
 import { GenderAnalytics } from '../components/dashboard/GenderAnalytics';
 import { NewJoinerAnalytics } from '../components/dashboard/NewJoinerAnalytics';
 import { SectionAnalytics } from '../components/dashboard/SectionAnalytics';
-import { WorkforceAvailability } from '../components/dashboard/WorkforceAvailability';
-import { WorkforceShortage } from '../components/dashboard/WorkforceShortage';
 import { useTheme } from '../hooks/useTheme';
 import { CHART_COLORS } from '../utils/constants';
 
@@ -136,12 +132,6 @@ export function WorkforceAnalytics() {
   const [isProductionAgentOpen, setIsProductionAgentOpen] = useState(false);
   const [isVendorAgentOpen, setIsVendorAgentOpen] = useState(false);
 
-  // Workforce Planning state (Availability & Shortages integrated into Workforce tab)
-  const [planningAvailability, setPlanningAvailability] = useState(null);
-  const [planningShortages, setPlanningShortages] = useState(null);
-  const [planningLoading, setPlanningLoading] = useState(false);
-  const [planningError, setPlanningError] = useState(null);
-
   // Filter states
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -159,12 +149,19 @@ export function WorkforceAnalytics() {
   const [summary, setSummary] = useState(null);
   const [attendance, setAttendance] = useState(null);
   const [attendancePeriod, setAttendancePeriod] = useState('daily');
+  const [attendanceTrendLoading, setAttendanceTrendLoading] = useState(false);
+  const attendancePeriodRef = useRef(attendancePeriod);
+  attendancePeriodRef.current = attendancePeriod;
   const [calendarDate, setCalendarDate] = useState('');
   const [production, setProduction] = useState(null);
   const [genderData, setGenderData] = useState(null);
   const [deptData, setDeptData] = useState(null);
   const [expData, setExpData] = useState(null);
   const [njData, setNjData] = useState(null);
+  const [newJoinerPeriod, setNewJoinerPeriod] = useState('daily');
+  const [newJoinerLoading, setNewJoinerLoading] = useState(false);
+  const newJoinerPeriodRef = useRef(newJoinerPeriod);
+  newJoinerPeriodRef.current = newJoinerPeriod;
   const [secData, setSecData] = useState(null);
   const [vendorData, setVendorData] = useState(null);
   const [employees, setEmployees] = useState([]);
@@ -209,12 +206,33 @@ export function WorkforceAnalytics() {
     setPlantId(newPlantId);
     setDepartmentId('');
     setSectionId('');
+    setOperatorTeam('');
   }, []);
 
   const handleDepartmentChange = useCallback((newDeptId) => {
     setDepartmentId(newDeptId);
     setSectionId('');
+    setOperatorTeam('');
   }, []);
+
+  const handleSectionChange = useCallback((newSecId) => {
+    setSectionId(newSecId);
+    setOperatorTeam('');
+  }, []);
+
+  const activeFilters = useMemo(
+    () => ({
+      startDate: startDate || undefined,
+      endDate: endDate || undefined,
+      plantId: plantId || undefined,
+      shiftId: shiftId || undefined,
+      departmentId: departmentId || undefined,
+      sectionId: sectionId || undefined,
+      teamId: operatorTeam || undefined,
+      operatorTeam: operatorTeam || undefined,
+    }),
+    [startDate, endDate, plantId, shiftId, departmentId, sectionId, operatorTeam]
+  );
 
   // Fetch departments & sections for filter dropdowns on mount or when plant/dept changes
   useEffect(() => {
@@ -242,6 +260,7 @@ export function WorkforceAnalytics() {
       if (!isValid) {
         setDepartmentId('');
         setSectionId('');
+        setOperatorTeam('');
       }
     }
   }, [departments, departmentId]);
@@ -251,6 +270,7 @@ export function WorkforceAnalytics() {
       const isValid = sections.some((s) => (s.section_id || s.id) === sectionId);
       if (!isValid) {
         setSectionId('');
+        setOperatorTeam('');
       }
     }
   }, [sections, sectionId]);
@@ -262,48 +282,24 @@ export function WorkforceAnalytics() {
     async function loadBase() {
       setBaseLoading(true);
       setBaseError(null);
-      const commonFilters = {
-        startDate,
-        endDate,
-        plantId: plantId || undefined,
-        shiftId,
-        departmentId,
-        sectionId,
-      };
 
       try {
         const [sRes, aRes, pRes, gRes, dRes, eRes, njRes, scRes, vRes, empRes] = await Promise.allSettled([
-          fetchWorkforceSummary({
-            plantId: plantId || undefined,
-          }),
+          fetchWorkforceSummary(activeFilters),
           fetchAttendanceAnalytics({
-            period: attendancePeriod,
-            startDate,
-            endDate,
-            plantId: plantId || undefined,
-            shiftId: shiftId || undefined,
-            departmentId: departmentId || undefined,
-            sectionId: sectionId || undefined,
-            operatorTeam: operatorTeam || undefined,
+            period: attendancePeriodRef.current,
+            ...activeFilters,
           }),
-          fetchProductionAnalytics({
-            startDate,
-            endDate,
-            plantId,
-            shiftId,
-          }),
-          fetchGenderAnalytics(commonFilters),
-          fetchDepartmentAnalytics(commonFilters),
-          fetchExperienceAnalytics(commonFilters),
-          fetchNewJoinerAnalytics({ period: 'daily', ...commonFilters }),
-          fetchSectionAnalytics(commonFilters),
-          fetchVendorAnalytics({
-            plantId: plantId || undefined,
-          }),
+          fetchProductionAnalytics(activeFilters),
+          fetchGenderAnalytics(activeFilters),
+          fetchDepartmentAnalytics(activeFilters),
+          fetchExperienceAnalytics(activeFilters),
+          fetchNewJoinerAnalytics({ period: newJoinerPeriodRef.current, ...activeFilters }),
+          fetchSectionAnalytics(activeFilters),
+          fetchVendorAnalytics(activeFilters),
           fetchEmployees({
             limit: 500,
-            plantId: plantId || undefined,
-            teamId: operatorTeam || undefined,
+            ...activeFilters,
           }),
         ]);
 
@@ -332,69 +328,71 @@ export function WorkforceAnalytics() {
     return () => {
       active = false;
     };
-  }, [startDate, endDate, shiftId, departmentId, sectionId, plantId, operatorTeam, attendancePeriod, reloadToken]);
+  }, [activeFilters, reloadToken]);
 
-  // Fetch Workforce Planning Data (Availability & Shortage Gap Analysis) for the Workforce Tab
+  // Isolated Attendance Period Effect: only re-fetches attendance trends for this card without reloading the entire page
+  const isInitialPeriodMount = useRef(true);
   useEffect(() => {
-    if (activeTab !== 'workforce') return;
+    if (isInitialPeriodMount.current) {
+      isInitialPeriodMount.current = false;
+      return;
+    }
+
     let active = true;
-
-    async function loadPlanning() {
-      setPlanningLoading(true);
-      setPlanningError(null);
-      const targetDate = startDate || '2026-08-01';
-
+    async function updateAttendanceTrend() {
+      setAttendanceTrendLoading(true);
       try {
-        const [availSettled, shortSettled] = await Promise.allSettled([
-          fetchWorkforceAvailability({
-            date: targetDate,
-            plantId: plantId || undefined,
-            shiftId: shiftId || undefined,
-            departmentId: departmentId || undefined,
-            sectionId: sectionId || undefined,
-          }),
-          fetchWorkforceShortages({
-            date: targetDate,
-            plantId: plantId || undefined,
-            shiftId: shiftId || undefined,
-          }),
-        ]);
-
-        if (!active) return;
-
-        if (availSettled.status === 'fulfilled' && availSettled.value) {
-          setPlanningAvailability(availSettled.value);
-        } else if (availSettled.status === 'rejected') {
-          const err = availSettled.reason;
-          if (err?.name !== 'CanceledError' && err?.code !== 'ERR_CANCELED') {
-            console.warn('Workforce planning availability non-blocking error:', err);
-          }
-        }
-
-        if (shortSettled.status === 'fulfilled' && shortSettled.value) {
-          setPlanningShortages(shortSettled.value);
-        } else if (shortSettled.status === 'rejected') {
-          const err = shortSettled.reason;
-          if (err?.name !== 'CanceledError' && err?.code !== 'ERR_CANCELED') {
-            console.warn('Workforce planning shortages non-blocking error:', err);
-          }
+        const res = await fetchAttendanceAnalytics({
+          period: attendancePeriod,
+          ...activeFilters,
+        });
+        if (active && res) {
+          setAttendance(res);
         }
       } catch (err) {
-        if (!active) return;
-        if (err?.name !== 'CanceledError' && err?.code !== 'ERR_CANCELED') {
-          console.warn('Workforce planning non-blocking error:', err);
-          setPlanningError(extractApiErrorMessage(err));
-        }
+        // preserve previous trend data on non-blocking error
       } finally {
-        if (active) setPlanningLoading(false);
+        if (active) setAttendanceTrendLoading(false);
       }
     }
 
-    loadPlanning();
+    updateAttendanceTrend();
     return () => {
       active = false;
     };
-  }, [activeTab, startDate, plantId, shiftId, departmentId, sectionId, reloadToken]);
+  }, [attendancePeriod]);
+
+  // Isolated New Joiner Period Effect: only re-fetches joiner trends when D/W/M toggle is clicked
+  const isInitialNJMount = useRef(true);
+  useEffect(() => {
+    if (isInitialNJMount.current) {
+      isInitialNJMount.current = false;
+      return;
+    }
+
+    let active = true;
+    async function updateNJTrend() {
+      setNewJoinerLoading(true);
+      try {
+        const res = await fetchNewJoinerAnalytics({
+          period: newJoinerPeriod,
+          ...activeFilters,
+        });
+        if (active && res) {
+          setNjData(res);
+        }
+      } catch {
+        // preserve existing data on non-blocking error
+      } finally {
+        if (active) setNewJoinerLoading(false);
+      }
+    }
+
+    updateNJTrend();
+    return () => {
+      active = false;
+    };
+  }, [newJoinerPeriod]);
 
   // Fetch Overtime Analytics
   useEffect(() => {
@@ -406,12 +404,7 @@ export function WorkforceAnalytics() {
       setOvertimeError(null);
       try {
         const data = await fetchOvertimeAnalytics({
-          startDate,
-          endDate,
-          shiftId,
-          departmentId,
-          sectionId,
-          plantId,
+          ...activeFilters,
           signal: controller.signal,
         });
         if (active) setOvertimeData(data);
@@ -427,7 +420,7 @@ export function WorkforceAnalytics() {
       active = false;
       controller.abort();
     };
-  }, [startDate, endDate, shiftId, departmentId, sectionId, plantId, reloadToken]);
+  }, [activeFilters, reloadToken]);
 
   // Fetch Team Production Performance
   useEffect(() => {
@@ -439,11 +432,7 @@ export function WorkforceAnalytics() {
       setTeamProdError(null);
       try {
         const data = await fetchTeamProductionAnalytics({
-          startDate,
-          endDate,
-          plantId,
-          shiftId,
-          operatorTeam,
+          ...activeFilters,
           signal: controller.signal,
         });
         if (active) setTeamProdData(data);
@@ -459,7 +448,7 @@ export function WorkforceAnalytics() {
       active = false;
       controller.abort();
     };
-  }, [startDate, endDate, plantId, shiftId, operatorTeam, reloadToken]);
+  }, [activeFilters, reloadToken]);
 
   // Fetch Shift Efficiency Analytics
   useEffect(() => {
@@ -471,10 +460,7 @@ export function WorkforceAnalytics() {
       setShiftEffError(null);
       try {
         const data = await fetchShiftEfficiencyAnalytics({
-          startDate,
-          endDate,
-          plantId,
-          shiftId,
+          ...activeFilters,
           signal: controller.signal,
         });
         if (active) setShiftEffData(data);
@@ -490,7 +476,7 @@ export function WorkforceAnalytics() {
       active = false;
       controller.abort();
     };
-  }, [startDate, endDate, plantId, shiftId, reloadToken]);
+  }, [activeFilters, reloadToken]);
 
   // Fetch Skills Matrix Analytics
   useEffect(() => {
@@ -502,11 +488,7 @@ export function WorkforceAnalytics() {
       setSkillsError(null);
       try {
         const data = await fetchSkillsAnalytics({
-          departmentId,
-          sectionId,
-          teamId: operatorTeam,
-          shiftId,
-          plantId: plantId || undefined,
+          ...activeFilters,
           signal: controller.signal,
         });
         if (active) setSkillsData(data);
@@ -522,7 +504,7 @@ export function WorkforceAnalytics() {
       active = false;
       controller.abort();
     };
-  }, [departmentId, sectionId, operatorTeam, shiftId, plantId, reloadToken]);
+  }, [activeFilters, reloadToken]);
 
   // Fetch Training Compliance Analytics
   useEffect(() => {
@@ -534,12 +516,7 @@ export function WorkforceAnalytics() {
       setComplianceError(null);
       try {
         const data = await fetchComplianceAnalytics({
-          startDate,
-          endDate,
-          shiftId,
-          departmentId,
-          sectionId,
-          plantId,
+          ...activeFilters,
           signal: controller.signal,
         });
         if (active) setComplianceData(data);
@@ -555,7 +532,7 @@ export function WorkforceAnalytics() {
       active = false;
       controller.abort();
     };
-  }, [startDate, endDate, shiftId, departmentId, sectionId, plantId, reloadToken]);
+  }, [activeFilters, reloadToken]);
 
   return (
     <section aria-label="Workforce Analytics">
@@ -574,7 +551,7 @@ export function WorkforceAnalytics() {
         onEndDateChange={setEndDate}
         onShiftChange={setShiftId}
         onDepartmentChange={handleDepartmentChange}
-        onSectionChange={setSectionId}
+        onSectionChange={handleSectionChange}
         onPlantChange={handlePlantChange}
         onTeamChange={setOperatorTeam}
         onReset={handleResetFilters}
@@ -631,125 +608,65 @@ export function WorkforceAnalytics() {
       {/* ========================================================================= */}
       {activeTab === 'workforce' && (
         <div className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <h2 className="text-sm font-bold flex items-center gap-2">
-                <Users className="w-4 h-4 text-purple-600" />
-                Workforce Demographics & Role Distribution
-              </h2>
-              <p className="text-[10px] muted mt-0.5">
-                Headcount breakdown by gender, departments, plant sections, tenure buckets, and role classifications.
-              </p>
-            </div>
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="text-sm font-bold flex items-center gap-2">
+              <Users className="w-4 h-4 text-purple-600" />
+              Workforce Demographics & Role Distribution
+            </h2>
 
-            <div className="flex flex-wrap items-center gap-3 self-start sm:self-auto">
-              <span className="text-[10px] font-semibold muted">
-                {summary?.total_employees ? `${summary.total_employees.toLocaleString()} total workforce` : '1,700 total workforce'}
-              </span>
-
-              <div className="h-4 w-px bg-slate-200 dark:bg-slate-700 hidden sm:block" />
-
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">Workforce Planning Agent</span>
-                <button
-                  type="button"
-                  onClick={() => setIsPlanningAgentOpen(true)}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg shadow-xs transition-all duration-150 hover:brightness-110 active:scale-95 cursor-pointer"
-                  style={{
-                    background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
-                  }}
-                  title="Run Workforce Planning Agent"
-                >
-                  <Bot className="w-3.5 h-3.5" />
-                  <span>Run Agent</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Workforce Planning & Availability Intelligence (Required vs Available & Shortages) */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3.5 items-stretch">
-            <WorkforceAvailability
-              planningAvailability={planningAvailability}
-              workforceSummary={summary}
-              attendanceAnalytics={attendance}
-              loading={planningLoading}
-            />
-            <WorkforceShortage
-              planningShortages={planningShortages}
-              planningAvailability={planningAvailability}
-              attendanceAnalytics={attendance}
-              loading={planningLoading}
-            />
+            <button
+              type="button"
+              onClick={() => setIsPlanningAgentOpen(true)}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg shadow-xs transition-all duration-150 hover:brightness-110 active:scale-95 cursor-pointer"
+              style={{
+                background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
+              }}
+              title="Run Workforce Planning Agent"
+            >
+              <Bot className="w-3.5 h-3.5" />
+              <span>Run Agent</span>
+            </button>
           </div>
 
           {/* Row 1: Gender Analytics | Employment Type Distribution | Employee Status Distribution */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">
             <GenderAnalytics genderAnalytics={genderData} loading={baseLoading} error={baseError} />
             <EmploymentTypeCard workforceSummary={summary} loading={baseLoading} error={baseError} />
             <EmployeeStatusCard workforceSummary={summary} employees={employees} loading={baseLoading} error={baseError} />
           </div>
 
           {/* Row 2: Department-wise Analytics | Section-wise Analytics | Plant-wise Workforce Distribution */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3.5 items-stretch">
             <DepartmentAnalytics departmentAnalytics={deptData} loading={baseLoading} error={baseError} />
             <SectionAnalytics sectionAnalytics={secData} loading={baseLoading} error={baseError} />
             <PlantWorkforceCard workforceSummary={summary} attendance={attendance} selectedPlantId={plantId} loading={baseLoading} error={baseError} />
           </div>
 
-          {/* Row 3: Vendor-wise Workforce Distribution | Distribution by Role | Team-wise Workforce Distribution */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-stretch">
+          {/* Row A (2 columns, 50/50): Vendor-wise Workforce Distribution | Distribution by Role */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3.5 items-stretch">
             <VendorWorkforceCard
               vendorData={vendorData}
               loading={baseLoading}
               error={baseError}
             />
-            <Card className="p-4 lg:col-span-4 flex flex-col justify-between min-h-[220px]">
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <div className="flex items-center gap-2 min-w-0">
-                    <Award className="w-4 h-4 shrink-0" style={{ color: '#4D8EEB' }} aria-hidden="true" />
-                    <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Distribution by Role</h2>
-                  </div>
-                  <span className="text-[10px] font-semibold muted shrink-0">employee_master</span>
-                </div>
-                {baseLoading ? (
-                  <LoadingSkeleton className="h-32 w-full rounded-lg" />
-                ) : (
-                  <div className="h-32 w-full my-1">
-                    <ResponsiveContainer width="100%" height={128}>
-                      <BarChart data={summary?.by_role ?? []} margin={{ top: 8, right: 10, left: -25, bottom: 0 }}>
-                        <CartesianGrid strokeDasharray="3 3" stroke={palette.grid} />
-                        <XAxis dataKey="key" stroke={palette.axisText} fontSize={8} tickLine={false} />
-                        <YAxis stroke={palette.axisText} fontSize={9} />
-                        <Tooltip
-                          contentStyle={{
-                            backgroundColor: palette.tooltipBg,
-                            borderColor: palette.tooltipBorder,
-                            color: palette.tooltipText,
-                            fontSize: '11px',
-                            borderRadius: '8px',
-                          }}
-                        />
-                        <Bar dataKey="count" name="Employees" fill={palette.demand} radius={[3, 3, 0, 0]} />
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </div>
-                )}
-              </div>
-              <div className="flex items-center justify-between pt-2 border-t border-[var(--border)] text-[10px] muted">
-                <span>Roles: <strong>{summary?.by_role?.length != null ? `${summary.by_role.length} Categories` : '—'}</strong></span>
-                <span>Total: <strong>{summary?.total_employees != null ? `${summary.total_employees} Staff` : '—'}</strong></span>
-              </div>
-            </Card>
-            <TeamWorkforceCard employees={employees} selectedTeam={operatorTeam} loading={baseLoading} error={baseError} />
+            <RoleDistributionCard
+              summary={summary}
+              loading={baseLoading}
+              error={baseError}
+            />
           </div>
 
-          {/* Row 4: Employee Experience Analytics | New Joiner Analytics | Employee Movement Trend */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-stretch">
+          {/* Row B (3 columns): Employee Experience Analytics | New Joiner Analytics | Employee Movement Trend */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 items-stretch">
             <ExperienceAnalytics experienceAnalytics={expData} loading={baseLoading} error={baseError} />
-            <NewJoinerAnalytics newJoinerAnalytics={njData} granularity="daily" loading={baseLoading} error={baseError} />
-            <EmployeeMovementCard newJoinerAnalytics={njData} loading={baseLoading} error={baseError} />
+            <NewJoinerAnalytics
+              newJoinerAnalytics={njData}
+              granularity={newJoinerPeriod}
+              onGranularityChange={setNewJoinerPeriod}
+              loading={baseLoading || newJoinerLoading}
+              error={baseError}
+            />
+            <EmployeeMovementCard employees={employees} loading={baseLoading} error={baseError} />
           </div>
         </div>
       )}
@@ -760,40 +677,24 @@ export function WorkforceAnalytics() {
       {activeTab === 'attendance' && (
         <div className="space-y-4">
           {/* Subheader */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <h2 className="text-sm font-bold flex items-center gap-2">
-                <CalendarClock className="w-4 h-4 text-purple-600" />
-                Attendance Overview
-              </h2>
-              <p className="text-[10px] muted mt-0.5">
-                Attendance insights, absenteeism, shift performance and detailed employee attendance records.
-              </p>
-            </div>
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="text-sm font-bold flex items-center gap-2">
+              <CalendarClock className="w-4 h-4 text-purple-600" />
+              Attendance Overview
+            </h2>
 
-            <div className="flex flex-wrap items-center gap-3 self-start sm:self-auto">
-              <span className="text-[10px] font-semibold muted">
-                {attendance?.total_records ? `${attendance.total_records.toLocaleString()} verified records` : '177,043 verified records'}
-              </span>
-
-              <div className="h-4 w-px bg-slate-200 dark:bg-slate-700 hidden sm:block" />
-
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">Attendance Agent</span>
-                <button
-                  type="button"
-                  onClick={() => setIsAttendanceAgentOpen(true)}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg shadow-xs transition-all duration-150 hover:brightness-110 active:scale-95 cursor-pointer"
-                  style={{
-                    background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
-                  }}
-                  title="Run Attendance Intelligence Agent"
-                >
-                  <Bot className="w-3.5 h-3.5" />
-                  <span>Run Agent</span>
-                </button>
-              </div>
-            </div>
+            <button
+              type="button"
+              onClick={() => setIsAttendanceAgentOpen(true)}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg shadow-xs transition-all duration-150 hover:brightness-110 active:scale-95 cursor-pointer"
+              style={{
+                background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
+              }}
+              title="Run Attendance Intelligence Agent"
+            >
+              <Bot className="w-3.5 h-3.5" />
+              <span>Run Agent</span>
+            </button>
           </div>
 
           {/* Row 1: Six Attendance KPI Cards */}
@@ -809,7 +710,7 @@ export function WorkforceAnalytics() {
               attendance={attendance}
               period={attendancePeriod}
               onPeriodChange={setAttendancePeriod}
-              loading={baseLoading}
+              loading={baseLoading || attendanceTrendLoading}
               error={baseError}
             />
             <ShiftWiseAttendanceCard
@@ -840,6 +741,7 @@ export function WorkforceAnalytics() {
               error={baseError}
             />
             <VendorAttendanceCard
+              data={attendance?.by_vendor}
               loading={baseLoading}
               error={baseError}
             />
@@ -923,6 +825,7 @@ export function WorkforceAnalytics() {
           startDate={startDate}
           endDate={endDate}
           plantId={plantId}
+          shiftId={shiftId}
           departmentId={departmentId}
           sectionId={sectionId}
           teamId={operatorTeam}

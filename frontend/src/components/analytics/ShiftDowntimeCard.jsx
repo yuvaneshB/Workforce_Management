@@ -53,9 +53,6 @@ export function ShiftDowntimeCard({
               Shift-wise Downtime
             </h2>
           </div>
-          <span className="text-[9px] font-bold text-blue-600 bg-blue-50 dark:bg-blue-950/40 px-1.5 py-0.5 rounded border border-blue-200 dark:border-blue-800 shrink-0">
-            {totalDowntime.toLocaleString()} mins Total
-          </span>
         </div>
 
         {loading ? (

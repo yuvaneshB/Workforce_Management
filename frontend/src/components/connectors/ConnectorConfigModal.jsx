@@ -1002,7 +1002,7 @@ export function ConnectorConfigModal({
             <button
               type="button"
               onClick={handleSave}
-              className="h-8 px-4 rounded-lg text-xs font-bold bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white shadow-xs flex items-center gap-1.5 cursor-pointer transition-colors"
+              className="h-8 px-4 rounded-lg text-xs font-bold bg-gradient-to-r from-violet-600 to-purple-700 hover:from-violet-700 hover:to-purple-800 active:scale-[0.99] text-white shadow-xs flex items-center gap-1.5 cursor-pointer transition-all"
             >
               <Save className="w-3.5 h-3.5" />
               <span>Save Configuration</span>

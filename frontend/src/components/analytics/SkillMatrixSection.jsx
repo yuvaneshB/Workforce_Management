@@ -99,39 +99,25 @@ export function SkillMatrixSection({
           </div>
           <div>
             <h2 className="text-sm font-bold text-[var(--text)] tracking-tight">
-              Workforce Skill Matrix & Certification Analytics
+              Workforce Skill Matrix &amp; Certification Analytics
             </h2>
-            <p className="text-[11px] text-[var(--secondary)]">
-              Skill proficiency, certification status and training needs across the workforce
-            </p>
           </div>
         </div>
 
         {/* Skill & Training Agent Action */}
         <div className="flex items-center gap-2 self-start sm:self-auto">
-          <span className="text-[10px] font-semibold muted hidden md:inline ml-1">
-            {data?.total_employees ? `${data.total_employees.toLocaleString()} skilled staff` : '1,700 skilled staff'}
-          </span>
-
-          <div className="h-4 w-px bg-slate-200 dark:bg-slate-700 hidden sm:block" />
-
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Skill & Training Agent
-            </span>
-            <button
-              type="button"
-              onClick={onRunAgent}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg shadow-xs transition-all duration-150 hover:brightness-110 active:scale-95 cursor-pointer"
-              style={{
-                background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
-              }}
-              title="Run Skill & Training Intelligence Agent"
-            >
-              <Bot className="w-3.5 h-3.5" />
-              <span>Run Agent</span>
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={onRunAgent}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg shadow-xs transition-all duration-150 hover:brightness-110 active:scale-95 cursor-pointer"
+            style={{
+              background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
+            }}
+            title="Run Skill & Training Intelligence Agent"
+          >
+            <Bot className="w-3.5 h-3.5" />
+            <span>Run Agent</span>
+          </button>
         </div>
       </div>
 

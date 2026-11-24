@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 import { extractApiErrorMessage } from '../api/client';
 import { sendChatMessage, streamChatAnalysis } from '../api/workforceApi';
-import { AssistantSidebar } from '../components/assistant/AssistantSidebar';
 import { ChatWindow } from '../components/assistant/ChatWindow';
 import { Card } from '../components/common/Card';
 import { ROUTE_META } from '../utils/constants';
@@ -300,19 +299,14 @@ export function AIAssistant() {
 
   return (
     <section aria-label={meta.title} className="h-[calc(100vh-84px)] min-h-[500px]">
-      <Card className="overflow-hidden h-full flex flex-col lg:flex-row p-0 shadow-xs border">
-        <AssistantSidebar
-          onNewConversation={handleNewConversation}
-          conversationId={conversationId}
-          messageCount={messages.filter((m) => m.role === 'user' || (m.content && m.content.trim() !== '') || m.isError || m.isMissingProvider).length}
-          firstQuestion={messages.find((m) => m.role === 'user')?.content || ''}
-        />
+      <Card className="overflow-hidden h-full flex flex-col p-0 shadow-xs border">
         <ChatWindow
           messages={messages}
           inputValue={inputValue}
           onInputChange={setInputValue}
           onSelectSuggestion={handleSelectSuggestion}
           onSendMessage={handleSendMessage}
+          onNewConversation={handleNewConversation}
           inputRef={inputRef}
           loading={loading}
           isThinking={isThinking}

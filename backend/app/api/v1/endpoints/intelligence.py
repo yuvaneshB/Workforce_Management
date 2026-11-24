@@ -30,6 +30,10 @@ def get_single_person_dependency(
     plant_id: str | None = Query(default=None, description="Filter by plant_id (e.g. IN-KA-01, IN-TN-01)"),
     shift_id: str | None = Query(default=None, description="Filter by shift_id (A, B, C or GS1, S2, NS3)"),
     date: dt.date | None = Query(default=None, description="Target date in YYYY-MM-DD format (defaults to latest available)"),
+    department_id: str | None = Query(default=None, description="Filter by department_id"),
+    section_id: str | None = Query(default=None, description="Filter by section_id"),
+    employment_type: str | None = Query(default=None, description="Filter by employment_type (Permanent, Vendor)"),
+    vendor_id: str | None = Query(default=None, description="Filter by vendor_id (e.g. V01)"),
     db: Session = Depends(get_readonly_db),
 ) -> dict[str, Any]:
     """Return single-person dependency analysis grouped by plant, role, and certification."""
@@ -49,6 +53,10 @@ def get_single_person_dependency(
         plant_id=plant_id,
         shift_id=shift_id,
         date=date,
+        department_id=department_id,
+        section_id=section_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
     )
 
 

@@ -42,9 +42,6 @@ export function HourlyProductionTrendCard({
               Hourly Production Trend
             </h2>
           </div>
-          <span className="text-[9px] font-bold text-cyan-600 bg-cyan-50 dark:bg-cyan-950/40 px-1.5 py-0.5 rounded border border-cyan-200 dark:border-cyan-800 shrink-0">
-            Peak: 16:00
-          </span>
         </div>
 
         {loading ? (

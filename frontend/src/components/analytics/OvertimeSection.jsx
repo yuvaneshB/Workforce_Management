@@ -23,44 +23,26 @@ export function OvertimeSection({ data, loading, error, onRetry, palette = CHART
   const [trendGranularity, setTrendGranularity] = useState('daily');
 
   const headerContent = (
-    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-      <div>
-        <h2 className="text-sm font-bold flex items-center gap-2">
-          <Clock className="w-4 h-4 text-purple-600" />
-          Overtime & Working Hours Analytics
-        </h2>
-        <p className="text-[11px] muted">
-          Verified overtime records from fact_workforce_attendance
-        </p>
-      </div>
+    <div className="flex items-center justify-between gap-3">
+      <h2 className="text-sm font-bold flex items-center gap-2">
+        <Clock className="w-4 h-4 text-purple-600" />
+        Overtime &amp; Working Hours Analytics
+      </h2>
 
-      <div className="flex flex-wrap items-center gap-3 self-start sm:self-auto">
-        <span className="text-[10px] font-semibold muted">
-          {data?.overtime_record_count
-            ? `${data.overtime_record_count.toLocaleString()} overtime records`
-            : '23,700 verified records'}
-        </span>
-
-        <div className="h-4 w-px bg-slate-200 dark:bg-slate-700 hidden sm:block" />
-
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-            Overtime Optimization Agent
-          </span>
-          <button
-            type="button"
-            onClick={onRunAgent}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg shadow-xs transition-all duration-150 hover:brightness-110 active:scale-95 cursor-pointer"
-            style={{
-              background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
-            }}
-            title="Run Overtime Optimization Agent"
-          >
-            <Bot className="w-3.5 h-3.5" />
-            <span>Run Agent</span>
-          </button>
-        </div>
-      </div>
+      {onRunAgent && (
+        <button
+          type="button"
+          onClick={onRunAgent}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg shadow-xs transition-all duration-150 hover:brightness-110 active:scale-95 cursor-pointer"
+          style={{
+            background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
+          }}
+          title="Run Overtime Optimization Agent"
+        >
+          <Bot className="w-3.5 h-3.5" />
+          <span>Run Agent</span>
+        </button>
+      )}
     </div>
   );
 
@@ -139,7 +121,6 @@ export function OvertimeSection({ data, loading, error, onRetry, palette = CHART
         <KPICard
           label="Total Overtime Hours"
           value={`${data.total_overtime_hours.toLocaleString()} hrs`}
-          subtitle={`${data.overtime_record_count.toLocaleString()} overtime shifts`}
           icon={Clock}
           iconBg="var(--brand-purple-soft)"
           iconColor="#6F3DBA"
@@ -147,7 +128,6 @@ export function OvertimeSection({ data, loading, error, onRetry, palette = CHART
         <KPICard
           label="Employees with Overtime"
           value={data.total_employees_with_overtime.toLocaleString()}
-          subtitle={`Out of ${data.total_employees.toLocaleString()} total active staff`}
           icon={Users}
           iconBg="var(--brand-blue-soft)"
           iconColor="#4D8EEB"
@@ -155,7 +135,6 @@ export function OvertimeSection({ data, loading, error, onRetry, palette = CHART
         <KPICard
           label="Overtime Frequency Rate"
           value={`${data.overtime_rate_pct}%`}
-          subtitle="Percentage of attendance records with OT"
           icon={TrendingUp}
           iconBg="var(--emerald-soft)"
           iconColor="#0E9C86"
@@ -163,7 +142,6 @@ export function OvertimeSection({ data, loading, error, onRetry, palette = CHART
         <KPICard
           label="Avg OT per OT Employee"
           value={`${data.avg_overtime_hours_per_employee} hrs`}
-          subtitle="Total overtime hours / employees with OT"
           icon={UserCheck}
           iconBg="var(--brand-blue-soft)"
           iconColor="#31B7C3"
@@ -177,7 +155,6 @@ export function OvertimeSection({ data, loading, error, onRetry, palette = CHART
           <div className="flex items-center justify-between mb-3">
             <div>
               <h3 className="text-[12px] font-bold">Shift-wise Overtime Hours & Frequency</h3>
-              <p className="text-[10px] muted">Overtime hours worked by shift roster</p>
             </div>
           </div>
           <div className="h-56">
@@ -218,7 +195,6 @@ export function OvertimeSection({ data, loading, error, onRetry, palette = CHART
           <div className="flex items-center justify-between mb-3">
             <div>
               <h3 className="text-[12px] font-bold">Department-wise Overtime Hours</h3>
-              <p className="text-[10px] muted">Total overtime hours logged across departments</p>
             </div>
           </div>
           <div className="h-56">
@@ -257,7 +233,6 @@ export function OvertimeSection({ data, loading, error, onRetry, palette = CHART
           <div className="flex items-center justify-between mb-3">
             <div>
               <h3 className="text-[12px] font-bold">Overtime Trend Analysis</h3>
-              <p className="text-[10px] muted">Daily or monthly aggregate overtime hours</p>
             </div>
             <div className="inline-flex rounded-lg border p-0.5" style={{ borderColor: 'var(--border)' }}>
               <button
@@ -327,8 +302,7 @@ export function OvertimeSection({ data, loading, error, onRetry, palette = CHART
 
         {/* Top Overtime Employees Table (5 cols) */}
         <Card className="p-4 lg:col-span-5 flex flex-col">
-          <h3 className="text-[12px] font-bold mb-1">Top Overtime Contributors</h3>
-          <p className="text-[10px] muted mb-3">Highest cumulative overtime hours logged</p>
+          <h3 className="text-[12px] font-bold mb-3">Top Overtime Contributors</h3>
           <div className="overflow-y-auto max-h-56 flex-1 pr-1">
             <table className="w-full text-left text-[11px]">
               <thead>

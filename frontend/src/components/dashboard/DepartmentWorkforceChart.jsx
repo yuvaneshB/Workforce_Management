@@ -59,11 +59,8 @@ export function DepartmentWorkforceChart({
             </div>
             <div>
               <h3 className="text-sm font-extrabold text-[var(--text)] tracking-tight">
-                Department-wise Workforce ({departmentRows.length > 0 ? `${departmentRows.length} Departments` : 'Overview'})
+                Department-wise Workforce
               </h3>
-              <p className="text-[11px] text-[var(--secondary)]">
-                Headcount and workforce share across manufacturing functions
-              </p>
             </div>
           </div>
           <span className="text-xs font-bold text-[var(--secondary)]">

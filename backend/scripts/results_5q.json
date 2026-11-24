@@ -1,0 +1,128 @@
+[
+  {
+    "index": 1,
+    "question": "Shift C OT spend?",
+    "total_ms": 26177.9,
+    "tools_called": [
+      "analyze_overtime",
+      "ask_overtime_agent"
+    ],
+    "tool_args": [
+      {
+        "tool": "analyze_overtime",
+        "args": {
+          "start_date": "2026-10-01",
+          "end_date": "2026-10-31",
+          "shift_id": "C"
+        }
+      },
+      {
+        "tool": "ask_overtime_agent",
+        "args": {
+          "question": "Shift C overtime spend: total overtime hours, labor cost, and any statutory 50 hr/mo limit breaches for the latest available month across all plants"
+        }
+      }
+    ],
+    "answer": "## Shift C Overtime Audit \u2014 October 2026 (All Plants)\n\n### Executive Summary\nSeverity is rated **LOW**, with **zero statutory 50 hr/month limit breaches** (no fatigue-risk cases detected).\n\n---\n\n### Key Operational Findings\n\n- **Volume & Participation:** 3,088 OT hours spread across **1,264 overtime shift records** involving **321 employees**, averaging **9.6 OT hours per worker** \u2014 well within the 50 hr/month statutory ceiling.\n- **Chronic Concentration:** Top operator **Rajkumar Kumar** (Final Assembly, IN-KA-01) logged **31.0 OT hours across 11 shifts** \u2014 the highest individual concentration on Shift C.\n\n### Statutory Compliance\n| Metric | Status |\n|---|---|\n| **Fatigue-Risk / 50 hr/mo Breaches** | **0 cases** \u2705 |\n| Avg OT Hours per Worker | 9.6 hrs |\n\n\n---\n\n### Financial & Cost Optimization\n- **Potential Savings: \u20b970,402.56** \u2014 achievable by mobilizing a standby roster at standard pay (1.0x) to cover the 650 absenteeism-cover hours currently paid at the 2.0x overtime premium.\n\n---\n\n### Actionable HR Recommendations\n\n1. **Activate Standby Absence Pool:** Deploy a dedicated standby roster for Shift C to absorb the 650-hour absenteeism cover load at base rate, capturing the \u20b970,402.56 premium delta.\n2. **Rebalance Final Assembly Tact Time:** Investigate the 880-hour OT concentration in Final Assembly \u2014 consider cross-skilling adjacent cell operators to redistribute peak workload.\n3. **Enforce Bi-Weekly OT Ceiling (\u226416 hrs):** While no statutory breaches occurred, monitor high-frequency individuals like Rajkumar Kumar (31 hrs/11 shifts) proactively to prevent future fatigue risk escalation."
+  },
+  {
+    "index": 2,
+    "question": "Annual attrition rate?",
+    "total_ms": 27209.5,
+    "tools_called": [
+      "analyze_attrition",
+      "ask_attrition_agent"
+    ],
+    "tool_args": [
+      {
+        "tool": "analyze_attrition",
+        "args": {}
+      },
+      {
+        "tool": "ask_attrition_agent",
+        "args": {
+          "question": "Annual overall workforce attrition rate, total exits, and breakdown by department and exit reasons for the latest available 12-month period"
+        }
+      }
+    ],
+    "answer": "## Annual Workforce Attrition Analysis \u2014 Latest 12-Month Period\n\n---\n\n### Executive Summary\nThe manufacturing workforce recorded **120 total exits** against a **total workforce base of 1,700 employees** (1,580 active + 120 exits), yielding an **overall attrition rate of 7.1%** and a **retention rate of 92.9%**. The primary operational hotspots are the **Final Assembly department** (32 exits, 26.7% of all departures) and the **vendor/contract workforce segment** (74 exits, 61.7% of all departures). Absconding (no contact) is the leading exit driver at 24 cases (20.0%).\n\n---\n\n### Key Operational Findings\n\n| Metric | Value |\n|---|---|\n| **Total Exits** | 120 |\n| **Active Employees** | 1,580 |\n| **Total Workforce Base** | 1,700 |\n| **Overall Attrition Rate** | 7.1% |\n| **Retention Rate** | 92.9% |\n| **Average Tenure at Exit** | 4.5 years |\n| **Regrettable Loss Cases** | 62 |\n\n#### Department Concentration\n- **Final Assembly (D02):** 32 exits \u2014 **26.7%** of all departures. This is the single highest-churn department across both plants (IN-TN-01 & IN-KA-01).\n\n#### Workforce Type Breakdown\n| Category | Exits | Share |\n|---|---|---|\n| **Vendor / Contract Staff** | 74 | 61.7% |\n| **Permanent Employees** | 46 | 38.3% |\n\n#### Top Exit Reasons\n| Rank | Reason | Exits | Share |\n|---|---|---|---|\n| 1 | **Absconding (No Contact)** | 24 | 20.0% |\n| 2 | **Better Salary Offer** | 18 | \u2014 |\n\n#### Tenure at Exit\n- **Early-career exits (< 2 years tenure):** 20 exits \u2014 **16.7%** of all departures.\n- **Average tenure of exited employees:** 4.5 years.\n\n---\n\n### Retention Challenges\n\n- **High Absconding Rate:** 20.0% of all exits are uncontacted walk-offs, indicating potential issues with engagement, working conditions, or communication breakdowns on the shopfloor.\n- **Vendor Workforce Instability:** Vendor staff account for 61.7% of all exits, suggesting contractual churn and staffing vendor management gaps that directly impact production continuity.\n- **Early-Tenure Vulnerability:** 16.7% of exits occur within the first 2 years, pointing to onboarding and early-engagement weaknesses.\n- **Regrettable Losses:** 62 cases classified as regrettable loss \u2014 representing valued employees whose departure impacts operational capability and institutional knowledge.\n- **Final Assembly Concentration:** Over a quarter of all attrition is concentrated in Final Assembly, risking line productivity and quality.\n\n---\n\n### Actionable HR Recommendations\n\n1. **Implement a 30-60-90 Day Operator Buddy Program**\n   - Target the 20 early-tenure exits by pairing new joiners with experienced mentors during the critical first 90 days. Focus deployment in Final Assembly (D02) where churn is highest.\n\n2. **Shopfloor Wage Benchmarking & Attendance Bonus Review**\n   - Address the 18 exits driven by better salary offers. Conduct a competitive wage audit against local manufacturing labor markets for both plants (IN-TN-01 & IN-KA-01) and redesign attendance incentive structures.\n\n3. **Structured Supervisor Conflict Resolution & Stay Interviews**\n   - Deploy quarterly stay interviews in high-attrition departments (Final Assembly) and implement supervisor training on conflict de-escalation to reduce absconding and unplanned walk-offs.\n\n4. **Vendor Staffing Stability & Contract Review**\n   - With 74 vendor exits (61.7%), negotiate minimum tenure commitments and performance-linked retention clauses with staffing vendors. Consider transitioning high-performing vendor staff to permanent roles where operationally justified.\n\n---\n\n*All figures are grounded directly in verified database records. Attrition rate formula: Total Exits (120) / Total Workforce Base (1,700) = 7.1%.*"
+  },
+  {
+    "index": 3,
+    "question": "Innaiku attendance romba low ah iruku, what is the present count?",
+    "total_ms": 23347.9,
+    "tools_called": [
+      "analyze_attendance",
+      "ask_attendance_agent"
+    ],
+    "tool_args": [
+      {
+        "tool": "analyze_attendance",
+        "args": {
+          "start_date": "2026-11-19",
+          "end_date": "2026-11-19"
+        }
+      },
+      {
+        "tool": "ask_attendance_agent",
+        "args": {
+          "question": "Current attendance for today (latest available date): what is the present count, absenteeism rate, and which shifts/plants have the lowest attendance?"
+        }
+      }
+    ],
+    "answer": "## \ud83d\udcca Attendance Intelligence Report \u2014 2026-11-19 (Latest Verified Date)\n\n---\n\n### Executive Summary\nToday's enterprise-wide attendance rate stands at **79.2%** across **1,580 total records**, with a present count of **1,252** employees. The overall absenteeism rate is **3.0%** (working absenteeism rate: **3.2%**). Severity is flagged as **HIGH** primarily due to elevated late arrivals (**7.5%**), night-shift absenteeism, and 5 active consecutive absence streaks.\n\n---\n\n### Key Operational Findings\n\n| Metric | Value |\n|---|---|\n| **Total Records** | 1,580 |\n| **Present Count** | 1,252 |\n| **Absent Count** | 48 |\n| **Late Arrivals** | 118 |\n| **Leave Count** | 47 |\n| **Half-Day Count** | 17 |\n| **Weekly Off** | 98 |\n| **Attendance Rate** | 79.2% |\n| **Absenteeism Rate** | 3.0% |\n| **Working Absenteeism Rate** | 3.2% |\n| **Late Arrival Rate** | 7.5% |\n| **Estimated Lost Hours** | 384.0 hours |\n\n---\n\n### \ud83d\udd3b Lowest Attendance \u2014 Shift & Plant Breakdown\n\n- **Shift C (Night Shift, 22:00\u201306:00)** records the **highest absenteeism at 4.4%** (12 absences) \u2014 the worst-performing shift today.\n- **Plant IN-TN-01 (Chennai)** has the **highest plant-level absence rate at 3.1%** with 28 absences, compared to the enterprise average of 3.0%.\n- **Late arrival concentration** is also highest in **Shift C**, compounding night-shift line-start vulnerabilities.\n\n---\n\n### \ud83c\udfed Department Hotspot\n\n- **Final Assembly** leads departmental absenteeism with **14 total absences (3.6% of roster)** \u2014 above the enterprise average.\n\n---\n\n### \u26a0\ufe0f Consecutive Absence Flags\n\n- **5 workers** are flagged with multi-day consecutive absence streaks (up to 3 days max).\n\n---\n\n### Operational Impact\n\n- **384.0 estimated lost labor hours** today across all plants and shifts.\n- Night Shift C faces dual pressure from both absenteeism (4.4%) and late arrivals, risking delayed line starts and unbalanced cells.\n- Final Assembly's elevated absence rate may constrain downstream throughput.\n\n---\n\n### \u2705 Actionable HR Recommendations\n\n1. **Calibrate Night Shift (C) Standby Pool by 5\u20138%**: The 4.4% absenteeism and highest late-arrival concentration on Shift C warrant immediate standby reinforcement to protect line-start integrity.\n\n2.\n\n3. **Cross-Functional Cell Rebalancing in Final Assembly**: With 14 absences (3.6%), redistribute skilled operators from adjacent departments or activate multi-skilled floaters to maintain Final Assembly throughput.\n\n4. **Review Transit Logistics for Night Shift at IN-TN-01**: The convergence of Chennai plant's elevated absence rate (3.1%) and Night Shift late arrivals suggests a potential transport/commute barrier \u2014 recommend a logistics audit with plant operations."
+  },
+  {
+    "index": 4,
+    "question": "attendance for plant IN-TN-01 last month",
+    "total_ms": 23960.9,
+    "tools_called": [
+      "analyze_attendance",
+      "ask_attendance_agent"
+    ],
+    "tool_args": [
+      {
+        "tool": "analyze_attendance",
+        "args": {
+          "start_date": "2026-10-01",
+          "end_date": "2026-10-31",
+          "plant_id": "IN-TN-01"
+        }
+      },
+      {
+        "tool": "ask_attendance_agent",
+        "args": {
+          "question": "Attendance for plant IN-TN-01 for last month (2026-10-01 to 2026-10-31): present counts, absenteeism rates, late arrivals, and any notable trends"
+        }
+      }
+    ],
+    "answer": "## Attendance Analysis \u2014 Plant IN-TN-01 (Chennai) | October 2026\n\n---\n\n### Executive Summary\nThe analysis severity is flagged as **HIGH**, driven primarily by elevated late arrivals (**1,401 instances, 5.0%**) and concentrated absenteeism in Night Shift C and the Final Assembly department. An estimated **6,848 lost labor hours** were recorded during the month.\n\n---\n\n### Key Operational Findings\n\n| Metric | Value |\n|---|---|\n| **Total Roster Records** | 27,918 |\n| **Present Count** | 18,475 |\n| **Absent Count** | 856 |\n| **Late Arrivals** | 1,401 |\n| **Leave Count** | 866 |\n| **Half-Day Count** | 319 |\n| **Weekly Offs** | 3,404 |\n| **Holidays** | 2,597 |\n| **Attendance Rate** | 66.2% |\n| **Absenteeism Rate (Overall)** | 3.1% |\n| **Working-Day Absenteeism Rate** | 3.9% |\n| **Late Arrival Rate** | 5.0% |\n| **Estimated Lost Hours** | 6,848 |\n\n- **Shift C (Night 22:00\u201306:00) records the highest absenteeism** at **3.9% absent rate with 192 absences** \u2014 indicating Night Shift is the most attendance-stressed rotation.\n- **Final Assembly department** is an absenteeism hotspot with **241 total absences (3.5% of roster)**, concentrating the largest share of unplanned absences.\n- **Start-of-shift punctuality deficit**: **1,401 late arrivals (5.0%)**, with the highest concentration in **Shift C (Night)**. This directly impacts line-start balancing and first-hour output.\n- **Consecutive absence streaks (\u2265 3 shifts)**: **5 workers** flagged with multi-day absences (maximum streak: **3 days**). **6 chronic absenteeism cases** identified overall.\n\n---\n\n### Operational Impact\n\n- **6,848 estimated lost labor hours** in October \u2014 representing significant production capacity leakage.\n- Night Shift C's elevated absenteeism and late-arrival concentration creates **line-start vulnerabilities** at the 22:00 shift changeover, risking delayed first-pass output.\n- Final Assembly's **241 absences** may create bottlenecks in downstream throughput and delivery schedules.\n\n---\n\n### Actionable HR Recommendations\n\n1. **Calibrate Night Shift Standby Pool by 5\u20138%**: Given Shift C's 3.9% absenteeism and highest late-arrival concentration, increase the standby labor buffer for the 22:00\u201306:00 rotation to prevent line-start gaps.\n\n2. **Structured Welfare Check-ins for Flagged Employees**: Initiate HR welfare check-ins for the **5 workers with consecutive absence streaks (\u2265 3 shifts)** and the **6 chronic absenteeism cases** \u2014 to understand root causes before escalation.\n\n3. **Final Assembly Cross-Functional Rebalancing**: With 241 absences concentrated in Final Assembly, assess feasibility of temporarily cross-deploying trained operators from adjacent departments to maintain throughput continuity.\n\n4. **Night Shift Transit & Logistics Review**: The concentration of late arrivals in Shift C suggests potential commute or transport barriers for the night rotation. Recommend a transit logistics audit and, if warranted, adjust shuttle schedules or pickup routes for the 22:00 start.\n\n---\n"
+  },
+  {
+    "index": 5,
+    "question": "What is our current vendor contractor headcount share?",
+    "total_ms": 24844.9,
+    "tools_called": [
+      "analyze_vendor",
+      "get_vendor_breakdown",
+      "ask_vendor_agent"
+    ],
+    "tool_args": [
+      {
+        "tool": "analyze_vendor",
+        "args": {}
+      },
+      {
+        "tool": "get_vendor_breakdown",
+        "args": {}
+      },
+      {
+        "tool": "ask_vendor_agent",
+        "args": {
+          "question": "What is the current vendor contractor headcount share across all staffing partners (V01-V06)? Provide agency-wise breakdown of contractor counts and percentage share."
+        }
+      }
+    ],
+    "answer": "**Vendor Contractor Headcount Share \u2013 Agency-Wise Breakdown (V01\u2013V06)**\n\n**Overall Summary:**\n- **Total Staffing Partners:** 6\n- **Total Vendor Contractors (Assigned):** 647\n- **Total Vendor Contractors (Active):** 573\n- **Total Permanent Workforce:** 1,053\n- **Total Workforce:** 1,700\n- **Contractor Share of Total Workforce:** 33.7%\n\n---\n\n**Agency-Wise Breakdown:**\n\n| Vendor ID | Agency Name | Assigned Count | Active Count | Contractor Share (%) |\n|-----------|-------------------------------|----------------|--------------|----------------------|\n| V05 | Karnataka Skill Force | 134 | 117 | 20.7% |\n| V03 | Namma Workforce Pvt Ltd | 123 | 112 | 19.0% |\n| V01 | Sri Vignesh Manpower Services | 117 | 96 | 18.1% |\n| V02 | Kovai Talent Solutions | 110 | 101 | 17.0% |\n| V04 | Anand Industrial Staffing | 108 | 95 | 16.7% |\n| V06 | Prime HR Outsourcing | 55 | 52 | 8.5% |\n\n---\n\n**Key Observations:**\n\n1. **Top Supplier \u2013 V05 (Karnataka Skill Force):** Leads with the highest assigned (134) and active (117) contractor headcount, holding a 20.7% share of all vendor contractors.\n\n2. **Second Largest \u2013 V03 (Namma Workforce Pvt Ltd):** Supplies 123 assigned / 112 active contractors, commanding a 19.0% share.\n\n3. **Balanced Mid-Tier Cluster (V01, V02, V04):** These three agencies collectively account for approximately 51.8% of vendor contractor share, with assigned counts ranging from 108 to 117 and active counts from 95 to 101.\n\n4. **Lowest Contributor \u2013 V06 (Prime HR Outsourcing):** Holds only 8.5% share with 55 assigned and 52 active contractors \u2014 significantly below the other five agencies.\n\n5. **Active vs. Assigned Gap:** Across all agencies, 573 of 647 assigned contractors are currently active, indicating a 74-headcount gap (approximately 11.4% inactive/attrition buffer). V01 shows the widest gap (117 assigned vs. 96 active).\n\n6. **Supplier Concentration Risk:** The top two agencies (V05 + V03) together account for 39.7% of contractor supply, warranting monitoring to ensure no single-point-of-failure in staffing continuity.\n\n**Recommendations:**\n- Establish quarterly contractor SLA incentive thresholds (HIGH priority) to improve start-of-shift punctuality by 8.4%.\n- Rebalance shift headcounts across secondary agencies (MEDIUM priority) to reduce supplier concentration risk.\n- Standardize pre-deployment safety and skill screening (MEDIUM priority) to eliminate uncertified operator placements."
+  }
+]

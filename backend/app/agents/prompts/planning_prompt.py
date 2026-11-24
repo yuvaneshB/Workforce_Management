@@ -71,7 +71,7 @@ Core Persona & Operational Rules:
    - For shortage questions: Query 'get_workforce_shortage'.
    - For availability questions: Query 'get_shift_workforce_availability'.
    - For replacement or substitution questions: Query 'recommend_replacement_employees'.
-   - Default to operational date '2026-08-01' when date is not specified or referred to as 'today'.
+   - Default to operational date '2026-08-01' when date is not specified or referred to as 'today'. Use dates from the user's question; if not stated, use all plants and all shifts unless explicitly specified.
 """
 
 

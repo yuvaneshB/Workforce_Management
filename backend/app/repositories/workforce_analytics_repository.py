@@ -37,41 +37,105 @@ def _apply_common_filters(
     department_id: str | None = None,
     section_id: str | None = None,
     plant_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+    team_id: str | None = None,
+    operator_team: str | None = None,
     emp_id_col=EmployeeMaster.employee_id,
     include_attendance_filters: bool = True,
 ):
+    target_team = (team_id or operator_team or "").strip()
+    team_targets = [target_team]
+    if target_team.startswith("TEAM-"):
+        team_targets.append(target_team.replace("TEAM-", "S0"))
     if include_attendance_filters:
         if start_date is not None:
             stmt = stmt.where(WorkforceAttendance.work_date >= start_date)
         if end_date is not None:
             stmt = stmt.where(WorkforceAttendance.work_date <= end_date)
         if shift_id:
-            stmt = stmt.where(WorkforceAttendance.shift_id == shift_id)
+            stmt = stmt.where(WorkforceAttendance.shift_id == shift_id.strip())
         if plant_id:
-            stmt = stmt.where(WorkforceAttendance.plant_id == plant_id)
+            stmt = stmt.where(WorkforceAttendance.plant_id == plant_id.strip())
+        if employment_type and employment_type.strip():
+            stmt = stmt.where(
+                WorkforceAttendance.employee_id.in_(
+                    select(EmployeeMaster.employee_id).where(
+                        EmployeeMaster.employment_type.ilike(employment_type.strip())
+                    )
+                )
+            )
+        if vendor_id and vendor_id.strip():
+            stmt = stmt.where(
+                WorkforceAttendance.employee_id.in_(
+                    select(EmployeeMaster.employee_id).where(
+                        EmployeeMaster.vendor_id == vendor_id.strip()
+                    )
+                )
+            )
+        if target_team:
+            stmt = stmt.where(
+                WorkforceAttendance.employee_id.in_(
+                    select(EmployeeMaster.employee_id).where(
+                        EmployeeMaster.section_id.in_(team_targets)
+                    )
+                )
+            )
     else:
-        if plant_id:
+        if plant_id and plant_id.strip():
             stmt = stmt.where(
                 emp_id_col.in_(
                     select(EmployeeMaster.employee_id).where(
-                        EmployeeMaster.plant_id == plant_id
+                        EmployeeMaster.plant_id == plant_id.strip()
+                    )
+                )
+            )
+        if shift_id and shift_id.strip():
+            stmt = stmt.where(
+                emp_id_col.in_(
+                    select(EmployeeMaster.employee_id).where(
+                        EmployeeMaster.shift_id == shift_id.strip()
+                    )
+                )
+            )
+        if employment_type and employment_type.strip():
+            stmt = stmt.where(
+                emp_id_col.in_(
+                    select(EmployeeMaster.employee_id).where(
+                        EmployeeMaster.employment_type.ilike(employment_type.strip())
+                    )
+                )
+            )
+        if vendor_id and vendor_id.strip():
+            stmt = stmt.where(
+                emp_id_col.in_(
+                    select(EmployeeMaster.employee_id).where(
+                        EmployeeMaster.vendor_id == vendor_id.strip()
+                    )
+                )
+            )
+        if target_team:
+            stmt = stmt.where(
+                emp_id_col.in_(
+                    select(EmployeeMaster.employee_id).where(
+                        EmployeeMaster.section_id.in_(team_targets)
                     )
                 )
             )
 
-    if department_id:
+    if department_id and department_id.strip():
         stmt = stmt.where(
             emp_id_col.in_(
                 select(EmployeeDepartmentMapping.employee_id).where(
-                    EmployeeDepartmentMapping.department_id == department_id
+                    EmployeeDepartmentMapping.department_id == department_id.strip()
                 )
             )
         )
-    if section_id:
+    if section_id and section_id.strip():
         stmt = stmt.where(
             emp_id_col.in_(
                 select(EmployeeSectionMapping.employee_id).where(
-                    EmployeeSectionMapping.section_id == section_id
+                    EmployeeSectionMapping.section_id == section_id.strip()
                 )
             )
         )
@@ -87,6 +151,10 @@ def get_gender_analytics(
     department_id: str | None = None,
     section_id: str | None = None,
     plant_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+    team_id: str | None = None,
+    operator_team: str | None = None,
 ) -> dict:
     emp_stmt = select(
         EmployeeMaster.gender,
@@ -94,9 +162,14 @@ def get_gender_analytics(
     ).group_by(EmployeeMaster.gender)
     emp_stmt = _apply_common_filters(
         emp_stmt,
+        shift_id=shift_id,
         department_id=department_id,
         section_id=section_id,
         plant_id=plant_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
+        operator_team=operator_team,
         include_attendance_filters=False,
     )
     emp_counts = {str(r[0]): int(r[1]) for r in db.execute(emp_stmt).all()}
@@ -126,6 +199,10 @@ def get_gender_analytics(
         department_id=department_id,
         section_id=section_id,
         plant_id=plant_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
+        operator_team=operator_team,
     )
 
     att_map = {
@@ -165,6 +242,10 @@ def _grouped_dimension_analytics(
     department_id: str | None = None,
     section_id: str | None = None,
     plant_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+    team_id: str | None = None,
+    operator_team: str | None = None,
 ) -> list[dict]:
     headcount_stmt = (
         select(
@@ -182,9 +263,14 @@ def _grouped_dimension_analytics(
     )
     headcount_stmt = _apply_common_filters(
         headcount_stmt,
+        shift_id=shift_id,
         department_id=department_id,
         section_id=section_id,
         plant_id=plant_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
+        operator_team=operator_team,
         emp_id_col=mapping_emp_col,
         include_attendance_filters=False,
     )
@@ -214,6 +300,10 @@ def _grouped_dimension_analytics(
         department_id=department_id,
         section_id=section_id,
         plant_id=plant_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
+        operator_team=operator_team,
         emp_id_col=mapping_emp_col,
     )
     att_map = {str(r[0]): (int(r[1]), int(r[2]), int(r[3])) for r in db.execute(att_stmt).all()}
@@ -278,15 +368,33 @@ def get_section_analytics(db: Session, **filters) -> dict:
     return {"total_sections": len(items), "items": items}
 
 
-def get_vendor_analytics(db: Session, *, plant_id: str | None = None) -> dict:
+def get_vendor_analytics(
+    db: Session,
+    *,
+    plant_id: str | None = None,
+    shift_id: str | None = None,
+    department_id: str | None = None,
+    section_id: str | None = None,
+    team_id: str | None = None,
+    operator_team: str | None = None,
+) -> dict:
     """Compute vendor-wise workforce distribution from vendor_master and employee_vendor_mapping."""
     vm_stmt = select(VendorMaster).order_by(asc(VendorMaster.vendor_id))
     vendors = list(db.execute(vm_stmt).scalars().all())
 
     # Base filters for employee queries
     emp_filters = []
-    if plant_id:
-        emp_filters.append(EmployeeMaster.plant_id == plant_id)
+    if plant_id and plant_id.strip():
+        emp_filters.append(EmployeeMaster.plant_id == plant_id.strip())
+    if shift_id and shift_id.strip():
+        emp_filters.append(EmployeeMaster.shift_id == shift_id.strip())
+    if department_id and department_id.strip():
+        emp_filters.append(EmployeeMaster.department_id == department_id.strip())
+    if section_id and section_id.strip():
+        emp_filters.append(EmployeeMaster.section_id == section_id.strip())
+    target_team = (team_id or operator_team or "").strip()
+    if target_team:
+        emp_filters.append(EmployeeMaster.section_id == target_team)
 
     # 1. Total workforce counts
     tot_stmt = select(func.count(distinct(EmployeeMaster.employee_id)))
@@ -391,6 +499,10 @@ def get_experience_analytics(
     department_id: str | None = None,
     section_id: str | None = None,
     plant_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+    team_id: str | None = None,
+    operator_team: str | None = None,
 ) -> dict:
     total_months = EmployeeExperience.experience_years * 12 + EmployeeExperience.experience_months
     bucket_case = case(
@@ -413,9 +525,14 @@ def get_experience_analytics(
     )
     head_stmt = _apply_common_filters(
         head_stmt,
+        shift_id=shift_id,
         department_id=department_id,
         section_id=section_id,
         plant_id=plant_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
+        operator_team=operator_team,
         emp_id_col=EmployeeExperience.employee_id,
         include_attendance_filters=False,
     )
@@ -447,6 +564,10 @@ def get_experience_analytics(
         department_id=department_id,
         section_id=section_id,
         plant_id=plant_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
+        operator_team=operator_team,
         emp_id_col=EmployeeExperience.employee_id,
     )
     att_map = {str(r[0]): (int(r[1]), int(r[2]), int(r[3])) for r in db.execute(att_stmt).all()}
@@ -481,6 +602,10 @@ def get_new_joiner_analytics(
     department_id: str | None = None,
     section_id: str | None = None,
     plant_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+    team_id: str | None = None,
+    operator_team: str | None = None,
 ) -> dict:
     # Condition 7: Use reporting period start date as New Joiners calculation anchor, 12-month lookback
     anchor_date = start_date
@@ -515,9 +640,14 @@ def get_new_joiner_analytics(
     )
     nj_stmt = _apply_common_filters(
         nj_stmt,
+        shift_id=shift_id,
         department_id=department_id,
         section_id=section_id,
         plant_id=plant_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
+        operator_team=operator_team,
         include_attendance_filters=False,
     )
     nj_rows = db.execute(nj_stmt).all()
@@ -560,6 +690,8 @@ def get_new_joiner_analytics(
         end_date=end_date,
         shift_id=shift_id,
         plant_id=plant_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
     )
     total_rec, present_c, absent_c = [int(x) for x in db.execute(totals_stmt).one()]
 
@@ -593,6 +725,8 @@ def get_new_joiner_analytics(
         end_date=end_date,
         shift_id=shift_id,
         plant_id=plant_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
     )
 
     trends = []
@@ -642,6 +776,10 @@ def get_overtime_analytics(
     department_id: str | None = None,
     section_id: str | None = None,
     plant_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+    team_id: str | None = None,
+    operator_team: str | None = None,
 ) -> dict:
     """Compute comprehensive overtime analytics, shift/dept/section breakdowns, and trends."""
     filters = []
@@ -666,6 +804,31 @@ def get_overtime_analytics(
             WorkforceAttendance.employee_id.in_(
                 select(EmployeeSectionMapping.employee_id).where(
                     EmployeeSectionMapping.section_id == section_id
+                )
+            )
+        )
+    target_team = (team_id or operator_team or "").strip()
+    if target_team:
+        filters.append(
+            WorkforceAttendance.employee_id.in_(
+                select(EmployeeMaster.employee_id).where(
+                    EmployeeMaster.section_id == target_team
+                )
+            )
+        )
+    if employment_type and employment_type.strip():
+        filters.append(
+            WorkforceAttendance.employee_id.in_(
+                select(EmployeeMaster.employee_id).where(
+                    EmployeeMaster.employment_type.ilike(employment_type.strip())
+                )
+            )
+        )
+    if vendor_id and vendor_id.strip():
+        filters.append(
+            WorkforceAttendance.employee_id.in_(
+                select(EmployeeMaster.employee_id).where(
+                    EmployeeMaster.vendor_id == vendor_id.strip()
                 )
             )
         )
@@ -998,8 +1161,20 @@ def get_team_production_analytics(
     plant_id: str | None = None,
     shift_id: str | None = None,
     operator_team: str | None = None,
+    team_id: str | None = None,
+    department_id: str | None = None,
+    section_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
 ) -> dict:
     """Compute team production metrics and independent team attendance correlation."""
+    target_team = (team_id or operator_team or "").strip()
+    team_targets = [target_team]
+    if target_team.startswith("TEAM-"):
+        team_targets.append(target_team.replace("TEAM-", "S0"))
+    elif target_team.startswith("S0"):
+        team_targets.append(target_team.replace("S0", "TEAM-"))
+
     prod_filters = []
     if start_date is not None:
         prod_filters.append(HourlyProduction.event_date >= start_date)
@@ -1009,8 +1184,28 @@ def get_team_production_analytics(
         prod_filters.append(HourlyProduction.plant_id == plant_id)
     if shift_id:
         prod_filters.append(HourlyProduction.shift_id == shift_id)
-    if operator_team:
-        prod_filters.append(HourlyProduction.operator_team == operator_team)
+    if target_team:
+        prod_filters.append(HourlyProduction.operator_team.in_(team_targets))
+    if department_id:
+        prod_filters.append(HourlyProduction.department_id == department_id)
+    if section_id:
+        prod_filters.append(HourlyProduction.section_id == section_id)
+    if employment_type and employment_type.strip():
+        prod_filters.append(
+            HourlyProduction.employee_id.in_(
+                select(EmployeeMaster.employee_id).where(
+                    EmployeeMaster.employment_type.ilike(employment_type.strip())
+                )
+            )
+        )
+    if vendor_id and vendor_id.strip():
+        prod_filters.append(
+            HourlyProduction.employee_id.in_(
+                select(EmployeeMaster.employee_id).where(
+                    EmployeeMaster.vendor_id == vendor_id.strip()
+                )
+            )
+        )
 
     # 1. Independent Production Aggregates by Team
     prod_stmt = (
@@ -1043,6 +1238,22 @@ def get_team_production_analytics(
     }
 
     # 2. Team Headcount from dim_workforce
+    hc_filters = []
+    if plant_id:
+        hc_filters.append(Workforce.plant_id == plant_id)
+    if shift_id:
+        hc_filters.append(Workforce.home_shift == shift_id)
+    if target_team:
+        hc_filters.append(Workforce.team_id.in_(team_targets))
+    if department_id:
+        hc_filters.append(Workforce.department_id == department_id)
+    if section_id:
+        hc_filters.append(Workforce.section_id == section_id)
+    if employment_type and employment_type.strip():
+        hc_filters.append(Workforce.employment_type.ilike(employment_type.strip()))
+    if vendor_id and vendor_id.strip():
+        hc_filters.append(Workforce.vendor_id == vendor_id.strip())
+
     hc_stmt = (
         select(
             Workforce.team_id,
@@ -1051,8 +1262,8 @@ def get_team_production_analytics(
         .group_by(Workforce.team_id)
         .order_by(asc(Workforce.team_id))
     )
-    if operator_team:
-        hc_stmt = hc_stmt.where(Workforce.team_id == operator_team)
+    if hc_filters:
+        hc_stmt = hc_stmt.where(*hc_filters)
     headcounts = {str(r[0]): int(r[1]) for r in db.execute(hc_stmt).all()}
 
     # 3. Independent Attendance Aggregates by Team
@@ -1065,8 +1276,34 @@ def get_team_production_analytics(
         att_filters.append(WorkforceAttendance.plant_id == plant_id)
     if shift_id:
         att_filters.append(WorkforceAttendance.shift_id == shift_id)
-    if operator_team:
-        att_filters.append(Workforce.team_id == operator_team)
+    if target_team:
+        att_filters.append(Workforce.team_id.in_(team_targets))
+    if department_id:
+        att_filters.append(WorkforceAttendance.department_id == department_id)
+    if section_id:
+        att_filters.append(
+            WorkforceAttendance.employee_id.in_(
+                select(EmployeeSectionMapping.employee_id).where(
+                    EmployeeSectionMapping.section_id == section_id
+                )
+            )
+        )
+    if employment_type and employment_type.strip():
+        att_filters.append(
+            WorkforceAttendance.employee_id.in_(
+                select(EmployeeMaster.employee_id).where(
+                    EmployeeMaster.employment_type.ilike(employment_type.strip())
+                )
+            )
+        )
+    if vendor_id and vendor_id.strip():
+        att_filters.append(
+            WorkforceAttendance.employee_id.in_(
+                select(EmployeeMaster.employee_id).where(
+                    EmployeeMaster.vendor_id == vendor_id.strip()
+                )
+            )
+        )
 
     att_stmt = (
         select(
@@ -1182,8 +1419,19 @@ def get_shift_efficiency_analytics(
     end_date: dt.date | None = None,
     plant_id: str | None = None,
     shift_id: str | None = None,
+    department_id: str | None = None,
+    section_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+    team_id: str | None = None,
+    operator_team: str | None = None,
 ) -> dict:
     """Compute shift-wise production performance correlated with shift-level attendance."""
+    target_team = (team_id or operator_team or "").strip()
+    team_targets = [target_team]
+    if target_team.startswith("TEAM-"):
+        team_targets.append(target_team.replace("TEAM-", "S0"))
+
     prod_filters = []
     if start_date is not None:
         prod_filters.append(HourlyProduction.event_date >= start_date)
@@ -1193,6 +1441,28 @@ def get_shift_efficiency_analytics(
         prod_filters.append(HourlyProduction.plant_id == plant_id)
     if shift_id:
         prod_filters.append(HourlyProduction.shift_id == shift_id)
+    if department_id:
+        prod_filters.append(HourlyProduction.department_id == department_id)
+    if section_id:
+        prod_filters.append(HourlyProduction.section_id == section_id)
+    if target_team:
+        prod_filters.append(HourlyProduction.section_id.in_(team_targets))
+    if employment_type and employment_type.strip():
+        prod_filters.append(
+            HourlyProduction.employee_id.in_(
+                select(EmployeeMaster.employee_id).where(
+                    EmployeeMaster.employment_type.ilike(employment_type.strip())
+                )
+            )
+        )
+    if vendor_id and vendor_id.strip():
+        prod_filters.append(
+            HourlyProduction.employee_id.in_(
+                select(EmployeeMaster.employee_id).where(
+                    EmployeeMaster.vendor_id == vendor_id.strip()
+                )
+            )
+        )
 
     # 1. Independent Shift Production Aggregates
     prod_stmt = (
@@ -1234,6 +1504,32 @@ def get_shift_efficiency_analytics(
         att_filters.append(WorkforceAttendance.plant_id == plant_id)
     if shift_id:
         att_filters.append(WorkforceAttendance.shift_id == shift_id)
+    if department_id:
+        att_filters.append(WorkforceAttendance.department_id == department_id)
+    if section_id:
+        att_filters.append(
+            WorkforceAttendance.employee_id.in_(
+                select(EmployeeSectionMapping.employee_id).where(
+                    EmployeeSectionMapping.section_id == section_id
+                )
+            )
+        )
+    if employment_type and employment_type.strip():
+        att_filters.append(
+            WorkforceAttendance.employee_id.in_(
+                select(EmployeeMaster.employee_id).where(
+                    EmployeeMaster.employment_type.ilike(employment_type.strip())
+                )
+            )
+        )
+    if vendor_id and vendor_id.strip():
+        att_filters.append(
+            WorkforceAttendance.employee_id.in_(
+                select(EmployeeMaster.employee_id).where(
+                    EmployeeMaster.vendor_id == vendor_id.strip()
+                )
+            )
+        )
 
     att_stmt = (
         select(
@@ -1354,6 +1650,10 @@ def get_skills_analytics(
     team_id: str | None = None,
     shift_id: str | None = None,
     plant_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+    start_date: dt.date | None = None,
+    end_date: dt.date | None = None,
 ) -> dict:
     """Compute skill grade distributions, department/section/team skill matrices, and certification analytics."""
     emp_filters = []
@@ -1385,6 +1685,10 @@ def get_skills_analytics(
                 )
             )
         )
+    if employment_type and employment_type.strip():
+        emp_filters.append(Workforce.employment_type.ilike(employment_type.strip()))
+    if vendor_id and vendor_id.strip():
+        emp_filters.append(Workforce.vendor_id == vendor_id.strip())
 
     # 1. Total employees
     tot_stmt = select(func.count(Workforce.employee_id))
@@ -1558,6 +1862,10 @@ def get_compliance_analytics(
     department_id: str | None = None,
     section_id: str | None = None,
     plant_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+    team_id: str | None = None,
+    operator_team: str | None = None,
 ) -> dict:
     """Compute training compliance and skill match rates across departments, sections, and shifts."""
     trn_filters = []
@@ -1569,10 +1877,17 @@ def get_compliance_analytics(
         trn_filters.append(EmployeeMaster.department_id == department_id)
     if section_id:
         trn_filters.append(EmployeeMaster.section_id == section_id)
+    target_team = (team_id or operator_team or "").strip()
+    if target_team:
+        trn_filters.append(EmployeeMaster.section_id == target_team)
     if start_date is not None:
         trn_filters.append(EmployeeTraining.start_date >= start_date)
     if end_date is not None:
         trn_filters.append(EmployeeTraining.end_date <= end_date)
+    if employment_type and employment_type.strip():
+        trn_filters.append(EmployeeMaster.employment_type.ilike(employment_type.strip()))
+    if vendor_id and vendor_id.strip():
+        trn_filters.append(EmployeeMaster.vendor_id == vendor_id.strip())
 
     # 1. Overall compliance & skill match totals from verified employee_training records
     tot_stmt = (

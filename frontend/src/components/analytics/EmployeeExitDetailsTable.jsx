@@ -6,7 +6,6 @@ import {
   Users,
 } from 'lucide-react';
 import { useMemo, useState } from 'react';
-import { EXITED_EMPLOYEES_RECORDS } from '../../data/attritionData';
 import { Card } from '../common/Card';
 import { LoadingSkeleton } from '../common/LoadingSkeleton';
 
@@ -26,7 +25,7 @@ export function EmployeeExitDetailsTable({
   const effectiveVendorFilter =
     externalVendorFilter !== 'ALL' ? externalVendorFilter : vendorFilter;
 
-  const allRecords = records && records.length > 0 ? records : EXITED_EMPLOYEES_RECORDS;
+  const allRecords = Array.isArray(records) ? records : [];
 
   // Filter records
   const filteredRecords = useMemo(() => {

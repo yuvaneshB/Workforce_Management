@@ -49,6 +49,9 @@ def calculate_workforce_availability(
     shift_id: str | None = None,
     department_id: str | None = None,
     section_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+    team_id: str | None = None,
 ) -> dict[str, Any]:
     """Calculate date-specific workforce availability distinguishing PRESENT, ABSENT,
 
@@ -61,6 +64,9 @@ def calculate_workforce_availability(
         shift_id=shift_id,
         department_id=department_id,
         section_id=section_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
     )
 
     total_scheduled = len(records)
@@ -138,8 +144,16 @@ def calculate_workforce_availability(
     available_count = present_count
     potential_total_with_late = present_count + late_count
 
-    availability_rate = round((present_count / total_scheduled) * 100.0, 1)
-    absenteeism_rate = round(((absent_count + leave_count) / total_scheduled) * 100.0, 1)
+    availability_rate = (
+        round((present_count / total_scheduled) * 100.0, 1)
+        if total_scheduled > 0
+        else 0.0
+    )
+    absenteeism_rate = (
+        round(((absent_count + leave_count) / total_scheduled) * 100.0, 1)
+        if total_scheduled > 0
+        else 0.0
+    )
 
     return {
         "date": target_date.isoformat(),
@@ -169,6 +183,11 @@ def detect_workforce_shortages(
     target_date: dt.date,
     plant_id: str | None = None,
     shift_id: str | None = None,
+    department_id: str | None = None,
+    section_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+    team_id: str | None = None,
 ) -> dict[str, Any]:
     """Calculate workforce shortage against the verified 10-person-team and
 
@@ -180,6 +199,11 @@ def detect_workforce_shortages(
         db,
         plant_id=plant_id,
         shift_id=shift_id,
+        department_id=department_id,
+        section_id=section_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
     )
     baseline = sum(t["employee_count"] for t in team_comp)
     num_teams = len(team_comp)
@@ -212,6 +236,11 @@ def detect_workforce_shortages(
         target_date=target_date,
         plant_id=plant_id,
         shift_id=shift_id,
+        department_id=department_id,
+        section_id=section_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
     )
 
     available_workforce = availability["available_count"]
@@ -277,6 +306,16 @@ def detect_workforce_shortages(
     )
     if plant_id:
         shift_stmt = shift_stmt.where(WorkforceRequirement.plant_id == plant_id)
+    if department_id:
+        shift_stmt = shift_stmt.where(WorkforceRequirement.department_id == department_id)
+    if section_id:
+        shift_stmt = shift_stmt.where(WorkforceRequirement.section_id == section_id)
+    if team_id and team_id.strip():
+        t_id = team_id.strip()
+        t_targets = [t_id]
+        if t_id.startswith("TEAM-"):
+            t_targets.append(t_id.replace("TEAM-", "S0"))
+        shift_stmt = shift_stmt.where(WorkforceRequirement.section_id.in_(t_targets))
     shift_shortages = []
     for r in db.execute(shift_stmt).all():
         s_id, s_name, req, act = str(r[0]), str(r[1]), int(r[2]), int(r[3])
@@ -305,6 +344,12 @@ def detect_workforce_shortages(
     )
     if plant_id:
         dept_stmt = dept_stmt.where(WorkforceRequirement.plant_id == plant_id)
+    if shift_id:
+        dept_stmt = dept_stmt.where(WorkforceRequirement.shift_id == shift_id)
+    if section_id:
+        dept_stmt = dept_stmt.where(WorkforceRequirement.section_id == section_id)
+    if team_id and team_id.strip():
+        dept_stmt = dept_stmt.where(WorkforceRequirement.section_id.in_(t_targets))
     dept_shortages = []
     for r in db.execute(dept_stmt).all():
         d_name, req, act = str(r[0]), int(r[1]), int(r[2])
@@ -333,6 +378,12 @@ def detect_workforce_shortages(
     )
     if plant_id:
         sec_stmt = sec_stmt.where(WorkforceRequirement.plant_id == plant_id)
+    if shift_id:
+        sec_stmt = sec_stmt.where(WorkforceRequirement.shift_id == shift_id)
+    if department_id:
+        sec_stmt = sec_stmt.where(WorkforceRequirement.department_id == department_id)
+    if team_id and team_id.strip():
+        sec_stmt = sec_stmt.where(WorkforceRequirement.section_id.in_(t_targets))
     section_shortages = []
     for r in db.execute(sec_stmt).all():
         s_name, s_id, req, act = str(r[0]), str(r[1]), int(r[2]), int(r[3])
@@ -359,6 +410,16 @@ def detect_workforce_shortages(
         .group_by(PlantMaster.plant_id, PlantMaster.plant_name)
         .order_by(PlantMaster.plant_id)
     )
+    if plant_id:
+        plant_stmt = plant_stmt.where(WorkforceRequirement.plant_id == plant_id)
+    if shift_id:
+        plant_stmt = plant_stmt.where(WorkforceRequirement.shift_id == shift_id)
+    if department_id:
+        plant_stmt = plant_stmt.where(WorkforceRequirement.department_id == department_id)
+    if section_id:
+        plant_stmt = plant_stmt.where(WorkforceRequirement.section_id == section_id)
+    if team_id and team_id.strip():
+        plant_stmt = plant_stmt.where(WorkforceRequirement.section_id.in_(t_targets))
     plant_shortages = []
     for r in db.execute(plant_stmt).all():
         p_id, p_name, req, act = str(r[0]), str(r[1]), int(r[2]), int(r[3])

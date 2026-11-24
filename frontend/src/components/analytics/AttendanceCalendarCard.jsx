@@ -172,11 +172,6 @@ export function AttendanceCalendarCard({
           </div>
         )}
       </div>
-
-      <div className="flex items-center justify-between pt-2 border-t border-[var(--border)] text-[9px] text-[var(--secondary)]">
-        <span>Calendar Coverage: <strong className="text-[var(--text)]">3 Months</strong></span>
-        <span>{selectedDate ? `Selected: ${selectedDate}` : 'Click any date to inspect'}</span>
-      </div>
     </Card>
   );
 }

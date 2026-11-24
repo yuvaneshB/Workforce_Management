@@ -32,14 +32,9 @@ export function DowntimeAnalysisCard({
   return (
     <Card className="p-4 lg:col-span-4 flex flex-col justify-between min-h-[260px]">
       <div>
-        <div className="flex items-center justify-between gap-2 mb-2">
-          <div className="flex items-center gap-2 min-w-0">
-            <Clock className="w-4 h-4 shrink-0 text-[#F97316]" aria-hidden="true" />
-            <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Downtime Analysis</h2>
-          </div>
-          <span className="text-[10px] font-semibold text-orange-600 bg-orange-50 dark:bg-orange-950/40 px-1.5 py-0.5 rounded border border-orange-200 dark:border-orange-800 shrink-0">
-            Monthly Breakdown
-          </span>
+        <div className="flex items-center gap-2 mb-2 min-w-0">
+          <Clock className="w-4 h-4 shrink-0 text-[#F97316]" aria-hidden="true" />
+          <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Downtime Analysis</h2>
         </div>
 
         {loading ? (
@@ -97,11 +92,6 @@ export function DowntimeAnalysisCard({
             </div>
           </div>
         )}
-      </div>
-
-      <div className="flex items-center justify-between pt-2 border-t border-[var(--border)] text-[9px] text-[var(--secondary)]">
-        <span>Average: <strong className="text-[var(--text)]">3,908 mins/month</strong></span>
-        <span>Availability Impact: <strong className="text-emerald-600 font-bold">&lt; 1.5%</strong></span>
       </div>
     </Card>
   );

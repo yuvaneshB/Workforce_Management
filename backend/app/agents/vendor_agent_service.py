@@ -62,11 +62,19 @@ class VendorAgentService:
         active_vendor = s_data.total_active_vendor_workforce
         total_perm = s_data.total_permanent_workforce
 
-        contractor_share_pct = round((active_vendor / max(1, total_workforce)) * 100, 1)
+        contractor_share_of_workforce_pct = round((total_vendor / max(1, total_workforce)) * 100, 1)
+        active_contractor_share_pct = round((active_vendor / max(1, total_workforce)) * 100, 1)
+        contractor_share_pct = active_contractor_share_pct
 
-        # 2. Identify top vendor by headcount
+        # 2. Identify top vendor by headcount and top 2 concentration
         sorted_vendors = sorted(vendor_items, key=lambda x: x["active_count"], reverse=True)
         top_vendor = sorted_vendors[0] if sorted_vendors else {"vendor_id": "V01", "active_count": 0, "active_share_pct": 0.0}
+
+        sorted_by_assigned = sorted(vendor_items, key=lambda x: x.get("assigned_count", 0), reverse=True)
+        top2_assigned = (sorted_by_assigned[0]["assigned_count"] + sorted_by_assigned[1]["assigned_count"]) if len(sorted_by_assigned) >= 2 else (sorted_by_assigned[0]["assigned_count"] if sorted_by_assigned else 0)
+        top2_vendor_share_pct = round((top2_assigned / max(1, total_vendor)) * 100, 1) if total_vendor > 0 else 0.0
+        inactive_count = max(0, total_vendor - active_vendor)
+        inactive_pct = round((inactive_count / max(1, total_vendor)) * 100, 1) if total_vendor > 0 else 0.0
 
         # 3. Formulate structured findings grounded in Neon DB records
         findings = [
@@ -111,7 +119,7 @@ class VendorAgentService:
                 "owner": "Procurement & Plant HR",
                 "action": "Tie quarterly vendor bonuses to minimum 95% punctuality and attendance fulfillment thresholds to reduce emergency absenteeism cover.",
                 "target_timeline": "Next Quarter Contract Renewal",
-                "impact": "Improves start-of-shift contractor punctuality by 8.4% and eliminates unfilled station penalties.",
+                "impact": "Improves start-of-shift contractor punctuality and eliminates unfilled station penalties.",
             },
             {
                 "id": "VND-REC-02",
@@ -156,6 +164,11 @@ class VendorAgentService:
                 "total_vendor": total_vendor,
                 "active_vendor": active_vendor,
                 "contractor_share_pct": contractor_share_pct,
+                "contractor_share_of_workforce_pct": contractor_share_of_workforce_pct,
+                "active_contractor_share_pct": active_contractor_share_pct,
+                "top2_vendor_share_pct": top2_vendor_share_pct,
+                "inactive_count": inactive_count,
+                "inactive_pct": inactive_pct,
                 "top_vendor": top_vendor["vendor_id"],
                 "top_vendor_share": top_vendor.get("active_share_pct", 0),
             },

@@ -1,19 +1,14 @@
 import {
-  AlertCircle,
   AlertTriangle,
-  Award,
   Bot,
-  Brain,
   CheckCircle2,
   Clock,
-  Database,
   Flame,
+  HelpCircle,
   Layers,
+  MessageSquare,
   Shield,
-  ShieldAlert,
   Sparkles,
-  Users,
-  Zap,
 } from 'lucide-react';
 import { Card } from '../common/Card';
 
@@ -21,279 +16,179 @@ export const PROBLEM_DETAILS = {
   shortages: {
     id: 'shortages',
     num: '01',
-    category: 'WORKFORCE SHORTAGES',
-    title: 'Workforce Shortages & Shift Understaffing',
-    subtitle: 'Assembly & Machining Line Deficits – Uncovered Demands in NS3 Shift',
-    severityBadge: 'CRITICAL RISK • SOLVED BY WORKFORCE PLANNING AGENT',
-    severityColor: 'bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800',
+    title: 'Workforce Shortages',
+    agentName: 'Workforce Planning Agent',
+    serviceFile: 'workforce_planning_agent_service.py',
     icon: Clock,
-    challenges: [
-      {
-        title: 'Sluggish Shift Shortage Detection',
-        description: 'Manual supervisor headcount rollcalls take 1–2 hours after shift gate entry, severely delaying standby operator dispatch.',
-      },
-      {
-        title: 'Assembly Line Starvation',
-        description: 'Uncovered takt positions halt conveyor progression, idling up to 10 downstream operators and compounding station backlog.',
-      },
-      {
-        title: 'Unvetted Standby Substitution',
-        description: 'Slotting replacement workers without verified L2+ qualification grades increases assembly rework rates by up to 14%.',
-      },
-      {
-        title: 'Contractor Vendor Replenishment Lag',
-        description: 'Third-party staffing agencies take 24–48 hours to supply replacement heads during sudden peak production spikes.',
-      },
-      {
-        title: 'Statutory Overtime Compounding',
-        description: 'Masking persistent vacancy gaps by mandating double shifts breaches statutory 50 hr/month factory labor caps.',
-      },
+    themeColor: 'rose',
+    badgeClass: 'border-rose-300 text-rose-700 bg-rose-50 dark:bg-rose-950/60 dark:text-rose-300',
+    problemText:
+      'Shift-level workforce shortages occur when available headcount falls below operational requirements across plants, departments, or shifts, leading to understaffed lines and operational delays.',
+    whatAgentDoes: [
+      'Compares required vs available workforce by plant, department, and shift',
+      'Detects shortages and flags understaffed manufacturing sections',
+      'Suggests skill-compatible replacement employees from the available workforce',
     ],
-    agent: {
-      name: 'Workforce Planning Agent',
-      service: 'workforce_planning_agent_service.py',
-      endpoint: '/api/v1/agent/stream-analysis',
-      role: 'Audits required vs active headcount, flags 10-person team deficits, and identifies immediate standby replacements.',
-    },
+    exampleQuestion: 'Are there any workforce shortages in Plant 1 Shift A today?',
   },
   absenteeism: {
     id: 'absenteeism',
     num: '02',
-    category: 'ABSENTEEISM SPIKES',
-    title: 'Absenteeism Spikes & Unscheduled Line Disruptions',
-    subtitle: 'Peak Post-Weekend Absence Surges – 16.2% Absent & Late Arrivals',
-    severityBadge: 'HIGH VARIANCE • SOLVED BY ATTENDANCE AGENT',
-    severityColor: 'bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800',
+    title: 'Absenteeism Spikes',
+    agentName: 'Attendance Agent',
+    serviceFile: 'attendance_agent_service.py',
     icon: AlertTriangle,
-    challenges: [
-      {
-        title: 'Monday Morning (GS1) Drop-offs',
-        description: 'Absenteeism surges to 16.2% on morning shifts following weekend rotations, disrupting initial line ramp-up targets.',
-      },
-      {
-        title: 'Station Pairing Fragmentation',
-        description: 'Missing technicians break critical dual-operator assembly stations, cutting takt line velocity by nearly a third.',
-      },
-      {
-        title: 'Unplanned Cross-Coverage Errors',
-        description: 'Emergency reassignment of uncertified operators into packaging creates downstream bottleneck jams and quality holds.',
-      },
-      {
-        title: 'Vendor Attendance Disparities',
-        description: 'High variance in contractor agency punctuality causes unpredictable shift opening headcounts across Plant 1 & 2.',
-      },
-      {
-        title: 'Chronic Absenteeism Blindspots',
-        description: 'Absence of biometric streak tracking leaves chronic repeat attendance offenders unaddressed prior to shift release.',
-      },
+    themeColor: 'amber',
+    badgeClass: 'border-amber-300 text-amber-800 bg-amber-50 dark:bg-amber-950/60 dark:text-amber-300',
+    problemText:
+      'Unplanned absenteeism and late arrivals disrupt scheduled line operations and reduce shift productivity across manufacturing sections.',
+    whatAgentDoes: [
+      'Tracks absenteeism rates and late arrivals across rotational shifts',
+      'Finds department, shift, and plant absence hotspots',
+      'Flags chronic absentees and consecutive absence streaks',
     ],
-    agent: {
-      name: 'Attendance Agent',
-      service: 'attendance_agent_service.py',
-      endpoint: '/api/v1/agent/stream-analysis',
-      role: 'Scans 177,665 biometric punches in real time; audits chronic absenteeism streaks and shift arrival correlations.',
-    },
+    exampleQuestion: 'Which department has the highest absenteeism rate this month?',
   },
   attrition: {
     id: 'attrition',
     num: '03',
-    category: 'ATTRITION RISKS',
-    title: 'Attrition Risks & Contractor Turnover Velocity',
-    subtitle: 'Elevated Leaver Velocity – 61.7% of Plant Exits in Contractor Workforce',
-    severityBadge: 'MODERATE RISK • SOLVED BY ATTRITION AGENT',
-    severityColor: 'bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800',
+    title: 'Attrition Risks',
+    agentName: 'Attrition Agent',
+    serviceFile: 'attrition_agent_service.py',
     icon: Flame,
-    challenges: [
-      {
-        title: 'High Contractor Exit Churn',
-        description: '61.7% of total factory exits (74 out of 120 leavers) originate within temporary contractor agency workforce.',
-      },
-      {
-        title: 'First 90-Day Resignation Cliff',
-        description: 'Turnover concentrates heavily within initial 3-month probation due to steep manufacturing shopfloor learning curves.',
-      },
-      {
-        title: 'Critical CNC Knowledge Drain',
-        description: 'Senior technician departures in precision machining leave automated CNC cells without certified operator mentors.',
-      },
-      {
-        title: 'Salary Disparity Flight Risks',
-        description: 'Wage competition within the automotive manufacturing corridor drives 15.0% of logged voluntary resignations.',
-      },
-      {
-        title: 'Contract Expiration Bottlenecks',
-        description: 'Unsynchronized vendor contract completions create temporary multi-week staffing voids in high-volume shifts.',
-      },
+    themeColor: 'purple',
+    badgeClass: 'border-purple-300 text-purple-700 bg-purple-50 dark:bg-purple-950/60 dark:text-purple-300',
+    problemText:
+      'Employee turnover and contract resignations create vacancy gaps that impact plant stability and require proactive retention strategies.',
+    whatAgentDoes: [
+      'Shows overall attrition rates and departures by department',
+      'Evaluates employee tenure patterns and recorded leaving reasons',
+      'Suggests targeted retention actions for high-turnover areas',
     ],
-    agent: {
-      name: 'Attrition Agent',
-      service: 'attrition_agent_service.py',
-      endpoint: '/api/v1/agent/stream-analysis',
-      role: 'Evaluates 120 exit transactions by tenure bracket and vendor agency; identifies leading turnover root causes.',
-    },
+    exampleQuestion: 'What are the primary reasons for employee attrition in the Production department?',
   },
   overtime: {
     id: 'overtime',
     num: '04',
-    category: 'OVERTIME IMBALANCE',
-    title: 'Overtime Imbalance & Chronic Operator Fatigue',
-    subtitle: '58k OT Hours Concentrated in Top 15% – $1.46M Premium Spend',
-    severityBadge: 'FATIGUE WARNING • SOLVED BY OVERTIME AGENT',
-    severityColor: 'bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border-sky-200 dark:border-sky-800',
+    title: 'Overtime Imbalance',
+    agentName: 'Overtime Agent',
+    serviceFile: 'overtime_agent_service.py',
     icon: Layers,
-    challenges: [
-      {
-        title: 'Acute Overtime Concentration',
-        description: 'Top 15% of operators absorb 48% of total 58,433 overtime hours, causing chronic operator exhaustion and fatigue.',
-      },
-      {
-        title: 'Statutory 50hr/mo Limit Breach',
-        description: 'Repeat overtime operators frequently approach statutory 50 hr/month labor caps, incurring compliance audit penalties.',
-      },
-      {
-        title: 'Late-Shift Scrap & Defect Spikes',
-        description: 'Manufacturing telemetry demonstrates higher unit defect and rework rates during overtime hours exceeding standard shifts.',
-      },
-      {
-        title: 'Escalating Overtime Premium Spend',
-        description: 'Running premium 2.0x overtime rates incurs $1.46M annual cost that could be mitigated via cost-neutral shift equalization.',
-      },
-      {
-        title: 'Weekend Standby Buffer Deficit',
-        description: 'Absence of designated standby pools forces emergency weekend overtime call-ins at maximum hourly rates.',
-      },
+    themeColor: 'sky',
+    badgeClass: 'border-sky-300 text-sky-700 bg-sky-50 dark:bg-sky-950/60 dark:text-sky-300',
+    problemText:
+      'Overtime hours and premium expenses concentrate unevenly among a small group of repeat employees, increasing fatigue risks and labor costs.',
+    whatAgentDoes: [
+      'Measures overtime hours, overtime rates, and associated spend',
+      'Finds department and shift overtime concentration',
+      'Detects repeat overtime employees and suggests cost reduction',
     ],
-    agent: {
-      name: 'Overtime Optimization Agent',
-      service: 'overtime_agent_service.py',
-      endpoint: '/api/v1/agent/stream-analysis',
-      role: 'Monitors 58,433 overtime hours across 6 departments; models shift equalization to eliminate excess contractor premiums.',
-    },
+    exampleQuestion: 'What is our total overtime spend and which shift logged the most OT hours?',
   },
   skills: {
     id: 'skills',
     num: '05',
-    category: 'SKILL MISMATCHES',
-    title: 'Skill Mismatches & Station Qualification Gaps',
-    subtitle: '18 Critical Station Gaps – 89 Expired IPC & ESD Certifications',
-    severityBadge: 'COMPLIANCE FOCUS • SOLVED BY SKILL AGENT',
-    severityColor: 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800',
+    title: 'Skill Mismatches',
+    agentName: 'Skills & Training Agent',
+    serviceFile: 'skill_agent_service.py',
     icon: Shield,
-    challenges: [
-      {
-        title: 'L1/L2 Operator Station Slotting',
-        description: 'Critical high-complexity workstations in Assembly are staffed by entry-level operators lacking senior L3/L4 competencies.',
-      },
-      {
-        title: 'Expired IPC & ESD Certifications',
-        description: '89 core certifications are expired (led by IPC-A-610 inspection), creating serious quality vulnerabilities during OEM audits.',
-      },
-      {
-        title: 'Single-Operator Dependency Hotspots',
-        description: 'Specialized solder paste and wire bonding lines rely on only 1 certified technician per shift, creating line stoppage risks.',
-      },
-      {
-        title: 'Training Remediation Retest Delays',
-        description: '92 failed assessment candidates currently await structured re-testing and formal qualification re-certification.',
-      },
-      {
-        title: 'ISO/QMS Compliance Vulnerabilities',
-        description: 'Assigning operators to precision workstations without valid qualification logs violates factory standard operating procedures.',
-      },
+    themeColor: 'emerald',
+    badgeClass: 'border-emerald-300 text-emerald-800 bg-emerald-50 dark:bg-emerald-950/60 dark:text-emerald-300',
+    problemText:
+      'Mismatches between required station qualifications and employee competency levels create operational bottlenecks and compliance exposure.',
+    whatAgentDoes: [
+      'Analyses L1–L4 skill levels and multi-skilling coverage across workstations',
+      'Identifies critical station skill gaps across plant departments',
+      'Evaluates training completion rates and tracks certification validity',
     ],
-    agent: {
-      name: 'Skill & Training Agent',
-      service: 'skill_agent_service.py',
-      endpoint: '/api/v1/agent/stream-analysis',
-      role: 'Audits 2,927 skill mappings and 9,600 training events; matches certified L3/L4 standby operators to critical station quotas.',
-    },
+    exampleQuestion: 'How many operators hold L3 or L4 certifications in Assembly?',
   },
 };
 
 export function SelectedProblemDetailsCard({ selectedProblem = 'shortages' }) {
   const problem = PROBLEM_DETAILS[selectedProblem] || PROBLEM_DETAILS.shortages;
-  const agent = problem.agent;
   const Icon = problem.icon;
 
   return (
-    <Card className="p-3.5 sm:p-4 flex flex-col justify-between h-[420px] border border-[var(--border)] shadow-xs select-none">
-      {/* Top Header Row */}
+    <Card className="p-3.5 sm:p-4 flex flex-col justify-between border border-[var(--border)] shadow-xs select-none">
       <div>
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 pb-2 border-b border-[var(--border)]">
+        {/* Top Header Row with Solving Agent's Name */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2.5 border-b border-[var(--border)]">
           <div className="flex items-center gap-2 min-w-0">
-            <div className="w-6 h-6 rounded-lg bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0 border border-rose-200 dark:border-rose-800">
-              <Icon className="w-3.5 h-3.5" />
+            <div className="w-7 h-7 rounded-lg bg-[var(--brand-purple-soft)] text-[var(--brand-purple)] flex items-center justify-center shrink-0 border border-purple-200 dark:border-purple-800">
+              <Bot className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <h2 className="text-xs sm:text-[13px] font-extrabold text-[var(--text)] tracking-tight truncate">
-                {problem.num}. {problem.title}
-              </h2>
-              <p className="text-[9.5px] text-[var(--secondary)] truncate font-medium">
-                {problem.subtitle}
+              <div className="flex flex-wrap items-center gap-2">
+                <h3 className="text-xs sm:text-[13px] font-extrabold text-[var(--text)] tracking-tight break-words">
+                  {problem.num}. {problem.title}
+                </h3>
+              </div>
+              <p className="text-[10px] text-[var(--brand-purple)] font-bold tracking-tight">
+                Solved by {problem.agentName}
               </p>
             </div>
           </div>
 
           <span
-            className={`text-[8.5px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md border shrink-0 ${problem.severityColor}`}
+            className={`text-[8.5px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md border shrink-0 ${problem.badgeClass}`}
           >
-            {problem.severityBadge}
+            {problem.agentName}
           </span>
         </div>
 
-        {/* Problem Statements Subheader */}
-        <div className="flex items-center justify-between my-2 px-0.5">
-          <span className="text-[10px] font-black uppercase tracking-wider text-rose-600 dark:text-rose-400">
-            PROBLEM STATEMENTS:
-          </span>
-          <span className="text-[9px] font-bold text-[var(--secondary)] bg-[var(--surface-hover)] px-2 py-0.5 rounded-full border border-[var(--border)]">
-            5 Failure Points
-          </span>
+        {/* Section 1: Problem */}
+        <div className="my-3">
+          <div className="text-[10px] font-black uppercase tracking-wider text-[var(--secondary)] mb-1 flex items-center gap-1">
+            <Icon className="w-3 h-3 text-[var(--secondary)]" />
+            Problem
+          </div>
+          <p className="text-[11px] sm:text-[11.5px] text-[var(--text)] leading-relaxed bg-[var(--surface-hover)]/40 p-2.5 rounded-xl border border-[var(--border)] break-words">
+            {problem.problemText}
+          </p>
         </div>
 
-        {/* 5 Numbered Operational Challenges */}
-        <div className="space-y-1.5">
-          {problem.challenges.map((ch, idx) => (
-            <div
-              key={idx}
-              className="flex items-start gap-2 p-1.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-hover)]/30 transition-colors"
-            >
-              {/* Circular Number Badge */}
-              <div className="w-4 h-4 rounded-full bg-rose-600 text-white text-[9px] font-black flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
-                {idx + 1}
+        {/* Section 2: What the agent does */}
+        <div className="my-3">
+          <div className="text-[10px] font-black uppercase tracking-wider text-[var(--secondary)] mb-1.5 flex items-center gap-1">
+            <Sparkles className="w-3 h-3 text-[var(--brand-purple)]" />
+            What the Agent Does
+          </div>
+          <div className="space-y-1.5">
+            {problem.whatAgentDoes.map((bullet, idx) => (
+              <div
+                key={idx}
+                className="flex items-start gap-2 p-2 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-hover)]/30 transition-colors"
+              >
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                <span className="text-[11px] text-[var(--text)] leading-tight break-words">
+                  {bullet}
+                </span>
               </div>
+            ))}
+          </div>
+        </div>
 
-              {/* Text Description */}
-              <div className="text-[10px] leading-tight min-w-0">
-                <span className="font-extrabold text-[var(--text)] mr-1">
-                  {ch.title}:
-                </span>
-                <span className="text-[var(--secondary)] font-normal">
-                  {ch.description}
-                </span>
-              </div>
-            </div>
-          ))}
+        {/* Section 3: Ask the assistant */}
+        <div className="my-2.5 p-2.5 rounded-xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-900/40">
+          <div className="text-[9.5px] font-black uppercase tracking-wider text-[#5932EA] dark:text-purple-400 flex items-center gap-1 mb-1">
+            <MessageSquare className="w-3 h-3" />
+            Ask the Assistant
+          </div>
+          <div className="text-[11px] font-medium text-[var(--text)] italic break-words flex items-center gap-1.5">
+            <span>&ldquo;{problem.exampleQuestion}&rdquo;</span>
+          </div>
         </div>
       </div>
 
-      {/* Footer Strip: Responsible Agent */}
-      <div className="pt-2 border-t border-[var(--border)] flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-[9px]">
-        <div className="flex items-center gap-1.5 truncate">
-          <span className="font-extrabold text-[var(--text)] flex items-center gap-1">
-            <Bot className="w-3 h-3 text-[#5932EA]" />
-            Responsible Agent:
-          </span>
-          <span className="font-bold text-[#5932EA] dark:text-purple-400 truncate">
-            {agent.name}
-          </span>
-          <span className="font-mono text-[8.5px] text-[var(--secondary)] hidden md:inline">
-            ({agent.service})
-          </span>
-        </div>
-
+      {/* Footer Strip */}
+      <div className="pt-2 border-t border-[var(--border)] mt-2 flex flex-wrap items-center justify-between gap-1 text-[9px] text-[var(--secondary)]">
+        <span className="flex items-center gap-1.5 font-medium">
+          <Bot className="w-3 h-3 text-[#5932EA]" />
+          Autonomous Specialist Agent: <strong className="text-[var(--text)]">{problem.agentName}</strong>
+        </span>
         <span className="font-mono text-[8px] text-emerald-600 dark:text-emerald-400 font-bold shrink-0">
-          Neon PostgreSQL Verified
+          Neon DB Grounded
         </span>
       </div>
     </Card>

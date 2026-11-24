@@ -9,7 +9,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { TENURE_ATTRITION } from '../../data/attritionData';
 import { useTheme } from '../../hooks/useTheme';
 import { CHART_COLORS } from '../../utils/constants';
 import { Card } from '../common/Card';
@@ -19,7 +18,7 @@ export function TenureWiseAttritionCard({ data = null, loading = false }) {
   const { theme } = useTheme();
   const palette = CHART_COLORS[theme] || CHART_COLORS.light;
 
-  const sourceData = data && data.length > 0 ? data : TENURE_ATTRITION;
+  const sourceData = data && Array.isArray(data) ? data : [];
   const chartData = sourceData.map((t) => ({
     ...t,
     tenure_range: t.tenure_range || t.band || t.tenure,
@@ -63,9 +62,6 @@ export function TenureWiseAttritionCard({ data = null, loading = false }) {
               Tenure-wise Attrition (Service Duration at Exit)
             </h2>
           </div>
-          <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/40 px-1.5 py-0.5 rounded border border-emerald-200 dark:border-emerald-800 shrink-0">
-            Tenure Cohorts
-          </span>
         </div>
 
         {loading ? (

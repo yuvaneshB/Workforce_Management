@@ -9,7 +9,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { VENDOR_ATTRITION } from '../../data/attritionData';
 import { useTheme } from '../../hooks/useTheme';
 import { CHART_COLORS } from '../../utils/constants';
 import { Card } from '../common/Card';
@@ -19,7 +18,7 @@ export function VendorAttritionCard({ data = null, loading = false }) {
   const { theme } = useTheme();
   const palette = CHART_COLORS[theme] || CHART_COLORS.light;
 
-  const sourceData = (data && data.length > 0 ? data : VENDOR_ATTRITION).map((v) => ({
+  const sourceData = (data && Array.isArray(data) ? data : []).map((v) => ({
     ...v,
     shortVendor: v.vendor_id || (v.vendor.includes('(') ? v.vendor.split('(')[1].replace(')', '') : v.vendor.slice(0, 8)),
   }));
@@ -37,9 +36,6 @@ export function VendorAttritionCard({ data = null, loading = false }) {
               Vendor-wise Attrition
             </h2>
           </div>
-          <span className="text-[9px] font-bold text-purple-600 bg-purple-50 dark:bg-purple-950/40 px-1.5 py-0.5 rounded border border-purple-200 dark:border-purple-800 shrink-0">
-            {totalVendorExits} Vendor Exits
-          </span>
         </div>
 
         {loading ? (

@@ -1,0 +1,182 @@
+[
+  {
+    "id": "q01_attendance",
+    "category": "single-domain",
+    "domain": "attendance",
+    "question": "What is the overall attendance rate across our manufacturing plants in September 2026?"
+  },
+  {
+    "id": "q02_overtime",
+    "category": "single-domain",
+    "domain": "overtime",
+    "question": "Which departments logged the highest overtime hours and what is the total overtime spend?"
+  },
+  {
+    "id": "q03_attrition",
+    "category": "single-domain",
+    "domain": "attrition",
+    "question": "What is the annual attrition rate and what are the top reasons employees are leaving?"
+  },
+  {
+    "id": "q04_vendor",
+    "category": "single-domain",
+    "domain": "vendor",
+    "question": "What is our current vendor contractor headcount share across staffing agencies V01 to V06?"
+  },
+  {
+    "id": "q05_production",
+    "category": "single-domain",
+    "domain": "production",
+    "question": "How did total production output compare against planned targets across shifts?"
+  },
+  {
+    "id": "q06_skill",
+    "category": "single-domain",
+    "domain": "skill",
+    "question": "What percentage of our workforce is multi-skilled and where are our critical skill matrix gaps?"
+  },
+  {
+    "id": "q07_cross_absenteeism_overtime",
+    "category": "cross-domain",
+    "domain": "attendance + overtime",
+    "question": "Does high absenteeism in Shift C correlate with elevated overtime hours and costs?"
+  },
+  {
+    "id": "q08_cross_vendor_attrition",
+    "category": "cross-domain",
+    "domain": "vendor + attrition",
+    "question": "How does contractor reliance relate to employee attrition velocity and departure reasons?"
+  },
+  {
+    "id": "q09_cross_skills_planning",
+    "category": "cross-domain",
+    "domain": "skills + planning + attendance",
+    "question": "Are shift staffing shortages driven by critical skill deficits or baseline absenteeism?"
+  },
+  {
+    "id": "q10_cross_plants_comparison",
+    "category": "cross-domain",
+    "domain": "production + attendance",
+    "question": "Compare Plant 1 Chennai and Plant 2 Bengaluru on production volume and attendance reliability."
+  },
+  {
+    "id": "q11_ambiguous_best_employee",
+    "category": "ambiguous",
+    "domain": "general / clarification",
+    "question": "Who is the best employee in the company?"
+  },
+  {
+    "id": "q12_out_of_scope_stock_price",
+    "category": "out-of-scope",
+    "domain": "finance / out-of-scope",
+    "question": "What is our projected corporate revenue and stock price for 2027?"
+  },
+  {
+    "id": "q13_cross_ot_attrition",
+    "category": "cross-domain",
+    "domain": "overtime + attrition",
+    "question": "Does continuous overtime lead to higher attrition rates in manufacturing departments?"
+  },
+  {
+    "id": "q14_cross_shift_efficiency",
+    "category": "cross-domain",
+    "domain": "attendance + production",
+    "question": "Which shift has the lowest attendance rate and does that shift also suffer higher production downtime?"
+  },
+  {
+    "id": "q15_cross_vendor_skills",
+    "category": "cross-domain",
+    "domain": "vendor + skill",
+    "question": "Do vendor contractor employees have higher single-skill constraints compared to permanent staff?"
+  },
+  {
+    "id": "q16_cross_shortage_overtime",
+    "category": "cross-domain",
+    "domain": "planning + overtime",
+    "question": "Shift B shortage jaasthi iruka, is that why overtime hours increased this month?"
+  },
+  {
+    "id": "q17_ambiguous_top_performer",
+    "category": "ambiguous",
+    "domain": "general / clarification",
+    "question": "Tell me who should get employee of the month"
+  },
+  {
+    "id": "q18_out_of_scope_weather",
+    "category": "out-of-scope",
+    "domain": "general / out-of-scope",
+    "question": "What is the weather forecast for Chennai and Bengaluru tomorrow?"
+  },
+  {
+    "id": "q19_ambiguous_line_status",
+    "category": "ambiguous",
+    "domain": "general / clarification",
+    "question": "Is everything running fine on the shop floor today?"
+  },
+  {
+    "id": "q20_attendance_tanglish",
+    "category": "single-domain",
+    "domain": "attendance",
+    "question": "Innaiku attendance romba low ah iruka, what is the present count?"
+  },
+  {
+    "id": "q21_attendance_typo",
+    "category": "single-domain",
+    "domain": "attendance",
+    "question": "overall attandance persentage for plant IN-TN-01 last month?"
+  },
+  {
+    "id": "q22_overtime_short",
+    "category": "single-domain",
+    "domain": "overtime",
+    "question": "Shift C OT spend?"
+  },
+  {
+    "id": "q23_overtime_typo",
+    "category": "single-domain",
+    "domain": "overtime",
+    "question": "Which department has highest ovetime and statutory cap breach?"
+  },
+  {
+    "id": "q24_attrition_tanglish",
+    "category": "single-domain",
+    "domain": "attrition",
+    "question": "Why people leaving the company romba fast, what are top exit reasons?"
+  },
+  {
+    "id": "q25_attrition_short",
+    "category": "single-domain",
+    "domain": "attrition",
+    "question": "Annual attrition rate?"
+  },
+  {
+    "id": "q26_vendor_tanglish",
+    "category": "single-domain",
+    "domain": "vendor",
+    "question": "Vendor contractor headcount evvalavu iruku across all agencies?"
+  },
+  {
+    "id": "q27_production_typo",
+    "category": "single-domain",
+    "domain": "production",
+    "question": "prodution target vs actual achievement for chennai plant"
+  },
+  {
+    "id": "q28_skill_short",
+    "category": "single-domain",
+    "domain": "skill",
+    "question": "L3 and L4 certified operators count?"
+  },
+  {
+    "id": "q29_planning_shortage",
+    "category": "single-domain",
+    "domain": "workforce_planning",
+    "question": "How many workers are we short in the night shift across assembly cells?"
+  },
+  {
+    "id": "q30_planning_tanglish",
+    "category": "single-domain",
+    "domain": "workforce_planning",
+    "question": "Assembly line ku replacement operators list kudunga"
+  }
+]

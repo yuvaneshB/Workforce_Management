@@ -116,6 +116,7 @@ def get_attendance_analytics(
         leave_count=raw.get("leave_count", 0),
         late_count=raw.get("late_count", 0),
         attendance_rate=raw.get("attendance_rate", 0.0),
+        absenteeism_rate=raw.get("absenteeism_rate", 0.0),
         by_status=[AttendanceStatusBreakdown(**item) for item in raw["by_status"]],
         by_plant=[GroupCount(key=k, count=c) for k, c in raw["by_plant"]],
         by_shift=[GroupCount(key=k, count=c) for k, c in raw["by_shift"]],

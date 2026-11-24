@@ -35,6 +35,7 @@ export function ShiftPerformanceTable({
   planningAvailability = null,
   workforceSummary = null,
   loading = false,
+  minimal = false,
 }) {
   // Extract shortages from planning service
   const shiftShortageMap = {};
@@ -133,14 +134,18 @@ export function ShiftPerformanceTable({
               <h3 className="text-sm font-extrabold text-[var(--text)] tracking-tight">
                 Shift Performance Comparison
               </h3>
-              <p className="text-[11px] text-[var(--secondary)]">
-                Morning (GS1), Evening (S2), and Night (NS3) multi-metric operational table
-              </p>
+              {!minimal && (
+                <p className="text-[11px] text-[var(--secondary)]">
+                  Morning (GS1), Evening (S2), and Night (NS3) multi-metric operational table
+                </p>
+              )}
             </div>
           </div>
-          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[var(--brand-purple-soft)] text-[var(--brand-purple)]">
-            3 Rotational Shifts
-          </span>
+          {!minimal && (
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[var(--brand-purple-soft)] text-[var(--brand-purple)]">
+              3 Rotational Shifts
+            </span>
+          )}
         </div>
 
         {/* Comparison Table */}
@@ -221,10 +226,12 @@ export function ShiftPerformanceTable({
         </div>
       </div>
 
-      <div className="pt-2 border-t border-[var(--border)] text-[10px] text-[var(--secondary)] flex items-center justify-between">
-        <span>GS1 holds the highest production volume; S2 demonstrates optimal attendance stability.</span>
-        <span className="font-bold text-[var(--brand-purple)]">Factory Capacity: 100%</span>
-      </div>
+      {!minimal && (
+        <div className="pt-2 border-t border-[var(--border)] text-[10px] text-[var(--secondary)] flex items-center justify-between">
+          <span>GS1 holds the highest production volume; S2 demonstrates optimal attendance stability.</span>
+          <span className="font-bold text-[var(--brand-purple)]">Factory Capacity: 100%</span>
+        </div>
+      )}
     </div>
   );
 }

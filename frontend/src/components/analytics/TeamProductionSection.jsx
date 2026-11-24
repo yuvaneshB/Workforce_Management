@@ -41,42 +41,25 @@ export function TeamProductionSection({
   return (
     <div className="space-y-4 mb-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div>
-          <h2 className="text-sm font-bold flex items-center gap-2">
-            <Factory className="w-4 h-4 text-purple-600" />
-            Production Analytics &amp; Team Performance
-          </h2>
-          <p className="text-[10px] muted mt-0.5">
-            Target vs actual production, quality yield, downtime analysis, and team-level attribution
-          </p>
-        </div>
-        <div className="flex flex-wrap items-center gap-3 self-start sm:self-auto">
-          <span className="text-[10px] font-semibold muted">
-            {data?.total_teams ? `${data.total_teams} Operator Teams` : '18 Operator Teams'}
-          </span>
-
-          {onRunAgent && (
-            <>
-              <div className="h-4 w-px bg-slate-200 dark:bg-slate-700 hidden sm:block" />
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">Production Workforce Agent</span>
-                <button
-                  type="button"
-                  onClick={onRunAgent}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg shadow-xs transition-all duration-150 hover:brightness-110 active:scale-95 cursor-pointer"
-                  style={{
-                    background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
-                  }}
-                  title="Run Production Workforce Intelligence Agent"
-                >
-                  <Bot className="w-3.5 h-3.5" />
-                  <span>Run Agent</span>
-                </button>
-              </div>
-            </>
-          )}
-        </div>
+      <div className="flex items-center justify-between gap-3">
+        <h2 className="text-sm font-bold flex items-center gap-2">
+          <Factory className="w-4 h-4 text-purple-600" />
+          Production Analytics &amp; Team Performance
+        </h2>
+        {onRunAgent && (
+          <button
+            type="button"
+            onClick={onRunAgent}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg shadow-xs transition-all duration-150 hover:brightness-110 active:scale-95 cursor-pointer"
+            style={{
+              background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
+            }}
+            title="Run Production Workforce Intelligence Agent"
+          >
+            <Bot className="w-3.5 h-3.5" />
+            <span>Run Agent</span>
+          </button>
+        )}
       </div>
 
       {/* Row 1 & Row 2: Eight KPI Cards */}

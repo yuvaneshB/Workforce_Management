@@ -84,8 +84,8 @@ def get_section_analytics(db: Session, *, start_date: dt.date | None = None, end
     )
 
 
-def get_vendor_analytics(db: Session, *, plant_id: str | None = None) -> VendorAnalyticsResponse:
-    raw = workforce_analytics_repository.get_vendor_analytics(db, plant_id=plant_id)
+def get_vendor_analytics(db: Session, *, plant_id: str | None = None, **kwargs) -> VendorAnalyticsResponse:
+    raw = workforce_analytics_repository.get_vendor_analytics(db, plant_id=plant_id, **kwargs)
     return VendorAnalyticsResponse(
         total_vendors=raw["total_vendors"],
         total_vendor_workforce=raw["total_vendor_workforce"],
@@ -106,6 +106,10 @@ def get_overtime_analytics(
     department_id: str | None = None,
     section_id: str | None = None,
     plant_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+    team_id: str | None = None,
+    operator_team: str | None = None,
 ) -> dict:
     validate_date_range(start_date, end_date)
     return workforce_analytics_repository.get_overtime_analytics(
@@ -116,6 +120,10 @@ def get_overtime_analytics(
         department_id=department_id,
         section_id=section_id,
         plant_id=plant_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
+        operator_team=operator_team,
     )
 
 
@@ -127,6 +135,10 @@ def get_team_production_analytics(
     plant_id: str | None = None,
     shift_id: str | None = None,
     operator_team: str | None = None,
+    department_id: str | None = None,
+    section_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
 ) -> dict:
     validate_date_range(start_date, end_date)
     return workforce_analytics_repository.get_team_production_analytics(
@@ -136,6 +148,10 @@ def get_team_production_analytics(
         plant_id=plant_id,
         shift_id=shift_id,
         operator_team=operator_team,
+        department_id=department_id,
+        section_id=section_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
     )
 
 
@@ -146,6 +162,12 @@ def get_shift_efficiency_analytics(
     end_date: dt.date | None = None,
     plant_id: str | None = None,
     shift_id: str | None = None,
+    department_id: str | None = None,
+    section_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+    team_id: str | None = None,
+    operator_team: str | None = None,
 ) -> dict:
     validate_date_range(start_date, end_date)
     return workforce_analytics_repository.get_shift_efficiency_analytics(
@@ -154,6 +176,12 @@ def get_shift_efficiency_analytics(
         end_date=end_date,
         plant_id=plant_id,
         shift_id=shift_id,
+        department_id=department_id,
+        section_id=section_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
+        operator_team=operator_team,
     )
 
 
@@ -165,6 +193,10 @@ def get_skills_analytics(
     team_id: str | None = None,
     shift_id: str | None = None,
     plant_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+    start_date: dt.date | None = None,
+    end_date: dt.date | None = None,
 ) -> dict:
     return workforce_analytics_repository.get_skills_analytics(
         db,
@@ -173,6 +205,10 @@ def get_skills_analytics(
         team_id=team_id,
         shift_id=shift_id,
         plant_id=plant_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        start_date=start_date,
+        end_date=end_date,
     )
 
 
@@ -185,6 +221,10 @@ def get_compliance_analytics(
     department_id: str | None = None,
     section_id: str | None = None,
     plant_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+    team_id: str | None = None,
+    operator_team: str | None = None,
 ) -> dict:
     validate_date_range(start_date, end_date)
     return workforce_analytics_repository.get_compliance_analytics(
@@ -195,6 +235,10 @@ def get_compliance_analytics(
         department_id=department_id,
         section_id=section_id,
         plant_id=plant_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
+        operator_team=operator_team,
     )
 
 

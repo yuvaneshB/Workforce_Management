@@ -34,12 +34,17 @@ def get_single_person_dependency(
     """
     try:
         with _get_tool_db_session() as session:
-            return intelligence_service.get_single_person_dependency(
+            raw = intelligence_service.get_single_person_dependency(
                 session,
                 plant_id=plant_id,
                 shift_id=shift_id,
                 date=date,
             )
+            if isinstance(raw, dict) and "rows" in raw:
+                raw["total_roles_evaluated"] = raw.get("total_roles_evaluated", len(raw["rows"]))
+                raw["top_risk_roles"] = raw["rows"][:3]
+                raw["rows"] = raw["rows"][:3]
+            return raw
     except ValueError as err:
         return {
             "status": "error",
@@ -77,7 +82,7 @@ def get_labour_compliance(
     """
     try:
         with _get_tool_db_session() as session:
-            return intelligence_service.get_labour_compliance(
+            raw = intelligence_service.get_labour_compliance(
                 session,
                 plant_id=plant_id,
                 shift_id=shift_id,
@@ -85,6 +90,11 @@ def get_labour_compliance(
                 start_date=start_date,
                 end_date=end_date,
             )
+            if isinstance(raw, dict) and "exceptions" in raw:
+                raw["total_exceptions"] = raw.get("total_exceptions", len(raw["exceptions"]))
+                raw["sample_exceptions"] = raw["exceptions"][:3]
+                raw["exceptions"] = raw["exceptions"][:3]
+            return raw
     except ValueError as err:
         return {
             "status": "error",

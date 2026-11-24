@@ -1,14 +1,6 @@
 import { Bot, UserMinus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { fetchAttritionAnalytics } from '../../api/workforceApi';
-import {
-  ATTRITION_BY_REASON,
-  ATTRITION_MONTHLY_TREND,
-  ATTRITION_SUMMARY,
-  DEPARTMENT_ATTRITION,
-  TENURE_ATTRITION,
-  VENDOR_ATTRITION,
-} from '../../data/attritionData';
 import { Card } from '../common/Card';
 
 import { AttritionByReasonCard } from './AttritionByReasonCard';
@@ -23,8 +15,10 @@ export function AttritionSection({
   startDate = '',
   endDate = '',
   plantId = '',
+  shiftId = '',
   departmentId = '',
   sectionId = '',
+  teamId = '',
   loading = false,
   error = null,
   onRunAgent,
@@ -48,8 +42,12 @@ export function AttritionSection({
           startDate: startDate || undefined,
           endDate: endDate || undefined,
           plantId: plantId || undefined,
+          shiftId: shiftId || undefined,
           departmentId: departmentId || undefined,
           sectionId: sectionId || undefined,
+          teamId: teamId || undefined,
+          employmentType: employmentType !== 'ALL' ? employmentType : undefined,
+          vendorId: selectedVendor !== 'ALL' ? selectedVendor : undefined,
           signal: controller.signal,
         });
         if (active) {
@@ -71,29 +69,21 @@ export function AttritionSection({
       active = false;
       controller.abort();
     };
-  }, [startDate, endDate, plantId, departmentId, sectionId]);
+  }, [startDate, endDate, plantId, shiftId, departmentId, sectionId, teamId, employmentType, selectedVendor]);
 
-  const summary = attritionData?.summary || ATTRITION_SUMMARY;
-  const monthlyTrend =
-    attritionData?.monthly_trend && attritionData.monthly_trend.length > 0
-      ? attritionData.monthly_trend
-      : ATTRITION_MONTHLY_TREND;
-  const byReason =
-    attritionData?.by_reason && attritionData.by_reason.length > 0
-      ? attritionData.by_reason
-      : ATTRITION_BY_REASON;
-  const byDepartment =
-    attritionData?.by_department && attritionData.by_department.length > 0
-      ? attritionData.by_department
-      : DEPARTMENT_ATTRITION;
-  const byVendor =
-    attritionData?.by_vendor && attritionData.by_vendor.length > 0
-      ? attritionData.by_vendor
-      : VENDOR_ATTRITION;
-  const byTenure =
-    attritionData?.by_tenure && attritionData.by_tenure.length > 0
-      ? attritionData.by_tenure
-      : TENURE_ATTRITION;
+  const summary = attritionData?.summary || {
+    total_attrition: 0,
+    attrition_rate: 0,
+    ytd_attrition: 0,
+    critical_role_attrition: 0,
+    early_attrition_rate: 0,
+    regrettable_attrition: 0,
+  };
+  const monthlyTrend = attritionData?.monthly_trend || [];
+  const byReason = attritionData?.by_reason || [];
+  const byDepartment = attritionData?.by_department || [];
+  const byVendor = attritionData?.by_vendor || [];
+  const byTenure = attritionData?.by_tenure || [];
   const exitedRecords = attritionData?.exited_records || [];
 
   const isLoading = loading || internalLoading;
@@ -108,11 +98,8 @@ export function AttritionSection({
           </div>
           <div>
             <h2 className="text-sm font-bold text-[var(--text)] tracking-tight">
-              Workforce Attrition & Employee Retention Analytics
+              Workforce Attrition &amp; Employee Retention Analytics
             </h2>
-            <p className="text-[11px] text-[var(--secondary)]">
-              Employee exits, reasons, tenure and workforce retention insights from Neon DB
-            </p>
           </div>
         </div>
 
@@ -145,29 +132,18 @@ export function AttritionSection({
             <option value="V06">V06 (Prime HR)</option>
           </select>
 
-          <span className="text-[10px] font-semibold muted hidden md:inline ml-1">
-            {summary?.total_exits ? `${summary.total_exits} verified exits` : '120 verified exits'}
-          </span>
-
-          <div className="h-4 w-px bg-slate-200 dark:bg-slate-700 hidden sm:block" />
-
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Attrition Agent
-            </span>
-            <button
-              type="button"
-              onClick={onRunAgent}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg shadow-xs transition-all duration-150 hover:brightness-110 active:scale-95 cursor-pointer"
-              style={{
-                background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
-              }}
-              title="Run Attrition & Retention Intelligence Agent"
-            >
-              <Bot className="w-3.5 h-3.5" />
-              <span>Run Agent</span>
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={onRunAgent}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg shadow-xs transition-all duration-150 hover:brightness-110 active:scale-95 cursor-pointer"
+            style={{
+              background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
+            }}
+            title="Run Attrition & Retention Intelligence Agent"
+          >
+            <Bot className="w-3.5 h-3.5" />
+            <span>Run Agent</span>
+          </button>
         </div>
       </div>
 

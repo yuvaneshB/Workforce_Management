@@ -37,6 +37,10 @@ def get_attrition_analytics(
     plant_id: str | None = None,
     department_id: str | None = None,
     section_id: str | None = None,
+    shift_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+    team_id: str | None = None,
 ) -> dict:
     """Compute aggregated attrition metrics, trends, breakdown categories and exit records."""
     filters = []
@@ -46,10 +50,22 @@ def get_attrition_analytics(
         filters.append(AttritionTransaction.department_id == department_id)
     if section_id:
         filters.append(AttritionTransaction.section_id == section_id)
+    if team_id and team_id.strip():
+        filters.append(AttritionTransaction.section_id == team_id.strip())
     if start_date:
         filters.append(AttritionTransaction.resignation_date >= start_date)
     if end_date:
         filters.append(AttritionTransaction.resignation_date <= end_date)
+    if employment_type and employment_type.strip():
+        filters.append(AttritionTransaction.employment_type.ilike(employment_type.strip()))
+    if vendor_id and vendor_id.strip():
+        filters.append(AttritionTransaction.vendor_id == vendor_id.strip())
+    if shift_id and shift_id.strip():
+        filters.append(
+            AttritionTransaction.employee_id.in_(
+                select(EmployeeMaster.employee_id).where(EmployeeMaster.shift_id == shift_id.strip())
+            )
+        )
 
     # Base query for totals
     base_stmt = select(
@@ -80,6 +96,12 @@ def get_attrition_analytics(
         emp_filters.append(EmployeeMaster.department_id == department_id)
     if section_id:
         emp_filters.append(EmployeeMaster.section_id == section_id)
+    if shift_id:
+        emp_filters.append(EmployeeMaster.shift_id == shift_id)
+    if employment_type and employment_type.strip():
+        emp_filters.append(EmployeeMaster.employment_type.ilike(employment_type.strip()))
+    if vendor_id and vendor_id.strip():
+        emp_filters.append(EmployeeMaster.vendor_id == vendor_id.strip())
 
     active_count_stmt = select(func.count(EmployeeMaster.employee_id)).select_from(EmployeeMaster).where(*emp_filters)
     active_employees = int(db.execute(active_count_stmt).scalar_one() or 0)

@@ -1,369 +1,385 @@
-import {
-  Award,
-  Bot,
-  Brain,
-  CheckCircle2,
-  ChevronRight,
-  Cpu,
-  Database,
-  Flame,
-  Layers,
-  Lock,
-  Server,
-  Shield,
-  ShieldCheck,
-  TrendingUp,
-  UserCheck,
-  Users,
-  Workflow,
-  Zap,
-} from 'lucide-react';
-import { useState } from 'react';
+import { ChevronRight, Workflow } from 'lucide-react';
 import { Card } from '../common/Card';
+import {
+  CostContainment3DIcon,
+  DomoAi3DIcon,
+  Erp3DIcon,
+  FastApi3DIcon,
+  HumanApproval3DIcon,
+  Mes3DIcon,
+  NeonDb3DIcon,
+  Orchestrator3DIcon,
+  ShortageMitigation3DIcon,
+  Skills3DIcon,
+  SpecialistAgents3DIcon,
+  SqlAlchemy3DIcon,
+  Sse3DIcon,
+  Stage1HeaderIcon,
+  Stage2HeaderIcon,
+  Stage3HeaderIcon,
+  Stage4HeaderIcon,
+  Stage5HeaderIcon,
+} from './PipelineIcons';
 
 export const PIPELINE_STAGES = [
   {
     id: 1,
-    num: '1',
     headerTitle: '1. SOURCE SYSTEM',
-    headerSub: '18 Enterprise Tables',
-    headerBg: 'bg-[#831843]', // Deep Burgundy
-    badgeColor: 'border-rose-300 text-rose-700 bg-rose-50 dark:bg-rose-950/50',
-    title: 'Neon Serverless PostgreSQL Database',
-    tech: 'PostgreSQL 16 & Relational Silos',
-    description:
-      'Centralized operational database hosting 18 enterprise tables populated via CSV import to Neon PostgreSQL (live connectors for ERP, MES, and HRIS are Planned with zero mock data).',
-    icon: Database,
-    items: [
+    headerSub: '18 Enterprise Tables · CSV import',
+    headerBg: 'bg-[#991b1b]',
+    headerIcon: Stage1HeaderIcon,
+    accentColor: 'rose',
+    stageLabel: 'STAGE 1 · SOURCE SYSTEM',
+    subCards: [
       {
+        id: 'erp',
         title: 'ERP & Master Entities',
-        desc: 'employee_master (1,700), plant (2), dept (6), vendor (6) via CSV import',
-        sub: 'CSV import to Neon DB • ERP (Planned)',
-        icon: Database,
-        iconColor: 'text-blue-600',
+        sub: '1,700 employees, 2 plants, depts, vendors',
+        icon: Erp3DIcon,
+        color: 'rose',
+        bgTint:
+          'bg-rose-50/70 hover:bg-rose-50/90 dark:bg-rose-950/25 dark:hover:bg-rose-950/40 border-rose-200 dark:border-rose-900/60',
       },
       {
+        id: 'mes',
         title: 'MES & Shopfloor Logs',
-        desc: 'attendance_transactions (177k), overtime (58k hrs), line output via CSV import',
-        sub: 'CSV import to Neon DB • MES (Planned)',
-        icon: Server,
-        iconColor: 'text-emerald-600',
+        sub: 'Attendance, overtime, production records',
+        icon: Mes3DIcon,
+        color: 'rose',
+        bgTint:
+          'bg-rose-50/70 hover:bg-rose-50/90 dark:bg-rose-950/25 dark:hover:bg-rose-950/40 border-rose-200 dark:border-rose-900/60',
       },
       {
+        id: 'skills_roster',
         title: 'Skills, Roster & Exits',
-        desc: 'employee_skill (2,927), training (9.6k), exits (120 leavers) via CSV import',
-        sub: 'CSV import to Neon DB • HRIS (Planned)',
-        icon: ShieldCheck,
-        iconColor: 'text-purple-600',
+        sub: 'Skills matrix, training, rosters, exits',
+        icon: Skills3DIcon,
+        color: 'rose',
+        bgTint:
+          'bg-rose-50/70 hover:bg-rose-50/90 dark:bg-rose-950/25 dark:hover:bg-rose-950/40 border-rose-200 dark:border-rose-900/60',
+      },
+      {
+        id: 'neon_db',
+        title: 'Neon PostgreSQL Database',
+        sub: '18 tables, pooled read-only connection',
+        icon: NeonDb3DIcon,
+        color: 'rose',
+        bgTint:
+          'bg-rose-50/70 hover:bg-rose-50/90 dark:bg-rose-950/25 dark:hover:bg-rose-950/40 border-rose-200 dark:border-rose-900/60',
       },
     ],
-    protocol: 'PostgreSQL Wire / SSL Pooled',
-    security: 'SSL Encrypted • Read-Only Pool',
-    latency: '< 45 ms',
   },
   {
     id: 2,
-    num: '2',
     headerTitle: '2. API GATEWAY',
     headerSub: 'FastAPI Engine',
-    headerBg: 'bg-[#1E3A8A]', // Deep Blue
-    badgeColor: 'border-blue-300 text-blue-700 bg-blue-50 dark:bg-blue-950/50',
-    title: 'FastAPI High-Performance Engine',
-    tech: 'FastAPI & SQLAlchemy 2.0',
-    description:
-      'High-throughput Python ASGI backend providing authenticated REST endpoints, Pydantic v2 schemas, server-side aggregations, and real-time SSE streaming pipelines.',
-    icon: Server,
-    centerCard: {
-      title: 'FastAPI Engine',
-      port: 'Port 8000 - SSE',
-      sub: 'Async Normalizer',
-      icon: Cpu,
-    },
-    items: [
+    headerBg: 'bg-[#1D4ED8]',
+    headerIcon: Stage2HeaderIcon,
+    accentColor: 'blue',
+    stageLabel: 'STAGE 2 · API GATEWAY',
+    subCards: [
       {
-        title: 'SQLAlchemy 2.0 ORM',
-        desc: 'Pooled read-only database sessions with zero write permission',
-        sub: 'Connection Pooling',
-        icon: Database,
-        iconColor: 'text-blue-600',
+        id: 'fastapi',
+        title: 'FastAPI Engine',
+        sub: 'REST endpoints, query filters, CORS',
+        icon: FastApi3DIcon,
+        color: 'blue',
+        bgTint:
+          'bg-blue-50/70 hover:bg-blue-50/90 dark:bg-blue-950/25 dark:hover:bg-blue-950/40 border-blue-200 dark:border-blue-900/60',
       },
       {
-        title: 'SSE Streaming Pipeline',
-        desc: '/api/v1/agent/stream-analysis real-time stage progress',
-        sub: 'Server-Sent Events',
-        icon: Zap,
-        iconColor: 'text-amber-500',
+        id: 'sqlalchemy',
+        title: 'SQLAlchemy 2.0 ORM',
+        sub: 'Connection pooling, typed models',
+        icon: SqlAlchemy3DIcon,
+        color: 'blue',
+        bgTint:
+          'bg-blue-50/70 hover:bg-blue-50/90 dark:bg-blue-950/25 dark:hover:bg-blue-950/40 border-blue-200 dark:border-blue-900/60',
+      },
+      {
+        id: 'sse',
+        title: 'SSE Streaming',
+        sub: 'Server-Sent Events for agent execution',
+        icon: Sse3DIcon,
+        color: 'blue',
+        bgTint:
+          'bg-blue-50/70 hover:bg-blue-50/90 dark:bg-blue-950/25 dark:hover:bg-blue-950/40 border-blue-200 dark:border-blue-900/60',
       },
     ],
-    protocol: 'HTTP/2 • REST • JSON • SSE',
-    security: 'CORS Allowlist • ReadOnlyError Guards',
-    latency: '< 80 ms',
   },
   {
     id: 3,
-    num: '3',
     headerTitle: '3. MULTI-AGENT CORE',
     headerSub: '7 Specialist Agents',
-    headerBg: 'bg-[#581C87]', // Deep Purple
-    badgeColor: 'border-purple-300 text-purple-700 bg-purple-50 dark:bg-purple-950/50',
-    title: 'Multi-Agent Cognitive AI Core',
-    tech: 'LangChain & Domo AI Services',
-    description:
-      'Central Orchestrator (intent routing + conversation memory) coordinating 7 autonomous specialist agents (Attendance, Workforce Planning, Overtime, Attrition, Skills & Training, Vendor, Production) grounded in Neon PostgreSQL, paired with a Domo AI conversational layer for natural-language response over verified data.',
-    icon: Brain,
-    items: [
+    headerBg: 'bg-[#6D28D9]',
+    headerIcon: Stage3HeaderIcon,
+    accentColor: 'purple',
+    stageLabel: 'STAGE 3 · MULTI-AGENT CORE',
+    subCards: [
       {
+        id: 'central_orch',
         title: 'Central Orchestrator',
-        desc: 'Intent routing & isolated conversation memory across 7 specialist domains',
-        sub: 'Intent Routing + Memory',
-        icon: Brain,
-        iconColor: 'text-purple-600',
+        sub: 'Intent routing, task dispatch, aggregation',
+        icon: Orchestrator3DIcon,
+        color: 'purple',
+        bgTint:
+          'bg-purple-50/70 hover:bg-purple-50/90 dark:bg-purple-950/25 dark:hover:bg-purple-950/40 border-purple-200 dark:border-purple-900/60',
       },
       {
+        id: 'specialist_agents',
         title: '7 Specialist Agents',
-        desc: 'Attendance, Workforce Planning, Overtime, Attrition, Skills & Training, Vendor, Production',
-        sub: 'Attendance, Planning, OT, Attrition, Skills, Vendor, Production',
-        icon: Bot,
-        iconColor: 'text-blue-600',
+        sub: 'Shortage, Attendance, Attrition, Skills...',
+        icon: SpecialistAgents3DIcon,
+        color: 'purple',
+        bgTint:
+          'bg-purple-50/70 hover:bg-purple-50/90 dark:bg-purple-950/25 dark:hover:bg-purple-950/40 border-purple-200 dark:border-purple-900/60',
       },
       {
+        id: 'domo_ai',
         title: 'Domo AI Conversational Layer',
-        desc: 'Natural-language response synthesis grounded strictly over verified Neon data',
-        sub: 'Conversational Layer (Verified Data)',
-        icon: Zap,
-        iconColor: 'text-amber-500',
+        sub: 'Text-to-SQL, auto-visualizations',
+        icon: DomoAi3DIcon,
+        color: 'purple',
+        bgTint:
+          'bg-purple-50/70 hover:bg-purple-50/90 dark:bg-purple-950/25 dark:hover:bg-purple-950/40 border-purple-200 dark:border-purple-900/60',
       },
     ],
-    protocol: 'LangChain Tool Protocol • Domo LLM',
-    security: 'Isolated Memory • Grounded Facts',
-    latency: '350 ms – 1.2 s',
   },
   {
     id: 4,
-    num: '4',
     headerTitle: '4. GOVERNANCE',
-    headerSub: 'HR Approval + Audit Trail',
-    headerBg: 'bg-[#1D4ED8]', // Royal Blue
-    badgeColor: 'border-indigo-300 text-indigo-700 bg-indigo-50 dark:bg-indigo-950/50',
-    title: 'Human-in-the-Loop Governance Gate',
-    tech: 'React 18 & HITL Approval',
-    description:
-      'Zero-write read-only enforcement ensuring all AI-generated roster adjustments, overtime rebalancing, and standby assignments require HR Approval + Audit Trail. RBAC and dual authority sign-off are on the Roadmap.',
-    icon: ShieldCheck,
-    centerCard: {
-      title: 'Human Approval Gate',
-      port: 'HR Approval + Audit Trail',
-      sub: 'Read-Only Governance',
-      icon: ShieldCheck,
-    },
-    items: [
+    headerSub: 'HR Approval',
+    headerBg: 'bg-[#0F766E]',
+    headerIcon: Stage4HeaderIcon,
+    accentColor: 'emerald',
+    stageLabel: 'STAGE 4 · GOVERNANCE',
+    subCards: [
       {
-        title: 'HR Approval + Audit Trail',
-        desc: 'Plant HRBP and Operations sign-off with audit logging; RBAC and dual authority sign-off on Roadmap',
-        sub: 'RBAC & Dual Sign-Off (Roadmap)',
-        icon: Users,
-        iconColor: 'text-blue-600',
-      },
-      {
-        title: 'Read-Only Safeguards',
-        desc: 'Strict ReadOnlyError blocks unauthorized database writes',
-        sub: 'Immutable Audit Trail',
-        icon: Lock,
-        iconColor: 'text-rose-600',
+        id: 'human_approval',
+        title: 'Human Approval',
+        sub: 'HR reviews agent suggestions and approves or rejects them before any action',
+        icon: HumanApproval3DIcon,
+        color: 'emerald',
+        bgTint:
+          'bg-emerald-50/70 hover:bg-emerald-50/90 dark:bg-emerald-950/25 dark:hover:bg-emerald-950/40 border-emerald-200 dark:border-emerald-900/60',
       },
     ],
-    protocol: 'HITL Review Protocol • JWT Auth',
-    security: 'Human Verification Required • Read-Only DB',
-    latency: 'Interactive Session',
   },
   {
     id: 5,
-    num: '5',
     headerTitle: '5. CLOSED-LOOP',
     headerSub: 'Actions & Dispatch (Planned)',
-    headerBg: 'bg-[#7F1D1D]', // Dark Crimson
-    badgeColor: 'border-rose-300 text-rose-700 bg-rose-50 dark:bg-rose-950/50',
-    title: 'Closed-Loop Operational Actions & Dispatch',
-    tech: 'Manufacturing Operations & SLAs',
-    description:
-      'Future factory floor closed-loop outcomes: automated standby worker dispatch (Planned), cost-neutral overtime equalization with illustrative target of ₹2.5M savings (Planned), and automated command post dispatch (Planned).',
-    icon: Zap,
-    items: [
+    headerBg: 'bg-[#B45309]',
+    headerIcon: Stage5HeaderIcon,
+    accentColor: 'amber',
+    stageLabel: 'STAGE 5 · CLOSED-LOOP',
+    subCards: [
       {
-        title: 'Shortage Mitigation (Planned)',
-        desc: 'Automated standby redeployment to prevent line starvation on night shifts',
-        sub: 'Planned • Zero Assembly Downtime',
-        icon: UserCheck,
-        iconColor: 'text-emerald-600',
+        id: 'shortage_mit',
+        title: 'Shortage Mitigation',
+        sub: 'Auto-draft roster adjustments & standby replacement dispatch',
+        isPlanned: true,
+        icon: ShortageMitigation3DIcon,
+        color: 'amber',
+        bgTint:
+          'bg-amber-50/70 hover:bg-amber-50/90 dark:bg-amber-950/25 dark:hover:bg-amber-950/40 border-amber-200 dark:border-amber-900/60',
       },
       {
-        title: 'Cost Containment (Planned)',
-        desc: 'Overtime equalization to contain contractor premiums',
-        sub: 'Illustrative target: ₹2.5M Savings',
-        icon: TrendingUp,
-        iconColor: 'text-blue-600',
-      },
-      {
-        title: 'Command Portals (Planned)',
-        desc: 'Automated dispatch triggers and closed-loop command consoles',
-        sub: 'Planned • Automated Dispatch',
-        icon: Layers,
-        iconColor: 'text-purple-600',
+        id: 'cost_contain',
+        title: 'Cost Containment',
+        sub: 'Overtime threshold alerts & team labor cost balancing',
+        isPlanned: true,
+        icon: CostContainment3DIcon,
+        color: 'amber',
+        bgTint:
+          'bg-amber-50/70 hover:bg-amber-50/90 dark:bg-amber-950/25 dark:hover:bg-amber-950/40 border-amber-200 dark:border-amber-900/60',
       },
     ],
-    protocol: 'Operational SLAs • Factory Gate Dispatch',
-    security: 'Enterprise Governance Compliant',
-    latency: 'Live Shift Updates',
   },
 ];
 
-export function SystemArchitecturePipelineCard({ onInspectStage, className = '' }) {
-  const [selectedStageId, setSelectedStageId] = useState(1);
-
-  const handleStageClick = (stage) => {
-    setSelectedStageId(stage.id);
-    onInspectStage?.(stage);
-  };
-
+export function SystemArchitecturePipelineCard({
+  selected = { type: 'stage', id: 'erp' },
+  onSelect,
+  className = '',
+}) {
   return (
-    <Card className={`p-3.5 sm:p-4 flex flex-col justify-between h-[390px] border border-[var(--border)] shadow-xs select-none ${className}`}>
+    <Card
+      className={`p-2 sm:p-2.5 flex flex-col justify-between border border-[var(--border)] shadow-xs select-none min-h-0 overflow-hidden ${className}`}
+    >
       {/* Top Header Row */}
-      <div className="flex items-center justify-between gap-2 mb-2">
-        <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-lg bg-[#5932EA]/10 dark:bg-purple-950/50 text-[#5932EA] dark:text-purple-400 flex items-center justify-center shrink-0 border border-purple-200 dark:border-purple-800">
-            <Workflow className="w-3.5 h-3.5" />
+      <div className="flex items-center justify-between gap-1.5 mb-1.5 shrink-0">
+        <div className="flex items-center gap-1.5 min-w-0">
+          <div className="w-5 h-5 rounded-lg bg-[#5932EA]/10 dark:bg-purple-950/50 text-[#5932EA] dark:text-purple-400 flex items-center justify-center shrink-0 border border-purple-200 dark:border-purple-800">
+            <Workflow className="w-3 h-3" />
           </div>
-          <h2 className="text-[13px] sm:text-sm font-extrabold text-[var(--text)] tracking-tight">
+          <h2 className="text-xs sm:text-[12.5px] font-extrabold text-[var(--text)] tracking-tight truncate">
             System Architecture Pipeline
           </h2>
         </div>
 
-        <span className="text-[10px] text-purple-600 dark:text-purple-400 font-semibold cursor-pointer hover:underline flex items-center gap-0.5">
-          Click any card to inspect details <span className="text-xs">↘</span>
+        <span className="text-[9px] sm:text-[9.5px] text-purple-600 dark:text-purple-400 font-semibold tracking-tight shrink-0">
+          Click a card for details
         </span>
       </div>
 
       {/* 5-Stage Horizontal Connected Pipeline */}
-      <div className="grid grid-cols-5 gap-1.5 sm:gap-2 flex-1 my-1 items-stretch relative">
-        {PIPELINE_STAGES.map((stage, idx) => {
-          const isSelected = selectedStageId === stage.id;
-          const isLast = idx === PIPELINE_STAGES.length - 1;
+      <div className="flex-1 flex flex-col justify-between min-h-0 overflow-hidden">
+        <div className="grid grid-cols-5 gap-1 sm:gap-1.5 flex-1 items-stretch relative h-full min-h-0">
+          {PIPELINE_STAGES.map((stage, idx) => {
+            const isLast = idx === PIPELINE_STAGES.length - 1;
+            const HeaderIcon = stage.headerIcon;
+            const isStage4 = stage.id === 4;
+            const isStage5 = stage.id === 5;
 
-          return (
-            <div key={stage.id} className="relative flex flex-col h-full">
-              {/* Stage Card Box */}
-              <div
-                onClick={() => handleStageClick(stage)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handleStageClick(stage);
-                  }
-                }}
-                className={`flex-1 flex flex-col rounded-xl border transition-all cursor-pointer overflow-hidden group ${
-                  isSelected
-                    ? 'border-[#5932EA] ring-2 ring-[#5932EA]/30 bg-purple-50/15 dark:bg-purple-950/20 shadow-xs'
-                    : 'border-[var(--border)] hover:border-purple-300 dark:hover:border-purple-700 bg-[var(--surface)] hover:bg-[var(--surface-hover)]/30'
-                }`}
-              >
-                {/* Header Banner */}
-                <div className={`${stage.headerBg} text-white px-2 py-1.5 text-center shrink-0`}>
-                  <div className="text-[10px] font-black tracking-wider uppercase leading-none">
-                    {stage.headerTitle}
+            return (
+              <div key={stage.id} className="relative flex flex-col h-full min-h-0">
+                {/* Stage Column Box */}
+                <div className="flex-1 flex flex-col rounded-lg sm:rounded-xl border border-[var(--border)] bg-[var(--surface)] overflow-hidden shadow-2xs h-full min-h-0">
+                  {/* Solid Colored Header with 3D Stage Icon */}
+                  <div
+                    className={`${stage.headerBg} text-white px-1 py-1 flex flex-col items-center justify-center shrink-0 shadow-xs text-center`}
+                  >
+                    <HeaderIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white mb-0.5 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]" />
+                    <div className="text-[clamp(8px,0.7vw,9.5px)] font-extrabold tracking-tight uppercase leading-tight text-center break-words max-w-full">
+                      {stage.headerTitle}
+                    </div>
+                    <div className="text-[clamp(6.5px,0.55vw,7.5px)] text-white/90 font-medium tracking-tight mt-0.5 leading-tight text-center break-words max-w-full">
+                      {stage.headerSub}
+                    </div>
                   </div>
-                  <div className="text-[8px] text-white/80 font-medium tracking-tight mt-0.5 truncate">
-                    {stage.headerSub}
-                  </div>
-                </div>
 
-                {/* Body Content: 3 mini cards stacked */}
-                <div className="p-1.5 flex-1 flex flex-col justify-between gap-1 overflow-hidden">
-                  {stage.centerCard ? (
-                    <>
-                      {/* Main Center Badge for Gateway & Governance */}
-                      <div className="flex-1 rounded-lg border border-[var(--border)] bg-[var(--surface-hover)]/40 p-1.5 flex flex-col items-center justify-center text-center">
-                        <div className="w-8 h-8 rounded-full bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 flex items-center justify-center border border-blue-200 dark:border-blue-800 mb-1">
-                          <stage.centerCard.icon className="w-4 h-4" />
-                        </div>
-                        <div className="text-[9.5px] font-extrabold text-[var(--text)] leading-tight">
-                          {stage.centerCard.title}
-                        </div>
-                        <div className="text-[8px] font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-1.5 py-0.2 rounded mt-0.5 font-mono">
-                          {stage.centerCard.port}
-                        </div>
-                        <div className="text-[7.5px] text-[var(--secondary)] mt-0.5">
-                          {stage.centerCard.sub}
-                        </div>
-                      </div>
+                  {/* Stage Sub-Cards Stack */}
+                  <div className="p-0.5 sm:p-1 flex-1 flex flex-col gap-1 justify-between min-h-0">
+                    {stage.subCards.map((sc) => {
+                      const IconComp = sc.icon;
+                      const isSelected =
+                        selected?.type === 'stage' &&
+                        (selected?.id === sc.id || (sc.id === 'human_approval' && selected?.id === 'hitl'));
 
-                      {/* Supporting Item */}
-                      {stage.items.slice(0, 1).map((item, itemIdx) => (
-                        <div
-                          key={itemIdx}
-                          className="rounded-md border border-[var(--border)] bg-[var(--surface)] p-1 text-center shrink-0"
-                        >
-                          <div className="text-[8.5px] font-bold text-[var(--text)] truncate">
-                            {item.title}
-                          </div>
-                          <div className="text-[7px] text-[var(--secondary)] truncate">
-                            {item.sub}
-                          </div>
-                        </div>
-                      ))}
-                    </>
-                  ) : (
-                    /* 3 Stacked Sub-Cards */
-                    stage.items.map((item, itemIdx) => {
-                      const ItemIcon = item.icon;
-                      return (
-                        <div
-                          key={itemIdx}
-                          className="flex-1 rounded-lg border border-[var(--border)] bg-[var(--surface-hover)]/30 hover:bg-[var(--surface-hover)] p-1.5 flex flex-col justify-center transition-colors"
-                        >
-                          <div className="flex items-center gap-1 min-w-0">
-                            <ItemIcon className={`w-3 h-3 shrink-0 ${item.iconColor || 'text-[var(--primary)]'}`} />
-                            <div className="text-[9px] font-bold text-[var(--text)] truncate leading-tight">
-                              {item.title}
+                      // Stage 4: Single stretched card filling column
+                      if (isStage4) {
+                        return (
+                          <div
+                            key={sc.id}
+                            onClick={() => onSelect?.({ type: 'stage', id: sc.id })}
+                            role="button"
+                            tabIndex={0}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                onSelect?.({ type: 'stage', id: sc.id });
+                              }
+                            }}
+                            className={`group rounded-md sm:rounded-lg border p-1 sm:p-1.5 transition-all cursor-pointer flex flex-col items-center justify-center text-center flex-1 h-full min-h-0 ${
+                              sc.bgTint
+                            } ${
+                              isSelected
+                                ? 'ring-2 ring-emerald-600 border-emerald-600 dark:ring-emerald-400 bg-white dark:bg-slate-900 shadow-md scale-[1.01]'
+                                : 'hover:shadow-xs hover:scale-[1.005]'
+                            }`}
+                          >
+                            <IconComp className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 mb-1 drop-shadow-sm group-hover:scale-105 transition-transform shrink-0" />
+                            <div className="text-[clamp(9px,0.75vw,11px)] font-extrabold text-[var(--text)] leading-tight break-words">
+                              {sc.title}
+                            </div>
+                            <div className="text-[clamp(7px,0.58vw,8px)] text-[var(--secondary)] font-medium leading-tight sm:leading-relaxed mt-0.5 sm:mt-1 break-words max-w-full">
+                              {sc.sub}
                             </div>
                           </div>
-                          <div className="text-[7.5px] text-[var(--secondary)] truncate mt-0.5 leading-tight">
-                            {item.sub}
+                        );
+                      }
+
+                      // Stage 5: Two stretched cards filling column
+                      if (isStage5) {
+                        return (
+                          <div
+                            key={sc.id}
+                            onClick={() => onSelect?.({ type: 'stage', id: sc.id })}
+                            role="button"
+                            tabIndex={0}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                onSelect?.({ type: 'stage', id: sc.id });
+                              }
+                            }}
+                            className={`group rounded-md sm:rounded-lg border p-1 sm:p-1.5 transition-all cursor-pointer flex flex-col items-center justify-center text-center flex-1 min-h-0 ${
+                              sc.bgTint
+                            } ${
+                              isSelected
+                                ? 'ring-2 ring-amber-600 border-amber-600 dark:ring-amber-400 bg-white dark:bg-slate-900 shadow-md scale-[1.01]'
+                                : 'hover:shadow-xs hover:scale-[1.005]'
+                            }`}
+                          >
+                            <IconComp className="w-6 h-6 sm:w-7 sm:h-7 mb-0.5 drop-shadow-2xs group-hover:scale-105 transition-transform shrink-0" />
+                            <div className="flex items-center gap-1 justify-center flex-wrap">
+                              <span className="text-[clamp(8px,0.65vw,9.5px)] font-bold text-[var(--text)] leading-tight break-words">
+                                {sc.title}
+                              </span>
+                              <span className="text-[6px] font-bold uppercase px-1 py-0.2 rounded bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-300 dark:border-amber-700">
+                                Planned
+                              </span>
+                            </div>
+                            <div className="text-[clamp(6.5px,0.55vw,7.5px)] text-[var(--secondary)] font-medium leading-tight mt-0.5 break-words">
+                              {sc.sub}
+                            </div>
+                          </div>
+                        );
+                      }
+
+                      // Stages 1, 2, 3: Horizontal sub-cards with natural text wrapping
+                      return (
+                        <div
+                          key={sc.id}
+                          onClick={() => onSelect?.({ type: 'stage', id: sc.id })}
+                          role="button"
+                          tabIndex={0}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              onSelect?.({ type: 'stage', id: sc.id });
+                            }
+                          }}
+                          className={`group rounded-md sm:rounded-lg border p-1 sm:p-1.5 transition-all cursor-pointer flex items-center gap-1 sm:gap-1.5 flex-1 min-h-0 ${
+                            sc.bgTint
+                          } ${
+                            isSelected
+                              ? 'ring-2 ring-purple-600 border-purple-600 dark:ring-purple-400 bg-white dark:bg-slate-900 shadow-md scale-[1.01]'
+                              : 'hover:shadow-xs hover:scale-[1.005]'
+                          }`}
+                        >
+                          <IconComp className="w-5 h-5 sm:w-6 sm:h-6 shrink-0 drop-shadow-2xs group-hover:scale-105 transition-transform" />
+
+                          {/* Title & Subtitle with Natural Text Wrapping */}
+                          <div className="min-w-0 flex-1">
+                            <div className="text-[clamp(8px,0.65vw,9px)] font-bold text-[var(--text)] leading-tight break-words">
+                              {sc.title}
+                            </div>
+                            <div className="text-[clamp(6.5px,0.55vw,7.5px)] text-[var(--secondary)] font-medium leading-tight mt-0.5 break-words">
+                              {sc.sub}
+                            </div>
                           </div>
                         </div>
                       );
-                    })
-                  )}
+                    })}
+                  </div>
                 </div>
+
+                {/* Connector Arrow to Next Column on wide viewports */}
+                {!isLast && (
+                  <div
+                    aria-hidden="true"
+                    className="hidden xl:flex absolute -right-1 top-1/2 -translate-y-1/2 z-10 w-2.5 h-2.5 text-slate-400 dark:text-slate-500 items-center justify-center pointer-events-none"
+                  >
+                    <ChevronRight className="w-2.5 h-2.5" />
+                  </div>
+                )}
               </div>
-
-              {/* Connector Arrow to Next Column */}
-              {!isLast && (
-                <div
-                  aria-hidden="true"
-                  className="hidden sm:flex absolute -right-2 top-1/2 -translate-y-1/2 z-10 w-3 h-3 text-slate-400 dark:text-slate-600 pointer-events-none items-center justify-center font-bold text-[10px]"
-                >
-                  →
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Card Footer Bar */}
-      <div className="flex items-center justify-between text-[9px] text-[var(--secondary)] pt-1.5 border-t border-[var(--border)] mt-1">
-        <span className="flex items-center gap-1 font-medium">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          Neon PostgreSQL Wire • FastAPI ASGI • 7 Specialist Agents • Domo AI Conversational Layer
-        </span>
-        <span className="font-mono text-[8.5px] text-[#5932EA] dark:text-purple-400 font-bold">
-          Implemented + Roadmap
-        </span>
+            );
+          })}
+        </div>
       </div>
     </Card>
   );
 }
-
-export default SystemArchitecturePipelineCard;

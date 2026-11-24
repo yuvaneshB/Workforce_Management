@@ -148,7 +148,7 @@ export const ROUTE_META = {
   '/analytics': {
     crumb: 'Analytics',
     title: 'Workforce Analytics',
-    description: 'Detailed workforce, attendance and manufacturing performance analysis',
+    description: '',
   },
   '/assistant': {
     crumb: 'AI Assistance',

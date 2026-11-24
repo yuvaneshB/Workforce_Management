@@ -9,7 +9,7 @@ export function AttritionReasonsChart({
   const reasonsList =
     attritionAnalytics?.by_reason && attritionAnalytics.by_reason.length > 0
       ? attritionAnalytics.by_reason
-      : ATTRITION_BY_REASON;
+      : [];
 
   const totalExits =
     attritionAnalytics?.summary?.total_exits != null
@@ -29,25 +29,22 @@ export function AttritionReasonsChart({
             </div>
             <div>
               <h3 className="text-sm font-extrabold text-[var(--text)] tracking-tight">
-                Attrition Reasons Analysis ({displayReasons.length} Key Reasons)
+                Attrition Reasons Analysis
               </h3>
-              <p className="text-[11px] text-[var(--secondary)]">
-                Primary drivers for employee departures from Neon DB
-              </p>
             </div>
           </div>
           <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-[var(--secondary)]">
-            {hasData || totalExits > 0 ? `${totalExits} Recorded Exits` : 'No Connection'}
+            {totalExits > 0 ? `${totalExits} Recorded Exits` : 'No Exits'}
           </span>
         </div>
 
         {/* Horizontal Reason Bars */}
-        {!hasData && totalExits === 0 ? (
+        {reasonsList.length === 0 ? (
           <div className="py-12 flex flex-col items-center justify-center text-center p-4 bg-[var(--surface-hover)]/30 rounded-lg border border-dashed border-[var(--border)]">
             <UserX className="w-6 h-6 text-slate-400 mb-2 opacity-60" />
             <p className="text-xs font-bold text-[var(--text)]">No Attrition Records</p>
             <p className="text-[11px] text-[var(--secondary)] mt-0.5">
-              Connect to FastAPI backend to view live exit reason analysis.
+              No exit records match the current filter selection.
             </p>
           </div>
         ) : (
@@ -77,13 +74,6 @@ export function AttritionReasonsChart({
             })}
           </div>
         )}
-      </div>
-
-      <div className="pt-2 mt-2 border-t border-[var(--border)] text-[10px] text-[var(--secondary)] flex items-center justify-between">
-        <span>Exit interview telemetry module: grounded in Neon DB.</span>
-        <span className={`font-bold ${hasData || totalExits > 0 ? 'text-emerald-600' : 'text-slate-400'}`}>
-          {hasData || totalExits > 0 ? 'Verified Neon DB Exits' : 'No backend data'}
-        </span>
       </div>
     </div>
   );

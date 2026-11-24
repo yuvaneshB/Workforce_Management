@@ -26,6 +26,9 @@ from langchain_core.tools import tool
 from sqlalchemy import text
 from sqlalchemy.exc import DBAPIError, InternalError, ProgrammingError
 
+from app.agents.attrition_agent_service import attrition_agent_service
+from app.agents.overtime_agent_service import overtime_agent_service
+from app.agents.skill_agent_service import skill_agent_service
 from app.agents.central_agent_orchestrator import central_agent_orchestrator
 from app.agents.runtime.agent_runner import run_tool_agent
 from app.agents.specialists import run_supervisor
@@ -49,50 +52,46 @@ from tests.test_agent_runner import FakeScriptedChatModel
 
 
 # ============================================================================
-# 1. LLM Not Configured or Raising Exception -> Legacy Path Runs
+# 1. LLM Not Configured or Raising Exception -> Graceful Unavailable Response
 # ============================================================================
 
 def test_llm_not_configured_falls_back_to_legacy_path():
-    """Verify that when AGENT_MODE=tools but LLM is not configured, orchestrator falls back to legacy path."""
-    with patch.dict(os.environ, {"AGENT_MODE": "tools", "LLM_PROVIDER": ""}, clear=False):
+    """Verify that when LLM is not configured, orchestrator returns friendly unavailable message in same shape."""
+    with patch.dict(os.environ, {"LLM_PROVIDER": ""}, clear=False):
         res = central_agent_orchestrator.execute_query(
-            user_query="What is the overall attendance rate across plants?",
+            query="What is the overall attendance rate across plants?",
             conversation_id="test_unconfigured_llm",
         )
 
         assert res is not None
-        assert res.get("status") == "success"
-        assert res.get("error") is None
+        assert res.get("status") == "failed"
+        assert res.get("tool_trace") == []
         assert "answer" in res
         assert "direct_answer" in res
         assert "key_metrics" in res
         assert "evidence" in res
         assert "tables" in res
-        assert len(res["answer"]) > 0
-        # Verify no error text shown to user
-        assert "error" not in res["answer"].lower()
+        assert res["answer"] == "The assistant is temporarily unavailable. Please try again in a moment."
         assert "traceback" not in res["answer"].lower()
 
 
 def test_llm_exception_falls_back_to_legacy_path():
-    """Verify that when supervisor or LLM raises an unhandled exception, legacy path runs seamlessly."""
-    with patch.dict(os.environ, {"AGENT_MODE": "tools", "LLM_PROVIDER": "domo"}, clear=False):
+    """Verify that when supervisor or LLM raises an unhandled exception, friendly unavailable message is returned."""
+    with patch.dict(os.environ, {"LLM_PROVIDER": "domo"}, clear=False):
         with patch("app.agents.central_agent_orchestrator.is_llm_configured", return_value=True):
             with patch(
                 "app.agents.specialists.run_supervisor",
                 side_effect=RuntimeError("Domo AI Services connection refused (503 Service Unavailable)"),
             ):
                 res = central_agent_orchestrator.execute_query(
-                    user_query="What is the overall attendance rate across plants?",
+                    query="What is the overall attendance rate across plants?",
                     conversation_id="test_llm_exception",
                 )
 
                 assert res is not None
-                assert res.get("status") == "success"
-                assert res.get("error") is None
-                assert "answer" in res
-                assert len(res["answer"]) > 0
-                # User receives standard deterministic workforce insight, not an error stack trace
+                assert res.get("status") == "failed"
+                assert res.get("tool_trace") == []
+                assert res["answer"] == "The assistant is temporarily unavailable. Please try again in a moment."
                 assert "503" not in res["answer"]
                 assert "RuntimeError" not in res["answer"]
 
@@ -413,31 +412,30 @@ def test_specialist_tools_under_3kb_and_handle_empty_data():
 # 9. Overall Timeout and Per-LLM Timeout Fallback Tests
 # ============================================================================
 
-def test_overall_timeout_fallback_to_legacy():
-    """Verify that when supervisor execution exceeds AGENT_TOTAL_TIMEOUT_SEC, it falls back to legacy path."""
+def test_overall_timeout_returns_unavailable():
+    """Verify that when supervisor execution exceeds AGENT_TOTAL_TIMEOUT_SEC, it returns friendly unavailable message."""
     def slow_supervisor(*args: Any, **kwargs: Any) -> dict[str, Any]:
-        time.sleep(1.0)
+        time.sleep(2.0)
         return {"answer": "Slow answer", "tool_trace": []}
 
-    with patch.dict(os.environ, {"AGENT_MODE": "tools", "LLM_PROVIDER": "domo", "AGENT_TOTAL_TIMEOUT_SEC": "0.1"}, clear=False):
+    with patch.dict(os.environ, {"LLM_PROVIDER": "domo", "AGENT_TOTAL_TIMEOUT_SEC": "0.1"}, clear=False):
         with patch("app.agents.central_agent_orchestrator.is_llm_configured", return_value=True):
             with patch("app.agents.specialists.run_supervisor", side_effect=slow_supervisor):
                 t0 = time.time()
                 res = central_agent_orchestrator.execute_query(
-                    user_query="What is the overall attendance rate?",
+                    query="What is the overall attendance rate?",
                     conversation_id="test_overall_timeout",
                 )
                 dur = time.time() - t0
 
                 assert res is not None
-                assert res.get("status") == "success"
-                assert res.get("error") is None
-                assert "answer" in res
-                assert len(res["answer"]) > 0
+                assert res.get("status") == "failed"
+                assert res.get("tool_trace") == []
+                assert res["answer"] == "The assistant is temporarily unavailable. Please try again in a moment."
 
 
-def test_per_llm_call_timeout_fallback_to_legacy():
-    """Verify that when an individual LLM call exceeds AGENT_LLM_TIMEOUT_SEC, it falls back to legacy path."""
+def test_per_llm_call_timeout_returns_unavailable():
+    """Verify that when an individual LLM call exceeds AGENT_LLM_TIMEOUT_SEC, it returns friendly unavailable message."""
     class SlowChatModel(BaseChatModel):
         @property
         def _llm_type(self) -> str:
@@ -447,7 +445,7 @@ def test_per_llm_call_timeout_fallback_to_legacy():
             time.sleep(1.0)
             return ChatResult(generations=[ChatGeneration(message=AIMessage(content="Delayed"))])
 
-    with patch.dict(os.environ, {"AGENT_MODE": "tools", "LLM_PROVIDER": "domo", "AGENT_LLM_TIMEOUT_SEC": "0.1", "AGENT_TOTAL_TIMEOUT_SEC": "5.0"}, clear=False):
+    with patch.dict(os.environ, {"LLM_PROVIDER": "domo", "AGENT_LLM_TIMEOUT_SEC": "0.1", "AGENT_TOTAL_TIMEOUT_SEC": "5.0"}, clear=False):
         with patch("app.agents.central_agent_orchestrator.is_llm_configured", return_value=True):
             with patch("app.agents.specialists.run_supervisor") as mock_sup:
                 # Trigger a real run_tool_agent with the slow model
@@ -462,12 +460,411 @@ def test_per_llm_call_timeout_fallback_to_legacy():
                 mock_sup.side_effect = _run_slow
 
                 res = central_agent_orchestrator.execute_query(
-                    user_query="What is the overall attendance rate?",
+                    query="What is the overall attendance rate?",
                     conversation_id="test_llm_timeout",
                 )
 
                 assert res is not None
-                assert res.get("status") == "success"
-                assert res.get("error") is None
-                assert "answer" in res
-                assert len(res["answer"]) > 0
+                assert res.get("status") == "failed"
+                assert res.get("tool_trace") == []
+                assert res["answer"] == "The assistant is temporarily unavailable. Please try again in a moment."
+
+
+# ============================================================================
+# 10. Zero Division Regression Tests (Attrition, Overtime, Skills)
+# ============================================================================
+
+def test_attrition_zero_exits_no_zero_division():
+    """Verify attrition_agent_service handles zero exits without ZeroDivisionError."""
+    session_gen = get_readonly_db()
+    db = next(session_gen)
+    try:
+        res = attrition_agent_service.execute_attrition_analysis(
+            db,
+            plant_id="NON_EXISTENT_PLANT_FOR_ZERO_EXITS",
+            skip_llm=True,
+        )
+        assert res is not None
+        assert res.get("status") == "COMPLETED"
+        assert res["metrics"]["total_exits"] == 0
+        assert res["metrics"]["overall_attrition_rate"] == 0.0
+    finally:
+        session_gen.close()
+
+
+def test_overtime_zero_cost_no_zero_division():
+    """Verify overtime_agent_service handles zero overtime cost without ZeroDivisionError."""
+    session_gen = get_readonly_db()
+    db = next(session_gen)
+    try:
+        res = overtime_agent_service.execute_overtime_analysis(
+            db,
+            plant_id="NON_EXISTENT_PLANT_FOR_ZERO_OT",
+            skip_llm=True,
+        )
+        assert res is not None
+        assert res.get("status") == "COMPLETED"
+        assert res["metrics"]["total_overtime_hours"] == 0.0
+        assert res["metrics"]["total_overtime_cost_inr"] == 0.0
+    finally:
+        session_gen.close()
+
+
+def test_skill_zero_mappings_no_zero_division():
+    """Verify skill_agent_service handles zero mappings without ZeroDivisionError."""
+    session_gen = get_readonly_db()
+    db = next(session_gen)
+    try:
+        res = skill_agent_service.execute_skill_analysis(
+            db,
+            plant_id="NON_EXISTENT_PLANT_FOR_ZERO_SKILLS",
+            skip_llm=True,
+        )
+        assert res is not None
+        assert res.get("status") == "COMPLETED"
+        assert res["metrics"]["total_skill_mappings"] == 0
+        assert res.get("top_skills") == []
+        assert res.get("bottom_skills") == []
+    finally:
+        session_gen.close()
+
+
+# ============================================================================
+# 11. Multi-Specialist Shared Deadline & Capped Timeout Tests
+# ============================================================================
+
+def test_shared_deadline_two_specialists_never_exceeds_deadline_plus_call_timeout():
+    """Verify a 2-specialist supervisor question with tiny timeouts shares deadline and total duration <= deadline + 1 call timeout."""
+    class StepChatModel(BaseChatModel):
+        call_count: int = 0
+
+        @property
+        def _llm_type(self) -> str:
+            return "step_fake"
+
+        def bind_tools(self, tools: list[Any], **kwargs: Any) -> Any:
+            return self
+
+        def _generate(self, messages: list[BaseMessage], stop: list[str] | None = None, **kwargs: Any) -> ChatResult:
+            self.call_count += 1
+            if self.call_count == 1:
+                # Supervisor Step 1: Call attendance specialist
+                msg = AIMessage(
+                    content="",
+                    tool_calls=[{"name": "ask_attendance_agent", "args": {"question": "What is the attendance rate?"}, "id": "c1"}],
+                )
+                time.sleep(0.05)
+                return ChatResult(generations=[ChatGeneration(message=msg)])
+            elif self.call_count == 2:
+                # Attendance Specialist: Fast response
+                msg = AIMessage(content="Attendance rate is 92.4%.", tool_calls=[])
+                time.sleep(0.05)
+                return ChatResult(generations=[ChatGeneration(message=msg)])
+            elif self.call_count == 3:
+                # Supervisor Step 2: Call overtime specialist
+                msg = AIMessage(
+                    content="",
+                    tool_calls=[{"name": "ask_overtime_agent", "args": {"question": "What is the overtime spend?"}, "id": "c2"}],
+                )
+                time.sleep(0.05)
+                return ChatResult(generations=[ChatGeneration(message=msg)])
+            else:
+                # Overtime Specialist: Slow blocking call
+                time.sleep(1.0)
+                msg = AIMessage(content="Overtime spend is high.", tool_calls=[])
+                return ChatResult(generations=[ChatGeneration(message=msg)])
+
+    total_timeout = 0.35
+    llm_timeout = 0.15
+    model = StepChatModel()
+
+    t0 = time.perf_counter()
+    with pytest.raises(TimeoutError):
+        run_supervisor(
+            question="Compare attendance and overtime for Shift A",
+            model=model,
+            total_timeout=total_timeout,
+            llm_timeout=llm_timeout,
+        )
+    elapsed = time.perf_counter() - t0
+
+    # Total duration must not exceed deadline (total_timeout) by more than one call timeout (llm_timeout)
+    max_allowed = total_timeout + llm_timeout + 0.20  # small OS scheduling buffer
+    assert elapsed <= max_allowed, f"Elapsed time {elapsed:.3f}s exceeded max allowed {max_allowed:.3f}s"
+
+
+def test_shared_deadline_timeout_returns_unavailable():
+    """Verify execute_query returns friendly unavailable message when multi-specialist supervisor exceeds deadline."""
+    class BlockingModel(BaseChatModel):
+        @property
+        def _llm_type(self) -> str:
+            return "blocking_fake"
+
+        def bind_tools(self, tools: list[Any], **kwargs: Any) -> Any:
+            return self
+
+        def _generate(self, messages: list[BaseMessage], stop: list[str] | None = None, **kwargs: Any) -> ChatResult:
+            time.sleep(0.6)
+            return ChatResult(generations=[ChatGeneration(message=AIMessage(content="Done", tool_calls=[]))])
+
+    with patch.dict(os.environ, {
+        "LLM_PROVIDER": "domo",
+        "AGENT_TOTAL_TIMEOUT_SEC": "0.10",
+        "AGENT_LLM_TIMEOUT_SEC": "0.05",
+    }, clear=False):
+        with patch("app.agents.central_agent_orchestrator.is_llm_configured", return_value=True):
+            with patch("app.agents.llm.provider.get_chat_model", return_value=BlockingModel()):
+                res = central_agent_orchestrator.execute_query(
+                    query="Compare attendance and overtime across plants",
+                    conversation_id="test_timeout_fallback",
+                )
+
+                assert res is not None
+                assert res.get("status") == "failed"
+                assert res.get("tool_trace") == []
+                assert res["answer"] == "The assistant is temporarily unavailable. Please try again in a moment."
+
+
+# ============================================================================
+# 12. Service Zero Guard & Thread Deadline Tests
+# ============================================================================
+
+
+def test_workforce_planning_service_zero_scheduled_guard():
+    """Verify workforce_planning_service calculates availability with 0 scheduled records without ZeroDivisionError."""
+    from datetime import date
+    from app.services.workforce_planning_service import calculate_workforce_availability
+    session_gen = get_readonly_db()
+    db = next(session_gen)
+    try:
+        res = calculate_workforce_availability(
+            db=db,
+            target_date=date(2026, 9, 1),
+            plant_id="NON_EXISTENT_PLANT",
+            shift_id="A",
+        )
+        assert res is not None
+        assert res["total_scheduled"] == 0
+        assert res["availability_rate"] == 0.0
+        assert res["absenteeism_rate"] == 0.0
+    finally:
+        session_gen.close()
+
+
+def test_specialist_in_worker_thread_sees_supervisor_deadline():
+    """Verify that a specialist dispatched in a worker thread sees the supervisor's deadline."""
+    import contextvars
+    import concurrent.futures
+    from app.agents.specialists import _current_deadline, _current_llm_timeout, run_specialist
+
+    captured_deadlines = []
+
+    def mock_run_tool_agent(*args, **kwargs):
+        captured_deadlines.append(kwargs.get("deadline"))
+        return {"answer": "Specialist done", "tool_trace": [], "steps": 1}
+
+    test_deadline = time.perf_counter() + 45.0
+    test_llm_timeout = 15.0
+
+    token = _current_deadline.set(test_deadline)
+    token_llm = _current_llm_timeout.set(test_llm_timeout)
+
+    try:
+        ctx = contextvars.copy_context()
+
+        with patch("app.agents.specialists.run_tool_agent", side_effect=mock_run_tool_agent):
+            with concurrent.futures.ThreadPoolExecutor(max_workers=2) as ex:
+                # 1. Test via copy_context().run in a thread
+                fut1 = ex.submit(
+                    ctx.run,
+                    run_specialist,
+                    "attendance",
+                    "What is attendance rate?",
+                )
+                fut1.result(timeout=2.0)
+
+                assert len(captured_deadlines) == 1
+                assert captured_deadlines[0] == test_deadline
+
+                # 2. Test explicit deadline passing in thread
+                fut2 = ex.submit(
+                    run_specialist,
+                    "attendance",
+                    "What is attendance rate?",
+                    deadline=test_deadline,
+                )
+                fut2.result(timeout=2.0)
+
+                assert len(captured_deadlines) == 2
+                assert captured_deadlines[1] == test_deadline
+    finally:
+        _current_deadline.reset(token)
+        _current_llm_timeout.reset(token_llm)
+
+
+# ============================================================================
+# 11. Real Data Attendance Analytics & Deadline Enforcement
+# ============================================================================
+
+def test_get_attendance_analytics_real_db_counts():
+    """Verify that get_attendance_analytics against real Neon DB returns positive present_count and attendance_percentage."""
+    from app.agents.tools.workforce_tools import get_attendance_analytics
+
+    res = get_attendance_analytics.invoke({})
+    assert res is not None
+    assert res.get("status") == "success"
+    assert res.get("total_records", 0) > 0
+    # Must have non-zero present count and valid attendance percentage
+    assert res.get("present_count", 0) > 0, f"Expected present_count > 0, got {res.get('present_count')}"
+    assert res.get("attendance_percentage", 0.0) > 0.0, f"Expected attendance_percentage > 0.0, got {res.get('attendance_percentage')}"
+
+
+def test_supervisor_deadline_enforcement_never_exceeds_budget():
+    """Verify that run_tool_agent and supervisor strictly enforce deadline and never exceed budget."""
+    import concurrent.futures
+    from app.agents.runtime.agent_runner import run_tool_agent
+    from langchain_core.messages import AIMessage
+
+    class SlowChatModel(BaseChatModel):
+        def _generate(self, messages, stop=None, **kwargs):
+            time.sleep(2.0)
+            return ChatResult(generations=[ChatGeneration(message=AIMessage(content="Delayed"))])
+
+        @property
+        def _llm_type(self):
+            return "slow_mock"
+
+    t0 = time.perf_counter()
+    with pytest.raises(TimeoutError):
+        run_tool_agent(
+            system_prompt="Test",
+            tools=[],
+            user_input="Hello",
+            model=SlowChatModel(),
+            total_timeout=0.3,
+            llm_timeout=0.2,
+        )
+    elapsed = time.perf_counter() - t0
+    # Must fail promptly around deadline + call timeout, never hanging for the full 2.0s
+    assert elapsed < 1.0, f"Deadline enforcement hung! Elapsed: {elapsed:.2f}s"
+
+
+def test_harness_timeout_does_not_block_on_worker_thread():
+    """Verify that ThreadPoolExecutor with shutdown(wait=False, cancel_futures=True) returns immediately on timeout."""
+    import concurrent.futures
+
+    def slow_worker():
+        time.sleep(3.0)
+        return "done"
+
+    t0 = time.perf_counter()
+    timeout_sec = 0.2
+    ex = concurrent.futures.ThreadPoolExecutor(max_workers=1)
+    timed_out = False
+    try:
+        fut = ex.submit(slow_worker)
+        fut.result(timeout=timeout_sec)
+    except concurrent.futures.TimeoutError:
+        timed_out = True
+    finally:
+        ex.shutdown(wait=False, cancel_futures=True)
+
+    elapsed = time.perf_counter() - t0
+    assert timed_out is True
+    # Harness MUST return immediately without waiting for the 3.0s sleep in worker thread
+    assert elapsed < 0.6, f"Harness blocked on shutdown! Elapsed: {elapsed:.2f}s"
+
+
+def test_zero_tool_hallucination_code_guard():
+    """Verify that any supervisor response containing ungrounded metrics without tools is blocked by code guard."""
+    from app.agents.specialists import _contains_ungrounded_metrics, run_supervisor
+
+    # 1. Unit check on _contains_ungrounded_metrics
+    assert _contains_ungrounded_metrics("The overall attrition rate is 7.1% with 120 exits.") is True
+    assert _contains_ungrounded_metrics("Total overtime spend is $1,460,000 for 58,433 hours.") is True
+    assert _contains_ungrounded_metrics("We have 1250 employees in the plant.") is True
+    # Clarification question with numbered options should NOT be flagged as ungrounded metrics
+    clarification = "To check shop floor status, please clarify:\n1. Attendance rates\n2. Overtime hours\n3. Production output"
+    assert _contains_ungrounded_metrics(clarification) is False
+    # Honest refusal or lack of data should NOT be flagged
+    assert _contains_ungrounded_metrics("I cannot provide weather forecasts as I only access workforce data.") is False
+
+    # 2. End-to-end supervisor guard check: model attempts to hallucinate data with 0 tool calls
+    class HallucinatingMockChatModel(BaseChatModel):
+        def _generate(self, messages, stop=None, **kwargs):
+            return ChatResult(generations=[ChatGeneration(message=AIMessage(content="Verified attendance rate is 92.4% and 58,433 overtime hours."))])
+
+        @property
+        def _llm_type(self):
+            return "hallucinating_mock"
+
+    res = run_supervisor(
+        question="What is the workforce status?",
+        model=HallucinatingMockChatModel(),
+        total_timeout=5.0,
+    )
+    # The hallucinated metrics MUST be replaced by the honest refusal message
+    assert "not available without consulting the verified shopfloor database" in res["answer"]
+    assert res["tool_trace"] == []
+
+
+def test_ambiguous_question_line_status_asks_clarification_no_specialists():
+    """Verify that broad ambiguous questions produce a clarification answer without calling specialists."""
+    from app.agents.specialists import run_supervisor
+
+    class ClarificationMockChatModel(BaseChatModel):
+        def _generate(self, messages, stop=None, **kwargs):
+            return ChatResult(generations=[ChatGeneration(message=AIMessage(
+                content="To provide an accurate shop floor update, please clarify which area you would like to inspect: 1. Attendance, 2. Production, 3. Overtime."
+            ))])
+
+        @property
+        def _llm_type(self):
+            return "clarification_mock"
+
+    res = run_supervisor(
+        question="Is everything running fine on the shop floor today?",
+        model=ClarificationMockChatModel(),
+        total_timeout=5.0,
+    )
+    assert "please clarify" in res["answer"].lower()
+    assert res["steps"] == 1
+    assert len(res["selected_agents"]) == 0
+    assert len(res["tool_trace"]) == 0
+
+
+def test_filter_unverified_sentences():
+    """Verify that filter_unverified_sentences prunes sentences with unverified numbers while preserving verified ones."""
+    from app.agents.specialists import filter_unverified_sentences
+
+    tool_trace = [
+        {
+            "tool": "analyze_attrition",
+            "ok": True,
+            "output": {
+                "metrics": {
+                    "total_exits": 120,
+                    "attrition_rate": 7.1,
+                    "active_headcount": 1580,
+                }
+            },
+        }
+    ]
+
+    answer = (
+        "Plant IN-TN-01 recorded 120 verified exits for the period ending 2026-10-31. "
+        "The verified attrition rate was 7.1% across 1,580 active employees. "
+        "Additionally, 999 phantom workers unexpectedly departed without notification. "
+        "HR recommends reviewing exit interviews."
+    )
+
+    pruned = filter_unverified_sentences(answer, tool_trace, user_query="Annual attrition rate?")
+
+    # Verified sentences must be kept
+    assert "120 verified exits" in pruned
+    assert "7.1% across 1,580 active employees" in pruned
+    assert "HR recommends reviewing exit interviews" in pruned
+    # Sentence with unverified number (999) MUST be removed
+    assert "999" not in pruned
+    assert "phantom workers" not in pruned
+

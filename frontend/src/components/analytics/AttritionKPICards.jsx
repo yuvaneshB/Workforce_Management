@@ -114,20 +114,6 @@ export function AttritionKPICards({
               <div className="text-xl font-black text-[var(--text)] tracking-tight leading-tight">
                 {card.value}
               </div>
-              {card.trend ? (
-                <div className="text-[9.5px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-0.5 truncate">
-                  {card.trend.startsWith('+') ? (
-                    <TrendingUp className="w-2.5 h-2.5 shrink-0" />
-                  ) : (
-                    <TrendingDown className="w-2.5 h-2.5 shrink-0" />
-                  )}
-                  <span>{card.trend}</span>
-                </div>
-              ) : (
-                <div className="text-[9.5px] text-[var(--secondary)] truncate">
-                  {card.subtext}
-                </div>
-              )}
             </div>
           </Card>
         );

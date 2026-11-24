@@ -144,6 +144,7 @@ def get_workforce_summary(
     shift_id: str | None = None,
     employment_type: str | None = None,
     vendor_id: str | None = None,
+    team_id: str | None = None,
 ) -> WorkforceSummaryResponse:
     """Return aggregated workforce metrics derived from Neon records, optionally filtered by dimensions."""
     raw = workforce_repository.get_workforce_summary(
@@ -154,11 +155,13 @@ def get_workforce_summary(
         shift_id=shift_id,
         employment_type=employment_type,
         vendor_id=vendor_id,
+        team_id=team_id,
     )
     return WorkforceSummaryResponse(
         total_employees=raw["total_employees"],
         active_employees=raw["active_employees"],
         distinct_teams=raw["distinct_teams"],
+        distinct_departments=raw.get("distinct_departments", 0),
         permanent_count=raw.get("permanent_count", 0),
         vendor_count=raw.get("vendor_count", 0),
         resigned_employees=raw.get("resigned_employees", 0),

@@ -32,6 +32,9 @@ def get_attendance_records_for_planning(
     department_id: str | None = None,
     section_id: str | None = None,
     employee_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+    team_id: str | None = None,
 ) -> list[dict[str, Any]]:
     """Retrieve date-specific attendance records joined with employee,
     department, and section dimensions for availability and shortage calculations.
@@ -84,8 +87,18 @@ def get_attendance_records_for_planning(
         stmt = stmt.where(WorkforceAttendance.department_id == department_id)
     if section_id:
         stmt = stmt.where(EmployeeMaster.section_id == section_id)
+    if team_id and team_id.strip():
+        t_id = team_id.strip()
+        t_targets = [t_id]
+        if t_id.startswith("TEAM-"):
+            t_targets.append(t_id.replace("TEAM-", "S0"))
+        stmt = stmt.where(EmployeeMaster.section_id.in_(t_targets))
     if employee_id:
         stmt = stmt.where(WorkforceAttendance.employee_id == employee_id)
+    if employment_type:
+        stmt = stmt.where(func.lower(EmployeeMaster.employment_type) == employment_type.lower())
+    if vendor_id:
+        stmt = stmt.where(EmployeeMaster.vendor_id == vendor_id)
 
     stmt = stmt.order_by(WorkforceAttendance.employee_id)
     results = db.execute(stmt).mappings().all()
@@ -97,6 +110,11 @@ def get_team_roster_composition(
     *,
     plant_id: str | None = None,
     shift_id: str | None = None,
+    department_id: str | None = None,
+    section_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+    team_id: str | None = None,
 ) -> list[dict[str, Any]]:
     """Retrieve team assignments and headcount from employee_master."""
     stmt = (
@@ -113,6 +131,20 @@ def get_team_roster_composition(
         stmt = stmt.where(EmployeeMaster.plant_id == plant_id)
     if shift_id:
         stmt = stmt.where(EmployeeMaster.shift_id == shift_id)
+    if department_id:
+        stmt = stmt.where(EmployeeMaster.department_id == department_id)
+    if section_id:
+        stmt = stmt.where(EmployeeMaster.section_id == section_id)
+    if team_id and team_id.strip():
+        t_id = team_id.strip()
+        t_targets = [t_id]
+        if t_id.startswith("TEAM-"):
+            t_targets.append(t_id.replace("TEAM-", "S0"))
+        stmt = stmt.where(EmployeeMaster.section_id.in_(t_targets))
+    if employment_type:
+        stmt = stmt.where(func.lower(EmployeeMaster.employment_type) == employment_type.lower())
+    if vendor_id:
+        stmt = stmt.where(EmployeeMaster.vendor_id == vendor_id)
 
     stmt = stmt.group_by(EmployeeMaster.section_id, EmployeeMaster.shift_id, EmployeeMaster.plant_id)
     stmt = stmt.order_by(EmployeeMaster.plant_id, EmployeeMaster.shift_id, EmployeeMaster.section_id)

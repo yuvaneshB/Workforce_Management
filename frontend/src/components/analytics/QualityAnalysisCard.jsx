@@ -28,14 +28,9 @@ export function QualityAnalysisCard({
   return (
     <Card className="p-4 lg:col-span-3 flex flex-col justify-between min-h-[260px]">
       <div>
-        <div className="flex items-center justify-between gap-2 mb-2">
-          <div className="flex items-center gap-2 min-w-0">
-            <PieIcon className="w-4 h-4 shrink-0 text-[#6F3DBA]" aria-hidden="true" />
-            <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Quality Analysis</h2>
-          </div>
-          <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/40 px-1.5 py-0.5 rounded border border-emerald-200 dark:border-emerald-800 shrink-0">
-            {goodPct}% Yield
-          </span>
+        <div className="flex items-center gap-2 mb-2 min-w-0">
+          <PieIcon className="w-4 h-4 shrink-0 text-[#6F3DBA]" aria-hidden="true" />
+          <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Quality Analysis</h2>
         </div>
 
         {loading ? (
@@ -110,11 +105,6 @@ export function QualityAnalysisCard({
             </div>
           </div>
         )}
-      </div>
-
-      <div className="flex items-center justify-between pt-2 border-t border-[var(--border)] text-[9px] text-[var(--secondary)]">
-        <span>Rework: <strong className="text-[var(--text)]">{data?.total_rework_qty?.toLocaleString() ?? '24,852'} units</strong></span>
-        <span>Quality Grade: <strong className="text-emerald-600 font-bold">Class A</strong></span>
       </div>
     </Card>
   );

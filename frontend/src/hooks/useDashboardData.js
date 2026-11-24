@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { extractApiErrorMessage } from '../api/client';
 import {
   fetchAttendanceAnalytics,
@@ -54,6 +54,9 @@ export function useDashboardData({
   });
 
   const [loading, setLoading] = useState(true);
+  const [attendanceLoading, setAttendanceLoading] = useState(false);
+  const granularityRef = useRef(granularity);
+  granularityRef.current = granularity;
   const [error, setError] = useState(null);
   const [errors, setErrors] = useState({});
   const [reloadToken, setReloadToken] = useState(0);
@@ -129,7 +132,7 @@ export function useDashboardData({
             signal: controller.signal,
           }),
           fetchAttendanceAnalytics({
-            period: granularity,
+            period: granularityRef.current,
             startDate,
             endDate,
             plantId: plantId || undefined,
@@ -144,7 +147,7 @@ export function useDashboardData({
           fetchDepartmentAnalytics(commonFilters),
           fetchExperienceAnalytics(commonFilters),
           fetchNewJoinerAnalytics({
-            period: granularity,
+            period: granularityRef.current,
             ...commonFilters,
           }),
           fetchSectionAnalytics(commonFilters),
@@ -156,6 +159,8 @@ export function useDashboardData({
             shiftId: shiftId || undefined,
             departmentId: departmentId || undefined,
             sectionId: sectionId || undefined,
+            employmentType: employmentType || undefined,
+            vendorId: vendorId || undefined,
             signal: controller.signal,
           }),
           fetchShiftEfficiencyAnalytics({
@@ -165,6 +170,8 @@ export function useDashboardData({
             shiftId: shiftId || undefined,
             departmentId: departmentId || undefined,
             sectionId: sectionId || undefined,
+            employmentType: employmentType || undefined,
+            vendorId: vendorId || undefined,
             signal: controller.signal,
           }),
           fetchComplianceAnalytics(commonFilters),
@@ -175,29 +182,31 @@ export function useDashboardData({
             shiftId: shiftId || undefined,
             departmentId: departmentId || undefined,
             sectionId: sectionId || undefined,
+            employmentType: employmentType || undefined,
+            vendorId: vendorId || undefined,
             signal: controller.signal,
           }),
           fetchWorkforceShortages({
             date: startDate || '2026-08-01',
             plantId: plantId || undefined,
             shiftId: shiftId || undefined,
+            departmentId: departmentId || undefined,
+            sectionId: sectionId || undefined,
+            employmentType: employmentType || undefined,
+            vendorId: vendorId || undefined,
             signal: controller.signal,
           }),
           fetchSinglePersonDependency({
             plantId: plantId || undefined,
             shiftId: shiftId || undefined,
             date: startDate || '2026-08-01',
-            signal: controller.signal,
-          }),
-          fetchAttritionAnalytics({
-            startDate,
-            endDate,
-            plantId: plantId || undefined,
             departmentId: departmentId || undefined,
             sectionId: sectionId || undefined,
-            shiftId: shiftId || undefined,
+            employmentType: employmentType || undefined,
+            vendorId: vendorId || undefined,
             signal: controller.signal,
           }),
+          fetchAttritionAnalytics(commonFilters),
         ]);
 
         if (!active) return;
@@ -349,9 +358,49 @@ export function useDashboardData({
     sectionId,
     employmentType,
     vendorId,
-    granularity,
     reloadToken,
   ]);
+
+  // Isolated Granularity Effect: only re-fetches attendance trends for AttendanceTrendChart without reloading the entire page
+  const isInitialGranularityMount = useRef(true);
+  useEffect(() => {
+    if (isInitialGranularityMount.current) {
+      isInitialGranularityMount.current = false;
+      return;
+    }
+
+    let active = true;
+    async function updateGranularity() {
+      setAttendanceLoading(true);
+      try {
+        const res = await fetchAttendanceAnalytics({
+          period: granularity,
+          startDate,
+          endDate,
+          plantId: plantId || undefined,
+          shiftId: shiftId || undefined,
+          departmentId: departmentId || undefined,
+          sectionId: sectionId || undefined,
+          employmentType: employmentType || undefined,
+          vendorId: vendorId || undefined,
+        });
+        if (active && res) {
+          setAttendanceAnalytics(res);
+        }
+      } catch {
+        // preserve previous trend data on non-blocking error
+      } finally {
+        if (active) {
+          setAttendanceLoading(false);
+        }
+      }
+    }
+
+    updateGranularity();
+    return () => {
+      active = false;
+    };
+  }, [granularity]);
 
   return {
     workforceSummary,
@@ -372,6 +421,7 @@ export function useDashboardData({
     singlePersonDependency,
     filterOptions,
     loading,
+    attendanceLoading,
     error,
     errors,
     refetch,

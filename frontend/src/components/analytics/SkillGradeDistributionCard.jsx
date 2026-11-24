@@ -45,9 +45,6 @@ export function SkillGradeDistributionCard({
               Skill Grade Distribution (L1 – L4)
             </h2>
           </div>
-          <span className="text-[9px] font-bold text-purple-600 bg-purple-50 dark:bg-purple-950/40 px-1.5 py-0.5 rounded border border-purple-200 dark:border-purple-800 shrink-0">
-            {totalEmployees > 0 ? `${totalEmployees} Staff` : 'No Connection'}
-          </span>
         </div>
 
         {loading ? (

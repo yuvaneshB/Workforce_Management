@@ -168,6 +168,19 @@ def get_workforce_shortage(
                 shift_id=clean_shift,
             )
 
+            scheduled_teams = result.get("scheduled_teams") or []
+            role_shortages = result.get("role_shortages") or {}
+            trimmed_teams = scheduled_teams[:5] if isinstance(scheduled_teams, list) else scheduled_teams
+            if isinstance(role_shortages, dict) and len(role_shortages) > 5:
+                sorted_roles = sorted(
+                    role_shortages.items(),
+                    key=lambda x: (x[1] if isinstance(x[1], (int, float)) else 0),
+                    reverse=True,
+                )
+                trimmed_role_shortages = dict(sorted_roles[:5])
+            else:
+                trimmed_role_shortages = role_shortages
+
             return {
                 "status": "success",
                 "date": result["date"],
@@ -183,9 +196,10 @@ def get_workforce_shortage(
                 "leave_count": result["leave_count"],
                 "late_count": result["late_count"],
                 "calculation_explanation": result["calculation_explanation"],
-                "role_shortages": result["role_shortages"],
+                "role_shortages": trimmed_role_shortages,
                 "team_composition_validated": result["team_composition_validated"],
-                "scheduled_teams": result["scheduled_teams"],
+                "scheduled_teams": trimmed_teams,
+                "total_scheduled_teams": len(scheduled_teams) if isinstance(scheduled_teams, list) else 0,
                 "limitations": result["limitations"],
             }
     except ValueError as err:
@@ -254,6 +268,12 @@ def get_shift_workforce_availability(
                 section_id=clean_sec,
             )
 
+            by_role = result.get("by_role") or {}
+            if isinstance(by_role, dict) and len(by_role) > 5:
+                trimmed_by_role = dict(list(by_role.items())[:5])
+            else:
+                trimmed_by_role = by_role
+
             return {
                 "status": "success",
                 "date": result["date"],
@@ -271,7 +291,7 @@ def get_shift_workforce_availability(
                 "availability_rate": result["availability_rate"],
                 "absenteeism_rate": result["absenteeism_rate"],
                 "late_policy": result["late_policy"],
-                "by_role": result["by_role"],
+                "by_role": trimmed_by_role,
                 "by_shift": result["by_shift"],
                 "by_plant": result["by_plant"],
             }

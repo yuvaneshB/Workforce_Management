@@ -35,9 +35,6 @@ export function ShiftQualityPerformanceCard({
               Shift-wise Quality Performance
             </h2>
           </div>
-          <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/40 px-1.5 py-0.5 rounded border border-emerald-200 dark:border-emerald-800 shrink-0">
-            {goodPct}% Yield
-          </span>
         </div>
 
         {loading ? (

@@ -41,6 +41,7 @@ class WorkforceSummaryResponse(BaseModel):
     total_employees: int
     active_employees: int
     distinct_teams: int
+    distinct_departments: int = 0
     permanent_count: int = 0
     vendor_count: int = 0
     resigned_employees: int = 0

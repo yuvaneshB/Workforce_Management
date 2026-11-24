@@ -59,16 +59,11 @@ export function PlantProductionCard({
   return (
     <Card className="p-4 lg:col-span-4 flex flex-col justify-between min-h-[260px]">
       <div>
-        <div className="flex items-center justify-between gap-2 mb-2">
-          <div className="flex items-center gap-2 min-w-0">
-            <Factory className="w-4 h-4 shrink-0 text-[#4D8EEB]" aria-hidden="true" />
-            <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">
-              Plant-wise Production Comparison
-            </h2>
-          </div>
-          <span className="text-[10px] font-semibold text-blue-600 bg-blue-50 dark:bg-blue-950/40 px-1.5 py-0.5 rounded border border-blue-200 dark:border-blue-800 shrink-0">
-            2 Facilities
-          </span>
+        <div className="flex items-center gap-2 mb-2 min-w-0">
+          <Factory className="w-4 h-4 shrink-0 text-[#4D8EEB]" aria-hidden="true" />
+          <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">
+            Plant-wise Production Comparison
+          </h2>
         </div>
 
         {loading ? (
@@ -112,17 +107,14 @@ export function PlantProductionCard({
         )}
       </div>
 
-      {/* Legend & Summary */}
-      <div className="flex items-center justify-between pt-2 border-t border-[var(--border)] text-[9px] text-[var(--secondary)]">
-        <div className="flex items-center gap-3">
-          <span className="flex items-center gap-1 font-bold text-[var(--text)]">
-            <span className="w-2 h-2 rounded-full bg-[#4D8EEB]" /> Actual
-          </span>
-          <span className="flex items-center gap-1 font-bold text-[var(--text)]">
-            <span className="w-2 h-2 rounded-full bg-[#DDD6FE]" /> Target
-          </span>
-        </div>
-        <span>Plant 1: <strong>83.2%</strong> | Plant 2: <strong>83.1%</strong></span>
+      {/* Legend */}
+      <div className="flex items-center gap-3 pt-2 border-t border-[var(--border)] text-[9px] text-[var(--secondary)]">
+        <span className="flex items-center gap-1 font-bold text-[var(--text)]">
+          <span className="w-2 h-2 rounded-full bg-[#4D8EEB]" /> Actual
+        </span>
+        <span className="flex items-center gap-1 font-bold text-[var(--text)]">
+          <span className="w-2 h-2 rounded-full bg-[#DDD6FE]" /> Target
+        </span>
       </div>
     </Card>
   );

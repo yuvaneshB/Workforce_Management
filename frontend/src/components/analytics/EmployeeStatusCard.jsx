@@ -10,9 +10,12 @@ export function EmployeeStatusCard({
   employees = [],
   loading = false,
   error = null,
+  className = '',
 }) {
   const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const palette = CHART_COLORS[theme] || CHART_COLORS.light;
+  const sliceStroke = isDark ? (palette.surface || '#192235') : '#FFFFFF';
 
   const hasData = !error && (workforceSummary?.total_employees != null || employees.length > 0);
 
@@ -20,7 +23,6 @@ export function EmployeeStatusCard({
   let resignedCount = workforceSummary?.resigned_employees ?? 0;
   let inactiveCount = workforceSummary?.inactive_employees ?? 0;
 
-  // Robust extraction from by_active_status
   if (workforceSummary?.by_active_status && workforceSummary.by_active_status.length > 0) {
     workforceSummary.by_active_status.forEach((item) => {
       const key = String(item.key || '').toLowerCase();
@@ -44,47 +46,33 @@ export function EmployeeStatusCard({
   }
 
   return (
-    <Card className="p-4 lg:col-span-4 flex flex-col justify-between min-h-[220px]">
+    <Card className={`p-4 flex flex-col justify-between h-full min-h-[340px] ${className}`}>
       <div>
-        <div className="flex items-center justify-between gap-2 mb-2">
-          <div className="flex items-center gap-2 min-w-0">
-            <ShieldCheck className="w-4 h-4 shrink-0" style={{ color: '#0E9C86' }} aria-hidden="true" />
-            <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Employee Status Distribution</h2>
-          </div>
-          <span
-            className={`text-[10px] font-semibold px-1.5 py-0.5 rounded border shrink-0 ${
-              hasData
-                ? 'text-emerald-600 bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800'
-                : 'text-slate-500 bg-slate-50 dark:bg-slate-900 border-slate-200'
-            }`}
-          >
-            {hasData ? `${activePct}% Active` : 'No Connection'}
-          </span>
+        <div className="flex items-center gap-2 mb-2 min-w-0">
+          <ShieldCheck className="w-4 h-4 shrink-0" style={{ color: '#0E9C86' }} aria-hidden="true" />
+          <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Employee Status Distribution</h2>
         </div>
 
         {loading ? (
-          <LoadingSkeleton className="h-32 w-full rounded-lg" />
+          <LoadingSkeleton className="h-[220px] w-full rounded-lg my-1" />
         ) : !hasData || totalHeadcount === 0 ? (
-          <div className="h-32 w-full my-1 flex flex-col items-center justify-center text-center p-2 bg-[var(--surface-hover)]/30 rounded-lg border border-dashed border-[var(--border)]">
+          <div className="h-[220px] w-full my-1 flex flex-col items-center justify-center text-center p-2 bg-[var(--surface-hover)]/30 rounded-lg border border-dashed border-[var(--border)]">
             <ShieldCheck className="w-5 h-5 text-slate-400 mb-1 opacity-60" />
             <p className="text-xs font-bold text-[var(--text)]">No Status Data</p>
-            <p className="text-[10px] text-[var(--secondary)] mt-0.5">
-              Connect to FastAPI backend to view live status distribution.
-            </p>
           </div>
         ) : (
-          <div className="relative w-full h-32 flex items-center justify-center my-1">
-            <ResponsiveContainer width="100%" height={128}>
+          <div className="relative w-full h-[220px] flex items-center justify-center my-1">
+            <ResponsiveContainer width="100%" height={220}>
               <PieChart>
                 <Pie
                   data={chartData}
                   cx="50%"
                   cy="50%"
-                  innerRadius={42}
-                  outerRadius={58}
-                  paddingAngle={2}
+                  innerRadius={0}
+                  outerRadius={78}
                   dataKey="value"
-                  stroke="none"
+                  stroke={sliceStroke}
+                  strokeWidth={2}
                 >
                   {chartData.map((entry, index) => (
                     <Cell key={`cell-status-${index}`} fill={entry.color} />
@@ -102,42 +90,43 @@ export function EmployeeStatusCard({
                 />
               </PieChart>
             </ResponsiveContainer>
-
-            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-              <span className="text-base font-black text-[var(--text)] leading-none">
-                {totalHeadcount.toLocaleString()}
-              </span>
-              <span className="text-[8px] font-bold text-emerald-600 uppercase tracking-wider mt-0.5">
-                Total
-              </span>
-            </div>
           </div>
         )}
       </div>
 
-      <div className="space-y-1 pt-2 border-t border-[var(--border)] text-[11px]">
+      <div className="space-y-1.5 pt-2 border-t border-[var(--border)] text-[11px]">
         <div className="flex items-center justify-between">
           <span className="flex items-center gap-1.5 font-semibold text-[var(--text)]">
             <span className="w-2 h-2 rounded-full bg-[#0E9C86]" />
-            Active Employees:
+            Active:
           </span>
-          <span className={`font-bold ${hasData ? 'text-emerald-600' : 'text-slate-400'}`}>
-            {hasData ? `${activeCount.toLocaleString()} (${activePct}%)` : '—'}
+          <span className="font-extrabold text-[var(--text)] tabular-nums">
+            {totalHeadcount > 0 ? `${activeCount.toLocaleString()} (${activePct}%)` : '—'}
           </span>
         </div>
         <div className="flex items-center justify-between">
-          <span className="flex items-center gap-1.5 font-semibold text-[var(--secondary)]">
+          <span className="flex items-center gap-1.5 font-semibold text-[var(--text)]">
             <span className="w-2 h-2 rounded-full bg-[#E45C72]" />
-            Resigned / Inactive:
+            Resigned:
           </span>
-          <span className={`font-bold ${hasData ? 'text-[var(--secondary)]' : 'text-slate-400'}`}>
-            {hasData ? `${(resignedCount + inactiveCount).toLocaleString()} (${resignedPct}%)` : '—'}
+          <span className="font-extrabold text-[var(--text)] tabular-nums">
+            {totalHeadcount > 0 ? `${resignedCount.toLocaleString()} (${resignedPct}%)` : '—'}
           </span>
         </div>
-        <p className="text-[9px] text-[var(--secondary)] italic pt-0.5">
-          Resigned employees (120 historical exits) are tracked with verified resignation dates in Neon DB.
-        </p>
+        {inactiveCount > 0 && (
+          <div className="flex items-center justify-between">
+            <span className="flex items-center gap-1.5 font-semibold text-[var(--secondary)]">
+              <span className="w-2 h-2 rounded-full bg-[#9CA3AF]" />
+              Inactive:
+            </span>
+            <span className="font-extrabold text-slate-500 tabular-nums">
+              {`${inactiveCount.toLocaleString()} (${inactivePct}%)`}
+            </span>
+          </div>
+        )}
       </div>
     </Card>
   );
 }
+
+export default EmployeeStatusCard;

@@ -87,6 +87,10 @@ def get_single_person_dependency(
     plant_id: str | None = None,
     shift_id: str | None = None,
     date: dt.date | str | None = None,
+    department_id: str | None = None,
+    section_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
 ) -> dict[str, Any]:
     """Analyze single-person dependency risks across plant roles and certifications.
 
@@ -116,6 +120,14 @@ def get_single_person_dependency(
         active_stmt = active_stmt.where(Workforce.plant_id == plant_id)
     if canonical_shift:
         active_stmt = active_stmt.where(Workforce.home_shift == canonical_shift)
+    if department_id:
+        active_stmt = active_stmt.where(Workforce.department_id == department_id)
+    if section_id:
+        active_stmt = active_stmt.where(Workforce.section_id == section_id)
+    if employment_type:
+        active_stmt = active_stmt.where(func.lower(Workforce.employment_type) == employment_type.lower())
+    if vendor_id:
+        active_stmt = active_stmt.where(Workforce.vendor_id == vendor_id)
 
     active_records = db.execute(active_stmt).mappings().all()
 
@@ -131,7 +143,12 @@ def get_single_person_dependency(
     if canonical_shift:
         att_stmt = att_stmt.where(WorkforceAttendance.shift_id == canonical_shift)
 
-    attendance_rows = db.execute(att_stmt).mappings().all()
+    active_emp_ids = [emp["employee_id"] for emp in active_records]
+    if not active_emp_ids:
+        attendance_rows = []
+    else:
+        att_stmt = att_stmt.where(WorkforceAttendance.employee_id.in_(active_emp_ids))
+        attendance_rows = db.execute(att_stmt).mappings().all()
     # Build attendance map: employee_id -> attendance_status
     attendance_map: dict[str, str] = {
         row["employee_id"]: (row["attendance_status"] or "").upper()

@@ -101,6 +101,9 @@ def get_gender_analytics(
     department_id: str | None = Query(default=None),
     section_id: str | None = Query(default=None),
     plant_id: str | None = Query(default=None, description="Filter by plant_id"),
+    employment_type: str | None = Query(default=None, description="Filter by employment_type (Permanent, Vendor)"),
+    vendor_id: str | None = Query(default=None, description="Filter by vendor_id (e.g. V01)"),
+    team_id: str | None = Query(default=None, description="Filter by team_id"),
     db: Session = Depends(get_readonly_db),
 ) -> GenderAnalyticsResponse:
     return workforce_analytics_service.get_gender_analytics(
@@ -111,6 +114,9 @@ def get_gender_analytics(
         department_id=department_id,
         section_id=section_id,
         plant_id=plant_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
     )
 
 
@@ -126,6 +132,9 @@ def get_department_analytics(
     department_id: str | None = Query(default=None),
     section_id: str | None = Query(default=None),
     plant_id: str | None = Query(default=None, description="Filter by plant_id"),
+    employment_type: str | None = Query(default=None, description="Filter by employment_type (Permanent, Vendor)"),
+    vendor_id: str | None = Query(default=None, description="Filter by vendor_id (e.g. V01)"),
+    team_id: str | None = Query(default=None, description="Filter by team_id"),
     db: Session = Depends(get_readonly_db),
 ) -> DepartmentAnalyticsResponse:
     return workforce_analytics_service.get_department_analytics(
@@ -136,6 +145,9 @@ def get_department_analytics(
         department_id=department_id,
         section_id=section_id,
         plant_id=plant_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
     )
 
 
@@ -151,6 +163,9 @@ def get_experience_analytics(
     department_id: str | None = Query(default=None),
     section_id: str | None = Query(default=None),
     plant_id: str | None = Query(default=None, description="Filter by plant_id"),
+    employment_type: str | None = Query(default=None, description="Filter by employment_type (Permanent, Vendor)"),
+    vendor_id: str | None = Query(default=None, description="Filter by vendor_id (e.g. V01)"),
+    team_id: str | None = Query(default=None, description="Filter by team_id"),
     db: Session = Depends(get_readonly_db),
 ) -> ExperienceAnalyticsResponse:
     return workforce_analytics_service.get_experience_analytics(
@@ -161,6 +176,9 @@ def get_experience_analytics(
         department_id=department_id,
         section_id=section_id,
         plant_id=plant_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
     )
 
 
@@ -177,6 +195,9 @@ def get_new_joiner_analytics(
     department_id: str | None = Query(default=None),
     section_id: str | None = Query(default=None),
     plant_id: str | None = Query(default=None, description="Filter by plant_id"),
+    employment_type: str | None = Query(default=None, description="Filter by employment_type (Permanent, Vendor)"),
+    vendor_id: str | None = Query(default=None, description="Filter by vendor_id (e.g. V01)"),
+    team_id: str | None = Query(default=None, description="Filter by team_id"),
     db: Session = Depends(get_readonly_db),
 ) -> NewJoinerAnalyticsResponse:
     return workforce_analytics_service.get_new_joiner_analytics(
@@ -188,6 +209,9 @@ def get_new_joiner_analytics(
         department_id=department_id,
         section_id=section_id,
         plant_id=plant_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
     )
 
 
@@ -199,6 +223,9 @@ def get_section_analytics(
     department_id: str | None = Query(default=None),
     section_id: str | None = Query(default=None),
     plant_id: str | None = Query(default=None, description="Filter by plant_id"),
+    employment_type: str | None = Query(default=None, description="Filter by employment_type (Permanent, Vendor)"),
+    vendor_id: str | None = Query(default=None, description="Filter by vendor_id (e.g. V01)"),
+    team_id: str | None = Query(default=None, description="Filter by team_id"),
     db: Session = Depends(get_readonly_db),
 ) -> SectionAnalyticsResponse:
     return workforce_analytics_service.get_section_analytics(
@@ -209,16 +236,30 @@ def get_section_analytics(
         department_id=department_id,
         section_id=section_id,
         plant_id=plant_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
     )
 
 
 @router.get("/vendors", response_model=VendorAnalyticsResponse, summary="Get vendor-wise workforce distribution")
 def get_vendor_analytics(
     plant_id: str | None = Query(default=None, description="Filter by plant_id (IN-TN-01, IN-KA-01)"),
+    shift_id: str | None = Query(default=None, description="Filter by shift_id"),
+    department_id: str | None = Query(default=None, description="Filter by department_id"),
+    section_id: str | None = Query(default=None, description="Filter by section_id"),
+    team_id: str | None = Query(default=None, description="Filter by team_id"),
     db: Session = Depends(get_readonly_db),
 ) -> VendorAnalyticsResponse:
     """Return distinct employee counts, active/assigned status, and shares across all staffing vendors."""
-    return workforce_analytics_service.get_vendor_analytics(db, plant_id=plant_id)
+    return workforce_analytics_service.get_vendor_analytics(
+        db,
+        plant_id=plant_id,
+        shift_id=shift_id,
+        department_id=department_id,
+        section_id=section_id,
+        team_id=team_id,
+    )
 
 
 
@@ -230,6 +271,9 @@ def get_overtime_analytics(
     department_id: str | None = Query(default=None, description="Filter by department_id"),
     section_id: str | None = Query(default=None, description="Filter by section_id"),
     plant_id: str | None = Query(default=None, description="Filter by plant_id"),
+    employment_type: str | None = Query(default=None, description="Filter by employment_type (Permanent, Vendor)"),
+    vendor_id: str | None = Query(default=None, description="Filter by vendor_id (e.g. V01)"),
+    team_id: str | None = Query(default=None, description="Filter by team_id"),
     db: Session = Depends(get_readonly_db),
 ) -> dict[str, Any]:
     return workforce_analytics_service.get_overtime_analytics(
@@ -240,6 +284,9 @@ def get_overtime_analytics(
         department_id=department_id,
         section_id=section_id,
         plant_id=plant_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
     )
 
 
@@ -250,6 +297,10 @@ def get_team_production_analytics(
     plant_id: str | None = Query(default=None, description="Filter by plant_id"),
     shift_id: str | None = Query(default=None, description="Filter by shift_id (A, B, C)"),
     operator_team: str | None = Query(default=None, description="Filter by operator_team (e.g. TEAM-01)"),
+    department_id: str | None = Query(default=None, description="Filter by department_id"),
+    section_id: str | None = Query(default=None, description="Filter by section_id"),
+    employment_type: str | None = Query(default=None, description="Filter by employment_type (Permanent, Vendor)"),
+    vendor_id: str | None = Query(default=None, description="Filter by vendor_id (e.g. V01)"),
     db: Session = Depends(get_readonly_db),
 ) -> dict[str, Any]:
     return workforce_analytics_service.get_team_production_analytics(
@@ -259,6 +310,10 @@ def get_team_production_analytics(
         plant_id=plant_id,
         shift_id=shift_id,
         operator_team=operator_team,
+        department_id=department_id,
+        section_id=section_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
     )
 
 
@@ -268,6 +323,11 @@ def get_shift_efficiency_analytics(
     end_date: dt.date | None = Query(default=None, description="Inclusive end date (YYYY-MM-DD)"),
     plant_id: str | None = Query(default=None, description="Filter by plant_id"),
     shift_id: str | None = Query(default=None, description="Filter by shift_id (A, B, C)"),
+    department_id: str | None = Query(default=None, description="Filter by department_id"),
+    section_id: str | None = Query(default=None, description="Filter by section_id"),
+    employment_type: str | None = Query(default=None, description="Filter by employment_type (Permanent, Vendor)"),
+    vendor_id: str | None = Query(default=None, description="Filter by vendor_id (e.g. V01)"),
+    team_id: str | None = Query(default=None, description="Filter by team_id"),
     db: Session = Depends(get_readonly_db),
 ) -> dict[str, Any]:
     return workforce_analytics_service.get_shift_efficiency_analytics(
@@ -276,6 +336,11 @@ def get_shift_efficiency_analytics(
         end_date=end_date,
         plant_id=plant_id,
         shift_id=shift_id,
+        department_id=department_id,
+        section_id=section_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
     )
 
 
@@ -286,6 +351,10 @@ def get_skills_analytics(
     team_id: str | None = Query(default=None, description="Filter by team_id"),
     shift_id: str | None = Query(default=None, description="Filter by home shift_id (A, B, C)"),
     plant_id: str | None = Query(default=None, description="Filter by plant_id"),
+    start_date: dt.date | None = Query(default=None, description="Inclusive start date (YYYY-MM-DD)"),
+    end_date: dt.date | None = Query(default=None, description="Inclusive end date (YYYY-MM-DD)"),
+    employment_type: str | None = Query(default=None, description="Filter by employment_type (Permanent, Vendor)"),
+    vendor_id: str | None = Query(default=None, description="Filter by vendor_id (e.g. V01)"),
     db: Session = Depends(get_readonly_db),
 ) -> dict[str, Any]:
     return workforce_analytics_service.get_skills_analytics(
@@ -295,6 +364,10 @@ def get_skills_analytics(
         team_id=team_id,
         shift_id=shift_id,
         plant_id=plant_id,
+        start_date=start_date,
+        end_date=end_date,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
     )
 
 
@@ -306,6 +379,9 @@ def get_compliance_analytics(
     department_id: str | None = Query(default=None, description="Filter by department_id"),
     section_id: str | None = Query(default=None, description="Filter by section_id"),
     plant_id: str | None = Query(default=None, description="Filter by plant_id"),
+    employment_type: str | None = Query(default=None, description="Filter by employment_type (Permanent, Vendor)"),
+    vendor_id: str | None = Query(default=None, description="Filter by vendor_id (e.g. V01)"),
+    team_id: str | None = Query(default=None, description="Filter by team_id"),
     db: Session = Depends(get_readonly_db),
 ) -> dict[str, Any]:
     return workforce_analytics_service.get_compliance_analytics(
@@ -316,6 +392,9 @@ def get_compliance_analytics(
         department_id=department_id,
         section_id=section_id,
         plant_id=plant_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
     )
 
 
@@ -330,6 +409,10 @@ def get_attrition_analytics(
     plant_id: str | None = Query(default=None, description="Filter by plant_id (IN-TN-01, IN-KA-01)"),
     department_id: str | None = Query(default=None, description="Filter by department_id"),
     section_id: str | None = Query(default=None, description="Filter by section_id"),
+    shift_id: str | None = Query(default=None, description="Filter by shift_id"),
+    employment_type: str | None = Query(default=None, description="Filter by employment_type (Permanent, Vendor)"),
+    vendor_id: str | None = Query(default=None, description="Filter by vendor_id (e.g. V01)"),
+    team_id: str | None = Query(default=None, description="Filter by team_id"),
     db: Session = Depends(get_readonly_db),
 ) -> AttritionAnalyticsResponse:
     """Return workforce attrition summary, trends, reason distributions, and employee exits from Neon."""
@@ -340,6 +423,10 @@ def get_attrition_analytics(
         plant_id=plant_id,
         department_id=department_id,
         section_id=section_id,
+        shift_id=shift_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
     )
 
 

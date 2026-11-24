@@ -34,6 +34,7 @@ def list_employees(
     role: str | None = Query(default=None, description="Filter by workforce role"),
     skill_grade: str | None = Query(default=None, description="Filter by skill_grade (e.g. L1-L4)"),
     certification: str | None = Query(default=None, description="Filter by certification"),
+    shift_id: str | None = Query(default=None, description="Filter by shift_id (A, B, C)"),
     home_shift: str | None = Query(default=None, description="Filter by home_shift (A, B, C)"),
     active_status: str | None = Query(default=None, description="Filter by active_status"),
     sort_by: Literal[
@@ -63,7 +64,7 @@ def list_employees(
         role=role,
         skill_grade=skill_grade,
         certification=certification,
-        home_shift=home_shift,
+        home_shift=shift_id or home_shift,
         active_status=active_status,
         sort_by=sort_by,
         sort_order=sort_order,
@@ -103,6 +104,9 @@ def get_workforce_summary(
     shift_id: str | None = Query(default=None, description="Filter by shift_id (A, B, C)"),
     employment_type: str | None = Query(default=None, description="Filter by employment_type (Permanent, Vendor)"),
     vendor_id: str | None = Query(default=None, description="Filter by vendor_id (e.g. V01)"),
+    team_id: str | None = Query(default=None, description="Filter by team_id (e.g. TEAM-01)"),
+    start_date: dt.date | None = Query(default=None, description="Start date (YYYY-MM-DD)"),
+    end_date: dt.date | None = Query(default=None, description="End date (YYYY-MM-DD)"),
     db: Session = Depends(get_readonly_db),
 ) -> WorkforceSummaryResponse:
     """Return workforce counts and data coverage windows from Neon, optionally filtered by dimensions."""
@@ -114,6 +118,7 @@ def get_workforce_summary(
         shift_id=shift_id,
         employment_type=employment_type,
         vendor_id=vendor_id,
+        team_id=team_id,
     )
 
 

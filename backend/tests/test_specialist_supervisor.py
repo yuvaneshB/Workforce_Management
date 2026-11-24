@@ -207,6 +207,7 @@ def test_supervisor_tool_error_handled():
         question="Check vendor headcount for IN-NONEXISTENT.",
         on_event=lambda ev: events.append(ev),
         model=model,
+        return_direct_if_single_tool=False,
     )
 
     assert "could not retrieve vendor records" in result["answer"]
@@ -262,6 +263,7 @@ def test_supervisor_max_steps_stop():
         question="Loop forever.",
         model=model,
         max_steps=2,
+        return_direct_if_single_tool=False,
     )
 
     assert result["steps"] == 2
@@ -269,27 +271,23 @@ def test_supervisor_max_steps_stop():
     assert "Forced final supervisor response" in result["answer"]
 
 
-def test_llm_down_or_unconfigured_legacy_fallback(monkeypatch):
-    """Verify orchestrator execute_query cleanly falls back to legacy pipeline when LLM is unavailable."""
-    monkeypatch.setenv("AGENT_MODE", "tools")
-
+def test_llm_down_or_unconfigured_unavailable_response(monkeypatch):
+    """Verify orchestrator execute_query returns friendly unavailable response when LLM is unavailable."""
     # Simulate LLM unconfigured
     monkeypatch.setattr("app.agents.central_agent_orchestrator.is_llm_configured", lambda: False)
 
     orchestrator = CentralAgentOrchestrator()
     res = orchestrator.execute_query("What is the attendance rate in plant IN-KA-01?")
 
-    assert res["status"] == "success"
+    assert res["status"] == "failed"
     assert "conversation_id" in res
     assert "answer" in res
-    assert "key_metrics" in res
-    assert "tool_trace" in res
-    assert isinstance(res["tool_trace"], list)
+    assert res["answer"] == "The assistant is temporarily unavailable. Please try again in a moment."
+    assert res.get("tool_trace") == []
 
 
 def test_orchestrator_execute_query_supervisor_mode(monkeypatch):
-    """Verify orchestrator execute_query uses supervisor mode when AGENT_MODE=tools and LLM is configured."""
-    monkeypatch.setenv("AGENT_MODE", "tools")
+    """Verify orchestrator execute_query uses supervisor mode when LLM is configured."""
     monkeypatch.setattr("app.agents.central_agent_orchestrator.is_llm_configured", lambda: True)
 
     fake_sup_result = {
@@ -318,7 +316,6 @@ def test_stream_orchestration_supervisor_mode(monkeypatch):
     import asyncio
     import json
 
-    monkeypatch.setenv("AGENT_MODE", "tools")
     monkeypatch.setattr("app.agents.central_agent_orchestrator.is_llm_configured", lambda: True)
 
     def fake_run_supervisor(question, history=None, on_event=None, model=None, max_steps=6):

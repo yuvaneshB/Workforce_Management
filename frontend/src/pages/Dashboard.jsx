@@ -1,10 +1,6 @@
 import {
   AlertCircle,
-  Factory,
   RefreshCw,
-  ShieldCheck,
-  TrendingUp,
-  Users,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { AttendanceTrendChart } from '../components/dashboard/AttendanceTrendChart';
@@ -21,7 +17,6 @@ import { TrainingCompliance } from '../components/dashboard/TrainingCompliance';
 import { VendorWorkforceChart } from '../components/dashboard/VendorWorkforceChart';
 import { WorkforceAvailability } from '../components/dashboard/WorkforceAvailability';
 import { WorkforceKPICards } from '../components/dashboard/WorkforceKPICards';
-import { WorkforceProductivity } from '../components/dashboard/WorkforceProductivity';
 import { WorkforceShortage } from '../components/dashboard/WorkforceShortage';
 import { useDashboardData } from '../hooks/useDashboardData';
 
@@ -50,6 +45,7 @@ export function Dashboard() {
     planningShortages,
     filterOptions,
     loading,
+    attendanceLoading,
     error,
     errors,
     refetch,
@@ -64,8 +60,6 @@ export function Dashboard() {
     vendorId,
     granularity,
   });
-
-  const coverageWindow = workforceSummary?.attendance_coverage_window;
 
   function handleDateRangeChange({ startDate: newStart, endDate: newEnd }) {
     setStartDate(newStart || '');
@@ -161,7 +155,6 @@ export function Dashboard() {
         employmentType={employmentType}
         vendorId={vendorId}
         filterOptions={filterOptions}
-        coverageWindow={coverageWindow}
         onRefresh={refetch}
         loading={loading}
         onDateRangeChange={handleDateRangeChange}
@@ -174,40 +167,22 @@ export function Dashboard() {
         onReset={handleResetFilters}
       />
 
-      {/* 3. Executive KPI Cards (8 KPI Cards) */}
-      <div className="space-y-1.5">
-        <div className="flex items-center justify-between px-1">
-          <span className="text-[11px] font-extrabold uppercase tracking-wider text-[var(--secondary)] flex items-center gap-1.5">
-            <Users className="w-3.5 h-3.5 text-[var(--brand-purple)]" />
-            Executive Workforce Key Performance Indicators (8 Metrics)
-          </span>
-          <span className="text-[10px] text-[var(--secondary)]">
-            Verified Neon DB records
-          </span>
-        </div>
-        <WorkforceKPICards
-          workforceSummary={workforceSummary}
-          attendanceAnalytics={attendanceAnalytics}
-          overtimeAnalytics={overtimeAnalytics}
-          shiftEfficiencyAnalytics={shiftEfficiencyAnalytics}
-          planningShortages={planningShortages}
-          planningAvailability={planningAvailability}
-          attritionAnalytics={attritionAnalytics}
-          employmentType={employmentType}
-          vendorId={vendorId}
-          loading={loading}
-        />
-      </div>
+      {/* 3. Executive KPI Cards */}
+      <WorkforceKPICards
+        workforceSummary={workforceSummary}
+        attendanceAnalytics={attendanceAnalytics}
+        overtimeAnalytics={overtimeAnalytics}
+        shiftEfficiencyAnalytics={shiftEfficiencyAnalytics}
+        planningShortages={planningShortages}
+        planningAvailability={planningAvailability}
+        attritionAnalytics={attritionAnalytics}
+        employmentType={employmentType}
+        vendorId={vendorId}
+        loading={loading}
+      />
 
-      {/* 4. Section 6: Workforce Analytics Section */}
-      <div className="space-y-3 pt-2">
-        <div className="flex items-center gap-2 px-1 border-b border-[var(--border)]/60 pb-1.5">
-          <TrendingUp className="w-4 h-4 text-[var(--brand-purple)]" />
-          <h2 className="text-sm font-extrabold text-[var(--text)] tracking-tight">
-            Workforce Demographics & Analytics (Charts A – F)
-          </h2>
-        </div>
-
+      {/* 4. Workforce Analytics Section */}
+      <div className="space-y-4">
         {/* Row 4.1: Chart A (Attendance Trend) + Chart B (Permanent vs Vendor Distribution) */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 items-stretch">
           <div className="lg:col-span-2">
@@ -215,9 +190,10 @@ export function Dashboard() {
               attendanceAnalytics={attendanceAnalytics}
               granularity={granularity}
               onGranularityChange={setGranularity}
-              loading={loading}
+              loading={loading || attendanceLoading}
               error={errors?.attendanceAnalytics}
               onRetry={refetch}
+              minimal={true}
             />
           </div>
           <div>
@@ -226,6 +202,7 @@ export function Dashboard() {
               employmentType={employmentType}
               vendorId={vendorId}
               loading={loading}
+              variant="pie"
             />
           </div>
         </div>
@@ -262,15 +239,8 @@ export function Dashboard() {
         </div>
       </div>
 
-      {/* 5. Section 7: Manufacturing Workforce Operations */}
-      <div className="space-y-3 pt-2">
-        <div className="flex items-center gap-2 px-1 border-b border-[var(--border)]/60 pb-1.5">
-          <Factory className="w-4 h-4 text-[var(--brand-purple)]" />
-          <h2 className="text-sm font-extrabold text-[var(--text)] tracking-tight">
-            Manufacturing Operations & Shift Dispatch (Sections G – L)
-          </h2>
-        </div>
-
+      {/* 5. Manufacturing Workforce Operations */}
+      <div className="space-y-4">
         {/* Row 5.1: G (Workforce Availability) + H (Workforce Shortage Detection) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 items-stretch">
           <WorkforceAvailability
@@ -278,12 +248,14 @@ export function Dashboard() {
             workforceSummary={workforceSummary}
             attendanceAnalytics={attendanceAnalytics}
             loading={loading}
+            minimal={true}
           />
           <WorkforceShortage
             planningShortages={planningShortages}
             planningAvailability={planningAvailability}
             attendanceAnalytics={attendanceAnalytics}
             loading={loading}
+            minimal={true}
           />
         </div>
 
@@ -296,10 +268,11 @@ export function Dashboard() {
           planningAvailability={planningAvailability}
           workforceSummary={workforceSummary}
           loading={loading}
+          minimal={true}
         />
 
-        {/* Row 5.3: J (Overtime Analytics) + K (Production Performance) + L (Workforce Productivity) */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 items-stretch">
+        {/* Row 5.3: Overtime Analytics + Production Performance */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch">
           <OvertimeAnalytics
             overtimeAnalytics={overtimeAnalytics}
             workforceSummary={workforceSummary}
@@ -310,23 +283,11 @@ export function Dashboard() {
             teamProductionAnalytics={teamProductionAnalytics}
             loading={loading}
           />
-          <WorkforceProductivity
-            shiftEfficiencyAnalytics={shiftEfficiencyAnalytics}
-            teamProductionAnalytics={teamProductionAnalytics}
-            loading={loading}
-          />
         </div>
       </div>
 
-      {/* 6. Section 8: Workforce Capability & Compliance */}
-      <div className="space-y-3 pt-2">
-        <div className="flex items-center gap-2 px-1 border-b border-[var(--border)]/60 pb-1.5">
-          <ShieldCheck className="w-4 h-4 text-[var(--brand-purple)]" />
-          <h2 className="text-sm font-extrabold text-[var(--text)] tracking-tight">
-            Workforce Capability & Technical Compliance (Sections M & N)
-          </h2>
-        </div>
-
+      {/* 6. Workforce Capability & Compliance */}
+      <div className="space-y-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 items-stretch">
           <SkillsCoverage
             skillsAnalytics={skillsAnalytics}

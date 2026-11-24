@@ -33,6 +33,9 @@ def get_workforce_availability(
     shift_id: str | None = Query(default=None, description="Filter by shift_id (A, B, C)"),
     department_id: str | None = Query(default=None, description="Filter by department_id (e.g. DEPT-01)"),
     section_id: str | None = Query(default=None, description="Filter by section_id (e.g. SEC-01)"),
+    employment_type: str | None = Query(default=None, description="Filter by employment_type (Permanent, Vendor)"),
+    vendor_id: str | None = Query(default=None, description="Filter by vendor_id (e.g. V01)"),
+    team_id: str | None = Query(default=None, description="Filter by team_id (e.g. TEAM-01)"),
     db: Session = Depends(get_readonly_db),
 ) -> dict[str, Any]:
     """Return date-specific workforce availability breakdown."""
@@ -54,6 +57,9 @@ def get_workforce_availability(
         shift_id=shift_id,
         department_id=department_id,
         section_id=section_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
     )
 
 
@@ -66,6 +72,11 @@ def get_workforce_shortages(
     date: dt.date = Query(..., description="Target work_date in YYYY-MM-DD format"),
     plant_id: str | None = Query(default=None, description="Filter by plant_id (e.g. IN-KA-01, IN-TN-01)"),
     shift_id: str | None = Query(default=None, description="Filter by shift_id (A, B, C)"),
+    department_id: str | None = Query(default=None, description="Filter by department_id"),
+    section_id: str | None = Query(default=None, description="Filter by section_id"),
+    employment_type: str | None = Query(default=None, description="Filter by employment_type (Permanent, Vendor)"),
+    vendor_id: str | None = Query(default=None, description="Filter by vendor_id (e.g. V01)"),
+    team_id: str | None = Query(default=None, description="Filter by team_id (e.g. TEAM-01)"),
     db: Session = Depends(get_readonly_db),
 ) -> dict[str, Any]:
     """Detect plant/shift workforce shortages against operational staffing baselines."""
@@ -85,6 +96,11 @@ def get_workforce_shortages(
         target_date=date,
         plant_id=plant_id,
         shift_id=shift_id,
+        department_id=department_id,
+        section_id=section_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
     )
 
 

@@ -1,27 +1,34 @@
 import {
   Calendar,
+  Check,
   ChevronDown,
-  Filter,
   RefreshCw,
   RotateCcw,
 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { PLANT_OPTIONS } from '../../utils/constants';
 
-export const VENDOR_OPTIONS = [
-  { id: '', label: 'All Vendors' },
-  { id: 'V01', label: 'V01: Sri Vignesh Manpower Services' },
-  { id: 'V02', label: 'V02: Kovai Talent Solutions' },
-  { id: 'V03', label: 'V03: Namma Workforce Pvt Ltd' },
-  { id: 'V04', label: 'V04: Anand Industrial Staffing' },
-  { id: 'V05', label: 'V05: Karnataka Skill Force' },
-  { id: 'V06', label: 'V06: Prime HR Outsourcing' },
+export const SHIFT_OPTIONS = [
+  { id: '', label: 'All Shifts' },
+  { id: 'A', label: 'Shift A – GS1' },
+  { id: 'B', label: 'Shift B – S2' },
+  { id: 'C', label: 'Shift C – NS3' },
 ];
 
 export const EMPLOYMENT_TYPE_OPTIONS = [
-  { id: '', label: 'All Employment Types' },
-  { id: 'permanent', label: 'Permanent Employees' },
-  { id: 'vendor', label: 'Vendor Contract' },
+  { id: '', label: 'All Employees' },
+  { id: 'permanent', label: 'Permanent Staff' },
+  { id: 'vendor', label: 'Vendor Employees' },
+];
+
+export const VENDOR_OPTIONS = [
+  { id: '', label: 'All Vendors' },
+  { id: 'V01', label: 'V01: Sri Vignesh' },
+  { id: 'V02', label: 'V02: Kovai Talent' },
+  { id: 'V03', label: 'V03: Namma Workforce' },
+  { id: 'V04', label: 'V04: Anand Industrial' },
+  { id: 'V05', label: 'V05: Karnataka Skill' },
+  { id: 'V06', label: 'V06: Prime HR' },
 ];
 
 function formatDisplayDate(dateStr) {
@@ -35,6 +42,85 @@ function formatDisplayDate(dateStr) {
   }
 }
 
+/**
+ * Reusable custom dropdown menu control adhering to all strict design requirements:
+ * - Exactly h-10 height
+ * - Same border radius, padding, text color, font size
+ * - Same right-aligned chevron icon
+ * - Popover menu matching exact trigger width, max-height with scroll, hover/selected states, z-50
+ */
+function FilterDropdownControl({
+  value,
+  options = [],
+  placeholder = '',
+  onChange,
+  isOpen = false,
+  onToggle,
+  className = '',
+}) {
+  const selectedOption = options.find((opt) => opt.id === value);
+  const displayLabel = selectedOption?.label || placeholder;
+  const isSelected = Boolean(value);
+
+  return (
+    <div className={`relative w-full ${className}`}>
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        className={`w-full h-10 px-3 rounded-xl border text-xs font-semibold surface flex items-center justify-between gap-1.5 cursor-pointer shadow-2xs transition-all outline-none truncate select-none ${
+          isSelected
+            ? 'border-[var(--brand-purple)] text-[var(--brand-purple)] bg-[var(--brand-purple-soft)]/20 font-bold'
+            : 'border-[var(--border)] text-[var(--text)] hover:border-[var(--brand-purple)]/60'
+        }`}
+        title={displayLabel}
+      >
+        <span className="truncate flex-1 text-left min-w-0">{displayLabel}</span>
+        <ChevronDown
+          className={`w-3.5 h-3.5 shrink-0 text-[var(--secondary)] transition-transform duration-200 ${
+            isOpen ? 'rotate-180 text-[var(--brand-purple)]' : ''
+          }`}
+        />
+      </button>
+
+      {isOpen && (
+        <div
+          role="listbox"
+          className="absolute left-0 top-full mt-1.5 w-full z-50 surface rounded-xl border border-[var(--border)] shadow-xl max-h-60 overflow-y-auto py-1 animate-in fade-in zoom-in-95 duration-100"
+        >
+          {options.map((opt) => {
+            const active = opt.id === value;
+            return (
+              <button
+                key={opt.id}
+                type="button"
+                role="option"
+                aria-selected={active}
+                onClick={() => {
+                  onChange?.(opt.id);
+                  onToggle?.();
+                }}
+                className={`w-full px-3 py-2 text-left text-xs flex items-center justify-between transition-colors cursor-pointer hover:bg-[var(--surface-hover)] ${
+                  active
+                    ? 'bg-[var(--brand-purple-soft)]/35 text-[var(--brand-purple)] font-bold'
+                    : 'text-[var(--text)]'
+                }`}
+                title={opt.label}
+              >
+                <span className="truncate pr-2">{opt.label}</span>
+                {active && (
+                  <Check className="w-3.5 h-3.5 text-[var(--brand-purple)] shrink-0 ml-auto" />
+                )}
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function DashboardFilters({
   startDate = '',
   endDate = '',
@@ -45,7 +131,6 @@ export function DashboardFilters({
   employmentType = '',
   vendorId = '',
   filterOptions = { departments: [], sections: [] },
-  coverageWindow = null,
   onDateRangeChange,
   onPlantChange,
   onShiftChange,
@@ -57,27 +142,51 @@ export function DashboardFilters({
   onRefresh = null,
   loading = false,
 }) {
-  const [dateOpen, setDateOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
   const [tempStartDate, setTempStartDate] = useState(startDate || '');
   const [tempEndDate, setTempEndDate] = useState(endDate || '');
   const [validationError, setValidationError] = useState('');
-  const datePopoverRef = useRef(null);
+  const containerRef = useRef(null);
 
+  // Close open dropdown when clicking outside or pressing Escape
   useEffect(() => {
-    if (!dateOpen) return undefined;
-    function handleOutside(event) {
-      if (datePopoverRef.current && !datePopoverRef.current.contains(event.target)) {
-        setDateOpen(false);
+    if (!openDropdown) return undefined;
+
+    function handleClickOutside(e) {
+      if (containerRef.current && !containerRef.current.contains(e.target)) {
+        setOpenDropdown(null);
       }
     }
-    document.addEventListener('mousedown', handleOutside);
-    return () => document.removeEventListener('mousedown', handleOutside);
-  }, [dateOpen]);
 
-  function handleToggleOpen() {
-    setDateOpen((prev) => {
-      const next = !prev;
-      if (next) {
+    function handleKeyDown(e) {
+      if (e.key === 'Escape') {
+        setOpenDropdown(null);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [openDropdown]);
+
+  const hasActiveFilters = Boolean(
+    startDate ||
+      endDate ||
+      plantId ||
+      shiftId ||
+      department ||
+      section ||
+      employmentType ||
+      vendorId
+  );
+
+  function toggleDropdown(name) {
+    setOpenDropdown((prev) => {
+      const next = prev === name ? null : name;
+      if (next === 'date') {
         setTempStartDate(startDate || '');
         setTempEndDate(endDate || '');
         setValidationError('');
@@ -86,6 +195,7 @@ export function DashboardFilters({
     });
   }
 
+  // Format Date Range trigger label
   let dateRangeLabel = 'Select Date Range';
   if (startDate && endDate) {
     dateRangeLabel = `${formatDisplayDate(startDate)} – ${formatDisplayDate(endDate)}`;
@@ -120,7 +230,7 @@ export function DashboardFilters({
     setTempEndDate(end);
     setValidationError('');
     onDateRangeChange?.({ startDate: start, endDate: end });
-    setDateOpen(false);
+    setOpenDropdown(null);
   }
 
   function handleClearDates() {
@@ -128,6 +238,7 @@ export function DashboardFilters({
     setTempEndDate('');
     setValidationError('');
     onDateRangeChange?.({ startDate: '', endDate: '' });
+    setOpenDropdown(null);
   }
 
   function handleDoneDates() {
@@ -137,64 +248,60 @@ export function DashboardFilters({
     }
     setValidationError('');
     onDateRangeChange?.({ startDate: tempStartDate, endDate: tempEndDate });
-    setDateOpen(false);
+    setOpenDropdown(null);
   }
 
-  // Filter options derived exclusively from active employee database records
-  const availableDepts = filterOptions.departments || [];
-  const availableSecs = filterOptions.sections || [];
+  // Department options from active database records
+  const deptOptions = [
+    { id: '', label: 'All Departments' },
+    ...(filterOptions.departments || []).map((d) => ({
+      id: d.department_id || d.id,
+      label: d.department_name || d.name,
+    })),
+  ];
 
-  const hasActiveFilters = Boolean(
-    startDate ||
-      endDate ||
-      plantId ||
-      shiftId ||
-      department ||
-      section ||
-      employmentType ||
-      vendorId
-  );
-
-  const minDate = coverageWindow?.min_date;
-  const maxDate = coverageWindow?.max_date;
-  const coverageLabel =
-    minDate && maxDate
-      ? `${minDate} to ${maxDate}`
-      : 'Aug 01, 2026 – Oct 31, 2026';
-
-  const getSelectClass = (val) =>
-    `w-full h-9 pl-3 pr-7 rounded-xl border text-[11px] font-semibold surface cursor-pointer appearance-none shadow-2xs outline-none truncate transition-all ${
-      val
-        ? 'border-[var(--brand-purple)] text-[var(--brand-purple)] bg-[var(--brand-purple-soft)]/25 font-bold'
-        : 'border-[var(--border)] text-[var(--text)] hover:border-[var(--brand-purple)]/60'
-    }`;
+  // Section options from active database records
+  const secOptions = [
+    { id: '', label: 'All Sections' },
+    ...(filterOptions.sections || []).map((s) => ({
+      id: s.section_id || s.id,
+      label: s.section_name || s.name,
+    })),
+  ];
 
   return (
-    <div className="surface rounded-2xl border border-[var(--border)] p-2.5 sm:p-3 shadow-xs">
-      <div className="flex flex-wrap items-center justify-between gap-2.5">
-        {/* Filters Group */}
-        <div className="flex flex-wrap items-center gap-2 flex-1 min-w-0">
-          {/* 1. Date Range Filter */}
-          <div className="relative min-w-[155px] max-w-[210px] flex-1" ref={datePopoverRef}>
+    <div
+      ref={containerRef}
+      className="surface rounded-2xl border border-[var(--border)] p-3 shadow-xs"
+    >
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-[repeat(7,minmax(0,1fr))_auto] gap-2.5 items-center">
+        {/* 1. Date Range Filter */}
+        <div className="relative w-full">
             <button
               type="button"
-              onClick={handleToggleOpen}
-              className={`w-full h-9 px-3 rounded-xl border text-[11px] font-semibold surface flex items-center justify-between gap-1.5 cursor-pointer shadow-2xs transition-colors truncate ${
+              onClick={() => toggleDropdown('date')}
+              aria-haspopup="dialog"
+              aria-expanded={openDropdown === 'date'}
+              className={`w-full h-10 px-3 rounded-xl border text-xs font-semibold surface flex items-center justify-between gap-1.5 cursor-pointer shadow-2xs transition-all outline-none truncate select-none ${
                 startDate || endDate
-                  ? 'border-[var(--brand-purple)] text-[var(--brand-purple)] bg-[var(--brand-purple-soft)]/25 font-bold'
+                  ? 'border-[var(--brand-purple)] text-[var(--brand-purple)] bg-[var(--brand-purple-soft)]/20 font-bold'
                   : 'border-[var(--border)] text-[var(--text)] hover:border-[var(--brand-purple)]/60'
               }`}
               title="Filter by date range"
             >
-              <span className="flex items-center gap-1.5 truncate">
+              <span className="truncate flex items-center gap-1.5 text-left flex-1 min-w-0">
                 <Calendar className="w-3.5 h-3.5 text-[var(--brand-purple)] shrink-0" />
                 <span className="truncate">{dateRangeLabel}</span>
               </span>
-              <ChevronDown className="w-3 h-3 text-[var(--secondary)] shrink-0" />
+              <ChevronDown
+                className={`w-3.5 h-3.5 shrink-0 text-[var(--secondary)] transition-transform duration-200 ${
+                  openDropdown === 'date' ? 'rotate-180 text-[var(--brand-purple)]' : ''
+                }`}
+              />
             </button>
 
-            {dateOpen && (
-              <div className="absolute left-0 top-full mt-2 z-50 surface rounded-2xl border border-[var(--border)] p-3.5 shadow-xl w-72 space-y-3">
+            {openDropdown === 'date' && (
+              <div className="absolute left-0 top-full mt-1.5 z-50 surface rounded-2xl border border-[var(--border)] p-3.5 shadow-xl w-72 space-y-3 animate-in fade-in zoom-in-95 duration-100">
                 <div className="text-xs font-bold text-[var(--text)] flex items-center justify-between">
                   <span>Select Operational Dates</span>
                   <span className="text-[10px] text-[var(--secondary)] font-normal">2026 Dataset</span>
@@ -205,28 +312,28 @@ export function DashboardFilters({
                   <button
                     type="button"
                     onClick={() => handleApplyPreset('2026-08-01', '2026-10-31')}
-                    className="px-2 py-1 rounded-lg border border-[var(--border)] text-[10px] font-semibold hover:border-[var(--brand-purple)] hover:text-[var(--brand-purple)] text-left"
+                    className="px-2 py-1.5 rounded-lg border border-[var(--border)] text-[10px] font-semibold hover:border-[var(--brand-purple)] hover:text-[var(--brand-purple)] text-left cursor-pointer transition-colors"
                   >
-                    All (Aug-Oct 2026)
+                    All (Aug–Oct 2026)
                   </button>
                   <button
                     type="button"
                     onClick={() => handleApplyPreset('2026-08-01', '2026-08-31')}
-                    className="px-2 py-1 rounded-lg border border-[var(--border)] text-[10px] font-semibold hover:border-[var(--brand-purple)] hover:text-[var(--brand-purple)] text-left"
+                    className="px-2 py-1.5 rounded-lg border border-[var(--border)] text-[10px] font-semibold hover:border-[var(--brand-purple)] hover:text-[var(--brand-purple)] text-left cursor-pointer transition-colors"
                   >
                     August 2026
                   </button>
                   <button
                     type="button"
                     onClick={() => handleApplyPreset('2026-09-01', '2026-09-30')}
-                    className="px-2 py-1 rounded-lg border border-[var(--border)] text-[10px] font-semibold hover:border-[var(--brand-purple)] hover:text-[var(--brand-purple)] text-left"
+                    className="px-2 py-1.5 rounded-lg border border-[var(--border)] text-[10px] font-semibold hover:border-[var(--brand-purple)] hover:text-[var(--brand-purple)] text-left cursor-pointer transition-colors"
                   >
                     September 2026
                   </button>
                   <button
                     type="button"
                     onClick={() => handleApplyPreset('2026-10-01', '2026-10-31')}
-                    className="px-2 py-1 rounded-lg border border-[var(--border)] text-[10px] font-semibold hover:border-[var(--brand-purple)] hover:text-[var(--brand-purple)] text-left"
+                    className="px-2 py-1.5 rounded-lg border border-[var(--border)] text-[10px] font-semibold hover:border-[var(--brand-purple)] hover:text-[var(--brand-purple)] text-left cursor-pointer transition-colors"
                   >
                     October 2026
                   </button>
@@ -288,136 +395,92 @@ export function DashboardFilters({
           </div>
 
           {/* 2. Plant Filter */}
-          <div className="relative min-w-[110px] max-w-[145px] flex-1">
-            <select
-              value={plantId}
-              onChange={(e) => onPlantChange(e.target.value)}
-              className={getSelectClass(plantId)}
-            >
-              {PLANT_OPTIONS.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.label}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="w-3.5 h-3.5 text-[var(--secondary)] absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
-          </div>
+          <FilterDropdownControl
+            value={plantId}
+            options={PLANT_OPTIONS}
+            placeholder="All Plants"
+            onChange={onPlantChange}
+            isOpen={openDropdown === 'plant'}
+            onToggle={() => toggleDropdown('plant')}
+          />
 
           {/* 3. Shift Filter */}
-          <div className="relative min-w-[110px] max-w-[145px] flex-1">
-            <select
-              value={shiftId}
-              onChange={(e) => onShiftChange(e.target.value)}
-              className={getSelectClass(shiftId)}
-            >
-              <option value="">All Shifts</option>
-              <option value="A">Shift A – GS1</option>
-              <option value="B">Shift B – S2</option>
-              <option value="C">Shift C – NS3</option>
-            </select>
-            <ChevronDown className="w-3.5 h-3.5 text-[var(--secondary)] absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
-          </div>
+          <FilterDropdownControl
+            value={shiftId}
+            options={SHIFT_OPTIONS}
+            placeholder="All Shifts"
+            onChange={onShiftChange}
+            isOpen={openDropdown === 'shift'}
+            onToggle={() => toggleDropdown('shift')}
+          />
 
           {/* 4. Department Filter */}
-          <div className="relative min-w-[130px] max-w-[165px] flex-1">
-            <select
-              value={department}
-              onChange={(e) => onDepartmentChange(e.target.value)}
-              className={getSelectClass(department)}
-            >
-              <option value="">All Departments</option>
-              {availableDepts.map((d) => (
-                <option key={d.department_id || d.id} value={d.department_id || d.id}>
-                  {d.department_name || d.name}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="w-3.5 h-3.5 text-[var(--secondary)] absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
-          </div>
+          <FilterDropdownControl
+            value={department}
+            options={deptOptions}
+            placeholder="All Departments"
+            onChange={onDepartmentChange}
+            isOpen={openDropdown === 'department'}
+            onToggle={() => toggleDropdown('department')}
+          />
 
           {/* 5. Section Filter */}
-          <div className="relative min-w-[120px] max-w-[160px] flex-1">
-            <select
-              value={section}
-              onChange={(e) => onSectionChange(e.target.value)}
-              className={getSelectClass(section)}
-            >
-              <option value="">All Sections</option>
-              {availableSecs.map((s) => (
-                <option key={s.section_id || s.id} value={s.section_id || s.id}>
-                  {s.section_name || s.name}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="w-3.5 h-3.5 text-[var(--secondary)] absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
-          </div>
+          <FilterDropdownControl
+            value={section}
+            options={secOptions}
+            placeholder="All Sections"
+            onChange={onSectionChange}
+            isOpen={openDropdown === 'section'}
+            onToggle={() => toggleDropdown('section')}
+          />
 
-          {/* 6. Employment Type Filter */}
-          <div className="relative min-w-[130px] max-w-[170px] flex-1">
-            <select
-              value={employmentType}
-              onChange={(e) => onEmploymentTypeChange(e.target.value)}
-              className={getSelectClass(employmentType)}
-            >
-              {EMPLOYMENT_TYPE_OPTIONS.map((opt) => (
-                <option key={opt.id} value={opt.id}>
-                  {opt.label}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="w-3.5 h-3.5 text-[var(--secondary)] absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
-          </div>
+          {/* 6. Employment Type (Employees) Filter */}
+          <FilterDropdownControl
+            value={employmentType}
+            options={EMPLOYMENT_TYPE_OPTIONS}
+            placeholder="All Employees"
+            onChange={onEmploymentTypeChange}
+            isOpen={openDropdown === 'employment'}
+            onToggle={() => toggleDropdown('employment')}
+          />
 
           {/* 7. Vendor Filter */}
-          <div className="relative min-w-[120px] max-w-[165px] flex-1">
-            <select
-              value={vendorId}
-              onChange={(e) => onVendorChange(e.target.value)}
-              className={getSelectClass(vendorId)}
-            >
-              {VENDOR_OPTIONS.map((v) => (
-                <option key={v.id} value={v.id}>
-                  {v.label}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="w-3.5 h-3.5 text-[var(--secondary)] absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
-          </div>
+          <FilterDropdownControl
+            value={vendorId}
+            options={VENDOR_OPTIONS}
+            placeholder="All Vendors"
+            onChange={onVendorChange}
+            isOpen={openDropdown === 'vendor'}
+            onToggle={() => toggleDropdown('vendor')}
+          />
 
-          {/* Reset Action */}
+        {/* Right: Reset & Refresh Actions on the same row */}
+        <div className="flex items-center justify-end gap-1.5 shrink-0 col-span-full sm:col-span-1 md:col-span-2 xl:col-span-1">
           {hasActiveFilters && (
             <button
               type="button"
               onClick={onReset}
-              className="h-9 px-3 rounded-xl bg-[var(--brand-purple-soft)] text-[var(--brand-purple)] border border-[var(--brand-purple)]/30 text-[11px] font-bold hover:bg-[var(--brand-purple)] hover:text-white transition-all cursor-pointer shadow-2xs flex items-center gap-1.5 shrink-0"
-              title="Reset all filters"
+              className="h-10 px-2.5 rounded-xl text-xs font-bold text-[var(--secondary)] hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors flex items-center gap-1 cursor-pointer shrink-0 whitespace-nowrap"
+              title="Clear all active filters"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Reset</span>
             </button>
           )}
-        </div>
 
-        {/* Right Utility: Coverage & Refresh */}
-        <div className="flex items-center gap-2 shrink-0 ml-auto">
-          {/* Coverage pill */}
-          <div className="flex items-center gap-1.5 px-3 h-9 rounded-xl surface border border-[var(--border)] shadow-2xs text-[11px] font-semibold text-[var(--secondary)]">
-            <Calendar className="w-3.5 h-3.5 text-[var(--brand-purple)] shrink-0" />
-            <span className="hidden lg:inline text-[var(--secondary)]">Coverage:</span>
-            <span className="text-[var(--text)] font-bold">{coverageLabel}</span>
-          </div>
-
-          {/* Refresh button */}
           {onRefresh && (
             <button
               type="button"
               onClick={onRefresh}
-              disabled={loading}
-              className="flex items-center gap-1.5 px-3.5 h-9 rounded-xl surface border border-[var(--border)] text-[var(--text)] hover:border-[var(--brand-purple)] hover:text-[var(--brand-purple)] transition-colors shadow-2xs text-[11px] font-semibold cursor-pointer disabled:opacity-60"
+              className="h-10 px-3.5 rounded-xl border border-[var(--border)] surface text-xs font-bold text-[var(--text)] hover:border-[var(--brand-purple)] hover:text-[var(--brand-purple)] active:scale-[0.98] transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs shrink-0 select-none whitespace-nowrap"
               title="Refresh dashboard data"
             >
-              <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-[var(--brand-purple)]' : ''}`} />
-              <span className="hidden sm:inline">Refresh</span>
+              <RefreshCw
+                className={`w-3.5 h-3.5 ${
+                  loading ? 'animate-spin text-[var(--brand-purple)]' : 'text-[var(--secondary)]'
+                }`}
+              />
+              <span>Refresh</span>
             </button>
           )}
         </div>
@@ -425,3 +488,5 @@ export function DashboardFilters({
     </div>
   );
 }
+
+export default DashboardFilters;

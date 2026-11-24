@@ -15,6 +15,10 @@ def get_attrition_analytics(
     plant_id: str | None = None,
     department_id: str | None = None,
     section_id: str | None = None,
+    shift_id: str | None = None,
+    employment_type: str | None = None,
+    vendor_id: str | None = None,
+    team_id: str | None = None,
 ) -> AttritionAnalyticsResponse:
     """Return comprehensive attrition analytics derived from public.attrition_transactions."""
     data = attrition_repository.get_attrition_analytics(
@@ -24,6 +28,10 @@ def get_attrition_analytics(
         plant_id=plant_id,
         department_id=department_id,
         section_id=section_id,
+        shift_id=shift_id,
+        employment_type=employment_type,
+        vendor_id=vendor_id,
+        team_id=team_id,
     )
     return AttritionAnalyticsResponse(**data)
 

@@ -1,8 +1,9 @@
-import { TrendingUp } from 'lucide-react';
+import { AlertCircle, RefreshCw, TrendingUp } from 'lucide-react';
 import {
+  Bar,
   CartesianGrid,
+  ComposedChart,
   Line,
-  LineChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -10,195 +11,318 @@ import {
 } from 'recharts';
 import { useTheme } from '../../hooks/useTheme';
 import { CHART_COLORS } from '../../utils/constants';
-import { Card } from '../common/Card';
 import { LoadingSkeleton } from '../common/LoadingSkeleton';
 
-const PERIODS = [
-  { id: 'daily', label: 'Daily' },
-  { id: 'weekly', label: 'Weekly' },
-  { id: 'monthly', label: 'Monthly' },
+const MONTH_NAMES_SHORT = [
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
 ];
-
-function formatTrendTick(tick) {
-  if (!tick) return '';
-  const str = String(tick);
-  const parts = str.split('-');
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  if (parts.length === 3) {
-    const m = parseInt(parts[1], 10) - 1;
-    return `${months[m] || parts[1]} ${parts[2]}`;
-  }
-  return str;
-}
 
 export function AttendanceTrendChart({
   attendance = null,
+  attendanceAnalytics = null,
   period = 'daily',
+  granularity = 'daily',
   onPeriodChange = null,
+  onGranularityChange = null,
   loading = false,
   error = null,
+  onRetry = null,
+  className = '',
 }) {
   const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const palette = CHART_COLORS[theme] || CHART_COLORS.light;
 
-  const rawTrends = !error ? (attendance?.trends ?? []) : [];
+  const currentPeriod = period || granularity || 'daily';
+  const handlePeriodChange = onPeriodChange || onGranularityChange;
+  const dataObj = attendance || attendanceAnalytics;
 
-  const trendData = rawTrends.map((item) => {
+  const maleColor = isDark ? '#6BA5F5' : '#3B82F6';
+  const femaleColor = isDark ? '#F472B6' : '#EC4899';
+  const absentColor = isDark ? '#F87171' : '#EF4444';
+
+  const rawTrends = !error ? (dataObj?.trends ?? []) : [];
+
+  // Slice from the end: daily -> 7, weekly -> 4, monthly -> 4
+  const sliceCount = currentPeriod === 'daily' ? 7 : 4;
+  const slicedTrends = rawTrends.slice(-sliceCount);
+
+  const trendData = slicedTrends.map((item, index) => {
+    let xLabel = item.label || item.period_key || '';
+    let fullLabel = item.label || item.period_key || '';
+
+    if (currentPeriod === 'daily') {
+      // Format like "Nov 13"
+      if (item.period_key && item.period_key.includes('-')) {
+        const parts = item.period_key.split('-');
+        if (parts.length >= 3) {
+          const m = parseInt(parts[1], 10) - 1;
+          const d = parseInt(parts[2], 10);
+          const month = MONTH_NAMES_SHORT[m] || parts[1];
+          xLabel = `${month} ${d}`;
+          fullLabel = `${month} ${d}, ${parts[0]}`;
+        }
+      }
+    } else if (currentPeriod === 'weekly') {
+      // Format like "Wk 1 (Nov 3)"
+      const weekNum = index + 1;
+      let dateStr = '';
+      if (item.period_key && item.period_key.includes('-')) {
+        const parts = item.period_key.split('-');
+        if (parts.length >= 3) {
+          const m = parseInt(parts[1], 10) - 1;
+          const d = parseInt(parts[2], 10);
+          const month = MONTH_NAMES_SHORT[m] || parts[1];
+          dateStr = `${month} ${d}`;
+        }
+      }
+      if (!dateStr && item.label) {
+        const match = item.label.match(/(\d+)-(\d+)/);
+        if (match) {
+          const m = parseInt(match[1], 10) - 1;
+          const month = MONTH_NAMES_SHORT[m] || match[1];
+          dateStr = `${month} ${parseInt(match[2], 10)}`;
+        }
+      }
+      xLabel = dateStr ? `Wk ${weekNum} (${dateStr})` : `Wk ${weekNum}`;
+      fullLabel = dateStr ? `Week ${weekNum} (${dateStr})` : `Week ${weekNum}`;
+    } else if (currentPeriod === 'monthly') {
+      // Format like "Aug", "Sep"
+      if (item.period_key && item.period_key.includes('-')) {
+        const parts = item.period_key.split('-');
+        const m = parseInt(parts[1], 10) - 1;
+        const month = MONTH_NAMES_SHORT[m] || parts[1];
+        xLabel = month;
+        fullLabel = `${month} ${parts[0]}`;
+      } else if (item.label) {
+        xLabel = item.label.split(' ')[0];
+        fullLabel = item.label;
+      }
+    }
+
     const total = item.total_records || 0;
-    const present_pct = item.attendance_pct ?? (total > 0 ? ((item.present_count || 0) / total) * 100 : 0);
-    const absent_real = item.absenteeism_pct ?? (total > 0 ? ((item.absent_count || 0) / total) * 100 : 0);
-    const leave_real = total > 0 ? ((item.leave_count || 0) / total) * 100 : 0;
-    const late_real = total > 0 ? ((item.late_count || 0) / total) * 100 : 0;
+    const absent_pct =
+      item.absenteeism_pct != null
+        ? Number(Number(item.absenteeism_pct).toFixed(1))
+        : total > 0
+          ? Number((((item.absent_count || 0) / total) * 100).toFixed(1))
+          : 0;
 
     return {
       period_key: item.period_key,
-      label: item.label,
-      present_pct: Number(present_pct.toFixed(2)),
-      absent_pct: Number(absent_real.toFixed(2)),
-      leave_pct: Number(leave_real.toFixed(2)),
-      late_pct: Number(late_real.toFixed(2)),
+      displayLabel: xLabel,
+      fullLabel,
+      male_present_count: item.male_present_count ?? 0,
+      female_present_count: item.female_present_count ?? 0,
+      present_count: item.present_count ?? 0,
+      absent_count: item.absent_count ?? 0,
       total_records: total,
+      absent_pct,
     };
   });
 
-  const tickInterval = trendData.length > 0 ? Math.max(1, Math.floor(trendData.length / 8)) : 0;
-
   return (
-    <Card className="p-4 lg:col-span-6 flex flex-col justify-between min-h-[260px]">
-      <div>
-        <div className="flex items-center justify-between gap-2 mb-3">
-          <div className="flex items-center gap-2 min-w-0">
-            <TrendingUp className="w-4 h-4 shrink-0 text-[#4D8EEB]" aria-hidden="true" />
-            <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Attendance Trend</h2>
+    <div
+      className={`surface rounded-2xl p-4 border border-[var(--border)] shadow-xs flex flex-col justify-between h-full lg:col-span-6 ${className}`}
+    >
+      {/* Header and Toggle */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+        <div className="flex items-center gap-2">
+          <div className="w-7 h-7 rounded-lg bg-[var(--brand-purple-soft)] text-[var(--brand-purple)] flex items-center justify-center">
+            <TrendingUp className="w-4 h-4" />
           </div>
-
-          {/* Daily / Weekly / Monthly Toggle */}
-          <div
-            className="inline-flex rounded-lg border p-0.5 shrink-0"
-            style={{ borderColor: 'var(--border)', background: 'var(--brand-bg)' }}
-            role="group"
-            aria-label="Attendance trend granularity"
-          >
-            {PERIODS.map((p) => {
-              const active = period === p.id;
-              return (
-                <button
-                  key={p.id}
-                  type="button"
-                  onClick={() => onPeriodChange?.(p.id)}
-                  className="px-2.5 py-1 rounded-md text-[10px] font-bold transition-all cursor-pointer"
-                  style={
-                    active
-                      ? { background: '#6F3DBA', color: '#FFFFFF' }
-                      : { color: 'var(--secondary)' }
-                  }
-                >
-                  {p.label}
-                </button>
-              );
-            })}
-          </div>
+          <h3 className="text-sm font-extrabold text-[var(--text)] tracking-tight">
+            Attendance Trend
+          </h3>
         </div>
 
+        {/* Daily / Weekly / Monthly Toggle */}
+        <div className="flex items-center gap-1 bg-[var(--muted-fill)] p-1 rounded-xl">
+          {['daily', 'weekly', 'monthly'].map((g) => (
+            <button
+              key={g}
+              type="button"
+              onClick={() => handlePeriodChange?.(g)}
+              className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase transition-all cursor-pointer ${
+                currentPeriod === g
+                  ? 'bg-white dark:bg-[var(--surface)] text-[var(--brand-purple)] shadow-2xs'
+                  : 'text-[var(--secondary)] hover:text-[var(--text)]'
+              }`}
+            >
+              {g}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Chart Body */}
+      <div className="flex-1 w-full min-h-[220px]">
         {loading ? (
-          <LoadingSkeleton className="h-44 w-full rounded-lg" />
-        ) : !trendData || trendData.length === 0 ? (
-          <div className="h-44 w-full my-1 flex flex-col items-center justify-center text-center p-4 bg-[var(--surface-hover)]/30 rounded-lg border border-dashed border-[var(--border)]">
-            <TrendingUp className="w-6 h-6 text-slate-400 mb-2 opacity-60" />
-            <p className="text-xs font-bold text-[var(--text)]">No Attendance Trend Data</p>
-            <p className="text-[11px] text-[var(--secondary)] mt-0.5">
-              Connect to FastAPI backend to view attendance trend trajectory.
-            </p>
+          <div className="h-full min-h-[220px] flex items-center justify-center">
+            <LoadingSkeleton className="h-48 w-full rounded-xl" />
+          </div>
+        ) : error ? (
+          <div className="h-full flex flex-col items-center justify-center text-center p-4">
+            <AlertCircle className="w-6 h-6 text-rose-500 mb-1" />
+            <p className="text-xs font-bold text-[var(--text)]">Failed to load attendance trends</p>
+            <p className="text-[10px] text-[var(--secondary)] mt-0.5">{error}</p>
+            {onRetry && (
+              <button
+                type="button"
+                onClick={onRetry}
+                className="mt-2 text-xs font-bold text-[var(--brand-purple)] hover:underline flex items-center gap-1 cursor-pointer"
+              >
+                <RefreshCw className="w-3 h-3" /> Retry
+              </button>
+            )}
+          </div>
+        ) : trendData.length === 0 ? (
+          <div className="h-full flex items-center justify-center text-center p-4 text-[var(--secondary)] text-xs">
+            No attendance trend records for the selected filters.
           </div>
         ) : (
-          <div className="h-44 w-full my-1">
-            <ResponsiveContainer width="100%" height={176}>
-              <LineChart data={trendData} margin={{ top: 8, right: 12, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke={palette.grid} />
-                <XAxis
-                  dataKey="period_key"
-                  stroke={palette.axisText}
-                  fontSize={9}
-                  interval={tickInterval}
-                  tickFormatter={formatTrendTick}
-                  tickLine={false}
-                />
-                <YAxis
-                  stroke={palette.axisText}
-                  fontSize={9}
-                  domain={[80, 100]}
-                  ticks={[80, 85, 90, 95, 100]}
-                  unit="%"
-                />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: palette.tooltipBg,
-                    borderColor: palette.tooltipBorder,
-                    color: palette.tooltipText,
-                    fontSize: '11px',
-                    borderRadius: '8px',
-                  }}
-                  formatter={(val, name) => [`${val}%`, name]}
-                />
-                <Line
-                  type="monotone"
-                  dataKey="present_pct"
-                  name="Present"
-                  stroke="#6F3DBA"
-                  strokeWidth={2}
-                  dot={{ r: 2.5, fill: '#6F3DBA' }}
-                  activeDot={{ r: 4 }}
-                />
-                <Line
-                  type="monotone"
-                  dataKey="absent_pct"
-                  name="Absent"
-                  stroke="#E45C72"
-                  strokeWidth={1.5}
-                  dot={{ r: 2, fill: '#E45C72' }}
-                />
-                <Line
-                  type="monotone"
-                  dataKey="leave_pct"
-                  name="Leave"
-                  stroke="#F58A3A"
-                  strokeWidth={1.5}
-                  dot={{ r: 2, fill: '#F58A3A' }}
-                />
-                <Line
-                  type="monotone"
-                  dataKey="late_pct"
-                  name="Late"
-                  stroke="#4D8EEB"
-                  strokeWidth={1.5}
-                  dot={{ r: 2, fill: '#4D8EEB' }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+          <ResponsiveContainer width="100%" height={230}>
+            <ComposedChart
+              data={trendData}
+              barGap={4}
+              barCategoryGap="25%"
+              margin={{ top: 10, right: 10, left: -10, bottom: 4 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" stroke={palette.grid} vertical={false} />
+              <XAxis
+                dataKey="displayLabel"
+                interval={0}
+                tick={{ fill: palette.axisText, fontSize: 10, fontWeight: 500 }}
+                tickLine={false}
+                axisLine={{ stroke: palette.grid }}
+              />
+              {/* Left Y Axis: Headcount for Male and Female Present */}
+              <YAxis
+                yAxisId="left"
+                orientation="left"
+                domain={[0, (dataMax) => (dataMax > 0 ? Math.ceil(dataMax * 1.1) : 'auto')]}
+                tickFormatter={(v) => (v >= 1000 ? `${(v / 1000).toFixed(1)}k` : v)}
+                tick={{ fill: palette.axisText, fontSize: 10, fontWeight: 500 }}
+                tickLine={false}
+                axisLine={false}
+              />
+              {/* Right Y Axis: Percentage for Absent % */}
+              <YAxis
+                yAxisId="right"
+                orientation="right"
+                domain={[0, (dataMax) => (dataMax > 0 ? Number((dataMax * 1.25).toFixed(1)) : 5)]}
+                tickFormatter={(v) => `${v}%`}
+                tick={{ fill: palette.axisText, fontSize: 10, fontWeight: 500 }}
+                tickLine={false}
+                axisLine={false}
+              />
+              <Tooltip
+                content={({ active, payload }) => {
+                  if (!active || !payload?.length) return null;
+                  const item = payload[0]?.payload;
+                  if (!item) return null;
+                  return (
+                    <div
+                      className="p-3 rounded-xl shadow-lg border text-xs space-y-2 min-w-[190px]"
+                      style={{
+                        backgroundColor: palette.tooltipBg,
+                        borderColor: palette.tooltipBorder,
+                        color: palette.tooltipText,
+                      }}
+                    >
+                      <div className="font-extrabold text-[12px] pb-1.5 border-b border-[var(--border)] flex items-center justify-between">
+                        <span>{item.fullLabel || item.displayLabel}</span>
+                        <span className="text-[10px] font-normal text-[var(--secondary)]">
+                          Total: {item.total_records.toLocaleString()}
+                        </span>
+                      </div>
+                      <div className="space-y-1.5 text-[11px]">
+                        <div className="flex items-center justify-between">
+                          <span className="flex items-center gap-1.5">
+                            <span className="w-2.5 h-2.5 rounded-xs" style={{ backgroundColor: maleColor }} />
+                            <span className="font-medium">Male Present:</span>
+                          </span>
+                          <span className="font-bold">{item.male_present_count.toLocaleString()}</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="flex items-center gap-1.5">
+                            <span className="w-2.5 h-2.5 rounded-xs" style={{ backgroundColor: femaleColor }} />
+                            <span className="font-medium">Female Present:</span>
+                          </span>
+                          <span className="font-bold">{item.female_present_count.toLocaleString()}</span>
+                        </div>
+                        <div className="flex items-center justify-between pt-1 border-t border-[var(--border)]/60">
+                          <span className="flex items-center gap-1.5">
+                            <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: absentColor }} />
+                            <span className="font-medium">Absent %:</span>
+                          </span>
+                          <span className="font-bold">
+                            {item.absent_pct}%{' '}
+                            <span className="text-[10px] font-normal text-[var(--secondary)]">
+                              ({item.absent_count})
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }}
+              />
+              <Bar
+                yAxisId="left"
+                dataKey="male_present_count"
+                name="Male Present"
+                fill={maleColor}
+                radius={[4, 4, 0, 0]}
+                maxBarSize={30}
+              />
+              <Bar
+                yAxisId="left"
+                dataKey="female_present_count"
+                name="Female Present"
+                fill={femaleColor}
+                radius={[4, 4, 0, 0]}
+                maxBarSize={30}
+              />
+              <Line
+                yAxisId="right"
+                type="monotone"
+                dataKey="absent_pct"
+                name="Absent %"
+                stroke={absentColor}
+                strokeWidth={2.5}
+                dot={{ r: 4, fill: absentColor, stroke: '#FFFFFF', strokeWidth: 1.5 }}
+                activeDot={{ r: 6, fill: absentColor, stroke: '#FFFFFF', strokeWidth: 2 }}
+              />
+            </ComposedChart>
+          </ResponsiveContainer>
         )}
       </div>
 
-      {/* Legend */}
-      <div className="flex flex-wrap items-center justify-center gap-4 pt-2 border-t border-[var(--border)] text-[10px]">
-        <span className="flex items-center gap-1.5 font-bold text-[var(--text)]">
-          <span className="w-2 h-2 rounded-full bg-[#6F3DBA]" />
-          Present
+      {/* Legend at bottom with all 3 series */}
+      <div className="flex flex-wrap items-center justify-center gap-5 text-xs font-semibold pt-2 mt-auto">
+        <span className="flex items-center gap-1.5">
+          <span className="w-3 h-3 rounded-xs" style={{ backgroundColor: maleColor }} />
+          <span className="text-[11px] font-semibold text-[var(--text)]">Male Present</span>
         </span>
-        <span className="flex items-center gap-1.5 font-bold text-[var(--text)]">
-          <span className="w-2 h-2 rounded-full bg-[#E45C72]" />
-          Absent
+        <span className="flex items-center gap-1.5">
+          <span className="w-3 h-3 rounded-xs" style={{ backgroundColor: femaleColor }} />
+          <span className="text-[11px] font-semibold text-[var(--text)]">Female Present</span>
         </span>
-        <span className="flex items-center gap-1.5 font-bold text-[var(--text)]">
-          <span className="w-2 h-2 rounded-full bg-[#F58A3A]" />
-          Leave
-        </span>
-        <span className="flex items-center gap-1.5 font-bold text-[var(--text)]">
-          <span className="w-2 h-2 rounded-full bg-[#4D8EEB]" />
-          Late
+        <span className="flex items-center gap-1.5">
+          <span className="inline-flex items-center justify-center w-4 h-3 relative">
+            <span className="w-4 h-[2px]" style={{ backgroundColor: absentColor }} />
+            <span
+              className="w-2 h-2 rounded-full absolute border border-white dark:border-[var(--surface)]"
+              style={{ backgroundColor: absentColor }}
+            />
+          </span>
+          <span className="text-[11px] font-semibold text-[var(--text)]">Absent %</span>
         </span>
       </div>
-    </Card>
+    </div>
   );
 }
 
+export default AttendanceTrendChart;

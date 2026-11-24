@@ -96,11 +96,8 @@ export function ComplianceSection({ data, loading, error, onRetry, palette = CHA
         <div>
           <h2 className="text-sm font-bold flex items-center gap-2">
             <FileCheck className="w-4 h-4 text-emerald-600" />
-            Training Compliance & Skill Match Analytics
+            Training Compliance &amp; Skill Match Analytics
           </h2>
-          <p className="text-[11px] muted">
-            Verified compliance and skill match rates from public.fact_workforce_attendance
-          </p>
         </div>
       </div>
 
@@ -109,7 +106,6 @@ export function ComplianceSection({ data, loading, error, onRetry, palette = CHA
         <KPICard
           label="Training Compliance Rate"
           value={`${data.training_compliance_pct}%`}
-          subtitle={`${data.current_count.toLocaleString()} Current / ${data.expired_count.toLocaleString()} Expired`}
           icon={CheckCircle2}
           iconBg="var(--emerald-soft)"
           iconColor="#0E9C86"
@@ -117,7 +113,6 @@ export function ComplianceSection({ data, loading, error, onRetry, palette = CHA
         <KPICard
           label="Training Expiration Alerts"
           value={data.expired_count.toLocaleString()}
-          subtitle="Shifts worked with expired certifications"
           icon={ShieldAlert}
           iconBg="var(--rose-soft)"
           iconColor="#E45C72"
@@ -125,7 +120,6 @@ export function ComplianceSection({ data, loading, error, onRetry, palette = CHA
         <KPICard
           label="Skill Match Rate"
           value={`${data.skill_match_pct}%`}
-          subtitle={`${data.matched_count.toLocaleString()} Matched / ${data.gap_count.toLocaleString()} Gaps`}
           icon={ShieldCheck}
           iconBg="var(--brand-blue-soft)"
           iconColor="#4D8EEB"
@@ -133,7 +127,6 @@ export function ComplianceSection({ data, loading, error, onRetry, palette = CHA
         <KPICard
           label="Skill Gap Shifts"
           value={data.gap_count.toLocaleString()}
-          subtitle="Shifts with role-skill requirement gaps"
           icon={AlertCircle}
           iconBg="var(--brand-peach-soft)"
           iconColor="#F58A3A"
@@ -144,8 +137,7 @@ export function ComplianceSection({ data, loading, error, onRetry, palette = CHA
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Training Compliance Donut */}
         <Card className="p-4">
-          <h3 className="text-[12px] font-bold mb-1">Training Compliance Status</h3>
-          <p className="text-[10px] muted mb-2">Proportion of compliant vs expired training records</p>
+          <h3 className="text-[12px] font-bold mb-3">Training Compliance Status</h3>
           <div className="h-56 relative flex items-center justify-center">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -184,8 +176,7 @@ export function ComplianceSection({ data, loading, error, onRetry, palette = CHA
 
         {/* Skill Match Donut */}
         <Card className="p-4">
-          <h3 className="text-[12px] font-bold mb-1">Shift Skill Match Distribution</h3>
-          <p className="text-[10px] muted mb-2">Role alignment vs detected skill gaps</p>
+          <h3 className="text-[12px] font-bold mb-3">Shift Skill Match Distribution</h3>
           <div className="h-56 relative flex items-center justify-center">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -227,8 +218,7 @@ export function ComplianceSection({ data, loading, error, onRetry, palette = CHA
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Department Compliance Bar Chart */}
         <Card className="p-4">
-          <h3 className="text-[12px] font-bold mb-1">Department Compliance & Skill Match %</h3>
-          <p className="text-[10px] muted mb-3">Compliance and skill adherence rates across departments</p>
+          <h3 className="text-[12px] font-bold mb-3">Department Compliance &amp; Skill Match %</h3>
           <div className="h-60">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={deptData}>
@@ -255,8 +245,7 @@ export function ComplianceSection({ data, loading, error, onRetry, palette = CHA
 
         {/* Daily Compliance Trend Line Chart */}
         <Card className="p-4">
-          <h3 className="text-[12px] font-bold mb-1">Daily Compliance & Skill Match Trend</h3>
-          <p className="text-[10px] muted mb-3">Day-by-day rates across the reporting window</p>
+          <h3 className="text-[12px] font-bold mb-3">Daily Compliance &amp; Skill Match Trend</h3>
           <div className="h-60">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={dailyData}>

@@ -28,6 +28,7 @@ def list_employees(
     team_id: str | None = None,
     department_id: str | None = None,
     section_id: str | None = None,
+    shift_id: str | None = None,
     vendor_id: str | None = None,
     employment_type: str | None = None,
     role: str | None = None,
@@ -51,6 +52,9 @@ def list_employees(
         filters.append(EmployeeMaster.department_id == department_id)
     if section_id:
         filters.append(EmployeeMaster.section_id == section_id)
+    target_shift = shift_id or home_shift
+    if target_shift and target_shift.strip():
+        filters.append(EmployeeMaster.shift_id == target_shift.strip())
     if vendor_id:
         filters.append(EmployeeMaster.vendor_id == vendor_id)
     if employment_type:
@@ -67,8 +71,12 @@ def list_employees(
                 EmployeeMaster.vendor_id.ilike(pattern),
             )
         )
-    if team_id:
-        filters.append(EmployeeMaster.section_id == team_id)
+    if team_id and team_id.strip():
+        t_id = team_id.strip()
+        t_targets = [t_id]
+        if t_id.startswith("TEAM-"):
+            t_targets.append(t_id.replace("TEAM-", "S0"))
+        filters.append(EmployeeMaster.section_id.in_(t_targets))
     if role:
         filters.append(EmployeeMaster.designation == role)
     if skill_grade:
@@ -106,6 +114,7 @@ def get_workforce_summary(
     shift_id: str | None = None,
     employment_type: str | None = None,
     vendor_id: str | None = None,
+    team_id: str | None = None,
 ) -> dict:
     """Compute aggregated workforce distributions and data coverage windows, optionally filtered by dimensions."""
     emp_filters = []
@@ -121,12 +130,19 @@ def get_workforce_summary(
         emp_filters.append(EmployeeMaster.employment_type.ilike(employment_type.strip()))
     if vendor_id and vendor_id.strip():
         emp_filters.append(EmployeeMaster.vendor_id == vendor_id.strip())
+    if team_id and team_id.strip():
+        t_id = team_id.strip()
+        t_targets = [t_id]
+        if t_id.startswith("TEAM-"):
+            t_targets.append(t_id.replace("TEAM-", "S0"))
+        emp_filters.append(EmployeeMaster.section_id.in_(t_targets))
 
     total_stmt = select(func.count(EmployeeMaster.employee_id)).select_from(EmployeeMaster)
     active_stmt = select(func.count(EmployeeMaster.employee_id)).select_from(EmployeeMaster).where(
         EmployeeMaster.employment_status.ilike("active")
     )
     distinct_teams_stmt = select(func.count(func.distinct(EmployeeMaster.section_id))).select_from(EmployeeMaster)
+    distinct_departments_stmt = select(func.count(func.distinct(EmployeeMaster.department_id))).select_from(EmployeeMaster)
     perm_stmt = select(func.count(EmployeeMaster.employee_id)).select_from(EmployeeMaster).where(
         EmployeeMaster.employment_type.ilike("permanent")
     )
@@ -141,6 +157,7 @@ def get_workforce_summary(
         total_stmt = total_stmt.where(*emp_filters)
         active_stmt = active_stmt.where(*emp_filters)
         distinct_teams_stmt = distinct_teams_stmt.where(*emp_filters)
+        distinct_departments_stmt = distinct_departments_stmt.where(*emp_filters)
         perm_stmt = perm_stmt.where(*emp_filters)
         vend_stmt = vend_stmt.where(*emp_filters)
         resigned_stmt = resigned_stmt.where(*emp_filters)
@@ -148,6 +165,7 @@ def get_workforce_summary(
     total_employees = int(db.execute(total_stmt).scalar_one())
     active_employees = int(db.execute(active_stmt).scalar_one())
     distinct_teams = int(db.execute(distinct_teams_stmt).scalar_one())
+    distinct_departments = int(db.execute(distinct_departments_stmt).scalar_one())
     permanent_count = int(db.execute(perm_stmt).scalar_one())
     vendor_count = int(db.execute(vend_stmt).scalar_one())
     resigned_count = int(db.execute(resigned_stmt).scalar_one())
@@ -176,6 +194,7 @@ def get_workforce_summary(
         "total_employees": total_employees,
         "active_employees": active_employees,
         "distinct_teams": distinct_teams,
+        "distinct_departments": distinct_departments,
         "permanent_count": permanent_count,
         "vendor_count": vendor_count,
         "resigned_employees": resigned_count,

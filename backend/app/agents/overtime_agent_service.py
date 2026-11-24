@@ -467,7 +467,7 @@ class OvertimeAgentService:
         if perm_item and vend_item:
             findings.append({
                 "id": "OT-FND-05",
-                "title": f"Workforce Mix: Permanent Staff Drives {perm_item['share_pct']}% of Hours & {round(perm_item['ot_cost_inr'] / total_cost_inr * 100.0, 1)}% of Cost",
+                "title": f"Workforce Mix: Permanent Staff Drives {perm_item['share_pct']}% of Hours & {round(perm_item['ot_cost_inr'] / total_cost_inr * 100.0, 1) if total_cost_inr > 0 else 0.0}% of Cost",
                 "metric": f"Permanent: ₹{perm_item['ot_cost_inr']:,.2f} vs Vendor: ₹{vend_item['ot_cost_inr']:,.2f}",
                 "affected": "Factory Labor Expenditure",
                 "severity": "LOW",
@@ -591,6 +591,7 @@ class OvertimeAgentService:
             "metrics": {
                 "total_overtime_hours": total_hours,
                 "total_overtime_cost_inr": round(total_cost_inr, 2),
+                "total_cost_inr": round(total_cost_inr, 2),
                 "overtime_records_count": total_records,
                 "employees_with_overtime": total_employees,
                 "avg_ot_hours_per_worker": avg_hours_per_worker,

@@ -106,13 +106,8 @@ export function SkillMatrixKPICards({
             </div>
 
             <div className="min-w-0 flex-1">
-              <div className="text-[11px] font-semibold text-[var(--secondary)] truncate flex items-center gap-1">
-                <span>{card.title}</span>
-                {card.subtitleTag && (
-                  <span className="text-[9.5px] font-normal text-[var(--secondary)]">
-                    {card.subtitleTag}
-                  </span>
-                )}
+              <div className="text-[11px] font-semibold text-[var(--secondary)] truncate">
+                {card.title}
               </div>
               <div
                 className={`text-lg font-black tracking-tight leading-tight ${
@@ -120,9 +115,6 @@ export function SkillMatrixKPICards({
                 }`}
               >
                 {card.value}
-              </div>
-              <div className="text-[9.5px] text-[var(--secondary)] truncate">
-                {card.subtext}
               </div>
             </div>
           </Card>

@@ -58,14 +58,9 @@ export function DepartmentAbsenteeismCard({
   return (
     <Card className="p-4 lg:col-span-3 flex flex-col justify-between min-h-[260px]">
       <div>
-        <div className="flex items-center justify-between gap-2 mb-3">
-          <div className="flex items-center gap-2 min-w-0">
-            <Users className="w-4 h-4 shrink-0 text-[#6F3DBA]" aria-hidden="true" />
-            <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Department-wise Absenteeism</h2>
-          </div>
-          <span className="text-[9px] font-bold text-rose-500 bg-rose-50 dark:bg-rose-950/40 px-1.5 py-0.5 rounded border border-rose-200 dark:border-rose-800 shrink-0">
-            Highest: {highestDeptName}
-          </span>
+        <div className="flex items-center gap-2 mb-3 min-w-0">
+          <Users className="w-4 h-4 shrink-0 text-[#6F3DBA]" aria-hidden="true" />
+          <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Department-wise Absenteeism</h2>
         </div>
 
         {loading ? (
@@ -131,11 +126,6 @@ export function DepartmentAbsenteeismCard({
             </ResponsiveContainer>
           </div>
         )}
-      </div>
-
-      <div className="flex items-center justify-between pt-2 border-t border-[var(--border)] text-[9px] text-[var(--secondary)]">
-        <span>Departments: <strong className="text-[var(--text)]">{chartData.length} Tracked</strong></span>
-        <span>Peak Rate: <strong className="text-rose-500 font-bold">{chartData[0]?.absenteeism_pct}%</strong></span>
       </div>
     </Card>
   );

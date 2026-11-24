@@ -1,6 +1,7 @@
 """Pydantic v2 schemas for fact_workforce_attendance and attendance analytics."""
 
 import datetime as dt
+from typing import Any
 
 from pydantic import BaseModel, ConfigDict
 
@@ -57,6 +58,10 @@ class AttendanceTrendPoint(BaseModel):
     leave_count: int
     attendance_pct: float
     absenteeism_pct: float
+    male_present_count: int = 0
+    female_present_count: int = 0
+    male_absent_count: int = 0
+    female_absent_count: int = 0
 
 
 class ShiftAttendanceBreakdown(BaseModel):
@@ -86,6 +91,7 @@ class AttendanceAnalyticsResponse(BaseModel):
     leave_count: int = 0
     late_count: int = 0
     attendance_rate: float = 0.0
+    absenteeism_rate: float = 0.0
     by_status: list[AttendanceStatusBreakdown]
     by_plant: list[GroupCount]
     by_shift: list[GroupCount]
@@ -94,4 +100,5 @@ class AttendanceAnalyticsResponse(BaseModel):
     trends: list[AttendanceTrendPoint] = []
     weekly_comparison: list[AttendanceTrendPoint] = []
     shift_breakdown: list[ShiftAttendanceBreakdown] = []
+    by_vendor: list[dict[str, Any]] = []
     data_quality_warnings: list[DataQualityWarning]

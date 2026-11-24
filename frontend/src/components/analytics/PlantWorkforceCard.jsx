@@ -12,6 +12,7 @@ import {
 import { useTheme } from '../../hooks/useTheme';
 import { CHART_COLORS } from '../../utils/constants';
 import { Card } from '../common/Card';
+import { EmptyState } from '../common/EmptyState';
 import { LoadingSkeleton } from '../common/LoadingSkeleton';
 
 const PLANT_LABELS = {
@@ -29,14 +30,13 @@ export function PlantWorkforceCard({
   const { theme } = useTheme();
   const palette = CHART_COLORS[theme] || CHART_COLORS.light;
 
-  // Use authoritative employee_master counts from workforceSummary; fallback to attendance if summary not passed
+  // Authoritative employee_master counts from workforceSummary; fallback to attendance if summary not passed
   const rawPlants = !error ? (workforceSummary?.by_plant ?? attendance?.by_plant ?? []) : [];
   const plantCounts = {
     'IN-TN-01': 0,
     'IN-KA-01': 0,
   };
 
-  // Populate from API counts for verified plants
   rawPlants.forEach((p) => {
     if (p.key in plantCounts) {
       plantCounts[p.key] = p.count;
@@ -61,72 +61,74 @@ export function PlantWorkforceCard({
   ];
 
   return (
-    <Card className="p-4 lg:col-span-4 flex flex-col justify-between min-h-[220px]">
-      <div>
-        <div className="flex items-center justify-between gap-2 mb-2">
-          <div className="flex items-center gap-2 min-w-0">
-            <Factory className="w-4 h-4 shrink-0" style={{ color: '#4D8EEB' }} aria-hidden="true" />
-            <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Plant-wise Workforce Distribution</h2>
-          </div>
-          <span className="text-[10px] font-semibold muted shrink-0">employee_master</span>
+    <Card className="p-4 flex flex-col h-full min-h-[280px]">
+      {/* Single clean line header - no subtitles */}
+      <div className="flex items-center justify-between gap-2 mb-2 min-w-0 shrink-0">
+        <div className="flex items-center gap-2 min-w-0">
+          <Factory className="w-4 h-4 shrink-0" style={{ color: '#4D8EEB' }} aria-hidden="true" />
+          <h2 className="text-[13px] sm:text-sm font-bold truncate">Plant-wise Workforce Distribution</h2>
         </div>
-
-        {loading ? (
-          <LoadingSkeleton className="h-32 w-full rounded-lg" />
-        ) : totalAcrossPlants === 0 ? (
-          <div className="h-32 w-full my-1 flex flex-col items-center justify-center text-center p-2 bg-[var(--surface-hover)]/30 rounded-lg border border-dashed border-[var(--border)]">
-            <Factory className="w-5 h-5 text-slate-400 mb-1 opacity-60" />
-            <p className="text-xs font-bold text-[var(--text)]">No Plant Data</p>
-            <p className="text-[10px] text-[var(--secondary)] mt-0.5">
-              Connect to FastAPI backend to view live plant breakdown.
-            </p>
-          </div>
-        ) : (
-          <div className="h-32 w-full my-1">
-            <ResponsiveContainer width="100%" height={128}>
-              <BarChart data={chartData} margin={{ top: 8, right: 10, left: -15, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke={palette.grid} />
-                <XAxis
-                  dataKey="plant_id"
-                  stroke={palette.axisText}
-                  fontSize={10}
-                  tickLine={false}
-                />
-                <YAxis
-                  stroke={palette.axisText}
-                  fontSize={9}
-                  domain={[0, 1200]}
-                  ticks={[0, 300, 600, 900, 1200]}
-                />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: palette.tooltipBg,
-                    borderColor: palette.tooltipBorder,
-                    color: palette.tooltipText,
-                    fontSize: '11px',
-                    borderRadius: '8px',
-                  }}
-                  formatter={(val, name, item) => [`${val.toLocaleString()} (${item.payload.pct}%)`, item.payload.name]}
-                />
-                <Bar dataKey="count" name="Employees" radius={[4, 4, 0, 0]}>
-                  {chartData.map((entry, index) => {
-                    const isFiltered = selectedPlantId ? selectedPlantId === entry.plant_id : true;
-                    return (
-                      <Cell
-                        key={`cell-plant-${index}`}
-                        fill={isFiltered ? (entry.plant_id === 'IN-TN-01' ? '#6F3DBA' : '#4D8EEB') : '#CBD5E1'}
-                      />
-                    );
-                  })}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+        {totalAcrossPlants > 0 && !loading && (
+          <span className="text-[11px] font-bold text-[var(--secondary)] shrink-0">
+            {totalAcrossPlants.toLocaleString()} Total
+          </span>
         )}
       </div>
 
+      {loading ? (
+        <LoadingSkeleton className="h-[140px] w-full rounded-lg flex-1" />
+      ) : totalAcrossPlants === 0 ? (
+        <div className="h-[140px] flex-1 flex items-center justify-center">
+          <EmptyState
+            icon={Factory}
+            title="No Plant Data"
+            description="Plant workforce records will appear here."
+          />
+        </div>
+      ) : (
+        <div className="h-[140px] w-full flex-1">
+          <ResponsiveContainer width="100%" height={140}>
+            <BarChart data={chartData} margin={{ top: 8, right: 10, left: -20, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke={palette.grid} vertical={false} />
+              <XAxis
+                dataKey="plant_id"
+                stroke={palette.axisText}
+                fontSize={10}
+                tickLine={false}
+              />
+              <YAxis
+                stroke={palette.axisText}
+                fontSize={9}
+                tickLine={false}
+              />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: palette.tooltipBg,
+                  borderColor: palette.tooltipBorder,
+                  color: palette.tooltipText,
+                  fontSize: '11px',
+                  borderRadius: '8px',
+                }}
+                formatter={(val, name, item) => [`${val.toLocaleString()} (${item.payload.pct}%)`, item.payload.name]}
+              />
+              <Bar dataKey="count" name="Employees" radius={[4, 4, 0, 0]} barSize={36}>
+                {chartData.map((entry, index) => {
+                  const isFiltered = selectedPlantId ? selectedPlantId === entry.plant_id : true;
+                  return (
+                    <Cell
+                      key={`cell-plant-${index}`}
+                      fill={isFiltered ? (entry.plant_id === 'IN-TN-01' ? '#6F3DBA' : '#4D8EEB') : '#CBD5E1'}
+                    />
+                  );
+                })}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      )}
+
       {totalAcrossPlants > 0 && (
-        <div className="grid grid-cols-2 gap-2 pt-2 border-t border-[var(--border)] text-[10px]">
+        <div className="grid grid-cols-2 gap-2 pt-2 border-t border-[var(--border)] text-[10px] shrink-0 mt-auto">
           {chartData.map((p) => (
             <div
               key={p.plant_id}

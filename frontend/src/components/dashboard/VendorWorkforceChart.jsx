@@ -3,6 +3,7 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -10,6 +11,7 @@ import {
 } from 'recharts';
 import { useTheme } from '../../hooks/useTheme';
 import { CHART_COLORS } from '../../utils/constants';
+import { LoadingSkeleton } from '../common/LoadingSkeleton';
 
 export const ALL_SIX_VENDORS = [
   { id: 'V01', code: 'V01', name: 'Sri Vignesh Manpower Services', assigned: 117, active: 117, resigned: 21, pct: 18.1 },
@@ -20,161 +22,255 @@ export const ALL_SIX_VENDORS = [
   { id: 'V06', code: 'V06', name: 'Prime HR Outsourcing', assigned: 55, active: 55, resigned: 3, pct: 8.5 },
 ];
 
+export const VENDOR_PALETTE = [
+  {
+    name: 'red',
+    lightTop: '#F87171',
+    lightBottom: '#DC2626',
+    darkTop: '#FCA5A5',
+    darkBottom: '#B91C1C',
+    main: '#EF4444',
+  },
+  {
+    name: 'orange',
+    lightTop: '#FB923C',
+    lightBottom: '#EA580C',
+    darkTop: '#FDBA74',
+    darkBottom: '#C2410C',
+    main: '#F97316',
+  },
+  {
+    name: 'teal',
+    lightTop: '#2DD4BF',
+    lightBottom: '#0D9488',
+    darkTop: '#5EEAD4',
+    darkBottom: '#0F766E',
+    main: '#14B8A6',
+  },
+  {
+    name: 'blue',
+    lightTop: '#60A5FA',
+    lightBottom: '#2563EB',
+    darkTop: '#93C5FD',
+    darkBottom: '#1D4ED8',
+    main: '#3B82F6',
+  },
+  {
+    name: 'purple',
+    lightTop: '#C084FC',
+    lightBottom: '#9333EA',
+    darkTop: '#D8B4FE',
+    darkBottom: '#7E22CE',
+    main: '#A855F7',
+  },
+  {
+    name: 'green',
+    lightTop: '#4ADE80',
+    lightBottom: '#16A34A',
+    darkTop: '#86EFAC',
+    darkBottom: '#15803D',
+    main: '#22C55E',
+  },
+];
+
 export function VendorWorkforceChart({
   selectedVendorId = '',
   workforceSummary = null,
   loading = false,
   hasData = false,
+  variant = 'columns',
 }) {
   const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const palette = CHART_COLORS[theme] || CHART_COLORS.light;
 
   const totalVendorCount = workforceSummary?.vendor_count ?? 0;
 
   const chartData = hasData
-    ? ALL_SIX_VENDORS.map((v) => {
-        const isSelected = !selectedVendorId || selectedVendorId === v.id || selectedVendorId === v.code;
+    ? ALL_SIX_VENDORS.map((v, index) => {
         const vendorRow = workforceSummary?.by_vendor?.find(
           (r) => r.key.toUpperCase() === v.id.toUpperCase()
         );
         const count = vendorRow ? vendorRow.count : 0;
         const pct = totalVendorCount > 0 ? ((count / totalVendorCount) * 100).toFixed(1) : '0.0';
+        const pal = VENDOR_PALETTE[index % VENDOR_PALETTE.length];
         return {
           ...v,
-          assigned: count,
           active: count,
           pct: parseFloat(pct),
-          shortLabel: v.code,
-          fillActive: isSelected ? '#6F3DBA' : '#D1D5DB',
-          fillAssigned: isSelected ? '#4D8EEB' : '#E5E7EB',
+          color: pal.main,
+          palIndex: index,
         };
       })
     : [];
 
+  // Custom label renderer placed right on top of each rising column
+  const renderCustomBarLabel = (props) => {
+    const { x, y, width, index } = props;
+    const item = chartData[index];
+    if (!item) return null;
+    const color = item.color || (isDark ? '#A78BFA' : '#6F3DBA');
+    return (
+      <text
+        x={x + width / 2}
+        y={y - 8}
+        fill={color}
+        textAnchor="middle"
+        style={{
+          fontWeight: 800,
+          fontSize: '11px',
+          letterSpacing: '-0.02em',
+        }}
+      >
+        {item.pct}%
+      </text>
+    );
+  };
+
   return (
     <div className="surface rounded-2xl p-4 border border-[var(--border)] shadow-xs flex flex-col justify-between h-full">
-      <div>
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-[var(--brand-purple-soft)] text-[var(--brand-purple)] flex items-center justify-center">
-              <Building2 className="w-4 h-4" />
-            </div>
-            <div>
-              <h3 className="text-sm font-extrabold text-[var(--text)] tracking-tight">
-                Vendor-wise Workforce Distribution (6 Vendors)
-              </h3>
-              <p className="text-[11px] text-[var(--secondary)]">
-                Assigned, active, resigned, and contribution share across 6 vendors
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 text-[10px] font-bold">
-            <span className="flex items-center gap-1 text-[var(--secondary)]">
-              <span className="w-2.5 h-2.5 rounded-sm bg-[#4D8EEB]" /> Assigned
-            </span>
-            <span className="flex items-center gap-1 text-[var(--secondary)]">
-              <span className="w-2.5 h-2.5 rounded-sm bg-[#6F3DBA]" /> Active
-            </span>
-          </div>
+      {/* Header */}
+      <div className="flex items-center gap-2 mb-2">
+        <div className="w-7 h-7 rounded-lg bg-[var(--brand-purple-soft)] text-[var(--brand-purple)] flex items-center justify-center">
+          <Building2 className="w-4 h-4" />
         </div>
-
-        {/* Horizontal Bar Chart */}
-        {!hasData || chartData.length === 0 ? (
-          <div className="w-full h-[220px] flex flex-col items-center justify-center text-center p-4 bg-[var(--surface-hover)]/30 rounded-lg border border-dashed border-[var(--border)]">
-            <Building2 className="w-6 h-6 text-slate-400 mb-2 opacity-60" />
-            <p className="text-xs font-bold text-[var(--text)]">No Vendor Workforce Records</p>
-            <p className="text-[11px] text-[var(--secondary)] mt-0.5">
-              Connect to FastAPI backend to view live vendor workforce distribution.
-            </p>
-          </div>
-        ) : (
-          <div className="w-full h-[220px]">
-            <ResponsiveContainer width="100%" height={220}>
-              <BarChart
-                layout="vertical"
-                data={chartData}
-                margin={{ top: 5, right: 24, left: 10, bottom: 5 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke={palette.grid} />
-                <XAxis
-                  type="number"
-                  domain={[0, 160]}
-                  ticks={[0, 40, 80, 120, 160]}
-                  tick={{ fill: palette.axisText, fontSize: 10 }}
-                  tickLine={false}
-                  axisLine={{ stroke: palette.grid }}
-                />
-                <YAxis
-                  type="category"
-                  dataKey="code"
-                  width={55}
-                  tick={{ fill: palette.axisText, fontSize: 10, fontWeight: 700 }}
-                  tickLine={false}
-                  axisLine={false}
-                />
-                <Tooltip
-                  content={({ active, payload }) => {
-                    if (!active || !payload?.length) return null;
-                    const item = payload[0]?.payload;
-                    return (
-                      <div
-                        className="p-2.5 rounded-xl shadow-lg border text-xs space-y-1"
-                        style={{
-                          backgroundColor: palette.tooltipBg,
-                          borderColor: palette.tooltipBorder,
-                          color: palette.tooltipText,
-                        }}
-                      >
-                        <div className="font-bold text-[11px] text-[var(--brand-purple)]">
-                          {item.code}: {item.name}
-                        </div>
-                        <div className="flex justify-between gap-4 text-[11px]">
-                          <span>Assigned Employees:</span>
-                          <span className="font-bold">{item.assigned}</span>
-                        </div>
-                        <div className="flex justify-between gap-4 text-[11px]">
-                          <span>Active Employees:</span>
-                          <span className="font-bold text-emerald-600">{item.active}</span>
-                        </div>
-                        <div className="flex justify-between gap-4 text-[11px]">
-                          <span>Resigned Employees:</span>
-                          <span className="font-bold">{item.resigned}</span>
-                        </div>
-                        <div className="flex justify-between gap-4 text-[11px] pt-1 border-t border-[var(--border)]">
-                          <span>Workforce Share:</span>
-                          <span className="font-black">{item.pct}%</span>
-                        </div>
-                      </div>
-                    );
-                  }}
-                />
-                <Bar dataKey="assigned" name="Assigned" fill="#4D8EEB" radius={[0, 4, 4, 0]} barSize={10} />
-                <Bar dataKey="active" name="Active" fill="#6F3DBA" radius={[0, 4, 4, 0]} barSize={10} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        )}
+        <h3 className="text-sm font-extrabold text-[var(--text)] tracking-tight">
+          Vendor-wise Workforce Distribution
+        </h3>
       </div>
 
-      {/* Summary Footer of All 6 Vendors */}
-      {hasData && (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 pt-2 border-t border-[var(--border)] text-[10px]">
-          {ALL_SIX_VENDORS.map((v) => (
-            <div key={v.id} className="bg-[var(--muted-fill)]/50 rounded-lg p-1.5 border border-[var(--border)]/60">
-              <div className="font-extrabold text-[var(--text)] truncate" title={v.name}>
-                {v.code}
-              </div>
-              <div className="text-[var(--secondary)] truncate text-[9px]">{v.name}</div>
-              <div className="flex items-center justify-between mt-1">
-                <span className="font-black text-[var(--text)]">{v.active} active</span>
-                <span className="text-[9px] font-bold text-[var(--brand-purple)]">{v.pct}%</span>
-              </div>
-            </div>
-          ))}
+      {/* Main Chart Body */}
+      {loading && chartData.length === 0 ? (
+        <div className="flex-1 w-full min-h-[260px] flex items-center justify-center">
+          <LoadingSkeleton className="h-56 w-full rounded-xl" />
+        </div>
+      ) : !hasData || chartData.length === 0 || totalVendorCount === 0 ? (
+        <div className="flex-1 w-full min-h-[260px] flex flex-col items-center justify-center text-center p-4 bg-[var(--surface-hover)]/30 rounded-lg border border-dashed border-[var(--border)]">
+          <Building2 className="w-6 h-6 text-slate-400 mb-2 opacity-60" />
+          <p className="text-xs font-bold text-[var(--text)]">No Vendor Workforce Records</p>
+          <p className="text-[11px] text-[var(--secondary)] mt-0.5">
+            {totalVendorCount === 0
+              ? 'No vendor employees match the selected filters.'
+              : 'Connect to FastAPI backend to view live vendor workforce distribution.'}
+          </p>
+        </div>
+      ) : (
+        <div className="flex-1 w-full min-h-[260px] flex items-center">
+          <ResponsiveContainer width="100%" height={270}>
+            <BarChart
+              data={chartData}
+              margin={{ top: 24, right: 16, left: -14, bottom: 4 }}
+              barCategoryGap="20%"
+            >
+              <defs>
+                {VENDOR_PALETTE.map((pal, idx) => (
+                  <linearGradient
+                    key={`vendor-grad-${idx}`}
+                    id={`vendor-grad-${idx}`}
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
+                  >
+                    <stop
+                      offset="0%"
+                      stopColor={isDark ? pal.darkTop : pal.lightTop}
+                      stopOpacity={1}
+                    />
+                    <stop
+                      offset="100%"
+                      stopColor={isDark ? pal.darkBottom : pal.lightBottom}
+                      stopOpacity={0.92}
+                    />
+                  </linearGradient>
+                ))}
+                <filter id="bar-3d-shadow" x="-10%" y="-10%" width="120%" height="120%">
+                  <feDropShadow
+                    dx="0"
+                    dy="3"
+                    stdDeviation="3"
+                    floodOpacity={isDark ? '0.35' : '0.15'}
+                  />
+                </filter>
+              </defs>
+
+              <CartesianGrid
+                strokeDasharray="3 3"
+                vertical={false}
+                horizontal={true}
+                stroke={palette.grid}
+              />
+
+              <XAxis
+                dataKey="code"
+                tick={{ fill: palette.axisText, fontSize: 11, fontWeight: 700 }}
+                tickLine={false}
+                axisLine={{ stroke: palette.grid }}
+                interval={0}
+              />
+
+              <YAxis
+                domain={[0, (dataMax) => (dataMax > 0 ? Math.ceil(dataMax * 1.2) : 160)]}
+                tick={{ fill: palette.axisText, fontSize: 10, fontWeight: 500 }}
+                tickLine={false}
+                axisLine={false}
+                allowDecimals={false}
+              />
+
+              <Tooltip
+                cursor={{ fill: isDark ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)' }}
+                content={({ active, payload }) => {
+                  if (!active || !payload?.length) return null;
+                  const item = payload[0]?.payload;
+                  if (!item) return null;
+                  return (
+                    <div
+                      className="p-2.5 rounded-xl shadow-lg border text-xs"
+                      style={{
+                        backgroundColor: palette.tooltipBg,
+                        borderColor: palette.tooltipBorder,
+                        color: palette.tooltipText,
+                      }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span
+                          className="w-2.5 h-2.5 rounded-full shrink-0"
+                          style={{ backgroundColor: item.color }}
+                        />
+                        <span className="font-extrabold text-[11.5px] text-[var(--text)]">
+                          {item.name}:
+                        </span>
+                        <span className="font-extrabold text-[11.5px] text-[var(--text)]">
+                          {item.active} active ({item.pct}%)
+                        </span>
+                      </div>
+                    </div>
+                  );
+                }}
+              />
+
+              <Bar
+                dataKey="active"
+                radius={[6, 6, 0, 0]}
+                maxBarSize={46}
+                label={renderCustomBarLabel}
+                filter="url(#bar-3d-shadow)"
+              >
+                {chartData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${entry.id}`}
+                    fill={`url(#vendor-grad-${index % VENDOR_PALETTE.length})`}
+                    stroke={isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.06)'}
+                    strokeWidth={1}
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
         </div>
       )}
     </div>
   );
 }
+
+export default VendorWorkforceChart;

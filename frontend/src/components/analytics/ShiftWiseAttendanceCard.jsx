@@ -49,14 +49,9 @@ export function ShiftWiseAttendanceCard({
   return (
     <Card className="p-4 lg:col-span-3 flex flex-col justify-between min-h-[260px]">
       <div>
-        <div className="flex items-center justify-between gap-2 mb-3">
-          <div className="flex items-center gap-2 min-w-0">
-            <TrendingUp className="w-4 h-4 shrink-0 text-[#6F3DBA]" aria-hidden="true" />
-            <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Shift-wise Attendance</h2>
-          </div>
-          <span className="text-[10px] font-semibold text-purple-600 bg-purple-50 dark:bg-purple-950/40 px-1.5 py-0.5 rounded border border-purple-200 dark:border-purple-800 shrink-0">
-            {chartData.length > 0 ? `${chartData.length} Shifts` : 'No Connection'}
-          </span>
+        <div className="flex items-center gap-2 mb-3 min-w-0">
+          <TrendingUp className="w-4 h-4 shrink-0 text-[#6F3DBA]" aria-hidden="true" />
+          <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Shift-wise Attendance</h2>
         </div>
 
         {loading ? (

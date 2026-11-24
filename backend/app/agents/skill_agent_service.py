@@ -173,8 +173,8 @@ class SkillTrainingAgentService:
 
         # Top 5 and Bottom 5 skills
         sorted_skills = sorted(skill_name_counts.items(), key=lambda x: x[1], reverse=True)
-        top_skills = [{"skill": s[0], "count": s[1], "pct": round(s[1] / total_mappings_count * 100, 1)} for s in sorted_skills[:5]]
-        bottom_skills = [{"skill": s[0], "count": s[1], "pct": round(s[1] / total_mappings_count * 100, 1)} for s in sorted_skills[-5:]]
+        top_skills = [{"skill": s[0], "count": s[1], "pct": round(s[1] / total_mappings_count * 100, 1) if total_mappings_count > 0 else 0.0} for s in sorted_skills[:5]]
+        bottom_skills = [{"skill": s[0], "count": s[1], "pct": round(s[1] / total_mappings_count * 100, 1) if total_mappings_count > 0 else 0.0} for s in sorted_skills[-5:]]
 
         stages_log.append({
             "stage": 1,

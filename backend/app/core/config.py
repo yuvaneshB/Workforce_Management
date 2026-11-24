@@ -43,14 +43,14 @@ class Settings(BaseSettings):
     db_pool_recycle: int = Field(default=300, ge=30, le=3600, alias="DB_POOL_RECYCLE")
 
     # Domo AI Services LLM Timeout Configuration
-    domo_timeout: float = Field(default=30.0, ge=1.0, le=120.0, alias="DOMO_TIMEOUT")
+    domo_timeout: float = Field(default=60.0, ge=1.0, le=120.0, alias="DOMO_TIMEOUT")
 
     # Agent orchestration mode: "legacy" or "tools" (Phase 7.3 Multi-Agent Supervisor)
-    agent_mode: str = Field(default="legacy", alias="AGENT_MODE")
 
-    # Agent Timeout Settings (AGENT_TOTAL_TIMEOUT_SEC, AGENT_LLM_TIMEOUT_SEC)
-    agent_total_timeout_sec: float = Field(default=60.0, ge=1.0, le=600.0, alias="AGENT_TOTAL_TIMEOUT_SEC")
-    agent_llm_timeout_sec: float = Field(default=30.0, ge=1.0, le=300.0, alias="AGENT_LLM_TIMEOUT_SEC")
+    # Agent Timeout Settings (AGENT_TOTAL_TIMEOUT_SEC, AGENT_CROSS_DOMAIN_TIMEOUT_SEC, AGENT_LLM_TIMEOUT_SEC)
+    agent_total_timeout_sec: float = Field(default=100.0, ge=1.0, le=600.0, alias="AGENT_TOTAL_TIMEOUT_SEC")
+    agent_cross_domain_timeout_sec: float = Field(default=120.0, ge=1.0, le=600.0, alias="AGENT_CROSS_DOMAIN_TIMEOUT_SEC")
+    agent_llm_timeout_sec: float = Field(default=60.0, ge=1.0, le=300.0, alias="AGENT_LLM_TIMEOUT_SEC")
 
     # Workforce Intelligence Settings (Phase 7.1)
     dependency_backup_threshold: int = Field(default=1, alias="DEPENDENCY_BACKUP_THRESHOLD")

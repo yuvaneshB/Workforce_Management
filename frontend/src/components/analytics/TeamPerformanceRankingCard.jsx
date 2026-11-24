@@ -40,16 +40,11 @@ export function TeamPerformanceRankingCard({
   return (
     <Card className="p-4 lg:col-span-4 flex flex-col justify-between min-h-[260px]">
       <div>
-        <div className="flex items-center justify-between gap-2 mb-2">
-          <div className="flex items-center gap-2 min-w-0">
-            <Award className="w-4 h-4 shrink-0 text-[#6F3DBA]" aria-hidden="true" />
-            <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">
-              Team Performance Ranking (Top 5)
-            </h2>
-          </div>
-          <span className="text-[10px] font-bold text-purple-600 bg-purple-50 dark:bg-purple-950/40 px-1.5 py-0.5 rounded border border-purple-200 dark:border-purple-800 shrink-0">
-            Achievement %
-          </span>
+        <div className="flex items-center gap-2 mb-2 min-w-0">
+          <Award className="w-4 h-4 shrink-0 text-[#6F3DBA]" aria-hidden="true" />
+          <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">
+            Team Performance Ranking (Top 5)
+          </h2>
         </div>
 
         {loading ? (
@@ -83,11 +78,6 @@ export function TeamPerformanceRankingCard({
             })}
           </div>
         )}
-      </div>
-
-      <div className="flex items-center justify-between pt-2 border-t border-[var(--border)] text-[9px] text-[var(--secondary)]">
-        <span>Leader: <strong className="text-purple-600 font-bold">{topTeams[0]?.team} ({topTeams[0]?.achievement}%)</strong></span>
-        <span>Spread: <strong className="text-[var(--text)] font-semibold">2.3% Variance</strong></span>
       </div>
     </Card>
   );
