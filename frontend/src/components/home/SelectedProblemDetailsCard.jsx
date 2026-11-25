@@ -171,7 +171,7 @@ export function SelectedProblemDetailsCard({ selectedProblem = 'shortages' }) {
 
         {/* Section 3: Ask the assistant */}
         <div className="my-2.5 p-2.5 rounded-xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-900/40">
-          <div className="text-[9.5px] font-black uppercase tracking-wider text-[#5932EA] dark:text-purple-400 flex items-center gap-1 mb-1">
+          <div className="text-[9.5px] font-black uppercase tracking-wider text-[#493287] dark:text-purple-400 flex items-center gap-1 mb-1">
             <MessageSquare className="w-3 h-3" />
             Ask the Assistant
           </div>
@@ -184,11 +184,11 @@ export function SelectedProblemDetailsCard({ selectedProblem = 'shortages' }) {
       {/* Footer Strip */}
       <div className="pt-2 border-t border-[var(--border)] mt-2 flex flex-wrap items-center justify-between gap-1 text-[9px] text-[var(--secondary)]">
         <span className="flex items-center gap-1.5 font-medium">
-          <Bot className="w-3 h-3 text-[#5932EA]" />
+          <Bot className="w-3 h-3 text-[#493287]" />
           Autonomous Specialist Agent: <strong className="text-[var(--text)]">{problem.agentName}</strong>
         </span>
         <span className="font-mono text-[8px] text-emerald-600 dark:text-emerald-400 font-bold shrink-0">
-          Neon DB Grounded
+          Grounded
         </span>
       </div>
     </Card>

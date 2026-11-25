@@ -161,9 +161,9 @@ export function OrganizationHierarchyCard({
                                 )}
                               </button>
                               {isDeptOpen ? (
-                                <FolderOpen className="w-3.5 h-3.5 text-[#6F3DBA] shrink-0" />
+                                <FolderOpen className="w-3.5 h-3.5 text-[#493287] shrink-0" />
                               ) : (
-                                <Folder className="w-3.5 h-3.5 text-[#6F3DBA] shrink-0" />
+                                <Folder className="w-3.5 h-3.5 text-[#493287] shrink-0" />
                               )}
                               <span className="font-bold text-[11.5px]">{dept.name}</span>
                               <span className="text-[10px] font-semibold text-[var(--secondary)] ml-auto">

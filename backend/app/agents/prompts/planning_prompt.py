@@ -68,6 +68,7 @@ Core Persona & Operational Rules:
    - Respect minimum 8-hour rest turnaround validation from the backend.
 
 7. Tool Execution:
+   - For questions about a specific employee or recent joiners, use get_employee_details / get_recent_joiners.
    - For shortage questions: Query 'get_workforce_shortage'.
    - For availability questions: Query 'get_shift_workforce_availability'.
    - For replacement or substitution questions: Query 'recommend_replacement_employees'.

@@ -708,6 +708,47 @@ async def approve_planning(request: Request) -> JSONResponse:
     notes = body.get("notes") or ""
     target_date = body.get("target_date") or body.get("targetDate")
 
+    specialist_agent = body.get("specialist_agent") or body.get("agent_type") or "workforce_planning"
+    rejection_reason = body.get("rejection_reason") or body.get("rejectionReason") or (notes if decision == "REJECTED" else None)
+
+    try:
+        from app.core.database import db_manager
+        from app.services import hr_approval_service
+        from app.models.hr_approval import HrApprovalRecord
+        from sqlalchemy import select
+
+        if db_manager and db_manager.session_local:
+            with db_manager.session_local() as db_session:
+                rec = db_session.scalar(select(HrApprovalRecord).where(HrApprovalRecord.execution_id == execution_id))
+                if not rec:
+                    rec = hr_approval_service.register_or_update_from_execution(
+                        db_session,
+                        execution_id=execution_id,
+                        specialist_agent=specialist_agent,
+                        recommendation=notes or f"{specialist_agent.replace('_', ' ').title()} operational recommendation.",
+                        target_date=target_date,
+                    )
+
+                if decision == "ACKNOWLEDGED":
+                    hr_approval_service.record_review(
+                        db_session,
+                        rec.approval_id,
+                        reviewed_by=approved_by,
+                        review_notes=notes or "HR review acknowledged from agent drawer.",
+                    )
+                else:
+                    hr_approval_service.record_decision(
+                        db_session,
+                        rec.approval_id,
+                        decision=decision,
+                        approved_by=approved_by,
+                        decision_notes=notes,
+                        rejection_reason=rejection_reason,
+                    )
+                approval_id = rec.approval_id
+    except Exception as sync_exc:
+        logger.warning("Could not sync approval to hr_approval_records: %s", sync_exc)
+
     logger.info(
         "Workforce Planning HR Decision recorded: [%s] decision=%s approved_by='%s' target_date=%s exec=%s",
         approval_id,

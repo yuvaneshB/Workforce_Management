@@ -76,11 +76,11 @@ export function ProductionOverviewCard({
         {/* Legend dots */}
         <div className="flex items-center gap-3 text-xs font-semibold">
           <span className="flex items-center gap-1.5 text-[var(--secondary)]">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#C4B5FD] dark:bg-[#7C3AED]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#96A1C7] dark:bg-[#6775A8]" />
             <span className="text-[11px]">Target</span>
           </span>
           <span className="flex items-center gap-1.5 text-[var(--secondary)]">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#6F3DBA] dark:bg-[#A684EE]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#493287] dark:bg-[#8295E8]" />
             <span className="text-[11px]">Actual</span>
           </span>
         </div>
@@ -142,7 +142,7 @@ export function ProductionOverviewCard({
                 <Bar
                   dataKey="target"
                   name="Target"
-                  fill={theme === 'dark' ? '#7C3AED' : '#C4B5FD'}
+                  fill={theme === 'dark' ? '#6775A8' : '#96A1C7'}
                   radius={[4, 4, 0, 0]}
                   maxBarSize={40}
                   isAnimationActive={false}
@@ -160,7 +160,7 @@ export function ProductionOverviewCard({
                 <Bar
                   dataKey="actual"
                   name="Actual"
-                  fill={theme === 'dark' ? '#A684EE' : '#6F3DBA'}
+                  fill={theme === 'dark' ? '#8295E8' : '#493287'}
                   radius={[4, 4, 0, 0]}
                   maxBarSize={40}
                   isAnimationActive={false}
@@ -198,7 +198,7 @@ export function ProductionOverviewCard({
                   cx="60"
                   cy="60"
                   r={radius}
-                  stroke={theme === 'dark' ? '#A684EE' : '#6F3DBA'}
+                  stroke={theme === 'dark' ? '#8295E8' : '#493287'}
                   strokeWidth="9"
                   strokeDasharray={circumference}
                   strokeDashoffset={strokeDashoffset}

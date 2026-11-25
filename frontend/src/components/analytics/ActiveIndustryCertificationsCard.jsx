@@ -32,10 +32,13 @@ export function ActiveIndustryCertificationsCard({
   const palette = CHART_COLORS[theme] || CHART_COLORS.light;
 
   const rawCerts = !error && data?.certification_distribution?.length
-    ? data.certification_distribution.map((c) => ({
-        certification: c.certification,
-        employee_count: c.employee_count,
-      }))
+    ? data.certification_distribution
+        .filter((c) => c.certification && c.certification !== 'None' && c.certification !== 'null')
+        .slice(0, 6)
+        .map((c) => ({
+          certification: c.certification,
+          employee_count: c.employee_count,
+        }))
     : DEFAULT_CERTS;
 
   return (
@@ -58,7 +61,7 @@ export function ActiveIndustryCertificationsCard({
               <BarChart
                 data={rawCerts}
                 layout="vertical"
-                margin={{ top: 5, right: 30, left: -10, bottom: 0 }}
+                margin={{ top: 5, right: 35, left: 10, bottom: 0 }}
                 barSize={12}
               >
                 <CartesianGrid
@@ -68,8 +71,7 @@ export function ActiveIndustryCertificationsCard({
                 />
                 <XAxis
                   type="number"
-                  domain={[0, 40]}
-                  ticks={[0, 10, 20, 30, 40]}
+                  domain={[0, (dataMax) => Math.ceil((dataMax * 1.2) / 50) * 50]}
                   stroke={palette.axis}
                   tick={{ fill: palette.text, fontSize: 9 }}
                   axisLine={{ stroke: palette.grid }}
@@ -82,7 +84,7 @@ export function ActiveIndustryCertificationsCard({
                   tick={{ fill: palette.text, fontSize: 9.5, fontWeight: 600 }}
                   axisLine={false}
                   tickLine={false}
-                  width={68}
+                  width={85}
                 />
                 <Tooltip
                   contentStyle={{

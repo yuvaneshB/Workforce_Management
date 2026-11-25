@@ -50,7 +50,7 @@ export function ShiftWiseAttendanceCard({
     <Card className="p-4 lg:col-span-3 flex flex-col justify-between min-h-[260px]">
       <div>
         <div className="flex items-center gap-2 mb-3 min-w-0">
-          <TrendingUp className="w-4 h-4 shrink-0 text-[#6F3DBA]" aria-hidden="true" />
+          <TrendingUp className="w-4 h-4 shrink-0 text-[#493287]" aria-hidden="true" />
           <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Shift-wise Attendance</h2>
         </div>
 
@@ -78,9 +78,9 @@ export function ShiftWiseAttendanceCard({
                 <YAxis
                   stroke={palette.axisText}
                   fontSize={9}
-                  domain={[80, 100]}
-                  ticks={[80, 85, 90, 95, 100]}
-                  unit="%"
+                  domain={[0, 100]}
+                  ticks={[20, 40, 60, 80, 100]}
+                  tickFormatter={(val) => `${val}%`}
                 />
                 <Tooltip
                   contentStyle={{

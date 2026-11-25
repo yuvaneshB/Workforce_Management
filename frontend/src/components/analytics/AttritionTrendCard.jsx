@@ -49,7 +49,7 @@ export function AttritionTrendCard({ data = null, loading = false }) {
                 onClick={() => setPeriod(p)}
                 className={`px-2.5 py-0.5 rounded-md text-[10px] font-bold capitalize transition-colors cursor-pointer ${
                   period === p
-                    ? 'bg-[#6F3DBA] text-white shadow-xs'
+                    ? 'bg-[#493287] text-white shadow-xs'
                     : 'text-[var(--secondary)] hover:text-[var(--text)]'
                 }`}
               >
@@ -121,9 +121,9 @@ export function AttritionTrendCard({ data = null, loading = false }) {
                   type="monotone"
                   dataKey="total"
                   name="Total Exits"
-                  stroke="#8B5CF6"
+                  stroke="#493287"
                   strokeWidth={2.5}
-                  dot={{ r: 3.5, fill: '#8B5CF6' }}
+                  dot={{ r: 3.5, fill: '#493287' }}
                   activeDot={{ r: 5 }}
                 />
                 <Line

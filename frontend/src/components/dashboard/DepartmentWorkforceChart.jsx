@@ -6,14 +6,14 @@ const COLOR_CYCLE = [
   'bg-[#4D8EEB]',
   'bg-[#0E9C86]',
   'bg-[#F58A3A]',
-  'bg-[#8B5CF6]',
+  'bg-[#493287]',
   'bg-[#EC4899]',
   'bg-[#10B981]',
   'bg-[#6366F1]',
   'bg-[#F97316]',
   'bg-[#14B8A6]',
   'bg-[#3B82F6]',
-  'bg-[#A855F7]',
+  'bg-[#5B44A3]',
 ];
 
 export function DepartmentWorkforceChart({

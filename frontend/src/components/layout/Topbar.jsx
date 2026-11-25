@@ -63,7 +63,7 @@ export function Topbar({ onOpenSidebar }) {
             <ThemeToggle />
 
             {/* Admin Badge */}
-            <div className="px-3 py-1 rounded-lg bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800 text-[10px] font-black text-[#5932EA] dark:text-purple-300 uppercase tracking-wider select-none">
+            <div className="px-3 py-1 rounded-lg bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800 text-[10px] font-black text-[#493287] dark:text-purple-300 uppercase tracking-wider select-none">
               ADMIN
             </div>
           </>

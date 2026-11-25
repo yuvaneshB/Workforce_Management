@@ -27,8 +27,9 @@ export function DataConnectors() {
   const timeoutIdsRef = useRef([]);
 
   useEffect(() => {
+    const timeouts = timeoutIdsRef.current;
     return () => {
-      timeoutIdsRef.current.forEach((id) => clearTimeout(id));
+      timeouts.forEach((id) => clearTimeout(id));
     };
   }, []);
 

@@ -106,7 +106,7 @@ export function WorkforceAvailability({
                 <defs>
                   <linearGradient id="availabilityGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stopColor="#4D8EEB" />
-                    <stop offset="100%" stopColor="#6F3DBA" />
+                    <stop offset="100%" stopColor="#493287" />
                   </linearGradient>
                 </defs>
               </svg>

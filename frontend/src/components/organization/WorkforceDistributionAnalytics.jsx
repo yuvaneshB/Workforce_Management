@@ -39,7 +39,7 @@ export function WorkforceDistributionAnalytics({
   const vendPct = totalEmployees > 0 ? ((vendorCount / totalEmployees) * 100).toFixed(1) : '0.0';
 
   const donutData = [
-    { name: 'Permanent', value: permanentCount, pct: permPct, color: '#8B5CF6' },
+    { name: 'Permanent', value: permanentCount, pct: permPct, color: '#493287' },
     { name: 'Vendor', value: vendorCount, pct: vendPct, color: '#38BDF8' },
   ];
 
@@ -194,7 +194,7 @@ export function WorkforceDistributionAnalytics({
               {/* Custom Legend on Right */}
               <div className="absolute right-2 top-1/2 -translate-y-1/2 space-y-2 text-[10.5px]">
                 <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#8B5CF6] shrink-0" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#493287] shrink-0" />
                   <span className="font-semibold text-[var(--text)]">Permanent:</span>
                   <span className="font-bold text-[var(--secondary)]">{permanentCount} ({permPct}%)</span>
                 </div>
@@ -216,7 +216,7 @@ export function WorkforceDistributionAnalytics({
             </span>
             <div className="flex items-center gap-2 text-[9.5px]">
               <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded bg-[#8B5CF6]" /> Perm
+                <span className="w-2 h-2 rounded bg-[#493287]" /> Perm
               </span>
               <span className="flex items-center gap-1">
                 <span className="w-2 h-2 rounded bg-[#38BDF8]" /> Vendor
@@ -249,7 +249,7 @@ export function WorkforceDistributionAnalytics({
                     fontSize: '11px',
                   }}
                 />
-                <Bar dataKey="Permanent" stackId="a" fill="#8B5CF6" radius={[0, 0, 0, 0]} />
+                <Bar dataKey="Permanent" stackId="a" fill="#493287" radius={[0, 0, 0, 0]} />
                 <Bar dataKey="Vendor" stackId="a" fill="#38BDF8" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
@@ -298,7 +298,7 @@ export function WorkforceDistributionAnalytics({
                   />
                   <Bar
                     dataKey="count"
-                    fill="#8B5CF6"
+                    fill="#493287"
                     radius={[4, 4, 0, 0]}
                     label={{ position: 'top', fill: palette.labelText, fontSize: 9.5, fontWeight: 700 }}
                   />

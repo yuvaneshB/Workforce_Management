@@ -231,7 +231,7 @@ export function OvertimeAnalytics({
                         {item.fullName}
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-[#6F3DBA]" />
+                        <span className="w-2 h-2 rounded-full bg-[#493287]" />
                         <span className="text-[var(--secondary)]">Overtime Logged:</span>
                         <span className="font-bold">{item.hours.toLocaleString()} hrs</span>
                       </div>
@@ -242,7 +242,7 @@ export function OvertimeAnalytics({
               <Bar
                 dataKey="hours"
                 name="Overtime Hours"
-                fill="#6F3DBA"
+                fill="#493287"
                 radius={[4, 4, 0, 0]}
                 maxBarSize={42}
               />

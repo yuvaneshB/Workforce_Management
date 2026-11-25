@@ -13,6 +13,7 @@ import {
   RefreshCw,
   RotateCcw,
   Search,
+  ShieldCheck,
   TrendingUp,
   UserCheck,
   UserMinus,
@@ -49,6 +50,9 @@ import { KPICard } from '../components/common/KPICard';
 import { LoadingSkeleton } from '../components/common/LoadingSkeleton';
 import { PaginationControls } from '../components/common/PaginationControls';
 import { StatusBadge } from '../components/common/StatusBadge';
+import { AddEmployeeSection } from '../components/workforce/AddEmployeeSection';
+import { HrApprovalSection } from '../components/workforce/HrApprovalSection';
+import { RelieveEmployeeSection } from '../components/workforce/RelieveEmployeeSection';
 import { VendorWorkforceSection } from '../components/workforce/VendorWorkforceSection';
 import { useTheme } from '../hooks/useTheme';
 import { CHART_COLORS, PLANT_OPTIONS, SHIFT_NAMES } from '../utils/constants';
@@ -76,7 +80,7 @@ function getAttendanceStatusBadge(status) {
     return { background: 'var(--brand-peach-soft)', color: '#F58A3A' };
   }
   if (norm === 'LEAVE') {
-    return { background: 'var(--brand-purple-soft)', color: '#6F3DBA' };
+    return { background: 'var(--brand-purple-soft)', color: '#493287' };
   }
   return { background: 'var(--brand-blue-soft)', color: '#4D8EEB' };
 }
@@ -110,7 +114,7 @@ export function WorkforceManagement() {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const tabParam = searchParams.get('tab');
-  const validTabs = ['workforce', 'vendor-workforce', 'attendance', 'shifts'];
+  const validTabs = ['workforce', 'vendor-workforce', 'attendance', 'shifts', 'add-employee', 'relieve-employee', 'hr-approval'];
   const activeTab = validTabs.includes(tabParam) ? tabParam : 'workforce';
 
   const handleTabChange = useCallback(
@@ -453,6 +457,7 @@ export function WorkforceManagement() {
       {/* ==================================================================== */}
       {/* 1. SHARED FILTERS CONTAINER (Clean 2-Row Layout)                    */}
       {/* ==================================================================== */}
+      {activeTab !== 'add-employee' && activeTab !== 'relieve-employee' && activeTab !== 'hr-approval' && (
       <Card className="p-4 border-slate-200/80 dark:border-slate-800 shadow-xs">
         <div className="flex flex-col gap-3">
           {/* Row 1: Date range, All Plants, All Departments, All Sections, All Shifts */}
@@ -586,6 +591,7 @@ export function WorkforceManagement() {
           </div>
         </div>
       </Card>
+      )}
 
       {/* ==================================================================== */}
       {/* 2. UNIFIED INTERNAL NAVIGATION TABS                                  */}
@@ -642,6 +648,45 @@ export function WorkforceManagement() {
           <Layers className="w-4 h-4" />
           <span>Shifts</span>
         </button>
+
+        <button
+          type="button"
+          onClick={() => handleTabChange('add-employee')}
+          className={`h-10 px-5 text-xs font-bold rounded-t-xl transition-all flex items-center gap-2 shrink-0 ${
+            activeTab === 'add-employee'
+              ? 'bg-purple-600 text-white shadow-xs'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800/50'
+          }`}
+        >
+          <UserPlus className="w-4 h-4" />
+          <span>Add Employee</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => handleTabChange('relieve-employee')}
+          className={`h-10 px-5 text-xs font-bold rounded-t-xl transition-all flex items-center gap-2 shrink-0 ${
+            activeTab === 'relieve-employee'
+              ? 'bg-purple-600 text-white shadow-xs'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800/50'
+          }`}
+        >
+          <UserMinus className="w-4 h-4" />
+          <span>Relieve Employee</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => handleTabChange('hr-approval')}
+          className={`h-10 px-5 text-xs font-bold rounded-t-xl transition-all flex items-center gap-2 shrink-0 ${
+            activeTab === 'hr-approval'
+              ? 'bg-purple-600 text-white shadow-xs'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800/50'
+          }`}
+        >
+          <ShieldCheck className="w-4 h-4" />
+          <span>HR Approval</span>
+        </button>
       </div>
 
       {/* ==================================================================== */}
@@ -673,7 +718,7 @@ export function WorkforceManagement() {
               subtitle="Registered workforce"
               icon={Users}
               iconBg="var(--brand-purple-soft)"
-              iconColor="#6F3DBA"
+              iconColor="#493287"
               loading={!summaryData}
             />
             <KPICard
@@ -889,7 +934,7 @@ export function WorkforceManagement() {
               subtitle="Biometric shift shifts"
               icon={Calendar}
               iconBg="var(--brand-purple-soft)"
-              iconColor="#6F3DBA"
+              iconColor="#493287"
               loading={attendanceLoading && !attendanceAnalytics}
             />
             <KPICard
@@ -955,8 +1000,12 @@ export function WorkforceManagement() {
             <KPICard
               label="Attendance Rate"
               value={
-                typeof attendanceAnalytics?.attendance_pct === 'number'
+                attendanceAnalytics?.attendance_rate != null
+                  ? `${Number(attendanceAnalytics.attendance_rate).toFixed(1)}%`
+                  : typeof attendanceAnalytics?.attendance_pct === 'number'
                   ? `${attendanceAnalytics.attendance_pct.toFixed(1)}%`
+                  : attendanceAnalytics?.present_count != null && attendanceAnalytics?.total_records
+                  ? `${((attendanceAnalytics.present_count / attendanceAnalytics.total_records) * 100).toFixed(1)}%`
                   : '—'
               }
               subtitle="Operational presence ratio"
@@ -990,8 +1039,8 @@ export function WorkforceManagement() {
                   <AreaChart data={attendanceAnalytics.trends.slice(-30)} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
                     <defs>
                       <linearGradient id="attendanceGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#6F3DBA" stopOpacity={0.3} />
-                        <stop offset="95%" stopColor="#6F3DBA" stopOpacity={0.0} />
+                        <stop offset="5%" stopColor="#493287" stopOpacity={0.3} />
+                        <stop offset="95%" stopColor="#493287" stopOpacity={0.0} />
                       </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="3 3" stroke={palette.grid} />
@@ -1010,7 +1059,7 @@ export function WorkforceManagement() {
                     <Area
                       type="monotone"
                       dataKey="attendance_pct"
-                      stroke="#6F3DBA"
+                      stroke="#493287"
                       strokeWidth={2}
                       fillOpacity={1}
                       fill="url(#attendanceGradient)"
@@ -1176,7 +1225,7 @@ export function WorkforceManagement() {
               subtitle="14:00 – 22:00 (Planned: 480 min | Break: 60 min)"
               icon={CalendarClock}
               iconBg="var(--brand-purple-soft)"
-              iconColor="#6F3DBA"
+              iconColor="#493287"
               loading={!summaryData}
             />
             <KPICard
@@ -1290,6 +1339,39 @@ export function WorkforceManagement() {
           </Card>
         </div>
       )}
+
+      {/* ==================================================================== */}
+      {/* 5. TAB 5: ADD EMPLOYEE                                               */}
+      {/* ==================================================================== */}
+      {activeTab === 'add-employee' && (
+        <AddEmployeeSection
+          onEmployeeCreated={() => {
+            setFilterToken((prev) => prev + 1);
+          }}
+          onNavigateToDirectory={() => {
+            handleTabChange('workforce');
+          }}
+        />
+      )}
+
+      {/* ==================================================================== */}
+      {/* 6. TAB 6: RELIEVE EMPLOYEE                                           */}
+      {/* ==================================================================== */}
+      {activeTab === 'relieve-employee' && (
+        <RelieveEmployeeSection
+          onEmployeeRelieved={() => {
+            setFilterToken((prev) => prev + 1);
+          }}
+          onNavigateToDirectory={() => {
+            handleTabChange('workforce');
+          }}
+        />
+      )}
+
+      {/* ==================================================================== */}
+      {/* 7. TAB 7: HR APPROVAL                                                */}
+      {/* ==================================================================== */}
+      {activeTab === 'hr-approval' && <HrApprovalSection />}
     </div>
   );
 }

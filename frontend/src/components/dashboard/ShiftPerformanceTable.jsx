@@ -6,7 +6,7 @@ const SHIFTS_META = [
     name: 'Morning Shift',
     code: 'GS1',
     hours: '06:00 – 14:00',
-    dotColor: '#6F3DBA',
+    dotColor: '#493287',
     required: 60,
   },
   {

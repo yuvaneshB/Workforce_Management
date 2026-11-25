@@ -26,49 +26,24 @@ export function GenderAnalytics({ genderAnalytics = null, loading = false, error
   const maleColor = '#3B82F6';
   const femaleColor = '#EC4899';
 
+  const malePct = totalEmployees > 0 ? ((maleCount / totalEmployees) * 100).toFixed(1) : '0.0';
+  const femalePct = totalEmployees > 0 ? ((femaleCount / totalEmployees) * 100).toFixed(1) : '0.0';
+
   const chartData =
     !error && (male || female)
       ? [
-          ...(male ? [{ name: 'Male', value: male.employee_count, pct: totalEmployees > 0 ? ((male.employee_count / totalEmployees) * 100).toFixed(1) : '0.0', color: maleColor }] : []),
-          ...(female ? [{ name: 'Female', value: female.employee_count, pct: totalEmployees > 0 ? ((female.employee_count / totalEmployees) * 100).toFixed(1) : '0.0', color: femaleColor }] : []),
+          ...(male ? [{ name: 'Male', value: maleCount, pct: malePct, color: maleColor }] : []),
+          ...(female ? [{ name: 'Female', value: femaleCount, pct: femalePct, color: femaleColor }] : []),
         ]
       : [];
 
-  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, value, name }) => {
-    const RADIAN = Math.PI / 180;
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.52;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    return (
-      <text
-        x={x}
-        y={y}
-        fill="#FFFFFF"
-        textAnchor="middle"
-        dominantBaseline="central"
-        className="font-bold pointer-events-none select-none"
-        style={{
-          filter: 'drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.85))',
-        }}
-      >
-        <tspan x={x} dy="-0.35em" fontSize="11px" fontWeight="800">
-          {name}: {value?.toLocaleString()}
-        </tspan>
-        <tspan x={x} dy="1.35em" fontSize="10px" fontWeight="700" fill="#F8FAFC">
-          ({(percent * 100).toFixed(1)}%)
-        </tspan>
-      </text>
-    );
-  };
-
   return (
-    <Card className={`p-4 flex flex-col justify-between h-full min-h-[340px] ${className}`}>
+    <Card className={`p-3.5 sm:p-4 flex flex-col justify-between h-full min-h-[175px] ${className}`}>
       <div>
         <div className="flex items-center justify-between gap-2 mb-2 min-w-0">
           <div className="flex items-center gap-2 min-w-0">
             <Users className="w-4 h-4 shrink-0 text-blue-500" aria-hidden="true" />
-            <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Gender Analytics</h2>
+            <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap text-[var(--text)]">Gender Analytics</h2>
           </div>
           {totalEmployees > 0 && !loading && (
             <span className="text-[11px] font-bold text-[var(--secondary)] shrink-0">
@@ -78,84 +53,75 @@ export function GenderAnalytics({ genderAnalytics = null, loading = false, error
         </div>
 
         {loading ? (
-          <LoadingSkeleton className="h-[220px] w-full rounded-lg my-1" />
+          <LoadingSkeleton className="h-[110px] w-full rounded-lg my-1" />
         ) : chartData.length === 0 ? (
-          <div className="h-[220px] w-full my-1 flex flex-col items-center justify-center text-center p-2 bg-[var(--surface-hover)]/30 rounded-lg border border-dashed border-[var(--border)]">
+          <div className="h-[110px] w-full my-1 flex flex-col items-center justify-center text-center p-2 bg-[var(--surface-hover)]/30 rounded-lg border border-dashed border-[var(--border)]">
             <Users className="w-5 h-5 text-slate-400 mb-1 opacity-60" />
             <p className="text-xs font-bold text-[var(--text)]">No Gender Data</p>
           </div>
         ) : (
-          <div className="relative w-full h-[220px] flex items-center justify-center my-1">
-            <ResponsiveContainer width="100%" height={220}>
-              <PieChart>
-                <Pie
-                  data={chartData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={0}
-                  outerRadius={82}
-                  dataKey="value"
-                  stroke={sliceStroke}
-                  strokeWidth={2}
-                  label={renderCustomizedLabel}
-                  labelLine={false}
+          <div className="flex-1 flex flex-row items-center justify-between gap-2 sm:gap-3 my-auto min-h-[110px]">
+            {/* Left side: Gender pie chart */}
+            <div className="relative w-[110px] h-[110px] shrink-0 flex items-center justify-center">
+              <ResponsiveContainer width="100%" height={110}>
+                <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+                  <Pie
+                    data={chartData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={0}
+                    outerRadius={46}
+                    dataKey="value"
+                    stroke={sliceStroke}
+                    strokeWidth={2}
+                  >
+                    {chartData.map((entry) => (
+                      <Cell key={entry.name} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: palette.tooltipBg,
+                      borderColor: palette.tooltipBorder,
+                      color: palette.tooltipText,
+                      fontSize: '11px',
+                      borderRadius: '8px',
+                    }}
+                    formatter={(val, name, item) => [`${val.toLocaleString()} employees (${item.payload.pct}%)`, name]}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* Right side: Male and Female counts and percentages */}
+            <div className="flex-1 min-w-0 flex flex-col justify-center gap-1.5 sm:gap-2">
+              {chartData.map((item) => (
+                <div
+                  key={item.name}
+                  className="px-2.5 py-1.5 rounded-lg bg-[var(--surface-hover)]/40 border border-[var(--border)]/60 flex items-center justify-between gap-2 text-xs"
                 >
-                  {chartData.map((entry) => (
-                    <Cell key={entry.name} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: palette.tooltipBg,
-                    borderColor: palette.tooltipBorder,
-                    color: palette.tooltipText,
-                    fontSize: '11px',
-                    borderRadius: '8px',
-                  }}
-                  formatter={(val, name, item) => [`${val.toLocaleString()} employees (${item.payload.pct}%)`, name]}
-                />
-              </PieChart>
-            </ResponsiveContainer>
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <span
+                      className="w-2.5 h-2.5 rounded-full shrink-0"
+                      style={{ backgroundColor: item.color }}
+                    />
+                    <span className="font-semibold text-[var(--text)] truncate text-[11px] sm:text-xs">
+                      {item.name}
+                    </span>
+                  </div>
+                  <div className="flex items-baseline gap-1 shrink-0 pl-1 text-right">
+                    <span className="font-extrabold text-[var(--text)] tabular-nums text-xs sm:text-[13px]">
+                      {item.value.toLocaleString()}
+                    </span>
+                    <span className="text-[10px] sm:text-[11px] font-bold text-[var(--secondary)] tabular-nums">
+                      ({item.pct}%)
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
-      </div>
-
-      <div className="grid grid-cols-2 gap-2 pt-2 border-t border-[var(--border)]">
-        <div className="p-2 rounded-lg bg-blue-500/10 border border-blue-500/20 flex flex-col justify-between">
-          <div className="flex items-center justify-between text-[11px] font-semibold text-blue-500">
-            <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#3B82F6]" />
-              Male
-            </span>
-            <span className="text-[10px] font-bold text-blue-400">
-              {totalEmployees > 0 && male ? `${((male.employee_count / totalEmployees) * 100).toFixed(1)}%` : '0%'}
-            </span>
-          </div>
-          <div className="mt-1 flex items-baseline justify-between">
-            <span className="text-sm font-extrabold text-[var(--text)] tabular-nums">
-              {male ? male.employee_count.toLocaleString() : '0'}
-            </span>
-            <span className="text-[10px] font-medium text-[var(--secondary)]">Headcount</span>
-          </div>
-        </div>
-
-        <div className="p-2 rounded-lg bg-pink-500/10 border border-pink-500/20 flex flex-col justify-between">
-          <div className="flex items-center justify-between text-[11px] font-semibold text-pink-500">
-            <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#EC4899]" />
-              Female
-            </span>
-            <span className="text-[10px] font-bold text-pink-400">
-              {totalEmployees > 0 && female ? `${((female.employee_count / totalEmployees) * 100).toFixed(1)}%` : '0%'}
-            </span>
-          </div>
-          <div className="mt-1 flex items-baseline justify-between">
-            <span className="text-sm font-extrabold text-[var(--text)] tabular-nums">
-              {female ? female.employee_count.toLocaleString() : '0'}
-            </span>
-            <span className="text-[10px] font-medium text-[var(--secondary)]">Headcount</span>
-          </div>
-        </div>
       </div>
     </Card>
   );

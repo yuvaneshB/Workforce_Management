@@ -202,17 +202,17 @@ export function WorkforceKPICards({
 
   if (loading && !workforceSummary) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-2.5 2xl:gap-3 items-stretch w-full">
         {Array.from({ length: 8 }).map((_, i) => (
           <div
             key={i}
-            className="surface rounded-2xl p-3.5 sm:p-4 border border-[var(--border)] shadow-xs flex flex-col justify-between min-h-[88px] sm:min-h-[94px]"
+            className="surface rounded-2xl p-3 2xl:p-3.5 border border-[var(--border)] shadow-xs flex flex-col justify-between h-full min-h-[88px] 2xl:min-h-[94px] min-w-0"
           >
-            <div className="flex items-center justify-between gap-2">
-              <LoadingSkeleton className="h-4 w-28" />
-              <LoadingSkeleton className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl shrink-0" />
+            <div className="flex items-start justify-between gap-1.5 min-h-[32px] w-full">
+              <LoadingSkeleton className="h-3.5 w-16" />
+              <LoadingSkeleton className="w-6 h-6 2xl:w-7 2xl:h-7 rounded-lg shrink-0" />
             </div>
-            <LoadingSkeleton className="h-7 sm:h-8 w-24 mt-1" />
+            <LoadingSkeleton className="h-7 w-20 mt-auto pt-1" />
           </div>
         ))}
       </div>
@@ -220,28 +220,31 @@ export function WorkforceKPICards({
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-2.5 2xl:gap-3 items-stretch w-full">
       {cards.map((c) => {
         const IconComponent = c.icon;
         return (
           <div
             key={c.id}
-            className="surface rounded-2xl p-3.5 sm:p-4 border border-[var(--border)] shadow-xs hover:shadow-sm transition-all flex flex-col justify-between min-h-[88px] sm:min-h-[94px]"
+            className="surface rounded-2xl p-3 2xl:p-3.5 border border-[var(--border)] shadow-xs hover:shadow-sm transition-all flex flex-col justify-between h-full min-h-[88px] 2xl:min-h-[94px] min-w-0"
           >
-            <div className="flex items-center justify-between gap-2">
+            <div className="flex items-start justify-between gap-1.5 min-h-[32px] w-full">
               <span
-                className="text-[11px] sm:text-xs font-bold text-[var(--secondary)] uppercase tracking-wider leading-tight truncate"
+                className="text-[10px] 2xl:text-[11px] font-bold text-[var(--secondary)] uppercase tracking-wider leading-snug line-clamp-2 min-w-0"
                 title={c.label}
               >
                 {c.label}
               </span>
               <div
-                className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl ${c.iconBg} flex items-center justify-center shrink-0`}
+                className={`w-6 h-6 2xl:w-7 2xl:h-7 rounded-lg ${c.iconBg} flex items-center justify-center shrink-0`}
               >
-                <IconComponent className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                <IconComponent className="w-3.5 h-3.5 2xl:w-4 2xl:h-4" />
               </div>
             </div>
-            <div className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight tabular-nums whitespace-nowrap mt-1">
+            <div
+              className="text-lg xl:text-xl 2xl:text-2xl font-extrabold text-[var(--text)] tracking-tight tabular-nums whitespace-nowrap mt-auto pt-1 truncate"
+              title={c.value}
+            >
               {c.value}
             </div>
           </div>

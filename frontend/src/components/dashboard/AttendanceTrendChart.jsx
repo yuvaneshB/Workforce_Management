@@ -3,6 +3,7 @@ import {
   Bar,
   CartesianGrid,
   ComposedChart,
+  LabelList,
   Line,
   ResponsiveContainer,
   Tooltip,
@@ -95,6 +96,40 @@ export function AttendanceTrendChart({
     }
 
     const total = item.total_records || 0;
+    const maleCount = item.male_present_count ?? 0;
+    const femaleCount = item.female_present_count ?? 0;
+
+    // 3. Use verified API gender percentage if present, else calculate with total_records denominator
+    const malePctValue =
+      item.male_attendance_pct != null
+        ? Number(item.male_attendance_pct)
+        : item.male_present_pct != null
+        ? Number(item.male_present_pct)
+        : item.male_present_percentage != null
+        ? Number(item.male_present_percentage)
+        : total > 0
+        ? (maleCount / total) * 100
+        : 0;
+
+    const femalePctValue =
+      item.female_attendance_pct != null
+        ? Number(item.female_attendance_pct)
+        : item.female_present_pct != null
+        ? Number(item.female_present_pct)
+        : item.female_present_percentage != null
+        ? Number(item.female_present_percentage)
+        : total > 0
+        ? (femaleCount / total) * 100
+        : 0;
+
+    const male_present_pct = Number(malePctValue.toFixed(1));
+    const female_present_pct = Number(femalePctValue.toFixed(1));
+
+    const male_pct_label =
+      total > 0 && maleCount > 0 ? `${male_present_pct.toFixed(1)}%` : '';
+    const female_pct_label =
+      total > 0 && femaleCount > 0 ? `${female_present_pct.toFixed(1)}%` : '';
+
     const absent_pct =
       item.absenteeism_pct != null
         ? Number(Number(item.absenteeism_pct).toFixed(1))
@@ -106,12 +141,16 @@ export function AttendanceTrendChart({
       period_key: item.period_key,
       displayLabel: xLabel,
       fullLabel,
-      male_present_count: item.male_present_count ?? 0,
-      female_present_count: item.female_present_count ?? 0,
+      male_present_count: maleCount,
+      female_present_count: femaleCount,
       present_count: item.present_count ?? 0,
       absent_count: item.absent_count ?? 0,
       total_records: total,
       absent_pct,
+      male_present_pct,
+      female_present_pct,
+      male_pct_label,
+      female_pct_label,
     };
   });
 
@@ -178,7 +217,7 @@ export function AttendanceTrendChart({
               data={trendData}
               barGap={4}
               barCategoryGap="25%"
-              margin={{ top: 10, right: 10, left: -10, bottom: 4 }}
+              margin={{ top: 16, right: 10, left: -10, bottom: 4 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke={palette.grid} vertical={false} />
               <XAxis
@@ -192,7 +231,7 @@ export function AttendanceTrendChart({
               <YAxis
                 yAxisId="left"
                 orientation="left"
-                domain={[0, (dataMax) => (dataMax > 0 ? Math.ceil(dataMax * 1.1) : 'auto')]}
+                domain={[0, (dataMax) => (dataMax > 0 ? Math.ceil(dataMax * 1.15) : 'auto')]}
                 tickFormatter={(v) => (v >= 1000 ? `${(v / 1000).toFixed(1)}k` : v)}
                 tick={{ fill: palette.axisText, fontSize: 10, fontWeight: 500 }}
                 tickLine={false}
@@ -264,7 +303,16 @@ export function AttendanceTrendChart({
                 fill={maleColor}
                 radius={[4, 4, 0, 0]}
                 maxBarSize={30}
-              />
+              >
+                <LabelList
+                  dataKey="male_pct_label"
+                  position="top"
+                  fill={maleColor}
+                  fontSize={9.5}
+                  fontWeight={700}
+                  offset={5}
+                />
+              </Bar>
               <Bar
                 yAxisId="left"
                 dataKey="female_present_count"
@@ -272,7 +320,16 @@ export function AttendanceTrendChart({
                 fill={femaleColor}
                 radius={[4, 4, 0, 0]}
                 maxBarSize={30}
-              />
+              >
+                <LabelList
+                  dataKey="female_pct_label"
+                  position="top"
+                  fill={femaleColor}
+                  fontSize={9.5}
+                  fontWeight={700}
+                  offset={5}
+                />
+              </Bar>
               <Line
                 yAxisId="right"
                 type="monotone"

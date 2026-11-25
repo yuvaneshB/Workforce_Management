@@ -15,9 +15,7 @@ import { ShiftPerformanceTable } from '../components/dashboard/ShiftPerformanceT
 import { SkillsCoverage } from '../components/dashboard/SkillsCoverage';
 import { TrainingCompliance } from '../components/dashboard/TrainingCompliance';
 import { VendorWorkforceChart } from '../components/dashboard/VendorWorkforceChart';
-import { WorkforceAvailability } from '../components/dashboard/WorkforceAvailability';
 import { WorkforceKPICards } from '../components/dashboard/WorkforceKPICards';
-import { WorkforceShortage } from '../components/dashboard/WorkforceShortage';
 import { useDashboardData } from '../hooks/useDashboardData';
 
 export function Dashboard() {
@@ -241,25 +239,7 @@ export function Dashboard() {
 
       {/* 5. Manufacturing Workforce Operations */}
       <div className="space-y-4">
-        {/* Row 5.1: G (Workforce Availability) + H (Workforce Shortage Detection) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 items-stretch">
-          <WorkforceAvailability
-            planningAvailability={planningAvailability}
-            workforceSummary={workforceSummary}
-            attendanceAnalytics={attendanceAnalytics}
-            loading={loading}
-            minimal={true}
-          />
-          <WorkforceShortage
-            planningShortages={planningShortages}
-            planningAvailability={planningAvailability}
-            attendanceAnalytics={attendanceAnalytics}
-            loading={loading}
-            minimal={true}
-          />
-        </div>
-
-        {/* Row 5.2: I (Shift Performance Comparison Table - Full Width) */}
+        {/* Row 5.1: Shift Performance Comparison Table - Full Width */}
         <ShiftPerformanceTable
           attendanceAnalytics={attendanceAnalytics}
           shiftEfficiencyAnalytics={shiftEfficiencyAnalytics}

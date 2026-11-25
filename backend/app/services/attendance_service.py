@@ -12,6 +12,7 @@ from app.schemas.attendance import (
     AttendanceStatusBreakdown,
     AttendanceTrendPoint,
     ShiftAttendanceBreakdown,
+    VendorAttendanceBreakdown,
 )
 from app.schemas.common import GroupCount
 from app.utils.query_helpers import (
@@ -127,5 +128,6 @@ def get_attendance_analytics(
         trends=[AttendanceTrendPoint(**pt) for pt in raw["trends"]],
         weekly_comparison=[AttendanceTrendPoint(**pt) for pt in raw["weekly_comparison"]],
         shift_breakdown=[ShiftAttendanceBreakdown(**sb) for sb in raw["shift_breakdown"]],
+        by_vendor=[VendorAttendanceBreakdown(**v) for v in raw.get("by_vendor", [])],
         data_quality_warnings=build_attendance_quality_warnings(raw["quality_counts"]),
     )

@@ -5,7 +5,7 @@ import { Card } from '../common/Card';
 import { LoadingSkeleton } from '../common/LoadingSkeleton';
 
 const SHIFT_COLORS = {
-  A: '#6F3DBA',
+  A: '#493287',
   B: '#4D8EEB',
   C: '#F58A3A',
 };

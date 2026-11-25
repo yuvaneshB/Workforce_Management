@@ -1,8 +1,6 @@
 import {
   Calendar,
   Percent,
-  TrendingDown,
-  TrendingUp,
   User,
   Users,
 } from 'lucide-react';
@@ -13,68 +11,6 @@ export function AttritionKPICards({
   summary = null,
   loading = false,
 }) {
-  const data = summary || {
-    total_exits: 0,
-    total_exits_change_pct: 0.0,
-    overall_attrition_rate: 0.0,
-    attrition_rate_change_pp: 0.0,
-    permanent_exits: 0,
-    permanent_pct: 0.0,
-    vendor_exits: 0,
-    vendor_pct: 0.0,
-    average_tenure_years: 0.0,
-    tenure_change_years: 0.0,
-  };
-
-  const cards = [
-    {
-      title: 'Total Employee Exits',
-      value: data.total_exits.toString(),
-      trend: `${data.total_exits_change_pct > 0 ? '+' : ''}${data.total_exits_change_pct}% vs previous period`,
-      trendType: 'good', // reduction in exits is good (green)
-      subtext: 'Exits in selected period',
-      icon: User,
-      iconColor: 'text-purple-600 dark:text-purple-400',
-      iconBg: 'bg-purple-50 dark:bg-purple-950/40 border-purple-200 dark:border-purple-900',
-    },
-    {
-      title: 'Overall Attrition Rate',
-      value: `${data.overall_attrition_rate.toFixed(1)}%`,
-      trend: `${data.attrition_rate_change_pp > 0 ? '+' : ''}${data.attrition_rate_change_pp} pp vs previous period`,
-      trendType: 'good', // reduction in attrition rate is good (green)
-      subtext: 'Annualized workforce rate',
-      icon: Percent,
-      iconColor: 'text-rose-500 dark:text-rose-400',
-      iconBg: 'bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-900',
-    },
-    {
-      title: 'Permanent Employee Exits',
-      value: data.permanent_exits.toString(),
-      subtext: `(${data.permanent_pct}% of exits)`,
-      icon: User,
-      iconColor: 'text-blue-600 dark:text-blue-400',
-      iconBg: 'bg-blue-50 dark:bg-blue-950/40 border-blue-200 dark:border-blue-900',
-    },
-    {
-      title: 'Vendor Employee Exits',
-      value: data.vendor_exits.toString(),
-      subtext: `(${data.vendor_pct}% of exits)`,
-      icon: Users,
-      iconColor: 'text-amber-600 dark:text-amber-400',
-      iconBg: 'bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-900',
-    },
-    {
-      title: 'Average Tenure at Exit',
-      value: `${data.average_tenure_years} Years`,
-      trend: `+${data.tenure_change_years} Years vs previous period`,
-      trendType: 'good',
-      subtext: 'Service length before exit',
-      icon: Calendar,
-      iconColor: 'text-purple-600 dark:text-purple-400',
-      iconBg: 'bg-purple-50 dark:bg-purple-950/40 border-purple-200 dark:border-purple-900',
-    },
-  ];
-
   if (loading) {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
@@ -91,6 +27,66 @@ export function AttritionKPICards({
       </div>
     );
   }
+
+  const totalExits = Number(summary?.total_exits ?? summary?.total_attrition ?? 0);
+  const totalExitsChange = Number(summary?.total_exits_change_pct ?? 0);
+  const overallRate = Number(summary?.overall_attrition_rate ?? summary?.attrition_rate ?? 0);
+  const rateChangePP = Number(summary?.attrition_rate_change_pp ?? 0);
+  const permanentExits = Number(summary?.permanent_exits ?? 0);
+  const permanentPct = Number(summary?.permanent_pct ?? 0);
+  const vendorExits = Number(summary?.vendor_exits ?? 0);
+  const vendorPct = Number(summary?.vendor_pct ?? 0);
+  const avgTenure = Number(summary?.average_tenure_years ?? 0);
+  const tenureChange = Number(summary?.tenure_change_years ?? 0);
+
+  const cards = [
+    {
+      title: 'Total Employee Exits',
+      value: totalExits.toLocaleString(),
+      trend: `${totalExitsChange > 0 ? '+' : ''}${totalExitsChange}% vs previous period`,
+      trendType: 'good', // reduction in exits is good (green)
+      subtext: 'Exits in selected period',
+      icon: User,
+      iconColor: 'text-purple-600 dark:text-purple-400',
+      iconBg: 'bg-purple-50 dark:bg-purple-950/40 border-purple-200 dark:border-purple-900',
+    },
+    {
+      title: 'Overall Attrition Rate',
+      value: `${overallRate.toFixed(1)}%`,
+      trend: `${rateChangePP > 0 ? '+' : ''}${rateChangePP} pp vs previous period`,
+      trendType: 'good', // reduction in attrition rate is good (green)
+      subtext: 'Annualized workforce rate',
+      icon: Percent,
+      iconColor: 'text-rose-500 dark:text-rose-400',
+      iconBg: 'bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-900',
+    },
+    {
+      title: 'Permanent Employee Exits',
+      value: permanentExits.toLocaleString(),
+      subtext: `(${permanentPct.toFixed(1)}% of exits)`,
+      icon: User,
+      iconColor: 'text-blue-600 dark:text-blue-400',
+      iconBg: 'bg-blue-50 dark:bg-blue-950/40 border-blue-200 dark:border-blue-900',
+    },
+    {
+      title: 'Vendor Employee Exits',
+      value: vendorExits.toLocaleString(),
+      subtext: `(${vendorPct.toFixed(1)}% of exits)`,
+      icon: Users,
+      iconColor: 'text-amber-600 dark:text-amber-400',
+      iconBg: 'bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-900',
+    },
+    {
+      title: 'Average Tenure at Exit',
+      value: `${avgTenure.toFixed(1)} Years`,
+      trend: `+${tenureChange.toFixed(1)} Years vs previous period`,
+      trendType: 'good',
+      subtext: 'Service length before exit',
+      icon: Calendar,
+      iconColor: 'text-purple-600 dark:text-purple-400',
+      iconBg: 'bg-purple-50 dark:bg-purple-950/40 border-purple-200 dark:border-purple-900',
+    },
+  ];
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">

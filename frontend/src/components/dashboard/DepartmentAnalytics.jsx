@@ -48,7 +48,7 @@ export function DepartmentAnalytics({
           }}
         >
           <p className="font-bold mb-1 text-[var(--foreground)]">{data.department_name}</p>
-          <p className="text-[11px] font-semibold text-[#6F3DBA]">
+          <p className="text-[11px] font-semibold text-[#493287]">
             {data.employee_count.toLocaleString()} employees ({pct}%)
           </p>
           {data.attendance_pct != null && (
@@ -67,7 +67,7 @@ export function DepartmentAnalytics({
       {/* Single clean line header - no subtitles */}
       <div className="flex items-center justify-between gap-2 mb-2 min-w-0 shrink-0">
         <div className="flex items-center gap-2 min-w-0">
-          <BarChart3 className="w-4 h-4 shrink-0" style={{ color: '#6F3DBA' }} aria-hidden="true" />
+          <BarChart3 className="w-4 h-4 shrink-0" style={{ color: '#493287' }} aria-hidden="true" />
           <h2 className="text-[13px] sm:text-sm font-bold truncate">Department-wise Analytics</h2>
         </div>
         {departments.length > 0 && !loading && (
@@ -115,7 +115,7 @@ export function DepartmentAnalytics({
                 {departments.map((entry, index) => (
                   <Cell
                     key={`cell-dept-${index}`}
-                    fill={index === 0 ? '#6F3DBA' : index < 3 ? '#4D8EEB' : '#8B5CF6'}
+                    fill={index === 0 ? '#493287' : index < 3 ? '#4D8EEB' : '#1F2F59'}
                   />
                 ))}
               </Bar>

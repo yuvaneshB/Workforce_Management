@@ -258,34 +258,80 @@ def _query_shift_breakdown(db: Session, filters: list) -> list[dict]:
 
 
 def _query_vendor_breakdown(db: Session, filters: list) -> list[dict]:
+    """Compute vendor-wise attendance performance from attendance_transactions, employee_master, and vendor_master."""
     stmt = (
         select(
+            VendorMaster.vendor_id,
             func.coalesce(VendorMaster.vendor_name, EmployeeMaster.vendor_id, "Unknown").label("vendor_name"),
-            EmployeeMaster.vendor_id,
-            func.count(),
-            _status_case_sum("PRESENT"),
-            _status_case_sum("ABSENT"),
+            func.count(func.distinct(WorkforceAttendance.employee_id)).label("assigned_employees"),
+            func.count(WorkforceAttendance.attendance_id).label("total_records"),
+            _status_case_sum("PRESENT").label("present_count"),
+            _status_case_sum("ABSENT").label("absent_count"),
+            _status_case_sum("LEAVE").label("leave_count"),
+            _status_case_sum("LATE").label("late_count"),
+            _status_case_sum("HALF DAY").label("half_day_count"),
+            func.coalesce(
+                func.sum(
+                    case((func.upper(WorkforceAttendance.attendance_status).in_(["WEEKLY OFF", "HOLIDAY"]), 1), else_=0)
+                ),
+                0,
+            ).label("off_holiday_count"),
         )
         .join(EmployeeMaster, WorkforceAttendance.employee_id == EmployeeMaster.employee_id)
-        .outerjoin(VendorMaster, EmployeeMaster.vendor_id == VendorMaster.vendor_id)
+        .join(VendorMaster, EmployeeMaster.vendor_id == VendorMaster.vendor_id)
         .where(EmployeeMaster.employment_type.ilike("%vendor%"))
-        .group_by(VendorMaster.vendor_name, EmployeeMaster.vendor_id)
-        .order_by(desc(func.count()))
+        .group_by(VendorMaster.vendor_id, VendorMaster.vendor_name, EmployeeMaster.vendor_id)
+        .order_by(desc(func.count(WorkforceAttendance.attendance_id)))
     )
     if filters:
         stmt = stmt.where(*filters)
 
     rows = []
-    for vendor_name, vendor_id, total, present, absent in db.execute(stmt).all():
-        pct = round((present * 100.0 / total), 1) if total > 0 else 0.0
+    for r in db.execute(stmt).all():
+        tot_records = int(r.total_records)
+        off_holidays = int(r.off_holiday_count)
+        working_rec = tot_records - off_holidays
+        denom = working_rec if working_rec > 0 else (tot_records if tot_records > 0 else 1)
+
+        present_c = int(r.present_count)
+        absent_c = int(r.absent_count)
+        leave_c = int(r.leave_count)
+        late_c = int(r.late_count)
+        half_day_c = int(r.half_day_count)
+        assigned_c = int(r.assigned_employees)
+
+        attended_c = present_c + late_c + half_day_c
+        att_rate = round((attended_c * 100.0) / denom, 1)
+        abs_rate = round((absent_c * 100.0) / denom, 1)
+
+        present_p = round((present_c * 100.0) / denom, 1)
+        absent_p = round((absent_c * 100.0) / denom, 1)
+        leave_p = round((leave_c * 100.0) / denom, 1)
+        late_p = round((late_c * 100.0) / denom, 1)
+
         rows.append(
             {
-                "vendor": str(vendor_id or "Unknown"),
-                "fullName": str(vendor_name or "Unknown"),
-                "pct": pct,
-                "present": int(present),
-                "absent": int(absent),
-                "total": int(total),
+                "vendor_id": str(r.vendor_id or "Unknown"),
+                "vendor_name": str(r.vendor_name or "Unknown"),
+                "assigned_employees": assigned_c,
+                "total_records": tot_records,
+                "present_count": present_c,
+                "present_pct": present_p,
+                "absent_count": absent_c,
+                "absent_pct": absent_p,
+                "leave_count": leave_c,
+                "leave_pct": leave_p,
+                "late_count": late_c,
+                "late_pct": late_p,
+                "attendance_rate": att_rate,
+                "absenteeism_rate": abs_rate,
+                # Backward-compatibility keys for legacy charts
+                "vendor": str(r.vendor_id or "Unknown"),
+                "fullName": str(r.vendor_name or "Unknown"),
+                "pct": att_rate,
+                "present": present_c,
+                "absent": absent_c,
+                "total": tot_records,
             }
         )
     return rows

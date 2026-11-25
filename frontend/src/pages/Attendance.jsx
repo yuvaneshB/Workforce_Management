@@ -22,7 +22,7 @@ function getStatusBadgeStyle(status) {
     return { background: 'var(--rose-soft)', color: '#E11D48' };
   }
   if (norm === 'LATE') {
-    return { background: 'var(--purple-soft)', color: '#7C3AED' };
+    return { background: 'var(--purple-soft)', color: '#493287' };
   }
   if (norm === 'LEAVE') {
     return { background: 'rgba(245, 138, 58, 0.12)', color: '#F58A3A' };

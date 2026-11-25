@@ -39,21 +39,21 @@ export const ATTRITION_WEEKLY_TREND = [];
 export const ATTRITION_DAILY_TREND = [];
 
 export const ATTRITION_BY_REASON = [
-  { reason: 'Absconding (No Contact)', count: 24, pct: '20.0%', color: '#6F3DBA' },
+  { reason: 'Absconding (No Contact)', count: 24, pct: '20.0%', color: '#493287' },
   { reason: 'Better Salary Offer', count: 18, pct: '15.0%', color: '#4D8EEB' },
   { reason: 'Contract Completed', count: 16, pct: '13.3%', color: '#F58A3A' },
   { reason: 'Family / Personal Reasons', count: 11, pct: '9.2%', color: '#E45C72' },
   { reason: 'Better Career Opportunity', count: 10, pct: '8.3%', color: '#31B7C3' },
   { reason: 'Poor Performance', count: 8, pct: '6.7%', color: '#0E9C86' },
   { reason: 'Higher Studies', count: 6, pct: '5.0%', color: '#B88943' },
-  { reason: 'Disciplinary Action', count: 5, pct: '4.2%', color: '#8A63D2' },
+  { reason: 'Disciplinary Action', count: 5, pct: '4.2%', color: '#5B44A3' },
   { reason: 'Supervisor Conflict', count: 5, pct: '4.2%', color: '#3E7BC4' },
   { reason: 'Health Issues', count: 4, pct: '3.3%', color: '#D9701F' },
   { reason: 'Shift Timing Issues', count: 3, pct: '2.5%', color: '#2BC0A6' },
   { reason: 'Work Pressure', count: 3, pct: '2.5%', color: '#FF7D90' },
-  { reason: 'Marriage / Family Relocation', count: 3, pct: '2.5%', color: '#A684EE' },
+  { reason: 'Marriage / Family Relocation', count: 3, pct: '2.5%', color: '#A290DB' },
   { reason: 'Relocation', count: 2, pct: '1.7%', color: '#78ACF5' },
-  { reason: 'Commute Distance', count: 2, pct: '1.7%', color: '#5932EA' },
+  { reason: 'Commute Distance', count: 2, pct: '1.7%', color: '#1F2F59' },
 ];
 
 export const DEPARTMENT_ATTRITION = [

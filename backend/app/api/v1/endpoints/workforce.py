@@ -6,14 +6,27 @@ from typing import Literal
 from fastapi import APIRouter, Depends, HTTPException, Path, Query, status
 from sqlalchemy.orm import Session
 
-from app.core.database import get_readonly_db
+from app.core.database import get_db, get_readonly_db
 from app.schemas.vendor_workforce import VendorWorkforceOverviewResponse
 from app.schemas.workforce import (
+    EmployeeCreateOptionsResponse,
+    EmployeeCreateRequest,
+    EmployeeCreateResponse,
+    EmployeeExitOptionsResponse,
+    EmployeeReinstateResponse,
+    EmployeeRelieveRequest,
+    EmployeeRelieveResponse,
+    EmployeeSearchResult,
+    RelievedEmployeeItem,
     WorkforceListResponse,
     WorkforceRecord,
     WorkforceSummaryResponse,
 )
-from app.services import workforce_service
+from app.services import (
+    employee_create_service,
+    employee_relieve_service,
+    workforce_service,
+)
 
 router = APIRouter(tags=["Workforce"])
 
@@ -71,6 +84,136 @@ def list_employees(
         limit=limit,
         offset=offset,
     )
+
+
+@router.get(
+    "/workforce/employees/options",
+    response_model=EmployeeCreateOptionsResponse,
+    summary="Get data-driven dropdown options for Add Employee form",
+)
+@router.get(
+    "/employees/create/options",
+    response_model=EmployeeCreateOptionsResponse,
+    summary="Get data-driven dropdown options for Add Employee form (alias)",
+)
+def get_employee_create_options(
+    db: Session = Depends(get_readonly_db),
+) -> EmployeeCreateOptionsResponse:
+    """Return data-driven dropdown options (plants, departments, sections, shifts, vendors, designations, bands)."""
+    return employee_create_service.get_employee_create_options(db)
+
+
+@router.post(
+    "/workforce/employees",
+    response_model=EmployeeCreateResponse,
+    status_code=status.HTTP_201_CREATED,
+    summary="Create a new employee atomically across 4 tables",
+)
+@router.post(
+    "/employees/create",
+    response_model=EmployeeCreateResponse,
+    status_code=status.HTTP_201_CREATED,
+    summary="Create a new employee atomically across 4 tables (alias)",
+)
+def create_employee(
+    data: EmployeeCreateRequest,
+    db: Session = Depends(get_db),
+) -> EmployeeCreateResponse:
+    """Validate, compute fields, and insert new employee into 4 tables in a single transaction."""
+    return employee_create_service.create_employee(db, data)
+
+
+@router.get(
+    "/workforce/employees/search",
+    response_model=list[EmployeeSearchResult],
+    summary="Search active employees by ID or name",
+)
+@router.get(
+    "/employees/search",
+    response_model=list[EmployeeSearchResult],
+    summary="Search active employees by ID or name (alias)",
+)
+def search_employees(
+    q: str = Query(default="", description="Search query by ID or name"),
+    status: str = Query(default="Active", description="Filter by employment status"),
+    limit: int = Query(default=10, ge=1, le=50, description="Max results"),
+    db: Session = Depends(get_readonly_db),
+) -> list[EmployeeSearchResult]:
+    """Search active employees for the Relieve Employee tab."""
+    return employee_relieve_service.search_active_employees(db, q=q, status_filter=status, limit=limit)
+
+
+@router.get(
+    "/workforce/employees/exit-options",
+    response_model=EmployeeExitOptionsResponse,
+    summary="Get data-driven exit types and reasons from Neon DB",
+)
+@router.get(
+    "/employees/exit-options",
+    response_model=EmployeeExitOptionsResponse,
+    summary="Get data-driven exit types and reasons from Neon DB (alias)",
+)
+def get_exit_options(
+    db: Session = Depends(get_readonly_db),
+) -> EmployeeExitOptionsResponse:
+    """Retrieve distinct exit types and exit reasons directly from Neon PostgreSQL."""
+    return employee_relieve_service.get_exit_options(db)
+
+
+@router.get(
+    "/workforce/employees/relieved",
+    response_model=list[RelievedEmployeeItem],
+    summary="Get recently relieved employees",
+)
+@router.get(
+    "/employees/relieved",
+    response_model=list[RelievedEmployeeItem],
+    summary="Get recently relieved employees (alias)",
+)
+def get_recently_relieved(
+    limit: int = Query(default=20, ge=1, le=100, description="Max results"),
+    db: Session = Depends(get_readonly_db),
+) -> list[RelievedEmployeeItem]:
+    """Retrieve recently relieved employees."""
+    return employee_relieve_service.get_recently_relieved(db, limit=limit)
+
+
+@router.post(
+    "/workforce/employees/{employee_id}/relieve",
+    response_model=EmployeeRelieveResponse,
+    summary="Relieve an active employee and record attrition in Neon DB",
+)
+@router.post(
+    "/employees/{employee_id}/relieve",
+    response_model=EmployeeRelieveResponse,
+    summary="Relieve an active employee and record attrition in Neon DB (alias)",
+)
+def relieve_employee(
+    employee_id: str = Path(..., min_length=1, max_length=32),
+    data: EmployeeRelieveRequest = ...,
+    db: Session = Depends(get_db),
+) -> EmployeeRelieveResponse:
+    """Mark employee as Resigned and record AttritionTransaction in an atomic transaction."""
+    return employee_relieve_service.relieve_employee(db, employee_id=employee_id, data=data)
+
+
+@router.post(
+    "/workforce/employees/{employee_id}/reinstate",
+    response_model=EmployeeReinstateResponse,
+    summary="Safety action to reinstate a mistakenly relieved employee back to Active",
+)
+@router.post(
+    "/employees/{employee_id}/reinstate",
+    response_model=EmployeeReinstateResponse,
+    summary="Safety action to reinstate a mistakenly relieved employee back to Active (alias)",
+)
+def reinstate_employee(
+    employee_id: str = Path(..., min_length=1, max_length=32),
+    db: Session = Depends(get_db),
+) -> EmployeeReinstateResponse:
+    """Reinstate a relieved employee back to Active and clear exit record."""
+    return employee_relieve_service.reinstate_employee(db, employee_id=employee_id)
+
 
 
 @router.get(

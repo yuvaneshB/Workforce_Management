@@ -1,5 +1,7 @@
 export const THEME_STORAGE_KEY = 'workforce-theme';
 
+export const AGENT_DRAWER_AUTOCLOSE_MS = 3000;
+
 export const SHIFT_NAMES = {
   A: 'GS1',
   B: 'S2',
@@ -18,8 +20,8 @@ export function formatShiftName(shiftId) {
 }
 
 export const BRAND_COLORS = {
-  primary: '#6F3DBA',
-  purple: '#6F3DBA',
+  primary: '#493287',
+  purple: '#493287',
   blue: '#4D8EEB',
   orange: '#F58A3A',
   navy: '#1F2F59',
@@ -33,7 +35,7 @@ export const BRAND_COLORS = {
 
 export const CHART_COLORS = {
   light: {
-    categorical: ['#4D8EEB', '#D9701F', '#6F3DBA', '#0E9C86'],
+    categorical: ['#4D8EEB', '#D9701F', '#493287', '#0E9C86'],
     ordinal: ['#8FB8F2', '#5F97E4', '#3670BB', '#17477F'],
     surface: '#FFFFFF',
     axisText: '#7C839B',
@@ -41,14 +43,14 @@ export const CHART_COLORS = {
     grid: 'rgba(31, 47, 89, 0.12)',
     demand: '#4D8EEB',
     supply: '#31B7C3',
-    shortage: '#6F3DBA',
+    shortage: '#493287',
     accent: '#0E9C86',
     tooltipBg: '#FFFFFF',
     tooltipBorder: 'rgba(31, 47, 89, 0.12)',
     tooltipText: '#1F2F59',
   },
   dark: {
-    categorical: ['#6BA5F5', '#F0913E', '#A684EE', '#2BC0A6'],
+    categorical: ['#6BA5F5', '#F0913E', '#A290DB', '#2BC0A6'],
     ordinal: ['#2E5C98', '#4A7EC2', '#71A3E4', '#A6CAFA'],
     surface: '#192235',
     axisText: '#8D97AE',
@@ -56,7 +58,7 @@ export const CHART_COLORS = {
     grid: 'rgba(214, 224, 244, 0.12)',
     demand: '#78ACF5',
     supply: '#4FD3DE',
-    shortage: '#A684EE',
+    shortage: '#A290DB',
     accent: '#2BC0A6',
     tooltipBg: '#192235',
     tooltipBorder: 'rgba(214, 224, 244, 0.12)',
@@ -65,8 +67,8 @@ export const CHART_COLORS = {
 };
 
 export const GRAPH_DEPTH_COLORS = {
-  light: ['#e45c72', '#6f3dba', '#4d8eeb', '#f58a3a', '#31b7c3', '#b88943', '#8a63d2', '#3e7bc4'],
-  dark: ['#ff7d90', '#a684ee', '#78acf5', '#ffab63', '#4fd3de', '#ddab5f', '#b192ec', '#6ba2e0'],
+  light: ['#e45c72', '#493287', '#4d8eeb', '#f58a3a', '#31b7c3', '#b88943', '#a290db', '#3e7bc4'],
+  dark: ['#ff7d90', '#a290db', '#78acf5', '#ffab63', '#4fd3de', '#ddab5f', '#cfc8e6', '#6ba2e0'],
 };
 
 export const SIDEBAR_NAV_ITEMS = [

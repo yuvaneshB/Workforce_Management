@@ -1,7 +1,6 @@
 import { Bot, UserMinus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { fetchAttritionAnalytics } from '../../api/workforceApi';
-import { Card } from '../common/Card';
 
 import { AttritionByReasonCard } from './AttritionByReasonCard';
 import { AttritionKPICards } from './AttritionKPICards';
@@ -38,6 +37,16 @@ export function AttritionSection({
       setInternalLoading(true);
       setInternalError(null);
       try {
+        const effectiveEmploymentType =
+          selectedVendor === 'Permanent'
+            ? 'Permanent'
+            : employmentType !== 'ALL'
+            ? employmentType
+            : undefined;
+
+        const effectiveVendorId =
+          selectedVendor !== 'ALL' ? selectedVendor : undefined;
+
         const data = await fetchAttritionAnalytics({
           startDate: startDate || undefined,
           endDate: endDate || undefined,
@@ -46,8 +55,8 @@ export function AttritionSection({
           departmentId: departmentId || undefined,
           sectionId: sectionId || undefined,
           teamId: teamId || undefined,
-          employmentType: employmentType !== 'ALL' ? employmentType : undefined,
-          vendorId: selectedVendor !== 'ALL' ? selectedVendor : undefined,
+          employmentType: effectiveEmploymentType,
+          vendorId: effectiveVendorId,
           signal: controller.signal,
         });
         if (active) {
@@ -72,12 +81,19 @@ export function AttritionSection({
   }, [startDate, endDate, plantId, shiftId, departmentId, sectionId, teamId, employmentType, selectedVendor]);
 
   const summary = attritionData?.summary || {
-    total_attrition: 0,
-    attrition_rate: 0,
-    ytd_attrition: 0,
-    critical_role_attrition: 0,
-    early_attrition_rate: 0,
-    regrettable_attrition: 0,
+    total_exits: 0,
+    total_exits_change_pct: 0.0,
+    overall_attrition_rate: 0.0,
+    attrition_rate_change_pp: 0.0,
+    permanent_exits: 0,
+    permanent_pct: 0.0,
+    vendor_exits: 0,
+    vendor_pct: 0.0,
+    average_tenure_years: 0.0,
+    tenure_change_years: 0.0,
+    active_employees: 0,
+    retained_employees: 0,
+    retention_rate: 100.0,
   };
   const monthlyTrend = attritionData?.monthly_trend || [];
   const byReason = attritionData?.by_reason || [];
@@ -108,7 +124,15 @@ export function AttritionSection({
           {/* Employment Type */}
           <select
             value={employmentType}
-            onChange={(e) => setEmploymentType(e.target.value)}
+            onChange={(e) => {
+              const val = e.target.value;
+              setEmploymentType(val);
+              if (val === 'Permanent' && selectedVendor !== 'Permanent' && selectedVendor !== 'ALL') {
+                setSelectedVendor('Permanent');
+              } else if (val === 'Vendor' && selectedVendor === 'Permanent') {
+                setSelectedVendor('ALL');
+              }
+            }}
             className="h-8 px-2.5 text-[11px] font-semibold rounded-lg border border-[var(--border)] bg-[var(--surface)] text-[var(--text)] focus:outline-none focus:ring-1 focus:ring-purple-500 cursor-pointer shadow-2xs"
           >
             <option value="ALL">Employment: All Types</option>
@@ -119,7 +143,15 @@ export function AttritionSection({
           {/* Vendor */}
           <select
             value={selectedVendor}
-            onChange={(e) => setSelectedVendor(e.target.value)}
+            onChange={(e) => {
+              const val = e.target.value;
+              setSelectedVendor(val);
+              if (val === 'Permanent') {
+                setEmploymentType('Permanent');
+              } else if (val !== 'ALL' && employmentType === 'Permanent') {
+                setEmploymentType('Vendor');
+              }
+            }}
             className="h-8 px-2.5 text-[11px] font-semibold rounded-lg border border-[var(--border)] bg-[var(--surface)] text-[var(--text)] focus:outline-none focus:ring-1 focus:ring-purple-500 cursor-pointer shadow-2xs"
           >
             <option value="ALL">All Vendors</option>
@@ -137,7 +169,7 @@ export function AttritionSection({
             onClick={onRunAgent}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg shadow-xs transition-all duration-150 hover:brightness-110 active:scale-95 cursor-pointer"
             style={{
-              background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
+              background: 'linear-gradient(135deg, #493287 0%, #5B44A3 100%)',
             }}
             title="Run Attrition & Retention Intelligence Agent"
           >
@@ -168,7 +200,7 @@ export function AttritionSection({
       {/* Row 5: Employee Exit Details Table */}
       <EmployeeExitDetailsTable
         records={exitedRecords}
-        employmentTypeFilter={employmentType}
+        employmentTypeFilter={selectedVendor === 'Permanent' ? 'Permanent' : employmentType}
         vendorFilter={selectedVendor}
         loading={isLoading}
       />

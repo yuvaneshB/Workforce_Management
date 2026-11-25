@@ -73,7 +73,7 @@ export function ProductionTrendChart({
       <div>
         <div className="flex items-center justify-between gap-2 mb-3">
           <div className="flex items-center gap-2 min-w-0">
-            <TrendingUp className="w-4 h-4 shrink-0 text-[#6F3DBA]" aria-hidden="true" />
+            <TrendingUp className="w-4 h-4 shrink-0 text-[#493287]" aria-hidden="true" />
             <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Production Trend</h2>
           </div>
 
@@ -94,7 +94,7 @@ export function ProductionTrendChart({
                   className="px-2.5 py-1 rounded-md text-[10px] font-bold transition-all cursor-pointer"
                   style={
                     active
-                      ? { background: '#6F3DBA', color: '#FFFFFF' }
+                      ? { background: '#493287', color: '#FFFFFF' }
                       : { color: 'var(--secondary)' }
                   }
                 >
@@ -160,9 +160,9 @@ export function ProductionTrendChart({
                   type="monotone"
                   dataKey="target"
                   name="Target Production"
-                  stroke="#6F3DBA"
+                  stroke="#1F2F59"
                   strokeWidth={2}
-                  dot={{ r: 3, fill: '#6F3DBA' }}
+                  dot={{ r: 3, fill: '#1F2F59' }}
                   activeDot={{ r: 5 }}
                 />
               </ComposedChart>
@@ -178,7 +178,7 @@ export function ProductionTrendChart({
           Actual Production
         </span>
         <span className="flex items-center gap-1.5 font-bold text-[var(--text)]">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#6F3DBA]" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[#1F2F59]" />
           Target Production
         </span>
       </div>

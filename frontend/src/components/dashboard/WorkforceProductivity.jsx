@@ -113,8 +113,8 @@ export function WorkforceProductivity({
             <AreaChart data={trendData} margin={{ top: 10, right: 12, left: -20, bottom: 0 }}>
               <defs>
                 <linearGradient id="prodGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#6F3DBA" stopOpacity={0.28} />
-                  <stop offset="95%" stopColor="#6F3DBA" stopOpacity={0.02} />
+                  <stop offset="5%" stopColor="#493287" stopOpacity={0.28} />
+                  <stop offset="95%" stopColor="#493287" stopOpacity={0.02} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke={palette.grid} vertical={false} />
@@ -146,7 +146,7 @@ export function WorkforceProductivity({
                     >
                       <div className="font-extrabold text-[11.5px] mb-1">{label}</div>
                       <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-[#6F3DBA]" />
+                        <span className="w-2 h-2 rounded-full bg-[#493287]" />
                         <span className="text-[var(--secondary)]">Throughput:</span>
                         <span className="font-bold">{item.productivity} units / emp</span>
                       </div>
@@ -157,7 +157,7 @@ export function WorkforceProductivity({
               <Area
                 type="monotone"
                 dataKey="productivity"
-                stroke="#6F3DBA"
+                stroke="#493287"
                 strokeWidth={2.5}
                 fillOpacity={1}
                 fill="url(#prodGradient)"

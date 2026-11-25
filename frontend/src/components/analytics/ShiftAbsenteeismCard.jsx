@@ -107,7 +107,7 @@ export function ShiftAbsenteeismCard({
                   yAxisId="left"
                   dataKey="rate"
                   name="Absenteeism Rate"
-                  fill="#A855F7"
+                  fill="#493287"
                   radius={[3, 3, 0, 0]}
                   barSize={30}
                 >
@@ -136,7 +136,7 @@ export function ShiftAbsenteeismCard({
 
       <div className="flex items-center justify-center gap-4 pt-2 border-t border-[var(--border)] text-[9px]">
         <span className="flex items-center gap-1 font-bold text-[var(--text)]">
-          <span className="w-2 h-2 rounded-sm bg-[#A855F7]" /> Absenteeism Rate
+          <span className="w-2 h-2 rounded-sm bg-[#493287]" /> Absenteeism Rate
         </span>
         <span className="flex items-center gap-1 font-bold text-[var(--text)]">
           <span className="w-2 h-2 rounded-full bg-[#E45C72]" /> Absent Staff

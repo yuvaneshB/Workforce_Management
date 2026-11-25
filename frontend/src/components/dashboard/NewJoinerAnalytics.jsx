@@ -87,8 +87,8 @@ export function NewJoinerAnalytics({
           }}
         >
           <p className="font-bold mb-1 text-[var(--foreground)]">{data.label || data.period_key}</p>
-          <div className="flex items-center gap-1.5 text-[11px] text-[#6F3DBA]">
-            <span className="w-2 h-2 rounded-full bg-[#6F3DBA]" />
+          <div className="flex items-center gap-1.5 text-[11px] text-[#493287]">
+            <span className="w-2 h-2 rounded-full bg-[#493287]" />
             <span>
               Attendance Rate:{' '}
               <strong>{data.display_pct}%</strong>
@@ -148,7 +148,7 @@ export function NewJoinerAnalytics({
           </span>
           <span>
             Att:{' '}
-            <strong className="text-[#6F3DBA]">
+            <strong className="text-[#493287]">
               {newJoinerAnalytics.attendance_pct !== null
                 ? `${newJoinerAnalytics.attendance_pct}%`
                 : '—'}
@@ -173,8 +173,8 @@ export function NewJoinerAnalytics({
             <AreaChart data={processedTrends} margin={{ top: 12, right: 10, left: -20, bottom: 0 }}>
               <defs>
                 <linearGradient id="njGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#6F3DBA" stopOpacity={0.35} />
-                  <stop offset="100%" stopColor="#6F3DBA" stopOpacity={0.02} />
+                  <stop offset="0%" stopColor="#493287" stopOpacity={0.35} />
+                  <stop offset="100%" stopColor="#493287" stopOpacity={0.02} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke={palette.grid} vertical={false} />
@@ -197,11 +197,11 @@ export function NewJoinerAnalytics({
                 type="monotone"
                 dataKey="display_pct"
                 name="Attendance %"
-                stroke="#6F3DBA"
+                stroke="#493287"
                 strokeWidth={2.2}
                 fill="url(#njGradient)"
                 dot={false}
-                activeDot={{ r: 4, stroke: '#6F3DBA', strokeWidth: 1.5, fill: '#ffffff' }}
+                activeDot={{ r: 4, stroke: '#493287', strokeWidth: 1.5, fill: '#ffffff' }}
               />
             </AreaChart>
           </ResponsiveContainer>

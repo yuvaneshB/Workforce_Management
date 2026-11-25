@@ -36,7 +36,7 @@ export function ShiftPerformanceRankingCard({
       <div>
         <div className="flex items-center justify-between gap-2 mb-2">
           <div className="flex items-center gap-2 min-w-0">
-            <Award className="w-4 h-4 shrink-0 text-[#6F3DBA]" aria-hidden="true" />
+            <Award className="w-4 h-4 shrink-0 text-[#493287]" aria-hidden="true" />
             <h2 className="text-[12px] sm:text-[13px] font-bold whitespace-nowrap">
               Shift Performance Ranking
             </h2>
@@ -65,7 +65,7 @@ export function ShiftPerformanceRankingCard({
 
                   <div className="w-full h-3 rounded-full bg-[var(--muted-fill)] overflow-hidden">
                     <div
-                      className="h-full rounded-full bg-[#6F3DBA] transition-all duration-500"
+                      className="h-full rounded-full bg-[#493287] transition-all duration-500"
                       style={{ width: `${widthPct}%` }}
                     />
                   </div>

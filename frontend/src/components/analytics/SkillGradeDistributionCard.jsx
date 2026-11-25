@@ -14,7 +14,7 @@ import { CHART_COLORS } from '../../utils/constants';
 import { Card } from '../common/Card';
 import { LoadingSkeleton } from '../common/LoadingSkeleton';
 
-const DEFAULT_GRADE_DATA = [
+const _DEFAULT_GRADE_DATA = [
   { skill_grade: 'L1', employee_count: 43, percentage: '23.9' },
   { skill_grade: 'L2', employee_count: 54, percentage: '30.0' },
   { skill_grade: 'L3', employee_count: 38, percentage: '21.1' },
@@ -62,7 +62,7 @@ export function SkillGradeDistributionCard({
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={rawGrades}
-                margin={{ top: 20, right: 10, left: -20, bottom: 0 }}
+                margin={{ top: 20, right: 10, left: 0, bottom: 0 }}
                 barSize={38}
               >
                 <CartesianGrid
@@ -78,12 +78,12 @@ export function SkillGradeDistributionCard({
                   tickLine={false}
                 />
                 <YAxis
-                  domain={[0, 60]}
-                  ticks={[0, 10, 20, 30, 40, 50, 60]}
+                  domain={[0, (dataMax) => Math.ceil((dataMax * 1.15) / 100) * 100]}
                   stroke={palette.axis}
                   tick={{ fill: palette.text, fontSize: 9 }}
                   axisLine={false}
                   tickLine={false}
+                  width={34}
                 />
                 <Tooltip
                   contentStyle={{
@@ -100,7 +100,7 @@ export function SkillGradeDistributionCard({
                 />
                 <Bar
                   dataKey="employee_count"
-                  fill="#7C3AED"
+                  fill="#493287"
                   radius={[6, 6, 0, 0]}
                 >
                   <LabelList

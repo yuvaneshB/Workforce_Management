@@ -6,7 +6,7 @@ import { LoadingSkeleton } from '../common/LoadingSkeleton';
 import { StatusBadge } from '../common/StatusBadge';
 
 const SHIFT_BAR_COLORS = {
-  A: '#6F3DBA',
+  A: '#493287',
   B: '#4D8EEB',
   C: '#31B7C3',
 };
@@ -36,7 +36,7 @@ export function ShiftCoverage({
           </p>
         </div>
         {typeof totalShiftEntries === 'number' && !loading && !error && (
-          <StatusBadge background="var(--purple-soft)" color="#6F3DBA">
+          <StatusBadge background="var(--purple-soft)" color="#493287">
             {totalShiftEntries} shifts
           </StatusBadge>
         )}

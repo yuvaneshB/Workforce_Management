@@ -6,6 +6,7 @@ import {
   Calendar,
   Check,
   CheckCircle2,
+  ClipboardCheck,
   Clock,
   ExternalLink,
   Factory,
@@ -24,14 +25,18 @@ import {
   UserCheck,
   Users,
   UserX,
-  X,
 } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
-import { runSkillTrainingAgentAnalysis } from '../../api/workforceApi';
+import React, { useEffect, useRef, useState } from 'react';
+import { runSkillTrainingAgentAnalysis, submitPlanningApproval } from '../../api/workforceApi';
 import { useAgentExecutionStream } from '../../hooks/useAgentExecutionStream';
 import { AgentExecutionPipeline } from './AgentExecutionPipeline';
 import { Button } from '../common/Button';
 import { Card } from '../common/Card';
+import { AgentFindingList } from '../common/AgentFindingCard';
+import { cleanText } from '../../utils/humanizeAgentOutput';
+import { useAutoCloseOnApproval, AutoCloseBanner } from '../../hooks/useAutoCloseOnApproval';
+import { AgentReviewPanel } from '../common/AgentReviewPanel';
+import { AGENT_REVIEW_CONFIGS } from '../../utils/agentReviewConfig';
 
 export function SkillTrainingAgentDrawer({ isOpen, onClose, filters = {} }) {
   const {
@@ -56,8 +61,52 @@ export function SkillTrainingAgentDrawer({ isOpen, onClose, filters = {} }) {
   const [hrNotes, setHrNotes] = useState('');
   const [hrDecisionStatus, setHrDecisionStatus] = useState(null); // 'ACKNOWLEDGED' | 'APPROVED'
   const [decisionTimestamp, setDecisionTimestamp] = useState(null);
+  const [isReviewPanelOpen, setIsReviewPanelOpen] = useState(false);
+  const [recordedReviewData, setRecordedReviewData] = useState(null);
+  const recordReviewBtnRef = useRef(null);
 
-  const handleExecute = () => execute();
+  const autoClose = useAutoCloseOnApproval({
+    onClose,
+    agentName: 'Skill & Training Agent',
+    isOpen,
+  });
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        if (isReviewPanelOpen) {
+          e.stopPropagation();
+          setIsReviewPanelOpen(false);
+        } else {
+          onClose();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, isReviewPanelOpen, onClose]);
+
+  const handleBackdropClick = () => {
+    if (isReviewPanelOpen) {
+      setIsReviewPanelOpen(false);
+      return;
+    }
+    onClose();
+  };
+
+  const handleOpenReviewPanel = () => {
+    autoClose.cancel();
+    setIsReviewPanelOpen(true);
+  };
+
+  const handleExecute = () => {
+    autoClose.cancel();
+    setIsReviewPanelOpen(false);
+    setRecordedReviewData(null);
+    setHrDecisionStatus(null);
+    execute();
+  };
 
   if (!isOpen) return null;
 
@@ -75,9 +124,44 @@ export function SkillTrainingAgentDrawer({ isOpen, onClose, filters = {} }) {
     }
   };
 
-  const handleRecordHrReview = (actionType) => {
+  const handleRecordHrReview = async (actionType, customNotes) => {
+    const notesToSave = customNotes !== undefined ? customNotes : hrNotes;
+    const activeExecId = executionId || result?.execution_id || `EXE-SKL-${Date.now()}`;
+    const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
     setHrDecisionStatus(actionType);
-    setDecisionTimestamp(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+    setDecisionTimestamp(timestamp);
+    if (customNotes !== undefined) {
+      setHrNotes(customNotes);
+    }
+
+    if (actionType === 'APPROVED') {
+      autoClose.start({
+        agentName: 'Skill & Training Agent',
+        approvalId: activeExecId,
+      });
+    } else {
+      autoClose.cancel();
+    }
+
+    try {
+      await submitPlanningApproval({
+        executionId: activeExecId,
+        specialistAgent: 'skill',
+        decision: actionType,
+        notes: notesToSave || (actionType === 'APPROVED' ? 'Skill certification plan approved.' : 'Skill gap assessment reviewed.'),
+        approvedBy: 'Workspace User (HR)',
+        targetDate: result?.target_date || filters?.date || filters?.startDate,
+      });
+    } catch (err) {
+      console.warn('Failed to persist skill HR review:', err);
+    }
+  };
+
+  const handleSaveReview = async (composedText, reviewData) => {
+    await handleRecordHrReview('ACKNOWLEDGED', composedText);
+    setRecordedReviewData(reviewData);
+    setIsReviewPanelOpen(false);
   };
 
   const metrics = result?.metrics;
@@ -92,19 +176,42 @@ export function SkillTrainingAgentDrawer({ isOpen, onClose, filters = {} }) {
   const bottomSkills = result?.bottom_skills || [];
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden bg-slate-900/50 backdrop-blur-xs flex justify-end animate-in fade-in duration-200">
-      {/* Slide-over Panel */}
+    <div className="fixed inset-0 z-50 overflow-hidden select-none">
+      {/* Semi-transparent backdrop */}
       <div
-        className="w-full max-w-3xl bg-[var(--surface)] text-[var(--text)] h-full shadow-2xl flex flex-col border-l border-[var(--border)] overflow-hidden"
-        style={{ animation: 'slideInRight 0.25s cubic-bezier(0.16, 1, 0.3, 1)' }}
-      >
+        className="absolute inset-0 bg-slate-900/30 backdrop-blur-[2px] transition-opacity duration-300"
+        onClick={handleBackdropClick}
+        aria-hidden="true"
+      />
+
+      {/* Right-side Sliding Drawer Container with Docked Review Panel */}
+      <div className="absolute inset-y-0 right-0 max-w-full flex pl-6 sm:pl-10">
+        <AgentReviewPanel
+          isOpen={isReviewPanelOpen}
+          onClose={() => setIsReviewPanelOpen(false)}
+          onSave={handleSaveReview}
+          agentConfig={AGENT_REVIEW_CONFIGS.skill_training}
+          result={result}
+          filters={filters}
+          executionId={executionId || result?.execution_id}
+          initialNotes={hrNotes}
+          reviewerName="Workspace User (HR)"
+          returnFocusRef={recordReviewBtnRef}
+        />
+
+        <aside
+          role="dialog"
+          aria-modal="true"
+          className="w-full max-w-3xl bg-[var(--surface)] text-[var(--text)] h-full shadow-2xl flex flex-col border-l border-[var(--border)] overflow-hidden"
+          style={{ background: 'var(--surface)', animation: 'slideInRight 0.25s cubic-bezier(0.16, 1, 0.3, 1)' }}
+        >
         {/* Drawer Header */}
         <div className="p-4 px-5 border-b border-[var(--border)] bg-gradient-to-r from-purple-900/10 via-indigo-900/5 to-transparent flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
             <div
               className="w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-md"
               style={{
-                background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
+                background: 'linear-gradient(135deg, #493287 0%, #5B44A3 100%)',
               }}
             >
               <Bot className="w-5 h-5" />
@@ -133,14 +240,6 @@ export function SkillTrainingAgentDrawer({ isOpen, onClose, filters = {} }) {
               title="Re-run Agent Analysis"
             >
               <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-purple-600' : ''}`} />
-            </button>
-            <button
-              type="button"
-              onClick={onClose}
-              className="p-1.5 rounded-lg border border-[var(--border)] hover:bg-[var(--surface-hover)] text-[var(--secondary)] transition-colors cursor-pointer"
-              title="Close Drawer"
-            >
-              <X className="w-4 h-4" />
             </button>
           </div>
         </div>
@@ -265,8 +364,8 @@ export function SkillTrainingAgentDrawer({ isOpen, onClose, filters = {} }) {
                     <Sparkles className="w-3.5 h-3.5" />
                     <span>Executive Skill & Training Synthesis</span>
                   </div>
-                  <div className="prose prose-sm dark:prose-invert max-w-none">
-                    {result.executive_synthesis}
+                  <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-line">
+                    {cleanText(result.executive_synthesis)}
                   </div>
                 </div>
               )}
@@ -322,35 +421,10 @@ export function SkillTrainingAgentDrawer({ isOpen, onClose, filters = {} }) {
               {/* TAB 1: Evidence Findings */}
               {activeTab === 'findings' && (
                 <div className="space-y-3">
-                  {findings.map((fnd) => (
-                    <div
-                      key={fnd.id}
-                      className="p-3.5 rounded-xl border border-[var(--border)] bg-slate-50/50 dark:bg-slate-900/30 hover:border-purple-300 transition-colors"
-                    >
-                      <div className="flex items-start justify-between gap-2 mb-1.5">
-                        <div className="flex items-center gap-2">
-                          <span className="font-mono text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-purple-100 text-purple-800 dark:bg-purple-950/80 dark:text-purple-300">
-                            {fnd.id}
-                          </span>
-                          <h4 className="text-xs font-bold text-[var(--text)]">{fnd.title}</h4>
-                        </div>
-                        <span className={`px-2 py-0.5 text-[10px] font-bold rounded-full border ${severityBadge(fnd.severity)}`}>
-                          {fnd.severity}
-                        </span>
-                      </div>
-                      <p className="text-xs text-[var(--secondary)] leading-relaxed mb-2">
-                        {fnd.impact}
-                      </p>
-                      <div className="flex flex-wrap items-center justify-between text-[11px] pt-2 border-t border-slate-200/60 dark:border-slate-800/60">
-                        <span className="font-semibold text-purple-700 dark:text-purple-300">
-                          {fnd.metric}
-                        </span>
-                        <span className="text-slate-400 font-mono text-[10px]">
-                          Evidence: {fnd.evidence}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
+                  <AgentFindingList
+                    findings={findings}
+                    emptyMessage="No skill or certification gaps observed for the selected scope."
+                  />
                 </div>
               )}
 
@@ -526,7 +600,7 @@ export function SkillTrainingAgentDrawer({ isOpen, onClose, filters = {} }) {
                   <div className="p-3.5 rounded-xl border border-[var(--border)] bg-slate-50/50 dark:bg-slate-900/30">
                     <div className="flex items-center justify-between mb-2">
                       <h4 className="text-xs font-bold text-[var(--text)]">
-                        Core Industry Certifications & Calendar Validity (Neon DB Audit)
+                        Core Industry Certifications & Calendar Validity
                       </h4>
                       <span className="text-[10px] font-semibold text-rose-600">
                         {metrics?.expired_certifications || 89} Expired &bull; {metrics?.expiring_soon_count || 211} Expiring Soon
@@ -694,11 +768,38 @@ export function SkillTrainingAgentDrawer({ isOpen, onClose, filters = {} }) {
             </div>
           )}
 
+          {/* Recorded HR Review Summary Box */}
+          {hrDecisionStatus === 'ACKNOWLEDGED' && recordedReviewData && (
+            <div className="p-3 rounded-lg bg-purple-50/70 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800 text-xs space-y-1.5">
+              <div className="flex items-center justify-between text-purple-900 dark:text-purple-300 font-semibold">
+                <span className="flex items-center gap-1.5">
+                  <ClipboardCheck className="w-3.5 h-3.5 text-purple-600" />
+                  HR Review Recorded ({decisionTimestamp}) by {recordedReviewData.reviewerName || 'Workspace User (HR)'}
+                </span>
+                <span className="px-2 py-0.5 rounded text-[10px] bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 font-bold uppercase">
+                  {recordedReviewData.decisionLabel || 'Review Recorded'}
+                </span>
+              </div>
+              <p className="text-[11px] text-[var(--secondary)] whitespace-pre-wrap bg-white/70 dark:bg-slate-900/50 p-2 rounded border border-purple-100 dark:border-purple-900">
+                {recordedReviewData.notes}
+              </p>
+            </div>
+          )}
+
+          <AutoCloseBanner
+            isCounting={autoClose.isCounting}
+            secondsLeft={autoClose.secondsLeft}
+            onCancel={autoClose.cancel}
+          />
+
           {/* HR Review Notes Textarea */}
           <div>
             <textarea
               value={hrNotes}
-              onChange={(e) => setHrNotes(e.target.value)}
+              onChange={(e) => {
+                autoClose.cancel();
+                setHrNotes(e.target.value);
+              }}
               placeholder="Add HR / Plant Manager review notes, training cohort comments, or certification scheduling priorities..."
               rows={2}
               className="w-full text-xs p-2.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] text-[var(--text)] focus:outline-none focus:ring-1 focus:ring-purple-500 placeholder:text-slate-400"
@@ -714,10 +815,23 @@ export function SkillTrainingAgentDrawer({ isOpen, onClose, filters = {} }) {
               <Button
                 size="sm"
                 variant="outline"
-                onClick={() => handleRecordHrReview('ACKNOWLEDGED')}
-                disabled={loading}
+                onClick={onClose}
                 className="text-xs"
               >
+                Close Drawer
+              </Button>
+              <Button
+                ref={recordReviewBtnRef}
+                size="sm"
+                onClick={handleOpenReviewPanel}
+                disabled={loading}
+                className={`text-xs gap-1.5 ${
+                  hrDecisionStatus === 'ACKNOWLEDGED'
+                    ? 'bg-purple-700 text-white'
+                    : 'bg-white dark:bg-slate-800 text-purple-700 dark:text-purple-300 border border-purple-300 dark:border-purple-700'
+                }`}
+              >
+                <FileCheck2 className="w-3.5 h-3.5" />
                 Record HR Review
               </Button>
               <Button
@@ -726,16 +840,33 @@ export function SkillTrainingAgentDrawer({ isOpen, onClose, filters = {} }) {
                 disabled={loading}
                 className="text-xs text-white"
                 style={{
-                  background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
+                  background: 'linear-gradient(135deg, #493287 0%, #5B44A3 100%)',
                 }}
               >
                 Approve Training Plan
               </Button>
+              {hrDecisionStatus && (
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => {
+                    autoClose.cancel();
+                    setIsReviewPanelOpen(false);
+                    setRecordedReviewData(null);
+                    setHrDecisionStatus(null);
+                    setHrNotes('');
+                  }}
+                  className="text-xs text-slate-400 hover:text-slate-600"
+                >
+                  Reset Decision
+                </Button>
+              )}
             </div>
           </div>
         </div>
-      </div>
+      </aside>
     </div>
+  </div>
   );
 }
 

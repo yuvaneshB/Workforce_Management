@@ -79,7 +79,7 @@ export function AttendanceTrends({
         {/* Legend dots */}
         <div className="flex flex-wrap items-center gap-3 text-xs font-semibold">
           <span className="flex items-center gap-1.5 text-[var(--secondary)]">
-            <span className="w-2 h-2 rounded-full bg-[#6F3DBA] dark:bg-[#A684EE]" />
+            <span className="w-2 h-2 rounded-full bg-[#493287] dark:bg-[#8295E8]" />
             <span className="text-[11px]">Present</span>
           </span>
           <span className="flex items-center gap-1.5 text-[var(--secondary)]">
@@ -158,17 +158,17 @@ export function AttendanceTrends({
                 type="monotone"
                 dataKey="present_pct"
                 name="Present"
-                stroke={theme === 'dark' ? '#A684EE' : '#6F3DBA'}
+                stroke={theme === 'dark' ? '#8295E8' : '#493287'}
                 strokeWidth={2}
                 isAnimationActive={false}
                 connectNulls={true}
                 dot={{
                   r: 1.5,
                   fill: theme === 'dark' ? '#192235' : '#FFFFFF',
-                  stroke: theme === 'dark' ? '#A684EE' : '#6F3DBA',
+                  stroke: theme === 'dark' ? '#8295E8' : '#493287',
                   strokeWidth: 1,
                 }}
-                activeDot={{ r: 4, fill: theme === 'dark' ? '#A684EE' : '#6F3DBA' }}
+                activeDot={{ r: 4, fill: theme === 'dark' ? '#8295E8' : '#493287' }}
               />
               <Line
                 type="monotone"

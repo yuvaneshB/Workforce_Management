@@ -53,6 +53,7 @@ Core Operational Rules:
 7. Do NOT use phrases like "2 out of every 5", "1 in 3", or other verbal fraction approximations derived from numbers.
 8. Maintain strict read-only governance without modifying vendor contracts or reassigning workers.
 9. Provide actionable decision support for Procurement, Plant HR, and Operations Leaders without unverified numerical speculation.
+10. For questions about a specific employee or recent joiners, use get_employee_details / get_recent_joiners.
 """
 
 
@@ -74,6 +75,7 @@ Mandatory First Lines (Period & Filter Statement):
   **Period**: YYYY-MM-DD to YYYY-MM-DD | **Filters**: Plant: [All / Specific], Shift: [All / Specific]
 
 Tool Calling Directives:
+- For questions about a specific employee or recent joiners, use get_employee_details / get_recent_joiners.
 - ALWAYS call the full analysis tool first (e.g., analyze_overtime, analyze_attrition, analyze_attendance, analyze_skills, analyze_vendor, analyze_production, analyze_workforce_planning).
 - Do NOT call a secondary or granular tool if the full analysis tool succeeded. The full analysis tool already contains complete metrics, breakdowns, bottlenecks, and costs.
 - After receiving the full analysis tool result, immediately provide your final answer in {"final": "..."}.
@@ -466,7 +468,7 @@ def ask_attendance_agent(question: str | None = None, query: str | None = None) 
 
 @tool(args_schema=SpecialistQuestionArgs)
 def ask_workforce_planning_agent(question: str | None = None, query: str | None = None) -> dict[str, Any]:
-    """Consult the Workforce Planning Specialist on shift shortages against the 30-person baseline, headcount availability, and replacements."""
+    """Consult the Workforce Planning Specialist on shift shortages against the 30-person baseline, headcount availability, replacements, specific employee details, and recent joiners."""
     resolved = (question or query or "").strip()
     return _invoke_specialist_and_track("workforce_planning", resolved)
 
@@ -519,7 +521,7 @@ SUPERVISOR_TOOLS: list[BaseTool] = [
 SUPERVISOR_SYSTEM_PROMPT = """You are the Central Workforce Intelligence Supervisor for an enterprise manufacturing workforce management platform.
 You oversee 7 domain specialist workforce agents:
 1. ask_attendance_agent: Attendance rates, absenteeism hotspots, late arrivals, chronic absence streaks.
-2. ask_workforce_planning_agent: Headcount availability, shift staffing shortages against the 30-person baseline, candidate replacements.
+2. ask_workforce_planning_agent: Headcount availability, total workforce size, shift staffing shortages against the 30-person baseline, candidate replacements, specific employee details, and recent joiners.
 3. ask_overtime_agent: Overtime hours, labor premiums, statutory 50 hr/mo limit breaches, worker fatigue.
 4. ask_attrition_agent: Employee turnover rates, exit drivers/reasons, tenure vulnerability, department resignation hotspots.
 5. ask_skill_agent: Skill proficiency grades (L1-L4), skill matrix shortages, single-operator dependencies, training compliance.
@@ -535,6 +537,9 @@ Operating Directives:
    - Example 3: "Annual attrition rate?" -> Call ask_attrition_agent(question="Annual overall workforce attrition rate and exit count across the last 12 months (October 2025 to November 2026)")
    - Example 4: "attendance for plant IN-TN-01 last month" -> Call ask_attendance_agent(question="Attendance for plant IN-TN-01 for last month: present counts, absenteeism rates, late arrivals")
    - Example 5: "Plant 1 overtime hours last month" -> Call ask_overtime_agent(question="Overtime hours for plant IN-TN-01 for last month across all shifts")
+   - Example 6: "Test Zzz details sollu" or "details of employee EMP-10001" -> Call ask_workforce_planning_agent(question="Get profile details for employee Test Zzz / EMP-10001: designation, plant, department, shift, grade, status, tenure band")
+   - Example 7: "idhu varaikkum evlo new joiners?" or "recent joiners count" -> Call ask_workforce_planning_agent(question="How many new joiners have joined recently? Give recent joiners count and list of latest joiners")
+   - Example 8: "total headcount evlo?" or "what is the total workforce count?" -> Call ask_workforce_planning_agent(question="What is the total registered and active workforce headcount?")
 
 2. Ambiguity & Broad Query Directive (Max 1 LLM Call, NO Specialists):
    - Broad, open-ended, or ambiguous questions that lack domain specificity or objective evaluation criteria (e.g. "Is everything running fine on the shop floor today?", "line status", "how is the factory doing?", "Who is the best employee?") MUST be answered IMMEDIATELY in Step 1 asking for clarification.

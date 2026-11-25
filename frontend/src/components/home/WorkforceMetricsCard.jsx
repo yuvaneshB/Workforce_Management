@@ -46,10 +46,10 @@ const ATTRITION_TREND_YEARLY = [
 ];
 
 const ATTRITION_REASONS_HOME = [
-  { reason: 'Better Opportunity', pct: 34.32, color: '#7C3AED' },
-  { reason: 'Higher Salary', pct: 22.74, color: '#8B5CF6' },
+  { reason: 'Better Opportunity', pct: 34.32, color: '#493287' },
+  { reason: 'Higher Salary', pct: 22.74, color: '#4A578F' },
   { reason: 'Personal Reasons', pct: 14.32, color: '#A78BFA' },
-  { reason: 'Work-Life Balance', pct: 11.79, color: '#C4B5FD' },
+  { reason: 'Work-Life Balance', pct: 11.79, color: '#96A1C7' },
   { reason: 'Career Growth', pct: 9.89, color: '#DDD6FE' },
   { reason: 'Other', pct: 6.94, color: '#EDE9FE' },
 ];
@@ -130,7 +130,7 @@ export function WorkforceMetricsCard() {
               onClick={() => setActiveMetricTab('absenteeism')}
               className={`px-3 py-1 rounded-md text-[11px] font-bold transition-all cursor-pointer ${
                 activeMetricTab === 'absenteeism'
-                  ? 'bg-[#6F3DBA] text-white shadow-xs'
+                  ? 'bg-[#493287] text-white shadow-xs'
                   : 'text-[var(--secondary)] hover:text-[var(--text)]'
               }`}
             >
@@ -140,7 +140,7 @@ export function WorkforceMetricsCard() {
               onClick={() => setActiveMetricTab('attrition')}
               className={`px-3 py-1 rounded-md text-[11px] font-bold transition-all cursor-pointer ${
                 activeMetricTab === 'attrition'
-                  ? 'bg-[#6F3DBA] text-white shadow-xs'
+                  ? 'bg-[#493287] text-white shadow-xs'
                   : 'text-[var(--secondary)] hover:text-[var(--text)]'
               }`}
             >
@@ -176,7 +176,7 @@ export function WorkforceMetricsCard() {
                     data={[
                       {
                         value: activeMetricTab === 'attrition' ? ATTRITION_RATE : ABSENTEEISM_RATE,
-                        fill: '#7C3AED',
+                        fill: '#493287',
                       },
                       {
                         value: 100 - (activeMetricTab === 'attrition' ? ATTRITION_RATE : ABSENTEEISM_RATE),
@@ -216,7 +216,7 @@ export function WorkforceMetricsCard() {
                     onClick={() => setTimeUnit(unit)}
                     className={`px-1.5 py-0.5 rounded cursor-pointer ${
                       timeUnit === unit
-                        ? 'bg-[#6F3DBA] text-white font-bold'
+                        ? 'bg-[#493287] text-white font-bold'
                         : 'text-[var(--secondary)] hover:text-[var(--text)]'
                     }`}
                   >
@@ -260,9 +260,9 @@ export function WorkforceMetricsCard() {
                   <Line
                     type="monotone"
                     dataKey="rate"
-                    stroke="#7C3AED"
+                    stroke="#493287"
                     strokeWidth={2}
-                    dot={{ r: 3, fill: '#7C3AED' }}
+                    dot={{ r: 3, fill: '#493287' }}
                   >
                     <LabelList
                       dataKey="rate"
@@ -379,7 +379,7 @@ export function WorkforceMetricsCard() {
                   />
                   <Bar
                     dataKey="rate"
-                    fill={activeMetricTab === 'attrition' ? '#3B82F6' : '#8B5CF6'}
+                    fill={activeMetricTab === 'attrition' ? '#3B82F6' : '#1F2F59'}
                     radius={[3, 3, 0, 0]}
                   >
                     <LabelList
@@ -396,7 +396,7 @@ export function WorkforceMetricsCard() {
                         key={`cell-${idx}`}
                         fill={
                           idx === 1
-                            ? '#7C3AED'
+                            ? '#493287'
                             : idx === 0
                               ? '#3B82F6'
                               : idx === 2

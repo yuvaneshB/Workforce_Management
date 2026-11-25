@@ -166,7 +166,7 @@ export function ShiftPerformanceTable({
           {/* Export CSV Button */}
           <button
             onClick={handleExportCSV}
-            className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#6F3DBA] hover:bg-[#5C329D] text-white text-[11px] font-semibold rounded-lg shadow-xs transition-colors shrink-0 cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#493287] hover:bg-[#3B2870] text-white text-[11px] font-semibold rounded-lg shadow-xs transition-colors shrink-0 cursor-pointer"
           >
             <Download className="w-3.5 h-3.5" />
             <span>Export CSV</span>

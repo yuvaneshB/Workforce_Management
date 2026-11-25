@@ -117,7 +117,7 @@ export function PlantWorkforceCard({
                   return (
                     <Cell
                       key={`cell-plant-${index}`}
-                      fill={isFiltered ? (entry.plant_id === 'IN-TN-01' ? '#6F3DBA' : '#4D8EEB') : '#CBD5E1'}
+                      fill={isFiltered ? (entry.plant_id === 'IN-TN-01' ? '#493287' : '#4D8EEB') : '#CBD5E1'}
                     />
                   );
                 })}

@@ -73,7 +73,7 @@ export function SkillsComplianceCard({
           <CircularMeter
             pct={trainingPct}
             label="Training Compliance"
-            color="#6F3DBA"
+            color="#493287"
           />
           <CircularMeter
             pct={skillMatchPct}

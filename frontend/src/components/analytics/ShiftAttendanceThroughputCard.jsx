@@ -117,9 +117,9 @@ export function ShiftAttendanceThroughputCard({
                   type="monotone"
                   dataKey="throughput"
                   name="Throughput / Present"
-                  stroke="#6F3DBA"
+                  stroke="#493287"
                   strokeWidth={2}
-                  dot={{ r: 3, fill: '#6F3DBA' }}
+                  dot={{ r: 3, fill: '#493287' }}
                   activeDot={{ r: 5 }}
                 />
               </ComposedChart>
@@ -133,7 +133,7 @@ export function ShiftAttendanceThroughputCard({
           <span className="w-2 h-2 rounded-sm bg-[#34D399]" /> Attendance Rate
         </span>
         <span className="flex items-center gap-1 font-bold text-[var(--text)]">
-          <span className="w-2 h-2 rounded-full bg-[#6F3DBA]" /> Throughput / Present (units)
+          <span className="w-2 h-2 rounded-full bg-[#493287]" /> Throughput / Present (units)
         </span>
       </div>
     </Card>

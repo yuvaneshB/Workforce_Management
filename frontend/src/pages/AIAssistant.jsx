@@ -8,7 +8,7 @@ import { ROUTE_META } from '../utils/constants';
 const INITIAL_PIPELINE_STAGES = [
   { id: 1, name: 'Understanding User Question', desc: 'Analyzing natural language intent, entities & context', status: 'pending' },
   { id: 2, name: 'Selecting Specialist Agent', desc: 'Routing query to relevant workforce specialist(s)', status: 'pending' },
-  { id: 3, name: 'Retrieving Neon PostgreSQL Data', desc: 'Querying verified enterprise relational tables', status: 'pending' },
+  { id: 3, name: 'Retrieving Enterprise Workforce Data', desc: 'Querying verified operational database tables', status: 'pending' },
   { id: 4, name: 'Performing Quantitative Analysis', desc: 'Computing baseline variances and domain metrics', status: 'pending' },
   { id: 5, name: 'Generating AI Insights', desc: 'Synthesizing evidence-based findings via Domo AI', status: 'pending' },
   { id: 6, name: 'Preparing Final Response', desc: 'Formatting direct answer, metrics, and recommendations', status: 'pending' },

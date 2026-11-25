@@ -221,7 +221,7 @@ export function ProductionPerformance({
               <Bar
                 dataKey="actual"
                 name="Actual Achieved"
-                fill="#6F3DBA"
+                fill="#493287"
                 radius={[4, 4, 0, 0]}
                 maxBarSize={32}
               />

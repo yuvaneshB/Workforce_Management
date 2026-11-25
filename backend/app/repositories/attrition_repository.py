@@ -1,7 +1,7 @@
 """Read-only repository for public.attrition_transactions and attrition analytics."""
 
 import datetime as dt
-from sqlalchemy import asc, case, desc, func, select
+from sqlalchemy import asc, case, desc, func, or_, select
 from sqlalchemy.orm import Session
 
 from app.models.attrition import AttritionTransaction
@@ -56,10 +56,19 @@ def get_attrition_analytics(
         filters.append(AttritionTransaction.resignation_date >= start_date)
     if end_date:
         filters.append(AttritionTransaction.resignation_date <= end_date)
-    if employment_type and employment_type.strip():
+    if employment_type and employment_type.strip() and employment_type.strip().upper() != "ALL":
         filters.append(AttritionTransaction.employment_type.ilike(employment_type.strip()))
-    if vendor_id and vendor_id.strip():
-        filters.append(AttritionTransaction.vendor_id == vendor_id.strip())
+    if vendor_id and vendor_id.strip() and vendor_id.strip().upper() != "ALL":
+        v_clean = vendor_id.strip()
+        if v_clean.lower() in ("permanent", "permanent only", "none", "internal", "permanent staff"):
+            filters.append(
+                or_(
+                    AttritionTransaction.vendor_id.is_(None),
+                    AttritionTransaction.employment_type.ilike("permanent"),
+                )
+            )
+        else:
+            filters.append(AttritionTransaction.vendor_id == v_clean)
     if shift_id and shift_id.strip():
         filters.append(
             AttritionTransaction.employee_id.in_(
@@ -98,10 +107,19 @@ def get_attrition_analytics(
         emp_filters.append(EmployeeMaster.section_id == section_id)
     if shift_id:
         emp_filters.append(EmployeeMaster.shift_id == shift_id)
-    if employment_type and employment_type.strip():
+    if employment_type and employment_type.strip() and employment_type.strip().upper() != "ALL":
         emp_filters.append(EmployeeMaster.employment_type.ilike(employment_type.strip()))
-    if vendor_id and vendor_id.strip():
-        emp_filters.append(EmployeeMaster.vendor_id == vendor_id.strip())
+    if vendor_id and vendor_id.strip() and vendor_id.strip().upper() != "ALL":
+        v_clean = vendor_id.strip()
+        if v_clean.lower() in ("permanent", "permanent only", "none", "internal", "permanent staff"):
+            emp_filters.append(
+                or_(
+                    EmployeeMaster.vendor_id.is_(None),
+                    EmployeeMaster.employment_type.ilike("permanent"),
+                )
+            )
+        else:
+            emp_filters.append(EmployeeMaster.vendor_id == v_clean)
 
     active_count_stmt = select(func.count(EmployeeMaster.employee_id)).select_from(EmployeeMaster).where(*emp_filters)
     active_employees = int(db.execute(active_count_stmt).scalar_one() or 0)

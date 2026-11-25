@@ -14,7 +14,7 @@ import { CHART_COLORS } from '../../utils/constants';
 import { Card } from '../common/Card';
 import { LoadingSkeleton } from '../common/LoadingSkeleton';
 
-const SHIFT_BAR_COLORS = ['#6F3DBA', '#4D8EEB', '#F58A3A'];
+const SHIFT_BAR_COLORS = ['#493287', '#4D8EEB', '#F58A3A'];
 
 const SHIFT_NAMES = {
   A: 'GS1',

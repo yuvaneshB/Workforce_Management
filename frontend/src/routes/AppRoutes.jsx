@@ -83,7 +83,7 @@ export function AppRoutes() {
           }
         />
         <Route path="/operations" element={<Navigate to="/organization-structure?tab=departments" replace />} />
-        <Route path="/approvals" element={<Navigate to="/organization-structure?tab=sections" replace />} />
+        <Route path="/approvals" element={<Navigate to="/employees?tab=hr-approval" replace />} />
 
         <Route
           path="/analytics"

@@ -72,8 +72,8 @@ export function ExperienceAnalytics({
           }}
         >
           <p className="font-bold mb-1 text-[var(--foreground)]">{data.category}</p>
-          <div className="flex items-center gap-1.5 text-[11px] text-[#6F3DBA]">
-            <span className="w-2 h-2 rounded-full bg-[#6F3DBA]" />
+          <div className="flex items-center gap-1.5 text-[11px] text-[#493287]">
+            <span className="w-2 h-2 rounded-full bg-[#493287]" />
             <span>Headcount: <strong>{data.employee_count.toLocaleString()}</strong></span>
           </div>
           <div className="flex items-center gap-1.5 text-[11px] text-[#F58A3A] mt-0.5">
@@ -91,7 +91,7 @@ export function ExperienceAnalytics({
       {/* Single clean line header - no subtitles */}
       <div className="flex items-center justify-between gap-2 mb-2 min-w-0 shrink-0">
         <div className="flex items-center gap-2 min-w-0">
-          <BarChart3 className="w-4 h-4 shrink-0" style={{ color: '#6F3DBA' }} aria-hidden="true" />
+          <BarChart3 className="w-4 h-4 shrink-0" style={{ color: '#493287' }} aria-hidden="true" />
           <h2 className="text-[13px] sm:text-sm font-bold truncate">Employee Experience Analytics</h2>
         </div>
       </div>
@@ -104,7 +104,7 @@ export function ExperienceAnalytics({
             <ComposedChart data={chartData} margin={{ top: 18, right: 10, left: -20, bottom: 0 }}>
               <defs>
                 <linearGradient id="expGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#6F3DBA" stopOpacity={0.9} />
+                  <stop offset="0%" stopColor="#493287" stopOpacity={0.9} />
                   <stop offset="100%" stopColor="#4D8EEB" stopOpacity={0.55} />
                 </linearGradient>
               </defs>

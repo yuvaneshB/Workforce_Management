@@ -51,82 +51,88 @@ export function EmploymentTypeCard({
   }
 
   return (
-    <Card className={`p-4 flex flex-col justify-between h-full min-h-[340px] ${className}`}>
+    <Card className={`p-3.5 sm:p-4 flex flex-col justify-between h-full min-h-[175px] ${className}`}>
       <div>
-        <div className="flex items-center gap-2 mb-2 min-w-0">
-          <Briefcase className="w-4 h-4 shrink-0" style={{ color: '#4D8EEB' }} aria-hidden="true" />
-          <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Employment Type Distribution</h2>
+        <div className="flex items-center justify-between gap-2 mb-2 min-w-0">
+          <div className="flex items-center gap-2 min-w-0">
+            <Briefcase className="w-4 h-4 shrink-0" style={{ color: '#4D8EEB' }} aria-hidden="true" />
+            <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap text-[var(--text)]">Employment Type Distribution</h2>
+          </div>
+          {totalEmployees > 0 && !loading && (
+            <span className="text-[11px] font-bold text-[var(--secondary)] shrink-0">
+              {totalEmployees.toLocaleString()} Total
+            </span>
+          )}
         </div>
 
         {loading ? (
-          <LoadingSkeleton className="h-[220px] w-full rounded-lg my-1" />
+          <LoadingSkeleton className="h-[110px] w-full rounded-lg my-1" />
         ) : totalEmployees === 0 ? (
-          <div className="h-[220px] w-full my-1 flex flex-col items-center justify-center text-center p-2 bg-[var(--surface-hover)]/30 rounded-lg border border-dashed border-[var(--border)]">
+          <div className="h-[110px] w-full my-1 flex flex-col items-center justify-center text-center p-2 bg-[var(--surface-hover)]/30 rounded-lg border border-dashed border-[var(--border)]">
             <Briefcase className="w-5 h-5 text-slate-400 mb-1 opacity-60" />
             <p className="text-xs font-bold text-[var(--text)]">No Employment Data</p>
           </div>
         ) : (
-          <div className="relative w-full h-[220px] flex items-center justify-center my-1">
-            <ResponsiveContainer width="100%" height={220}>
-              <PieChart>
-                <Pie
-                  data={chartData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={0}
-                  outerRadius={78}
-                  dataKey="value"
-                  stroke={sliceStroke}
-                  strokeWidth={2}
-                >
-                  {chartData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: palette.tooltipBg,
-                    borderColor: palette.tooltipBorder,
-                    color: palette.tooltipText,
-                    fontSize: '11px',
-                    borderRadius: '8px',
-                  }}
-                  formatter={(val, name, item) => [`${val.toLocaleString()} (${item.payload.pct}%)`, name]}
-                />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-        )}
-      </div>
+          <div className="flex-1 flex flex-row items-center justify-between gap-2 sm:gap-3 my-auto min-h-[110px]">
+            {/* Left side: Employment type pie chart */}
+            <div className="relative w-[110px] h-[110px] shrink-0 flex items-center justify-center">
+              <ResponsiveContainer width="100%" height={110}>
+                <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+                  <Pie
+                    data={chartData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={0}
+                    outerRadius={46}
+                    dataKey="value"
+                    stroke={sliceStroke}
+                    strokeWidth={2}
+                  >
+                    {chartData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: palette.tooltipBg,
+                      borderColor: palette.tooltipBorder,
+                      color: palette.tooltipText,
+                      fontSize: '11px',
+                      borderRadius: '8px',
+                    }}
+                    formatter={(val, name, item) => [`${val.toLocaleString()} (${item.payload.pct}%)`, name]}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
 
-      <div className="space-y-1.5 pt-2 border-t border-[var(--border)] text-[11px]">
-        <div className="flex items-center justify-between">
-          <span className="flex items-center gap-1.5 font-semibold text-[var(--text)]">
-            <span className="w-2 h-2 rounded-full bg-[#4D8EEB]" />
-            Permanent Direct:
-          </span>
-          <span className="font-extrabold text-[var(--text)] tabular-nums">
-            {totalEmployees > 0 ? `${permanentEmployees.toLocaleString()} (${permanentPct}%)` : '—'}
-          </span>
-        </div>
-        <div className="flex items-center justify-between">
-          <span className="flex items-center gap-1.5 font-semibold text-[var(--text)]">
-            <span className="w-2 h-2 rounded-full bg-[#F58A3A]" />
-            Vendor Contract:
-          </span>
-          <span className="font-extrabold text-[var(--text)] tabular-nums">
-            {totalEmployees > 0 ? `${vendorEmployees.toLocaleString()} (${vendorPct}%)` : '—'}
-          </span>
-        </div>
-        {unclassifiedEmployees > 0 && (
-          <div className="flex items-center justify-between">
-            <span className="flex items-center gap-1.5 font-semibold text-[var(--secondary)]">
-              <span className="w-2 h-2 rounded-full bg-[#9CA3AF]" />
-              Unclassified:
-            </span>
-            <span className="font-extrabold text-slate-500 tabular-nums">
-              {`${unclassifiedEmployees.toLocaleString()} (${unclassifiedPct}%)`}
-            </span>
+            {/* Right side: Permanent Direct and Vendor Contract counts and percentages */}
+            <div className="flex-1 min-w-0 flex flex-col justify-center gap-1.5 sm:gap-2">
+              {chartData.map((item) => (
+                <div
+                  key={item.name}
+                  className="px-2.5 py-1.5 rounded-lg bg-[var(--surface-hover)]/40 border border-[var(--border)]/60 flex items-center justify-between gap-2 text-xs"
+                >
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <span
+                      className="w-2.5 h-2.5 rounded-full shrink-0"
+                      style={{ backgroundColor: item.color }}
+                    />
+                    <span className="font-semibold text-[var(--text)] truncate text-[11px] sm:text-xs">
+                      {item.name}
+                    </span>
+                  </div>
+                  <div className="flex items-baseline gap-1 shrink-0 pl-1 text-right">
+                    <span className="font-extrabold text-[var(--text)] tabular-nums text-xs sm:text-[13px]">
+                      {item.value.toLocaleString()}
+                    </span>
+                    <span className="text-[10px] sm:text-[11px] font-bold text-[var(--secondary)] tabular-nums">
+                      ({item.pct}%)
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>

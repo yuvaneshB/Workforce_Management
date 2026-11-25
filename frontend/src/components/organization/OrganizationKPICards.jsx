@@ -30,7 +30,7 @@ export function OrganizationKPICards({
       subtext: hasData ? 'Operational manufacturing units' : 'No connection',
       icon: Factory,
       iconBg: 'bg-purple-100 dark:bg-purple-950/60',
-      iconColor: 'text-[#6F3DBA]',
+      iconColor: 'text-[#493287]',
     },
     {
       id: 'departments',
@@ -39,7 +39,7 @@ export function OrganizationKPICards({
       subtext: hasData ? 'Organizational divisions' : 'No data',
       icon: Building2,
       iconBg: 'bg-purple-100 dark:bg-purple-950/60',
-      iconColor: 'text-[#6F3DBA]',
+      iconColor: 'text-[#493287]',
     },
     {
       id: 'sections',
@@ -57,7 +57,7 @@ export function OrganizationKPICards({
       subtext: hasData ? 'Active shift operating teams' : 'No data',
       icon: Users,
       iconBg: 'bg-purple-100 dark:bg-purple-950/60',
-      iconColor: 'text-[#6F3DBA]',
+      iconColor: 'text-[#493287]',
     },
     {
       id: 'active',

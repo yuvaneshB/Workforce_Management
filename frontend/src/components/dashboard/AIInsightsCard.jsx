@@ -18,12 +18,12 @@ export function AIInsightsCard() {
       <div>
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
-            <span className="w-7 h-7 rounded-lg grid place-items-center" style={{ background: 'var(--purple-soft)', color: '#6F3DBA' }}>
+            <span className="w-7 h-7 rounded-lg grid place-items-center" style={{ background: 'var(--purple-soft)', color: '#493287' }}>
               <Bot className="w-4 h-4" />
             </span>
             <h3 className="text-[13px] font-bold text-[var(--foreground)]">AI Workforce Insights</h3>
           </div>
-          <span className="text-[9px] font-semibold px-2 py-0.5 rounded-full" style={{ background: 'var(--purple-soft)', color: '#6F3DBA' }}>
+          <span className="text-[9px] font-semibold px-2 py-0.5 rounded-full" style={{ background: 'var(--purple-soft)', color: '#493287' }}>
             <Sparkles className="w-2.5 h-2.5 inline mr-1" /> LangChain Agent
           </span>
         </div>

@@ -6,6 +6,7 @@ from app.api.v1.endpoints.agent import router as agent_router
 from app.api.v1.endpoints.analytics import router as analytics_router
 from app.api.v1.endpoints.attendance import router as attendance_router
 from app.api.v1.endpoints.health import router as health_router
+from app.api.v1.endpoints.hr_approvals import router as hr_approvals_router
 from app.api.v1.endpoints.intelligence import router as intelligence_router
 from app.api.v1.endpoints.organization import router as organization_router
 from app.api.v1.endpoints.planning import router as planning_router
@@ -24,3 +25,4 @@ api_router.include_router(organization_router)
 api_router.include_router(planning_router)
 api_router.include_router(intelligence_router)
 api_router.include_router(agent_router)
+api_router.include_router(hr_approvals_router)

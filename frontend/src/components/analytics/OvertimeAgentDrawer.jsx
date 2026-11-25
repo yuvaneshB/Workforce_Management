@@ -5,6 +5,7 @@ import {
   Calendar,
   Check,
   CheckCircle2,
+  ClipboardCheck,
   Clock,
   Coins,
   ExternalLink,
@@ -23,14 +24,18 @@ import {
   UserCheck,
   Users,
   UserX,
-  X,
 } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
-import { runOvertimeAgentAnalysis } from '../../api/workforceApi';
+import React, { useEffect, useRef, useState } from 'react';
+import { runOvertimeAgentAnalysis, submitPlanningApproval } from '../../api/workforceApi';
 import { useAgentExecutionStream } from '../../hooks/useAgentExecutionStream';
 import { AgentExecutionPipeline } from './AgentExecutionPipeline';
 import { Button } from '../common/Button';
 import { Card } from '../common/Card';
+import { AgentFindingList } from '../common/AgentFindingCard';
+import { AgentReviewPanel } from '../common/AgentReviewPanel';
+import { AGENT_REVIEW_CONFIGS } from '../../utils/agentReviewConfig';
+import { cleanText } from '../../utils/humanizeAgentOutput';
+import { useAutoCloseOnApproval, AutoCloseBanner } from '../../hooks/useAutoCloseOnApproval';
 
 export function OvertimeAgentDrawer({ isOpen, onClose, filters = {} }) {
   const {
@@ -55,8 +60,52 @@ export function OvertimeAgentDrawer({ isOpen, onClose, filters = {} }) {
   const [hrNotes, setHrNotes] = useState('');
   const [hrDecisionStatus, setHrDecisionStatus] = useState(null); // 'ACKNOWLEDGED' | 'APPROVED'
   const [decisionTimestamp, setDecisionTimestamp] = useState(null);
+  const [isReviewPanelOpen, setIsReviewPanelOpen] = useState(false);
+  const [recordedReviewData, setRecordedReviewData] = useState(null);
+  const recordReviewBtnRef = useRef(null);
 
-  const handleExecute = () => execute();
+  const autoClose = useAutoCloseOnApproval({
+    onClose,
+    agentName: 'Overtime Optimization Agent',
+    isOpen,
+  });
+
+  const handleExecute = () => {
+    autoClose.cancel();
+    setIsReviewPanelOpen(false);
+    setRecordedReviewData(null);
+    execute();
+  };
+
+  // Keyboard Escape listener: closes panel first, second Escape closes drawer
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        if (isReviewPanelOpen) {
+          e.stopPropagation();
+          e.preventDefault();
+          setIsReviewPanelOpen(false);
+        } else if (isOpen) {
+          onClose();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, isReviewPanelOpen, onClose]);
+
+  const handleBackdropClick = () => {
+    if (isReviewPanelOpen) {
+      setIsReviewPanelOpen(false);
+      return;
+    }
+    onClose();
+  };
+
+  const handleOpenReviewPanel = () => {
+    autoClose.cancel();
+    setIsReviewPanelOpen(true);
+  };
 
   if (!isOpen) return null;
 
@@ -74,9 +123,43 @@ export function OvertimeAgentDrawer({ isOpen, onClose, filters = {} }) {
     }
   };
 
-  const handleRecordHrReview = (actionType) => {
+  const handleRecordHrReview = async (actionType, customNotes) => {
+    const notesToSave = customNotes !== undefined ? customNotes : hrNotes;
+    const activeExecId = executionId || result?.execution_id || `EXE-OT-${Date.now()}`;
+    const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
     setHrDecisionStatus(actionType);
-    setDecisionTimestamp(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+    setDecisionTimestamp(timestamp);
+    if (customNotes !== undefined) {
+      setHrNotes(customNotes);
+    }
+
+    if (actionType === 'APPROVED') {
+      autoClose.start({
+        agentName: 'Overtime Optimization Agent',
+        approvalId: activeExecId,
+      });
+    } else {
+      autoClose.cancel();
+    }
+
+    try {
+      await submitPlanningApproval({
+        executionId: activeExecId,
+        specialistAgent: 'overtime',
+        decision: actionType,
+        notes: notesToSave || (actionType === 'APPROVED' ? 'Overtime rebalancing approved.' : 'Overtime distribution review recorded.'),
+        approvedBy: 'Workspace User (HR)',
+        targetDate: result?.target_date || filters?.date || filters?.startDate,
+      });
+    } catch (err) {
+      console.warn('Failed to persist overtime HR review:', err);
+    }
+  };
+
+  const handleSaveReview = async (composedText, reviewData) => {
+    await handleRecordHrReview('ACKNOWLEDGED', composedText);
+    setRecordedReviewData(reviewData);
   };
 
   const metrics = result?.metrics;
@@ -94,12 +177,25 @@ export function OvertimeAgentDrawer({ isOpen, onClose, filters = {} }) {
       {/* Semi-transparent backdrop allowing view of Analytics behind */}
       <div
         className="absolute inset-0 bg-slate-900/30 backdrop-blur-[2px] transition-opacity duration-300"
-        onClick={onClose}
+        onClick={handleBackdropClick}
         aria-hidden="true"
       />
 
-      {/* Right-side Sliding Drawer */}
+      {/* Right-side Sliding Drawer Container */}
       <div className="absolute inset-y-0 right-0 max-w-full flex pl-6 sm:pl-10">
+        <AgentReviewPanel
+          isOpen={isReviewPanelOpen}
+          onClose={() => setIsReviewPanelOpen(false)}
+          onSave={handleSaveReview}
+          agentConfig={AGENT_REVIEW_CONFIGS.overtime}
+          result={result}
+          filters={filters}
+          executionId={executionId || result?.execution_id}
+          initialNotes={hrNotes}
+          reviewerName="Workspace User (HR)"
+          returnFocusRef={recordReviewBtnRef}
+        />
+
         <aside
           role="dialog"
           aria-modal="true"
@@ -110,7 +206,7 @@ export function OvertimeAgentDrawer({ isOpen, onClose, filters = {} }) {
           {/* Top Header */}
           <div className="px-5 py-4 border-b border-[var(--border)] flex items-center justify-between gap-3 bg-gradient-to-r from-purple-500/5 via-blue-500/5 to-transparent shrink-0">
             <div className="flex items-center gap-3 min-w-0">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6F3DBA] to-[#4D8EEB] text-white flex items-center justify-center shrink-0 shadow-md">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#493287] to-[#5B44A3] text-white flex items-center justify-center shrink-0 shadow-md">
                 <Bot className="w-5 h-5" />
               </div>
               <div className="min-w-0">
@@ -118,9 +214,6 @@ export function OvertimeAgentDrawer({ isOpen, onClose, filters = {} }) {
                   <h2 id="overtime-agent-drawer-title" className="text-sm font-bold truncate">
                     Overtime Optimization Agent
                   </h2>
-                  <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-purple-100 dark:bg-purple-950/50 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
-                    Neon Grounded
-                  </span>
                 </div>
                 <p className="text-[11px] text-[var(--secondary)] truncate">
                   Evidence-based overtime audit, cost optimization & fatigue risk analysis
@@ -140,13 +233,6 @@ export function OvertimeAgentDrawer({ isOpen, onClose, filters = {} }) {
                 <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
                 <span className="hidden sm:inline">Rerun</span>
               </Button>
-              <button
-                onClick={onClose}
-                className="w-8 h-8 rounded-lg grid place-items-center hover:bg-slate-100 dark:hover:bg-slate-800 text-[var(--secondary)] transition-colors"
-                aria-label="Close Agent Drawer"
-              >
-                <X className="w-4 h-4" />
-              </button>
             </div>
           </div>
 
@@ -201,7 +287,7 @@ export function OvertimeAgentDrawer({ isOpen, onClose, filters = {} }) {
               <div className="space-y-3 py-4">
                 <div className="flex items-center gap-2 text-xs text-purple-600 font-semibold">
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Auditing 23,700 overtime transactions & financial costs from Neon PostgreSQL...</span>
+                  <span>Auditing 23,700 overtime transactions & financial costs...</span>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   <div className="h-16 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
@@ -313,8 +399,8 @@ export function OvertimeAgentDrawer({ isOpen, onClose, filters = {} }) {
                       <Sparkles className="w-3.5 h-3.5 text-purple-600" />
                       Executive Overtime Optimization Summary
                     </div>
-                    <p className="text-[11.5px] leading-relaxed whitespace-pre-line">
-                      {result.executive_synthesis.replace(/\*\*/g, '')}
+                    <p className="text-[11.5px] leading-relaxed whitespace-pre-line text-slate-700 dark:text-slate-300">
+                      {cleanText(result.executive_synthesis.replace(/\*\*/g, ''))}
                     </p>
                   </div>
                 )}
@@ -366,47 +452,10 @@ export function OvertimeAgentDrawer({ isOpen, onClose, filters = {} }) {
                 {/* TAB 1: Evidence-Based Findings */}
                 {activeTab === 'findings' && (
                   <div className="space-y-3">
-                    {findings.map((f, idx) => (
-                      <Card
-                        key={f.id || idx}
-                        className="p-3.5 border border-[var(--border)] hover:border-purple-300 dark:hover:border-purple-700 transition-all space-y-2"
-                      >
-                        <div className="flex items-start justify-between gap-2">
-                          <div>
-                            <span className="text-[9px] font-mono font-bold text-purple-600 dark:text-purple-400">
-                              {f.id} · {f.affected}
-                            </span>
-                            <h4 className="text-xs font-bold text-[var(--text)] mt-0.5">{f.title}</h4>
-                          </div>
-                          <span
-                            className={`text-[9px] font-black uppercase px-2 py-0.5 rounded border shrink-0 ${severityBadge(
-                              f.severity
-                            )}`}
-                          >
-                            {f.severity}
-                          </span>
-                        </div>
-
-                        {/* Metric Highlight */}
-                        <div className="p-2 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-[var(--border)] flex items-center justify-between text-xs">
-                          <span className="text-[11px] text-[var(--secondary)]">Observed Exposure:</span>
-                          <span className="font-bold font-mono text-[var(--text)]">{f.metric}</span>
-                        </div>
-
-                        <p className="text-[11px] text-[var(--secondary)] leading-relaxed">{f.evidence}</p>
-
-                        <div className="pt-2 border-t border-slate-100 dark:border-slate-800 text-[11px] space-y-1">
-                          <div className="text-slate-700 dark:text-slate-300">
-                            <span className="font-semibold text-rose-600 dark:text-rose-400">Operational Impact: </span>
-                            {f.operational_impact}
-                          </div>
-                          <div className="text-purple-700 dark:text-purple-300 font-medium">
-                            <span className="font-semibold">HR & Plant Action: </span>
-                            {f.recommendation}
-                          </div>
-                        </div>
-                      </Card>
-                    ))}
+                    <AgentFindingList
+                      findings={findings}
+                      emptyMessage="No overtime findings observed for the selected scope."
+                    />
                   </div>
                 )}
 
@@ -417,7 +466,7 @@ export function OvertimeAgentDrawer({ isOpen, onClose, filters = {} }) {
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
                         <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--text)]">
-                          Department Overtime Concentration (Neon DB Verified)
+                          Department Overtime Concentration
                         </h4>
                         <span className="text-[10px] text-slate-400">Hours & Cost Share</span>
                       </div>
@@ -671,11 +720,39 @@ export function OvertimeAgentDrawer({ isOpen, onClose, filters = {} }) {
                     )}
                   </div>
 
+                  <AutoCloseBanner
+                    isCounting={autoClose.isCounting}
+                    secondsLeft={autoClose.secondsLeft}
+                    onCancel={autoClose.cancel}
+                  />
+
                   <p className="text-[11px] text-indigo-900/80 dark:text-indigo-300 leading-relaxed">
                     <strong>Advisory Governance:</strong> Neon PostgreSQL functions in read-only mode. Overtime
                     Optimization Agent recommendations provide advisory guidance for HR and Factory Managers.
                     Payroll adjustments, overtime approvals, or shift reassignments are not automatically applied.
                   </p>
+
+                  {/* Recorded HR Review Summary Box */}
+                  {hrDecisionStatus === 'ACKNOWLEDGED' && (
+                    <div className="p-3 rounded-xl border border-purple-200 dark:border-purple-800/60 bg-purple-50/50 dark:bg-purple-950/20 space-y-2 text-xs">
+                      <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] font-bold text-purple-950 dark:text-purple-200">
+                        <span className="flex items-center gap-1.5">
+                          <ClipboardCheck className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0" />
+                          <span>HR review recorded ({decisionTimestamp}) by Workspace User (HR)</span>
+                        </span>
+                        {recordedReviewData?.decision && (
+                          <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-100 dark:bg-purple-900/60 text-purple-800 dark:text-purple-300 border border-purple-300 dark:border-purple-700 shrink-0">
+                            {recordedReviewData.decision}
+                          </span>
+                        )}
+                      </div>
+                      {hrNotes && (
+                        <div className="text-[11px] text-[var(--text)] whitespace-pre-line leading-relaxed bg-[var(--surface)] p-2.5 rounded-lg border border-[var(--border)] font-normal">
+                          {hrNotes}
+                        </div>
+                      )}
+                    </div>
+                  )}
 
                   {/* HR Notes / Comments */}
                   <div className="space-y-1">
@@ -684,7 +761,10 @@ export function OvertimeAgentDrawer({ isOpen, onClose, filters = {} }) {
                     </label>
                     <textarea
                       value={hrNotes}
-                      onChange={(e) => setHrNotes(e.target.value)}
+                      onChange={(e) => {
+                        autoClose.cancel();
+                        setHrNotes(e.target.value);
+                      }}
                       placeholder="Add administrative review notes (e.g., Reviewed ₹11.99L absenteeism cover surcharge; authorized Shift A standby roster pilot)..."
                       className="w-full text-xs p-2.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] text-[var(--text)] focus:outline-none focus:ring-1 focus:ring-purple-500 resize-none h-16"
                     />
@@ -693,8 +773,9 @@ export function OvertimeAgentDrawer({ isOpen, onClose, filters = {} }) {
                   {/* Decision Action Buttons */}
                   <div className="flex flex-wrap items-center gap-2 pt-1">
                     <Button
+                      ref={recordReviewBtnRef}
                       size="sm"
-                      onClick={() => handleRecordHrReview('ACKNOWLEDGED')}
+                      onClick={handleOpenReviewPanel}
                       className={`text-xs gap-1.5 h-8 px-3 ${
                         hrDecisionStatus === 'ACKNOWLEDGED'
                           ? 'bg-purple-700 text-white'
@@ -722,6 +803,9 @@ export function OvertimeAgentDrawer({ isOpen, onClose, filters = {} }) {
                       variant="ghost"
                       size="sm"
                       onClick={() => {
+                        autoClose.cancel();
+                        setIsReviewPanelOpen(false);
+                        setRecordedReviewData(null);
                         setHrDecisionStatus(null);
                         setHrNotes('');
                       }}

@@ -15,25 +15,25 @@ import { CHART_COLORS } from '../../utils/constants';
 import { LoadingSkeleton } from '../common/LoadingSkeleton';
 
 const GRADE_METADATA = {
-  G1: { baseColor: '#A855F7', topColor: '#C4B5FD', darkBase: '#9333EA', darkTop: '#C084FC' },
-  G2: { baseColor: '#9333EA', topColor: '#B8A1EC', darkBase: '#8B5CF6', darkTop: '#A78BFA' },
-  G3: { baseColor: '#8B5CF6', topColor: '#A78BFA', darkBase: '#7C3AED', darkTop: '#9B7CF6' },
-  G4: { baseColor: '#7C3AED', topColor: '#9B7CF6', darkBase: '#6F3DBA', darkTop: '#8B5CF6' },
-  G5: { baseColor: '#6F3DBA', topColor: '#8B5CF6', darkBase: '#5B21B6', darkTop: '#7C3AED' },
-  G6: { baseColor: '#5B21B6', topColor: '#7C3AED', darkBase: '#4C1D95', darkTop: '#6D28D9' },
-  G7: { baseColor: '#4C1D95', topColor: '#6D28D9', darkBase: '#3B0764', darkTop: '#581C87', isHighest: true },
+  G1: { baseColor: '#96A1C7', topColor: '#C5CCE3', darkBase: '#6775A8', darkTop: '#96A1C7' },
+  G2: { baseColor: '#6775A8', topColor: '#96A1C7', darkBase: '#4A578F', darkTop: '#6775A8' },
+  G3: { baseColor: '#4A578F', topColor: '#6775A8', darkBase: '#493287', darkTop: '#4A578F' },
+  G4: { baseColor: '#493287', topColor: '#4A578F', darkBase: '#3B2870', darkTop: '#493287' },
+  G5: { baseColor: '#3B2870', topColor: '#493287', darkBase: '#1F2F59', darkTop: '#3B2870' },
+  G6: { baseColor: '#1F2F59', topColor: '#3B2870', darkBase: '#172343', darkTop: '#1F2F59' },
+  G7: { baseColor: '#172343', topColor: '#1F2F59', darkBase: '#0F172A', darkTop: '#172343', isHighest: true },
 };
 
 const GRADE_ORDER = { G1: 1, G2: 2, G3: 3, G4: 4, G5: 5, G6: 6, G7: 7, L1: 1, L2: 2, L3: 3, L4: 4 };
 
 const CERT_PALETTE = [
-  '#6F3DBA', // brand purple
+  '#493287', // brand primary
   '#4D8EEB', // blue
   '#0EA5E9', // sky
   '#F59E0B', // amber
   '#10B981', // emerald
   '#EC4899', // pink
-  '#8B5CF6', // violet
+  '#3B2870', // navy
   '#14B8A6', // teal
   '#F97316', // orange
 ];
@@ -155,7 +155,7 @@ export function SkillsCoverage({
           y={0}
           dy={8}
           textAnchor="middle"
-          fill={isHighest ? (theme === 'dark' ? '#C084FC' : '#6F3DBA') : palette.axisText}
+          fill={isHighest ? (theme === 'dark' ? '#8295E8' : '#493287') : palette.axisText}
           fontSize={10.5}
           fontWeight={700}
         >
@@ -317,7 +317,7 @@ export function SkillsCoverage({
                         <Cell
                           key={entry.grade}
                           fill={`url(#skillGradeGrad-${entry.grade})`}
-                          stroke={isHighest ? (theme === 'dark' ? '#C084FC' : '#6F3DBA') : undefined}
+                          stroke={isHighest ? (theme === 'dark' ? '#8295E8' : '#493287') : undefined}
                           strokeWidth={isHighest ? 1.5 : 0}
                         />
                       );

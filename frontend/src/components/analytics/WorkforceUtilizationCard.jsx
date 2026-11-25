@@ -69,7 +69,7 @@ export function WorkforceUtilizationCard({
                   formatter={(val, name) => [`${val.toLocaleString()} staff`, name]}
                 />
                 <Bar dataKey="required" name="Required Staff" fill="#4D8EEB" radius={[2, 2, 0, 0]} barSize={10} />
-                <Bar dataKey="available" name="Available Staff" fill="#6F3DBA" radius={[2, 2, 0, 0]} barSize={10} />
+                <Bar dataKey="available" name="Available Staff" fill="#493287" radius={[2, 2, 0, 0]} barSize={10} />
                 <Bar dataKey="present" name="Present Staff" fill="#0E9C86" radius={[2, 2, 0, 0]} barSize={10} />
               </BarChart>
             </ResponsiveContainer>
@@ -82,7 +82,7 @@ export function WorkforceUtilizationCard({
           <span className="w-1.5 h-1.5 rounded-sm bg-[#4D8EEB]" /> Required
         </span>
         <span className="flex items-center gap-1 font-bold text-[var(--text)]">
-          <span className="w-1.5 h-1.5 rounded-sm bg-[#6F3DBA]" /> Available
+          <span className="w-1.5 h-1.5 rounded-sm bg-[#493287]" /> Available
         </span>
         <span className="flex items-center gap-1 font-bold text-[var(--text)]">
           <span className="w-1.5 h-1.5 rounded-sm bg-[#0E9C86]" /> Present

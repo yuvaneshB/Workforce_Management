@@ -18,7 +18,7 @@ export function AssistantSidebar({
           type="button"
           onClick={onNewConversation}
           className="w-full rounded-lg px-3 py-2 text-xs text-white font-bold cursor-pointer transition-opacity hover:opacity-90 flex items-center justify-center gap-2 shadow-xs"
-          style={{ background: '#6F3DBA' }}
+          style={{ background: '#493287' }}
         >
           <Plus className="w-3.5 h-3.5" />
           <span>New conversation</span>
@@ -32,7 +32,7 @@ export function AssistantSidebar({
             className="rounded-lg border p-2.5 text-left text-[10px]"
             style={{ borderColor: 'var(--border)', background: 'var(--surface)' }}
           >
-            <div className="flex items-center gap-1.5 font-semibold" style={{ color: '#6F3DBA' }}>
+            <div className="flex items-center gap-1.5 font-semibold" style={{ color: '#493287' }}>
               <MessageSquare className="w-3.5 h-3.5 shrink-0" />
               <span>Current Session</span>
             </div>

@@ -125,7 +125,7 @@ export function SystemArchitectureDiagram({
               onClick={() => onSelect('ai-agent')}
               className={`p-2.5 rounded-xl border transition-all cursor-pointer h-full flex flex-col justify-between select-none ${
                 selectedId === 'ai-agent'
-                  ? 'border-[#6F3DBA] bg-purple-50 dark:bg-purple-950/70 ring-2 ring-purple-500/50 shadow-md'
+                  ? 'border-[#493287] bg-purple-50 dark:bg-purple-950/70 ring-2 ring-purple-500/50 shadow-md'
                   : 'border-purple-300 dark:border-purple-800 bg-purple-50/40 dark:bg-purple-950/30 hover:border-purple-500'
               }`}
             >

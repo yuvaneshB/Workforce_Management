@@ -96,7 +96,7 @@ export function SkillGapAnalysisCard({
                 <Bar
                   dataKey="current"
                   name="Current Skill Level"
-                  fill="#C4B5FD"
+                  fill="#96A1C7"
                   radius={[3, 3, 0, 0]}
                 />
               </BarChart>

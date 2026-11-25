@@ -9,7 +9,7 @@ export function HomeTopCommandBar({ activeTab = 'architecture', onSelectTab }) {
           onClick={() => onSelectTab && onSelectTab('architecture')}
           className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-black transition-all cursor-pointer shadow-xs ${
             activeTab === 'architecture'
-              ? 'bg-[#5932EA] text-white shadow-purple-500/20'
+              ? 'bg-[#493287] text-white shadow-slate-500/20'
               : 'surface text-[var(--secondary)] hover:text-[var(--text)] border border-[var(--border)]'
           }`}
         >
@@ -21,7 +21,7 @@ export function HomeTopCommandBar({ activeTab = 'architecture', onSelectTab }) {
           onClick={() => onSelectTab && onSelectTab('overview')}
           className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
             activeTab === 'overview'
-              ? 'bg-[#5932EA] text-white shadow-xs'
+              ? 'bg-[#493287] text-white shadow-xs'
               : 'surface text-[var(--secondary)] hover:text-[var(--text)] border border-[var(--border)]'
           }`}
         >

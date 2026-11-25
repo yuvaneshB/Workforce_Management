@@ -6,7 +6,7 @@ import { Card } from '../common/Card';
 import { LoadingSkeleton } from '../common/LoadingSkeleton';
 
 const LATE_DATA = [
-  { name: 'Production', value: 127, pct: '32.4%', color: '#6F3DBA' },
+  { name: 'Production', value: 127, pct: '32.4%', color: '#493287' },
   { name: 'Maintenance', value: 73, pct: '18.6%', color: '#1E293B' },
   { name: 'Warehouse', value: 56, pct: '14.3%', color: '#06B6D4' },
   { name: 'Quality', value: 50, pct: '12.8%', color: '#F58A3A' },
@@ -35,7 +35,7 @@ export function LateArrivalCard({
     <Card className="p-4 lg:col-span-4 flex flex-col justify-between min-h-[260px]">
       <div>
         <div className="flex items-center gap-2 mb-2 min-w-0">
-          <Clock className="w-4 h-4 shrink-0 text-[#6F3DBA]" aria-hidden="true" />
+          <Clock className="w-4 h-4 shrink-0 text-[#493287]" aria-hidden="true" />
           <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">Late Arrival Analysis</h2>
         </div>
 

@@ -317,12 +317,12 @@ export function Orchestrator3DIcon({ className = 'w-7 h-7' }) {
     <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className={`shrink-0 ${className}`}>
       <defs>
         <linearGradient id="orchCoreGrad" x1="12" y1="8" x2="36" y2="40" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#C084FC" />
-          <stop offset="0.4" stopColor="#8B5CF6" />
-          <stop offset="1" stopColor="#4C1D95" />
+          <stop stopColor="#CFC8E6" />
+          <stop offset="0.4" stopColor="#4A578F" />
+          <stop offset="1" stopColor="#2E1E59" />
         </linearGradient>
         <filter id="orchShadow" x="4" y="4" width="40" height="42" filterUnits="userSpaceOnUse">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#7C3AED" floodOpacity="0.45" />
+          <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#493287" floodOpacity="0.45" />
         </filter>
       </defs>
       <g filter="url(#orchShadow)">
@@ -334,12 +334,12 @@ export function Orchestrator3DIcon({ className = 'w-7 h-7' }) {
         {/* Central 3D Orchestrator Brain Polyhedron */}
         <polygon points="24,6 38,15 38,33 24,42 10,33 10,15" fill="url(#orchCoreGrad)" stroke="#F3E8FF" strokeWidth="1.2" />
         {/* Core faceted highlights */}
-        <polygon points="24,12 33,18 33,30 24,36 15,30 15,18" fill="#6D28D9" stroke="#E9D5FF" strokeWidth="0.8" />
-        <polygon points="24,18 29,21 29,27 24,30 19,27 19,21" fill="#C084FC" />
+        <polygon points="24,12 33,18 33,30 24,36 15,30 15,18" fill="#1F2F59" stroke="#E9D5FF" strokeWidth="0.8" />
+        <polygon points="24,18 29,21 29,27 24,30 19,27 19,21" fill="#CFC8E6" />
 
         {/* 3 Surrounding Satellite Processing Nodes */}
-        <circle cx="10" cy="12" r="3.2" fill="#A855F7" stroke="#FFFFFF" strokeWidth="1" />
-        <circle cx="38" cy="12" r="3.2" fill="#A855F7" stroke="#FFFFFF" strokeWidth="1" />
+        <circle cx="10" cy="12" r="3.2" fill="#5B44A3" stroke="#FFFFFF" strokeWidth="1" />
+        <circle cx="38" cy="12" r="3.2" fill="#5B44A3" stroke="#FFFFFF" strokeWidth="1" />
         <circle cx="24" cy="42" r="3.2" fill="#EC4899" stroke="#FFFFFF" strokeWidth="1" />
       </g>
     </svg>
@@ -351,11 +351,11 @@ export function SpecialistAgents3DIcon({ className = 'w-7 h-7' }) {
     <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className={`shrink-0 ${className}`}>
       <defs>
         <linearGradient id="agentNode1" x1="16" y1="12" x2="32" y2="28" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#C084FC" />
-          <stop offset="1" stopColor="#7C3AED" />
+          <stop stopColor="#CFC8E6" />
+          <stop offset="1" stopColor="#493287" />
         </linearGradient>
         <filter id="agentsShadow" x="4" y="4" width="40" height="42" filterUnits="userSpaceOnUse">
-          <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" floodColor="#6D28D9" floodOpacity="0.4" />
+          <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" floodColor="#1F2F59" floodOpacity="0.4" />
         </filter>
       </defs>
       <g filter="url(#agentsShadow)">
@@ -369,12 +369,12 @@ export function SpecialistAgents3DIcon({ className = 'w-7 h-7' }) {
         <line x1="24" y1="24" x2="11" y2="17" stroke="#DDD6FE" strokeWidth="1" />
 
         {/* 6 Peripheral Agent Spheres */}
-        <circle cx="24" cy="10" r="3.5" fill="#8B5CF6" stroke="#FFFFFF" strokeWidth="0.8" />
-        <circle cx="37" cy="17" r="3.5" fill="#8B5CF6" stroke="#FFFFFF" strokeWidth="0.8" />
-        <circle cx="37" cy="31" r="3.5" fill="#8B5CF6" stroke="#FFFFFF" strokeWidth="0.8" />
-        <circle cx="24" cy="38" r="3.5" fill="#8B5CF6" stroke="#FFFFFF" strokeWidth="0.8" />
-        <circle cx="11" cy="31" r="3.5" fill="#8B5CF6" stroke="#FFFFFF" strokeWidth="0.8" />
-        <circle cx="11" cy="17" r="3.5" fill="#8B5CF6" stroke="#FFFFFF" strokeWidth="0.8" />
+        <circle cx="24" cy="10" r="3.5" fill="#493287" stroke="#FFFFFF" strokeWidth="0.8" />
+        <circle cx="37" cy="17" r="3.5" fill="#493287" stroke="#FFFFFF" strokeWidth="0.8" />
+        <circle cx="37" cy="31" r="3.5" fill="#493287" stroke="#FFFFFF" strokeWidth="0.8" />
+        <circle cx="24" cy="38" r="3.5" fill="#493287" stroke="#FFFFFF" strokeWidth="0.8" />
+        <circle cx="11" cy="31" r="3.5" fill="#493287" stroke="#FFFFFF" strokeWidth="0.8" />
+        <circle cx="11" cy="17" r="3.5" fill="#493287" stroke="#FFFFFF" strokeWidth="0.8" />
 
         {/* Central Master Coordinator Node (The 7th) */}
         <circle cx="24" cy="24" r="5.5" fill="url(#agentNode1)" stroke="#F3E8FF" strokeWidth="1.2" />
@@ -389,16 +389,16 @@ export function DomoAi3DIcon({ className = 'w-7 h-7' }) {
     <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className={`shrink-0 ${className}`}>
       <defs>
         <linearGradient id="chatBubbleGrad" x1="8" y1="6" x2="38" y2="36" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#D8B4FE" />
-          <stop offset="0.5" stopColor="#9333EA" />
-          <stop offset="1" stopColor="#581C87" />
+          <stop stopColor="#ECE9F5" />
+          <stop offset="0.5" stopColor="#493287" />
+          <stop offset="1" stopColor="#2E1E59" />
         </linearGradient>
         <linearGradient id="sparkleGrad" x1="26" y1="8" x2="38" y2="20" gradientUnits="userSpaceOnUse">
           <stop stopColor="#FDE047" />
           <stop offset="1" stopColor="#F59E0B" />
         </linearGradient>
         <filter id="domoShadow" x="4" y="4" width="40" height="42" filterUnits="userSpaceOnUse">
-          <feDropShadow dx="0" dy="3" stdDeviation="2.5" floodColor="#7E22CE" floodOpacity="0.45" />
+          <feDropShadow dx="0" dy="3" stdDeviation="2.5" floodColor="#3B2870" floodOpacity="0.45" />
         </filter>
       </defs>
       <g filter="url(#domoShadow)">
@@ -606,14 +606,14 @@ export function Stage3HeaderIcon({ className = 'w-5 h-5' }) {
       <defs>
         <linearGradient id="hdr3Grad" x1="3" y1="3" x2="21" y2="21" gradientUnits="userSpaceOnUse">
           <stop stopColor="#DDD6FE" />
-          <stop offset="1" stopColor="#7C3AED" />
+          <stop offset="1" stopColor="#493287" />
         </linearGradient>
       </defs>
       <circle cx="12" cy="12" r="6" fill="url(#hdr3Grad)" stroke="#F3E8FF" strokeWidth="1" />
-      <circle cx="12" cy="4" r="2" fill="#C084FC" />
-      <circle cx="20" cy="12" r="2" fill="#C084FC" />
-      <circle cx="12" cy="20" r="2" fill="#C084FC" />
-      <circle cx="4" cy="12" r="2" fill="#C084FC" />
+      <circle cx="12" cy="4" r="2" fill="#CFC8E6" />
+      <circle cx="20" cy="12" r="2" fill="#CFC8E6" />
+      <circle cx="12" cy="20" r="2" fill="#CFC8E6" />
+      <circle cx="4" cy="12" r="2" fill="#CFC8E6" />
       <line x1="12" y1="6" x2="12" y2="8" stroke="#E9D5FF" strokeWidth="1" />
       <line x1="16" y1="12" x2="18" y2="12" stroke="#E9D5FF" strokeWidth="1" />
       <line x1="12" y1="16" x2="12" y2="18" stroke="#E9D5FF" strokeWidth="1" />

@@ -17,7 +17,7 @@ export function ChatInput({ value, onChange, onSubmit, inputRef, loading = false
       <div className="max-w-4xl mx-auto w-full">
         <form
           onSubmit={handleSubmit}
-          className="flex items-center gap-2 rounded-xl border px-3.5 py-1.5 sm:py-2 transition-all focus-within:border-[#6F3DBA]/50 focus-within:shadow-xs"
+          className="flex items-center gap-2 rounded-xl border px-3.5 py-1.5 sm:py-2 transition-all focus-within:border-[#493287]/50 focus-within:shadow-xs"
           style={{ borderColor: 'var(--border)', background: 'var(--brand-bg)' }}
         >
           <input
@@ -36,7 +36,7 @@ export function ChatInput({ value, onChange, onSubmit, inputRef, loading = false
             disabled={isDisabled}
             aria-label="Send message"
             className="rounded-lg w-8 h-8 grid place-items-center text-white cursor-pointer transition-all hover:opacity-90 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
-            style={{ background: '#6F3DBA' }}
+            style={{ background: '#493287' }}
           >
             {loading ? (
               <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -46,7 +46,7 @@ export function ChatInput({ value, onChange, onSubmit, inputRef, loading = false
           </button>
         </form>
         <div className="text-[10px] muted mt-1.5 text-center">
-          Powered by Domo AI &amp; LangChain · Grounded in verified Neon PostgreSQL workforce data.
+          Powered by Domo AI · Grounded in verified workforce operations data.
         </div>
       </div>
     </div>

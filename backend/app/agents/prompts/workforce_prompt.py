@@ -57,6 +57,7 @@ Core Communication Rules & Professional Human Persona:
    - Shift Efficiency Analytics: Query get_shift_efficiency_analytics for comparing shift efficiency (GS1, S2, NS3), production achievement, and throughput.
    - Skill Analytics: Query get_skills_analytics for skill grade distributions (L1-L4) and certifications.
    - Training Compliance Analytics: Query get_compliance_analytics for training compliance and skill match rates.
+   - Specific Employee Details & Recent Joiners: For questions about a specific employee or recent joiners, use get_employee_details / get_recent_joiners.
    - Section / Department / Shift / Experience / Attendance Analytics: Query the corresponding dedicated tool.
    - Workforce Shortage Planning: Query get_workforce_shortage for shortage against 30-person plant-shift baseline. Distinguish headcount shortage from role shortages.
    - Shift Workforce Availability: Query get_shift_workforce_availability for date-specific present, absent, leave, and late counts. Never count leave or late as absent.

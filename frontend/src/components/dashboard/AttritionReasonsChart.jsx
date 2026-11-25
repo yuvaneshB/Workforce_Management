@@ -65,7 +65,7 @@ export function AttritionReasonsChart({
                   </div>
                   <div className="w-full h-1.5 rounded-full bg-[var(--muted-fill)] overflow-hidden">
                     <div
-                      className="h-full rounded-full bg-[#6F3DBA]"
+                      className="h-full rounded-full bg-[#493287]"
                       style={{ width: `${barWidth}%` }}
                     />
                   </div>

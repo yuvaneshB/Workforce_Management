@@ -575,7 +575,7 @@ export function WorkforceAnalytics() {
               }`}
               style={{
                 borderColor: isActive ? 'transparent' : 'var(--border)',
-                background: isActive ? '#6F3DBA' : 'var(--surface)',
+                background: isActive ? '#493287' : 'var(--surface)',
                 color: isActive ? 'var(--on-accent)' : 'inherit',
               }}
             >
@@ -619,7 +619,7 @@ export function WorkforceAnalytics() {
               onClick={() => setIsPlanningAgentOpen(true)}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg shadow-xs transition-all duration-150 hover:brightness-110 active:scale-95 cursor-pointer"
               style={{
-                background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
+                background: 'linear-gradient(135deg, #493287 0%, #5B44A3 100%)',
               }}
               title="Run Workforce Planning Agent"
             >
@@ -688,7 +688,7 @@ export function WorkforceAnalytics() {
               onClick={() => setIsAttendanceAgentOpen(true)}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg shadow-xs transition-all duration-150 hover:brightness-110 active:scale-95 cursor-pointer"
               style={{
-                background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
+                background: 'linear-gradient(135deg, #493287 0%, #5B44A3 100%)',
               }}
               title="Run Attendance Intelligence Agent"
             >
@@ -744,6 +744,7 @@ export function WorkforceAnalytics() {
               data={attendance?.by_vendor}
               loading={baseLoading}
               error={baseError}
+              onRetry={refetchAll}
             />
           </div>
 

@@ -88,7 +88,7 @@ export function AttendanceKPICards({
       subtextColor: hasData ? 'text-purple-600 dark:text-purple-400 font-bold' : 'text-[var(--secondary)]',
       icon: Clock,
       iconBg: 'bg-purple-50 dark:bg-purple-950/50',
-      iconColor: 'text-[#6F3DBA]',
+      iconColor: 'text-[#493287]',
     },
     {
       id: 'rate',

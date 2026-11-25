@@ -52,7 +52,7 @@ export function TeamProductionSection({
             onClick={onRunAgent}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg shadow-xs transition-all duration-150 hover:brightness-110 active:scale-95 cursor-pointer"
             style={{
-              background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
+              background: 'linear-gradient(135deg, #493287 0%, #5B44A3 100%)',
             }}
             title="Run Production Workforce Intelligence Agent"
           >

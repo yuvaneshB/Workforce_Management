@@ -111,7 +111,7 @@ export const PIPELINE_STAGES = [
     id: 3,
     headerTitle: '3. MULTI-AGENT CORE',
     headerSub: '7 Specialist Agents',
-    headerBg: 'bg-[#6D28D9]',
+    headerBg: 'bg-[#1F2F59]',
     headerIcon: Stage3HeaderIcon,
     accentColor: 'purple',
     stageLabel: 'STAGE 3 · MULTI-AGENT CORE',
@@ -210,7 +210,7 @@ export function SystemArchitecturePipelineCard({
       {/* Top Header Row */}
       <div className="flex items-center justify-between gap-1.5 mb-1.5 shrink-0">
         <div className="flex items-center gap-1.5 min-w-0">
-          <div className="w-5 h-5 rounded-lg bg-[#5932EA]/10 dark:bg-purple-950/50 text-[#5932EA] dark:text-purple-400 flex items-center justify-center shrink-0 border border-purple-200 dark:border-purple-800">
+          <div className="w-5 h-5 rounded-lg bg-[#493287]/10 dark:bg-purple-950/50 text-[#493287] dark:text-purple-400 flex items-center justify-center shrink-0 border border-purple-200 dark:border-purple-800">
             <Workflow className="w-3 h-3" />
           </div>
           <h2 className="text-xs sm:text-[12.5px] font-extrabold text-[var(--text)] tracking-tight truncate">

@@ -33,9 +33,9 @@ export function SkillsCoverageCard({
     0;
 
   const colorMap = {
-    L4: theme === 'dark' ? '#A684EE' : '#6F3DBA',
+    L4: theme === 'dark' ? '#8295E8' : '#1F2F59',
     L3: theme === 'dark' ? '#78ACF5' : '#4D8EEB',
-    L2: theme === 'dark' ? '#B8A1EC' : '#9B7CF6',
+    L2: theme === 'dark' ? '#CFC8E6' : '#A290DB',
     L1: theme === 'dark' ? '#8DB4F8' : '#7FB0F2',
   };
 
@@ -45,7 +45,7 @@ export function SkillsCoverageCard({
           name: g.key,
           value: g.count,
           pct: ((g.count / totalEmployees) * 100).toFixed(0),
-          color: colorMap[g.key] || '#9B7CF6',
+          color: colorMap[g.key] || '#A290DB',
         }))
       : [];
 

@@ -7,7 +7,7 @@ import { LoadingSkeleton } from '../common/LoadingSkeleton';
 
 const TRAINING_DATA = [
   { name: 'L1 Training', count: 7, pct: '25.0%', color: '#3B82F6' },
-  { name: 'L2 Training', count: 9, pct: '32.1%', color: '#A855F7' },
+  { name: 'L2 Training', count: 9, pct: '32.1%', color: '#5B44A3' },
   { name: 'L3 Training', count: 6, pct: '21.4%', color: '#F97316' },
   { name: 'L4 Training', count: 6, pct: '21.4%', color: '#22C55E' },
 ];

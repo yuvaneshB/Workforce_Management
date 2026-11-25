@@ -167,7 +167,7 @@ export function AttendanceAttritionAnalyticsCard({ className = '' } = {}) {
               onClick={() => setActiveTab('attendance')}
               className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md text-[8.5px] sm:text-[9.5px] font-extrabold transition-all cursor-pointer ${
                 activeTab === 'attendance'
-                  ? 'bg-[#5932EA] text-white shadow-2xs'
+                  ? 'bg-[#493287] text-white shadow-2xs'
                   : 'text-[var(--secondary)] hover:text-[var(--text)]'
               }`}
             >
@@ -178,7 +178,7 @@ export function AttendanceAttritionAnalyticsCard({ className = '' } = {}) {
               onClick={() => setActiveTab('attrition')}
               className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md text-[8.5px] sm:text-[9.5px] font-extrabold transition-all cursor-pointer ${
                 activeTab === 'attrition'
-                  ? 'bg-[#5932EA] text-white shadow-2xs'
+                  ? 'bg-[#493287] text-white shadow-2xs'
                   : 'text-[var(--secondary)] hover:text-[var(--text)]'
               }`}
             >
@@ -189,7 +189,7 @@ export function AttendanceAttritionAnalyticsCard({ className = '' } = {}) {
               onClick={() => setActiveTab('combined')}
               className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md text-[8.5px] sm:text-[9.5px] font-extrabold transition-all cursor-pointer ${
                 activeTab === 'combined'
-                  ? 'bg-[#5932EA] text-white shadow-2xs'
+                  ? 'bg-[#493287] text-white shadow-2xs'
                   : 'text-[var(--secondary)] hover:text-[var(--text)]'
               }`}
             >
@@ -477,7 +477,7 @@ export function AttendanceAttritionAnalyticsCard({ className = '' } = {}) {
                     }}
                   />
                   <Legend iconType="circle" wrapperStyle={{ fontSize: 9.5, paddingTop: 2 }} />
-                  <Bar dataKey="contractor_exits" name="Contractor Exits" stackId="a" fill="#8B5CF6" radius={[0, 0, 0, 0]} />
+                  <Bar dataKey="contractor_exits" name="Contractor Exits" stackId="a" fill="#1F2F59" radius={[0, 0, 0, 0]} />
                   <Bar dataKey="permanent_exits" name="Permanent Exits" stackId="a" fill="#3B82F6" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
@@ -533,7 +533,7 @@ export function AttendanceAttritionAnalyticsCard({ className = '' } = {}) {
                   type="monotone"
                   dataKey="exits"
                   name="Monthly Exits"
-                  stroke="#8B5CF6"
+                  stroke="#1F2F59"
                   strokeWidth={2}
                   dot={{ r: 3 }}
                 />
@@ -549,7 +549,7 @@ export function AttendanceAttritionAnalyticsCard({ className = '' } = {}) {
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
           Neon PostgreSQL Real Data • {attTotalRecords ? attTotalRecords.toLocaleString() : '177,043'} Punches • {attriTotalExits ? attriTotalExits.toLocaleString() : '120'} Exit Transactions
         </span>
-        <span className="font-mono text-[8px] sm:text-[8.5px] text-[#5932EA] dark:text-purple-400 font-bold shrink-0 ml-1">
+        <span className="font-mono text-[8px] sm:text-[8.5px] text-[#493287] dark:text-purple-400 font-bold shrink-0 ml-1">
           Zero Mock Data
         </span>
       </div>

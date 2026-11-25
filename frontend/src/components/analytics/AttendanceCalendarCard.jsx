@@ -80,7 +80,7 @@ export function AttendanceCalendarCard({
       <div>
         <div className="flex items-center justify-between gap-2 mb-2">
           <div className="flex items-center gap-2 min-w-0">
-            <CalendarIcon className="w-4 h-4 shrink-0 text-[#6F3DBA]" aria-hidden="true" />
+            <CalendarIcon className="w-4 h-4 shrink-0 text-[#493287]" aria-hidden="true" />
             <h2 className="text-[13px] sm:text-sm font-bold whitespace-nowrap">
               Attendance Calendar ({currentMonth.label})
             </h2>

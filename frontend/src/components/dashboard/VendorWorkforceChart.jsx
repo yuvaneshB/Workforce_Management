@@ -1,4 +1,5 @@
 import { Building2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import {
   Bar,
   BarChart,
@@ -9,6 +10,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+import { fetchVendorAnalytics } from '../../api/workforceApi';
 import { useTheme } from '../../hooks/useTheme';
 import { CHART_COLORS } from '../../utils/constants';
 import { LoadingSkeleton } from '../common/LoadingSkeleton';
@@ -57,11 +59,11 @@ export const VENDOR_PALETTE = [
   },
   {
     name: 'purple',
-    lightTop: '#C084FC',
-    lightBottom: '#9333EA',
-    darkTop: '#D8B4FE',
-    darkBottom: '#7E22CE',
-    main: '#A855F7',
+    lightTop: '#5B44A3',
+    lightBottom: '#3B2870',
+    darkTop: '#A290DB',
+    darkBottom: '#493287',
+    main: '#493287',
   },
   {
     name: 'green',
@@ -72,6 +74,46 @@ export const VENDOR_PALETTE = [
     main: '#22C55E',
   },
 ];
+
+function formatVendorNameLines(name) {
+  if (!name) return [''];
+  const words = name.trim().split(/\s+/);
+  if (words.length <= 1) return [name];
+
+  const half = Math.ceil(words.length / 2);
+  const line1 = words.slice(0, half).join(' ');
+  const line2 = words.slice(half).join(' ');
+  return [line1, line2];
+}
+
+function VendorXAxisTick({ x, y, payload, palette }) {
+  const vendorName = payload?.value || '';
+  const lines = formatVendorNameLines(vendorName);
+
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <text
+        textAnchor="middle"
+        fill={palette.axisText}
+        style={{
+          fontSize: '10px',
+          fontWeight: 600,
+          letterSpacing: '-0.01em',
+        }}
+      >
+        {lines.map((line, idx) => (
+          <tspan
+            key={idx}
+            x={0}
+            dy={idx === 0 ? 12 : 13}
+          >
+            {line}
+          </tspan>
+        ))}
+      </text>
+    </g>
+  );
+}
 
 export function VendorWorkforceChart({
   selectedVendorId = '',
@@ -84,6 +126,28 @@ export function VendorWorkforceChart({
   const isDark = theme === 'dark';
   const palette = CHART_COLORS[theme] || CHART_COLORS.light;
 
+  const [vendorMasterMap, setVendorMasterMap] = useState({});
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchVendorAnalytics()
+      .then((res) => {
+        if (!cancelled && res?.items?.length) {
+          const map = {};
+          res.items.forEach((item) => {
+            if (item.vendor_id && item.vendor_name) {
+              map[item.vendor_id.toUpperCase()] = item.vendor_name;
+            }
+          });
+          setVendorMasterMap(map);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const totalVendorCount = workforceSummary?.vendor_count ?? 0;
 
   const chartData = hasData
@@ -94,8 +158,10 @@ export function VendorWorkforceChart({
         const count = vendorRow ? vendorRow.count : 0;
         const pct = totalVendorCount > 0 ? ((count / totalVendorCount) * 100).toFixed(1) : '0.0';
         const pal = VENDOR_PALETTE[index % VENDOR_PALETTE.length];
+        const resolvedName = vendorMasterMap[v.id.toUpperCase()] || v.name;
         return {
           ...v,
+          name: resolvedName,
           active: count,
           pct: parseFloat(pct),
           color: pal.main,
@@ -109,7 +175,7 @@ export function VendorWorkforceChart({
     const { x, y, width, index } = props;
     const item = chartData[index];
     if (!item) return null;
-    const color = item.color || (isDark ? '#A78BFA' : '#6F3DBA');
+    const color = item.color || (isDark ? '#A290DB' : '#493287');
     return (
       <text
         x={x + width / 2}
@@ -156,10 +222,10 @@ export function VendorWorkforceChart({
         </div>
       ) : (
         <div className="flex-1 w-full min-h-[260px] flex items-center">
-          <ResponsiveContainer width="100%" height={270}>
+          <ResponsiveContainer width="100%" height={280}>
             <BarChart
               data={chartData}
-              margin={{ top: 24, right: 16, left: -14, bottom: 4 }}
+              margin={{ top: 24, right: 16, left: -14, bottom: 8 }}
               barCategoryGap="20%"
             >
               <defs>
@@ -202,11 +268,12 @@ export function VendorWorkforceChart({
               />
 
               <XAxis
-                dataKey="code"
-                tick={{ fill: palette.axisText, fontSize: 11, fontWeight: 700 }}
+                dataKey="name"
+                tick={<VendorXAxisTick palette={palette} />}
                 tickLine={false}
                 axisLine={{ stroke: palette.grid }}
                 interval={0}
+                height={46}
               />
 
               <YAxis

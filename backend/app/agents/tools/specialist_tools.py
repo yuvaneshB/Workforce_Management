@@ -65,6 +65,12 @@ from app.agents.vendor_agent_service import vendor_agent_service
 from app.agents.workforce_planning_agent_service import workforce_planning_agent_service
 from app.models.attendance import WorkforceAttendance
 from app.models.department import DepartmentMaster
+from app.models.employee_master import EmployeeMaster
+from app.models.experience import EmployeeExperience
+from app.models.plant_master import PlantMaster
+from app.models.section import SectionMaster
+from app.models.shift_master import ShiftMaster
+from app.models.vendor import VendorMaster
 from app.repositories import (
     attendance_repository,
     attrition_repository,
@@ -756,6 +762,221 @@ def get_overtime_by_plant(
 
 
 # =============================================================================
+# Granular Employee Directory & Recent Joiner Tools
+# =============================================================================
+
+class EmployeeDetailsArgs(BaseModel):
+    employee_id: str | None = Field(
+        default=None,
+        description="Employee ID to look up (e.g. 'EMP-10001', 'EMP-11701'). Exact or case-insensitive match. Optional if name is provided.",
+    )
+    name: str | None = Field(
+        default=None,
+        description="Employee full name or partial name (e.g. 'Test Zzz', 'Sumathi', 'Arun'). Case-insensitive partial match. Optional if employee_id is provided.",
+    )
+
+
+@tool(args_schema=EmployeeDetailsArgs)
+def get_employee_details(
+    employee_id: str | None = None,
+    name: str | None = None,
+) -> dict[str, Any]:
+    """Retrieve detailed profile information for a specific employee by ID or name.
+
+    When to use:
+    - Use this tool whenever the user asks for details, profile, role, department, shift, or status of a specific employee (e.g. 'Test Zzz details sollu', 'Tell me about employee EMP-10001', 'Who is Kavitha Subramanian?', 'What is Test Zzz's designation and plant?').
+
+    Args:
+    - employee_id: Unique identifier (e.g. 'EMP-10001', 'EMP-11701'). Optional.
+    - name: Full or partial employee name (e.g. 'Test Zzz'). Optional.
+
+    Example:
+    get_employee_details(name="Test Zzz") -> returns key profile fields (ID, name, plant, department, section, designation, employment type, vendor, shift, skill grade, date of joining, tenure band, status). Output is under 3 KB.
+    """
+    clean_id = (employee_id or "").strip()
+    clean_name = (name or "").strip()
+
+    if not clean_id and not clean_name:
+        return {
+            "status": "error",
+            "message": "Please provide an employee_id or name to search.",
+            "matches": [],
+        }
+
+    with _get_tool_db_session() as db:
+        query = (
+            select(
+                EmployeeMaster.employee_id,
+                EmployeeMaster.full_name,
+                EmployeeMaster.plant_id,
+                PlantMaster.plant_name,
+                EmployeeMaster.department_id,
+                DepartmentMaster.department_name,
+                EmployeeMaster.section_id,
+                SectionMaster.section_name,
+                EmployeeMaster.designation,
+                EmployeeMaster.employment_type,
+                EmployeeMaster.vendor_id,
+                VendorMaster.vendor_name,
+                EmployeeMaster.shift_id,
+                ShiftMaster.shift_name,
+                EmployeeMaster.grade,
+                EmployeeMaster.date_of_joining,
+                EmployeeMaster.employment_status,
+                EmployeeExperience.experience_band,
+            )
+            .select_from(EmployeeMaster)
+            .outerjoin(PlantMaster, EmployeeMaster.plant_id == PlantMaster.plant_id)
+            .outerjoin(DepartmentMaster, EmployeeMaster.department_id == DepartmentMaster.department_id)
+            .outerjoin(SectionMaster, EmployeeMaster.section_id == SectionMaster.section_id)
+            .outerjoin(VendorMaster, EmployeeMaster.vendor_id == VendorMaster.vendor_id)
+            .outerjoin(ShiftMaster, EmployeeMaster.shift_id == ShiftMaster.shift_id)
+            .outerjoin(EmployeeExperience, EmployeeMaster.employee_id == EmployeeExperience.employee_id)
+        )
+
+        if clean_id:
+            query = query.where(func.lower(EmployeeMaster.employee_id) == clean_id.lower())
+        else:
+            query = query.where(func.lower(EmployeeMaster.full_name).like(f"%{clean_name.lower()}%"))
+
+        query = query.order_by(EmployeeMaster.employee_id).limit(5)
+        rows = db.execute(query).all()
+
+        if not rows:
+            return {
+                "status": "not_found",
+                "message": f"No employee found matching {'ID ' + clean_id if clean_id else 'name ' + clean_name}.",
+                "matches": [],
+            }
+
+        matches = []
+        for r in rows:
+            matches.append({
+                "employee_id": r.employee_id,
+                "name": r.full_name,
+                "plant": f"{r.plant_name} ({r.plant_id})" if r.plant_name else r.plant_id,
+                "department": r.department_name or r.department_id,
+                "section": r.section_name or r.section_id,
+                "designation": r.designation,
+                "employment_type": r.employment_type,
+                "vendor": r.vendor_name or r.vendor_id or "N/A",
+                "shift": f"{r.shift_name} ({r.shift_id})" if r.shift_name else r.shift_id,
+                "skill_grade": r.grade,
+                "date_of_joining": str(r.date_of_joining),
+                "tenure_band": r.experience_band or "N/A",
+                "status": r.employment_status,
+            })
+
+        return {
+            "status": "success",
+            "count": len(matches),
+            "matches": matches,
+        }
+
+
+class RecentJoinersArgs(BaseModel):
+    days: int = Field(
+        default=30,
+        description="Number of past days to look back for joiners (default: 30). Optional.",
+    )
+    plant_id: str | None = Field(
+        default=None,
+        description="Filter by manufacturing plant facility ID (e.g. 'IN-TN-01', 'IN-KA-01'). Optional.",
+    )
+
+
+@tool(args_schema=RecentJoinersArgs)
+def get_recent_joiners(
+    days: int = 30,
+    plant_id: str | None = None,
+) -> dict[str, Any]:
+    """Retrieve new employees who joined recently (returns total count and the latest 10 employees).
+
+    When to use:
+    - Use this tool whenever asking about new joiners, recent hires, onboarding count, or newly added workforce (e.g. 'idhu varaikkum evlo new joiners?', 'How many new employees joined in the last 30 days?', 'recent joiners in Chennai plant').
+
+    Args:
+    - days: Number of days to look back from the latest operational date (default 30). Optional.
+    - plant_id: Optional plant ID filter ('IN-TN-01' or 'IN-KA-01'). Optional.
+
+    Example:
+    get_recent_joiners(days=30) -> returns count of recent joiners and list of up to 10 latest employees with department, designation, and joining date.
+    """
+    lookback_days = max(1, int(days)) if days else 30
+    clean_plant = (plant_id or "").strip() if plant_id else None
+
+    with _get_tool_db_session() as db:
+        max_doj = db.execute(select(func.max(EmployeeMaster.date_of_joining))).scalar()
+        ref_date = max(dt.date.today(), max_doj) if max_doj else dt.date.today()
+        cutoff = ref_date - dt.timedelta(days=lookback_days)
+
+        filters = [EmployeeMaster.date_of_joining >= cutoff]
+        if clean_plant:
+            filters.append(EmployeeMaster.plant_id == clean_plant)
+
+        total_recent_count = db.execute(select(func.count(EmployeeMaster.employee_id)).where(*filters)).scalar() or 0
+
+        # Cohort count of new joiners within the last 12 months (standard enterprise new joiner class)
+        twelve_months_cutoff = ref_date - dt.timedelta(days=365)
+        twelve_months_filters = [EmployeeMaster.date_of_joining >= twelve_months_cutoff]
+        if clean_plant:
+            twelve_months_filters.append(EmployeeMaster.plant_id == clean_plant)
+        total_new_joiners_12m = db.execute(
+            select(func.count(EmployeeMaster.employee_id)).where(*twelve_months_filters)
+        ).scalar() or 0
+
+        # Latest 10 employees
+        stmt = (
+            select(
+                EmployeeMaster.employee_id,
+                EmployeeMaster.full_name,
+                EmployeeMaster.plant_id,
+                PlantMaster.plant_name,
+                EmployeeMaster.department_id,
+                DepartmentMaster.department_name,
+                EmployeeMaster.designation,
+                EmployeeMaster.employment_type,
+                VendorMaster.vendor_name,
+                EmployeeMaster.date_of_joining,
+                EmployeeMaster.employment_status,
+            )
+            .select_from(EmployeeMaster)
+            .outerjoin(PlantMaster, EmployeeMaster.plant_id == PlantMaster.plant_id)
+            .outerjoin(DepartmentMaster, EmployeeMaster.department_id == DepartmentMaster.department_id)
+            .outerjoin(VendorMaster, EmployeeMaster.vendor_id == VendorMaster.vendor_id)
+            .where(*filters)
+            .order_by(desc(EmployeeMaster.date_of_joining), desc(EmployeeMaster.employee_id))
+            .limit(10)
+        )
+        rows = db.execute(stmt).all()
+
+        recent_list = [
+            {
+                "employee_id": r.employee_id,
+                "name": r.full_name,
+                "plant": f"{r.plant_name} ({r.plant_id})" if r.plant_name else r.plant_id,
+                "department": r.department_name or r.department_id,
+                "designation": r.designation,
+                "employment_type": r.employment_type,
+                "vendor": r.vendor_name or "N/A",
+                "date_of_joining": str(r.date_of_joining),
+                "status": r.employment_status,
+            }
+            for r in rows
+        ]
+
+        return {
+            "status": "success",
+            "lookback_days": lookback_days,
+            "period_window": f"{cutoff.isoformat()} to {ref_date.isoformat()}",
+            "recent_joiners_in_window_count": total_recent_count,
+            "total_new_joiners_cohort_count": total_new_joiners_12m,
+            "plant_filter": clean_plant or "All Plants",
+            "latest_joiners": recent_list,
+        }
+
+
+# =============================================================================
 # 3. AGENT_TOOLSETS Export
 # =============================================================================
 
@@ -769,6 +990,8 @@ AGENT_TOOLSETS: dict[str, list[BaseTool]] = {
     ],
     "workforce_planning": [
         analyze_workforce_planning,
+        get_employee_details,
+        get_recent_joiners,
         get_workforce_shortage,
         get_shift_workforce_availability,
         recommend_replacement_employees,
@@ -794,6 +1017,8 @@ AGENT_TOOLSETS: dict[str, list[BaseTool]] = {
     ],
     "vendor": [
         analyze_vendor,
+        get_employee_details,
+        get_recent_joiners,
         get_vendor_breakdown,
         get_workforce_summary,
     ],
@@ -820,6 +1045,8 @@ ALL_SPECIALIST_TOOLS: list[BaseTool] = [
     get_vendor_breakdown,
     get_production_vs_target,
     get_overtime_by_plant,
+    get_employee_details,
+    get_recent_joiners,
 ]
 
 # Register with central WorkforceToolRegistry
@@ -837,6 +1064,8 @@ __all__ = [
     "VendorBreakdownArgs",
     "ProductionVsTargetArgs",
     "OvertimeByPlantArgs",
+    "EmployeeDetailsArgs",
+    "RecentJoinersArgs",
     "analyze_attendance",
     "analyze_workforce_planning",
     "analyze_overtime",
@@ -850,6 +1079,8 @@ __all__ = [
     "get_vendor_breakdown",
     "get_production_vs_target",
     "get_overtime_by_plant",
+    "get_employee_details",
+    "get_recent_joiners",
     "AGENT_TOOLSETS",
     "ALL_SPECIALIST_TOOLS",
 ]

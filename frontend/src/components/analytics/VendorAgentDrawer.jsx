@@ -6,6 +6,7 @@ import {
   Calendar,
   Check,
   CheckCircle2,
+  ClipboardCheck,
   Clock,
   ExternalLink,
   Factory,
@@ -23,13 +24,18 @@ import {
   TrendingUp,
   UserCheck,
   Users,
-  X,
 } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { submitPlanningApproval } from '../../api/workforceApi';
 import { useAgentExecutionStream } from '../../hooks/useAgentExecutionStream';
 import { AgentExecutionPipeline } from './AgentExecutionPipeline';
 import { Button } from '../common/Button';
 import { Card } from '../common/Card';
+import { AgentFindingList } from '../common/AgentFindingCard';
+import { cleanText } from '../../utils/humanizeAgentOutput';
+import { useAutoCloseOnApproval, AutoCloseBanner } from '../../hooks/useAutoCloseOnApproval';
+import { AgentReviewPanel } from '../common/AgentReviewPanel';
+import { AGENT_REVIEW_CONFIGS } from '../../utils/agentReviewConfig';
 
 export function VendorAgentDrawer({ isOpen, onClose, filters = {} }) {
   const {
@@ -54,8 +60,52 @@ export function VendorAgentDrawer({ isOpen, onClose, filters = {} }) {
   const [hrNotes, setHrNotes] = useState('');
   const [hrDecisionStatus, setHrDecisionStatus] = useState(null); // 'ACKNOWLEDGED' | 'APPROVED'
   const [decisionTimestamp, setDecisionTimestamp] = useState(null);
+  const [isReviewPanelOpen, setIsReviewPanelOpen] = useState(false);
+  const [recordedReviewData, setRecordedReviewData] = useState(null);
+  const recordReviewBtnRef = useRef(null);
 
-  const handleExecute = () => execute();
+  const autoClose = useAutoCloseOnApproval({
+    onClose,
+    agentName: 'Vendor Workforce Agent',
+    isOpen,
+  });
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        if (isReviewPanelOpen) {
+          e.stopPropagation();
+          setIsReviewPanelOpen(false);
+        } else {
+          onClose();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, isReviewPanelOpen, onClose]);
+
+  const handleBackdropClick = () => {
+    if (isReviewPanelOpen) {
+      setIsReviewPanelOpen(false);
+      return;
+    }
+    onClose();
+  };
+
+  const handleOpenReviewPanel = () => {
+    autoClose.cancel();
+    setIsReviewPanelOpen(true);
+  };
+
+  const handleExecute = () => {
+    autoClose.cancel();
+    setIsReviewPanelOpen(false);
+    setRecordedReviewData(null);
+    setHrDecisionStatus(null);
+    execute();
+  };
 
   if (!isOpen) return null;
 
@@ -73,9 +123,44 @@ export function VendorAgentDrawer({ isOpen, onClose, filters = {} }) {
     }
   };
 
-  const handleRecordHrReview = (actionType) => {
+  const handleRecordHrReview = async (actionType, customNotes) => {
+    const notesToSave = customNotes !== undefined ? customNotes : hrNotes;
+    const activeExecId = executionId || result?.execution_id || `EXE-VND-${Date.now()}`;
+    const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
     setHrDecisionStatus(actionType);
-    setDecisionTimestamp(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+    setDecisionTimestamp(timestamp);
+    if (customNotes !== undefined) {
+      setHrNotes(customNotes);
+    }
+
+    if (actionType === 'APPROVED') {
+      autoClose.start({
+        agentName: 'Vendor Workforce Agent',
+        approvalId: activeExecId,
+      });
+    } else {
+      autoClose.cancel();
+    }
+
+    try {
+      await submitPlanningApproval({
+        executionId: activeExecId,
+        specialistAgent: 'vendor',
+        decision: actionType,
+        notes: notesToSave || (actionType === 'APPROVED' ? 'Vendor allocation and SLA actions approved.' : 'Vendor compliance review recorded.'),
+        approvedBy: 'Workspace User (HR)',
+        targetDate: result?.target_date || filters?.date || filters?.startDate,
+      });
+    } catch (err) {
+      console.warn('Failed to persist vendor HR review:', err);
+    }
+  };
+
+  const handleSaveReview = async (composedText, reviewData) => {
+    await handleRecordHrReview('ACKNOWLEDGED', composedText);
+    setRecordedReviewData(reviewData);
+    setIsReviewPanelOpen(false);
   };
 
   const metrics = result?.metrics;
@@ -88,12 +173,25 @@ export function VendorAgentDrawer({ isOpen, onClose, filters = {} }) {
       {/* Semi-transparent backdrop allowing view of Analytics behind */}
       <div
         className="absolute inset-0 bg-slate-900/30 backdrop-blur-[2px] transition-opacity duration-300"
-        onClick={onClose}
+        onClick={handleBackdropClick}
         aria-hidden="true"
       />
 
-      {/* Right-side Sliding Drawer */}
+      {/* Right-side Sliding Drawer with Docked Review Panel */}
       <div className="absolute inset-y-0 right-0 max-w-full flex pl-6 sm:pl-10">
+        <AgentReviewPanel
+          isOpen={isReviewPanelOpen}
+          onClose={() => setIsReviewPanelOpen(false)}
+          onSave={handleSaveReview}
+          agentConfig={AGENT_REVIEW_CONFIGS.vendor}
+          result={result}
+          filters={filters}
+          executionId={executionId || result?.execution_id}
+          initialNotes={hrNotes}
+          reviewerName="Workspace User (HR)"
+          returnFocusRef={recordReviewBtnRef}
+        />
+
         <aside
           role="dialog"
           aria-modal="true"
@@ -104,7 +202,7 @@ export function VendorAgentDrawer({ isOpen, onClose, filters = {} }) {
           {/* Top Header */}
           <div className="px-5 py-4 border-b border-[var(--border)] flex items-center justify-between gap-3 bg-gradient-to-r from-purple-500/5 via-blue-500/5 to-transparent shrink-0">
             <div className="flex items-center gap-3 min-w-0">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6F3DBA] to-[#4D8EEB] text-white flex items-center justify-center shrink-0 shadow-md">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#493287] to-[#5B44A3] text-white flex items-center justify-center shrink-0 shadow-md">
                 <Building2 className="w-5 h-5" />
               </div>
               <div className="min-w-0">
@@ -112,9 +210,6 @@ export function VendorAgentDrawer({ isOpen, onClose, filters = {} }) {
                   <h2 id="vendor-agent-drawer-title" className="text-sm font-bold truncate">
                     Vendor Workforce Agent
                   </h2>
-                  <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-purple-100 dark:bg-purple-950/50 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
-                    Neon Grounded
-                  </span>
                 </div>
                 <p className="text-[11px] text-[var(--secondary)] truncate">
                   Partner staffing allocations, contractor reliance & SLA compliance
@@ -134,13 +229,6 @@ export function VendorAgentDrawer({ isOpen, onClose, filters = {} }) {
                 <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
                 <span className="hidden sm:inline">Rerun</span>
               </Button>
-              <button
-                onClick={onClose}
-                className="w-8 h-8 rounded-lg grid place-items-center hover:bg-slate-100 dark:hover:bg-slate-800 text-[var(--secondary)] transition-colors"
-                aria-label="Close Agent Drawer"
-              >
-                <X className="w-4 h-4" />
-              </button>
             </div>
           </div>
 
@@ -251,7 +339,7 @@ export function VendorAgentDrawer({ isOpen, onClose, filters = {} }) {
                       onClick={() => setActiveTab(t.id)}
                       className={`px-3 py-1.5 text-xs font-bold border-b-2 transition-all cursor-pointer flex items-center gap-1.5 ${
                         activeTab === t.id
-                          ? 'border-[#5932EA] text-[#5932EA] dark:text-purple-400'
+                          ? 'border-[#493287] text-[#493287] dark:text-purple-400'
                           : 'border-transparent text-[var(--secondary)] hover:text-[var(--text)]'
                       }`}
                     >
@@ -266,39 +354,10 @@ export function VendorAgentDrawer({ isOpen, onClose, filters = {} }) {
                 {/* Tab: Findings */}
                 {activeTab === 'findings' && (
                   <div className="space-y-3">
-                    {findings.map((f, i) => (
-                      <div
-                        key={i}
-                        className="p-3.5 rounded-xl border border-[var(--border)] bg-[var(--surface)] shadow-xs space-y-2"
-                      >
-                        <div className="flex items-start justify-between gap-2">
-                          <div className="flex items-center gap-2">
-                            <span
-                              className={`text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded border ${severityBadge(
-                                f.severity
-                              )}`}
-                            >
-                              {f.severity}
-                            </span>
-                            <h4 className="text-xs font-bold text-[var(--text)]">{f.title}</h4>
-                          </div>
-                          <span className="text-[10px] font-mono text-slate-400 shrink-0">
-                            {f.id}
-                          </span>
-                        </div>
-                        <p className="text-xs text-[var(--secondary)] leading-relaxed">{f.detail}</p>
-                        <div className="p-2 rounded-lg bg-[var(--surface-hover)]/60 text-[11px] space-y-1">
-                          <p>
-                            <span className="font-bold text-[var(--text)]">Root Cause: </span>
-                            <span className="text-[var(--secondary)]">{f.root_cause}</span>
-                          </p>
-                          <p>
-                            <span className="font-bold text-[var(--text)]">Corrective Remedy: </span>
-                            <span className="text-purple-600 dark:text-purple-400">{f.remedy}</span>
-                          </p>
-                        </div>
-                      </div>
-                    ))}
+                    <AgentFindingList
+                      findings={findings}
+                      emptyMessage="No vendor findings observed for the selected scope."
+                    />
                   </div>
                 )}
 
@@ -366,26 +425,101 @@ export function VendorAgentDrawer({ isOpen, onClose, filters = {} }) {
                       </span>
                     )}
                   </div>
-                  <div className="flex items-center gap-2">
+
+                  {/* Recorded HR Review Summary Box */}
+                  {hrDecisionStatus === 'ACKNOWLEDGED' && recordedReviewData && (
+                    <div className="p-3 rounded-lg bg-purple-50/70 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800 text-xs space-y-1.5">
+                      <div className="flex items-center justify-between text-purple-900 dark:text-purple-300 font-semibold">
+                        <span className="flex items-center gap-1.5">
+                          <ClipboardCheck className="w-3.5 h-3.5 text-purple-600" />
+                          HR Review Recorded ({decisionTimestamp}) by {recordedReviewData.reviewerName || 'Workspace User (HR)'}
+                        </span>
+                        <span className="px-2 py-0.5 rounded text-[10px] bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 font-bold uppercase">
+                          {recordedReviewData.decisionLabel || 'Review Recorded'}
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-[var(--secondary)] whitespace-pre-wrap bg-white/70 dark:bg-slate-900/50 p-2 rounded border border-purple-100 dark:border-purple-900">
+                        {recordedReviewData.notes}
+                      </p>
+                    </div>
+                  )}
+
+                  <AutoCloseBanner
+                    isCounting={autoClose.isCounting}
+                    secondsLeft={autoClose.secondsLeft}
+                    onCancel={autoClose.cancel}
+                  />
+
+                  {/* HR Notes / Comments */}
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-semibold text-[var(--text)]">
+                      HR Review Notes / Action Justification:
+                    </label>
+                    <textarea
+                      value={hrNotes}
+                      onChange={(e) => {
+                        autoClose.cancel();
+                        setHrNotes(e.target.value);
+                      }}
+                      placeholder="Add administrative review notes (e.g., Reviewed vendor compliance; authorized shift rebalancing)..."
+                      className="w-full text-xs p-2.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] text-[var(--text)] focus:outline-none focus:ring-1 focus:ring-purple-500 resize-none h-16"
+                    />
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2 pt-1">
                     <Button
+                      ref={recordReviewBtnRef}
                       size="sm"
-                      onClick={() => handleRecordHrReview('ACKNOWLEDGED')}
-                      className="text-xs bg-[#5932EA] text-white"
+                      onClick={handleOpenReviewPanel}
+                      className={`text-xs gap-1.5 h-8 px-3 ${
+                        hrDecisionStatus === 'ACKNOWLEDGED'
+                          ? 'bg-purple-700 text-white'
+                          : 'bg-white dark:bg-slate-800 text-purple-700 dark:text-purple-300 border border-purple-300 dark:border-purple-700'
+                      }`}
                     >
-                      Acknowledge Findings
+                      <FileCheck2 className="w-3.5 h-3.5" />
+                      Record HR Review
                     </Button>
                     <Button
                       size="sm"
-                      variant="outline"
                       onClick={() => handleRecordHrReview('APPROVED')}
-                      className="text-xs"
+                      className={`text-xs gap-1.5 h-8 px-3 ${
+                        hrDecisionStatus === 'APPROVED'
+                          ? 'bg-emerald-700 text-white'
+                          : 'bg-emerald-600 text-white hover:bg-emerald-700'
+                      }`}
                     >
+                      <CheckCircle2 className="w-3.5 h-3.5" />
                       Approve Rebalancing
                     </Button>
+                    {hrDecisionStatus && (
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => {
+                          autoClose.cancel();
+                          setIsReviewPanelOpen(false);
+                          setRecordedReviewData(null);
+                          setHrDecisionStatus(null);
+                          setHrNotes('');
+                        }}
+                        className="text-xs text-slate-400 hover:text-slate-600 ml-auto"
+                      >
+                        Reset Decision
+                      </Button>
+                    )}
                   </div>
                 </div>
               </>
             )}
+          </div>
+
+          {/* Drawer Footer */}
+          <div className="px-5 py-3 border-t border-[var(--border)] bg-slate-50 dark:bg-slate-900/60 flex items-center justify-between text-[11px] text-slate-400 shrink-0">
+            <span>Workforce Management AI · Vendor Workforce Agent</span>
+            <Button size="sm" variant="outline" onClick={onClose} className="h-7 px-3 text-xs">
+              Close Drawer
+            </Button>
           </div>
         </aside>
       </div>

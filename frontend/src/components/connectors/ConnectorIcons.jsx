@@ -91,7 +91,7 @@ export function ConnectorIcon({ id, className = 'w-6 h-6' }) {
     case 'api':
       return (
         <svg viewBox="0 0 48 48" fill="none" className={className} aria-label="REST API Logo">
-          <rect width="48" height="48" rx="10" fill="#7C3AED" />
+          <rect width="48" height="48" rx="10" fill="#493287" />
           <path
             d="M17 19L12 24L17 29M31 19L36 24L31 29M27 15L21 33"
             stroke="white"

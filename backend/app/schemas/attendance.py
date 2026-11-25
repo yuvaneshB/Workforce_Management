@@ -77,6 +77,33 @@ class ShiftAttendanceBreakdown(BaseModel):
     absenteeism_pct: float
 
 
+class VendorAttendanceBreakdown(BaseModel):
+    """Per-vendor attendance performance metrics derived directly from Neon PostgreSQL."""
+
+    vendor_id: str
+    vendor_name: str
+    assigned_employees: int
+    total_records: int
+    present_count: int
+    present_pct: float
+    absent_count: int
+    absent_pct: float
+    leave_count: int
+    leave_pct: float
+    late_count: int
+    late_pct: float
+    attendance_rate: float
+    absenteeism_rate: float
+
+    # Backward-compatible convenience keys for existing charts
+    vendor: str | None = None
+    fullName: str | None = None
+    pct: float | None = None
+    present: int | None = None
+    absent: int | None = None
+    total: int | None = None
+
+
 class AttendanceAnalyticsResponse(BaseModel):
     """Aggregated attendance analytics derived directly from Neon database records."""
 
@@ -100,5 +127,5 @@ class AttendanceAnalyticsResponse(BaseModel):
     trends: list[AttendanceTrendPoint] = []
     weekly_comparison: list[AttendanceTrendPoint] = []
     shift_breakdown: list[ShiftAttendanceBreakdown] = []
-    by_vendor: list[dict[str, Any]] = []
+    by_vendor: list[VendorAttendanceBreakdown] = []
     data_quality_warnings: list[DataQualityWarning]

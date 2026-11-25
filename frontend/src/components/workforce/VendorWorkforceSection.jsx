@@ -351,7 +351,7 @@ export function VendorWorkforceSection({
           subtitle="Enrolled contractor personnel"
           icon={Users}
           iconBg="var(--brand-purple-soft)"
-          iconColor="#6F3DBA"
+          iconColor="#493287"
           loading={overviewLoading}
         />
         <KPICard
@@ -1001,8 +1001,8 @@ export function VendorWorkforceSection({
                 >
                   <defs>
                     <linearGradient id="vendorAttGradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#6F3DBA" stopOpacity={0.4} />
-                      <stop offset="95%" stopColor="#6F3DBA" stopOpacity={0.0} />
+                      <stop offset="5%" stopColor="#493287" stopOpacity={0.4} />
+                      <stop offset="95%" stopColor="#493287" stopOpacity={0.0} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
@@ -1024,7 +1024,7 @@ export function VendorWorkforceSection({
                     type="monotone"
                     dataKey="attendance_pct"
                     name="Attendance %"
-                    stroke="#6F3DBA"
+                    stroke="#493287"
                     strokeWidth={2}
                     fillOpacity={1}
                     fill="url(#vendorAttGradient)"

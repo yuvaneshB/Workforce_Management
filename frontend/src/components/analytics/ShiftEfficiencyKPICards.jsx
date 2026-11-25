@@ -65,7 +65,7 @@ export function ShiftEfficiencyKPICards({
       subtextColor: hasData ? 'text-emerald-600 dark:text-emerald-400 font-bold' : 'text-[var(--secondary)]',
       icon: BarChart3,
       iconBg: 'bg-purple-50 dark:bg-purple-950/50',
-      iconColor: 'text-[#6F3DBA]',
+      iconColor: 'text-[#493287]',
     },
   ];
 

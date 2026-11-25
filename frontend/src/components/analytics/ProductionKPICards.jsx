@@ -58,7 +58,7 @@ export function ProductionKPICards({
       subtextColor: 'text-[var(--secondary)]',
       icon: Layers,
       iconBg: 'bg-purple-50 dark:bg-purple-950/50',
-      iconColor: 'text-[#6F3DBA]',
+      iconColor: 'text-[#493287]',
     },
     {
       id: 'throughput',
@@ -68,7 +68,7 @@ export function ProductionKPICards({
       subtextColor: 'text-[var(--secondary)]',
       icon: Users,
       iconBg: 'bg-purple-50 dark:bg-purple-950/50',
-      iconColor: 'text-[#6F3DBA]',
+      iconColor: 'text-[#493287]',
     },
   ];
 

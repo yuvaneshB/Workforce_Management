@@ -27,7 +27,7 @@ export function ChatWindow({
 
   const subtitle = missingProvider
     ? 'LLM Provider Not Configured'
-    : 'LangChain Agent · Neon PostgreSQL';
+    : 'Enterprise Workforce Intelligence';
 
   return (
     <div className="flex-1 min-w-0 flex flex-col h-full overflow-hidden">
@@ -38,7 +38,7 @@ export function ChatWindow({
         <div className="flex items-center gap-3">
           <div
             className="w-8.5 h-8.5 rounded-xl grid place-items-center shrink-0"
-            style={{ background: 'var(--purple-soft)', color: '#6F3DBA' }}
+            style={{ background: 'var(--purple-soft)', color: '#493287' }}
           >
             <Bot className="w-4.5 h-4.5" />
           </div>
@@ -50,8 +50,8 @@ export function ChatWindow({
 
         <div className="flex items-center gap-3">
           {(loading || isThinking) && (
-            <div className="flex items-center gap-1.5 text-xs font-semibold text-[#6F3DBA] animate-pulse">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#6F3DBA]" />
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-[#493287] animate-pulse">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#493287]" />
               <span>Thinking...</span>
             </div>
           )}
@@ -74,7 +74,7 @@ export function ChatWindow({
           <div className="max-w-3xl w-full flex flex-col items-center">
             <div
               className="w-12 h-12 rounded-2xl grid place-items-center mb-3 shrink-0 shadow-xs"
-              style={{ background: 'var(--purple-soft)', color: '#6F3DBA' }}
+              style={{ background: 'var(--purple-soft)', color: '#493287' }}
             >
               <Sparkles className="w-6 h-6" />
             </div>
@@ -92,19 +92,19 @@ export function ChatWindow({
                   key={suggestion}
                   type="button"
                   onClick={() => onSelectSuggestion(suggestion)}
-                  className="suggestion text-left rounded-xl border p-3 sm:px-4 sm:py-3 text-xs font-medium cursor-pointer transition-all hover:bg-[var(--surface-hover)] hover:border-[#6F3DBA]/40 hover:shadow-xs flex items-center justify-between gap-3 group"
+                  className="suggestion text-left rounded-xl border p-3 sm:px-4 sm:py-3 text-xs font-medium cursor-pointer transition-all hover:bg-[var(--surface-hover)] hover:border-[#493287]/40 hover:shadow-xs flex items-center justify-between gap-3 group"
                   style={{ borderColor: 'var(--border)', background: 'var(--surface)' }}
                 >
-                  <span className="leading-snug text-[var(--text)] group-hover:text-[#6F3DBA] transition-colors">
+                  <span className="leading-snug text-[var(--text)] group-hover:text-[#493287] transition-colors">
                     {suggestion}
                   </span>
-                  <ArrowUpRight className="w-4 h-4 shrink-0 text-slate-400 group-hover:text-[#6F3DBA] transition-colors" />
+                  <ArrowUpRight className="w-4 h-4 shrink-0 text-slate-400 group-hover:text-[#493287] transition-colors" />
                 </button>
               ))}
             </div>
 
             <p className="text-[11px] muted mt-4">
-              Suggested prompts execute real workforce tools through the LangChain agent.
+              Suggested prompts execute real workforce analytical tools and models.
             </p>
           </div>
         </div>
@@ -133,7 +133,7 @@ export function ChatWindow({
                 <div className="flex items-start gap-2.5 max-w-[90%] sm:max-w-2xl">
                   <div
                     className="w-7 h-7 rounded-lg grid place-items-center shrink-0 mt-0.5 animate-pulse"
-                    style={{ background: 'var(--purple-soft)', color: '#6F3DBA' }}
+                    style={{ background: 'var(--purple-soft)', color: '#493287' }}
                     aria-label="Assistant Thinking"
                   >
                     <Bot className="w-4 h-4" />
@@ -141,18 +141,18 @@ export function ChatWindow({
                   <div
                     className="rounded-2xl rounded-tl-sm border px-4 py-2.5 text-xs flex items-center gap-2 shadow-xs border-[var(--border)] surface text-[var(--text)]"
                   >
-                    <span className="font-semibold text-xs text-[#6F3DBA] dark:text-purple-300">Thinking</span>
+                    <span className="font-semibold text-xs text-[#493287] dark:text-purple-300">Thinking</span>
                     <div className="flex gap-1 items-center">
                       <span
-                        className="w-1.5 h-1.5 rounded-full bg-[#6F3DBA] animate-bounce"
+                        className="w-1.5 h-1.5 rounded-full bg-[#493287] animate-bounce"
                         style={{ animationDelay: '0ms' }}
                       />
                       <span
-                        className="w-1.5 h-1.5 rounded-full bg-[#6F3DBA] animate-bounce"
+                        className="w-1.5 h-1.5 rounded-full bg-[#493287] animate-bounce"
                         style={{ animationDelay: '150ms' }}
                       />
                       <span
-                        className="w-1.5 h-1.5 rounded-full bg-[#6F3DBA] animate-bounce"
+                        className="w-1.5 h-1.5 rounded-full bg-[#493287] animate-bounce"
                         style={{ animationDelay: '300ms' }}
                       />
                     </div>

@@ -406,7 +406,7 @@ export const UnifiedDetailsCard = forwardRef(function UnifiedDetailsCard(
         <div className="flex items-center justify-between gap-3 pb-2 border-b border-[var(--border)] shrink-0">
           <div className="flex items-center gap-2.5 min-w-0">
             {isProblem ? (
-              <div className="w-8 h-8 rounded-lg bg-purple-500/10 dark:bg-purple-950/50 text-[#5932EA] dark:text-purple-400 flex items-center justify-center shrink-0 border border-purple-200 dark:border-purple-800">
+              <div className="w-8 h-8 rounded-lg bg-purple-500/10 dark:bg-purple-950/50 text-[#493287] dark:text-purple-400 flex items-center justify-center shrink-0 border border-purple-200 dark:border-purple-800">
                 <Icon className="w-4 h-4" />
               </div>
             ) : (
@@ -482,7 +482,7 @@ export const UnifiedDetailsCard = forwardRef(function UnifiedDetailsCard(
             onClick={handleOpenAssistant}
             className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-bold text-white rounded-lg shadow-xs transition-all duration-150 hover:brightness-110 active:scale-95 cursor-pointer shrink-0"
             style={{
-              background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
+              background: 'linear-gradient(135deg, #493287 0%, #5B44A3 100%)',
             }}
           >
             <Bot className="w-3.5 h-3.5" />

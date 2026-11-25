@@ -4,11 +4,22 @@ import { AlertTriangle, RefreshCw } from 'lucide-react';
 export class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false, error: null };
+    this.state = { hasError: false, error: null, prevResetKey: props.resetKey };
   }
 
   static getDerivedStateFromError(error) {
     return { hasError: true, error };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.resetKey !== state.prevResetKey) {
+      return {
+        hasError: false,
+        error: null,
+        prevResetKey: props.resetKey,
+      };
+    }
+    return null;
   }
 
   componentDidCatch(error, errorInfo) {

@@ -98,7 +98,7 @@ export function VendorAttritionCard({ data = null, loading = false }) {
                 />
                 <Bar
                   dataKey="count"
-                  fill="#8B5CF6"
+                  fill="#493287"
                   radius={[5, 5, 0, 0]}
                 >
                   <LabelList

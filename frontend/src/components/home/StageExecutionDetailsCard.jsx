@@ -136,7 +136,7 @@ export function StageExecutionDetailsCard({ selectedStage = 5 }) {
           </div>
           <div className="md:col-span-5 md:text-right">
             <span className="font-extrabold text-[var(--text)]">DATABASE TABLES: </span>
-            <span className="font-mono font-bold text-[#7C3AED] dark:text-purple-400 text-[10px]">
+            <span className="font-mono font-bold text-[#493287] dark:text-purple-400 text-[10px]">
               {current.tables}
             </span>
           </div>

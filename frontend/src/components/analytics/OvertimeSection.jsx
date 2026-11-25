@@ -35,7 +35,7 @@ export function OvertimeSection({ data, loading, error, onRetry, palette = CHART
           onClick={onRunAgent}
           className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white rounded-lg shadow-xs transition-all duration-150 hover:brightness-110 active:scale-95 cursor-pointer"
           style={{
-            background: 'linear-gradient(135deg, #6F3DBA 0%, #4D8EEB 100%)',
+            background: 'linear-gradient(135deg, #493287 0%, #5B44A3 100%)',
           }}
           title="Run Overtime Optimization Agent"
         >
@@ -123,7 +123,7 @@ export function OvertimeSection({ data, loading, error, onRetry, palette = CHART
           value={`${data.total_overtime_hours.toLocaleString()} hrs`}
           icon={Clock}
           iconBg="var(--brand-purple-soft)"
-          iconColor="#6F3DBA"
+          iconColor="#493287"
         />
         <KPICard
           label="Employees with Overtime"
@@ -183,7 +183,7 @@ export function OvertimeSection({ data, loading, error, onRetry, palette = CHART
                   ]}
                 />
                 <Legend wrapperStyle={{ fontSize: '11px' }} />
-                <Bar dataKey="overtime_hours" name="Overtime Hours" fill="#6F3DBA" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="overtime_hours" name="Overtime Hours" fill="#493287" radius={[6, 6, 0, 0]} />
                 <Bar dataKey="overtime_rate_pct" name="OT Frequency %" fill="#31B7C3" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
@@ -283,7 +283,7 @@ export function OvertimeSection({ data, loading, error, onRetry, palette = CHART
                   type="monotone"
                   dataKey="overtime_hours"
                   name="Overtime Hours"
-                  stroke="#6F3DBA"
+                  stroke="#493287"
                   strokeWidth={2}
                   dot={trendGranularity === 'monthly'}
                 />

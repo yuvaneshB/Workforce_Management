@@ -4,7 +4,7 @@ import { LoadingSkeleton } from '../common/LoadingSkeleton';
 const SHIFT_META = {
   A: {
     name: 'GS1',
-    dotColor: '#6F3DBA',
+    dotColor: '#493287',
     attBg: 'var(--brand-purple-soft)',
     attColor: 'var(--brand-purple)',
     prodBg: 'rgba(14, 156, 134, 0.12)',

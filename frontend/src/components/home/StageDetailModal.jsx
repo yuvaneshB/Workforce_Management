@@ -18,7 +18,7 @@ export function StageDetailModal({ stage, onClose }) {
         <div className="flex items-center justify-between px-5 py-4 border-b border-[var(--border)] bg-[var(--surface-hover)]">
           <div className="flex items-center gap-3">
             <div
-              className={`w-9 h-9 rounded-xl flex items-center justify-center border ${stage.iconBg || 'bg-purple-50 text-[#5932EA] border-purple-200 dark:bg-purple-950/50 dark:border-purple-800'}`}
+              className={`w-9 h-9 rounded-xl flex items-center justify-center border ${stage.iconBg || 'bg-purple-50 text-[#493287] border-purple-200 dark:bg-purple-950/50 dark:border-purple-800'}`}
             >
               <StageIcon className="w-5 h-5" />
             </div>

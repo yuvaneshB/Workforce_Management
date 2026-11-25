@@ -177,7 +177,7 @@ export function DepartmentSectionTabsTable({
             }}
             className={`h-9 px-4 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shadow-2xs ${
               activeTab === 'departments'
-                ? 'bg-[#6F3DBA] text-white'
+                ? 'bg-[#493287] text-white'
                 : 'surface text-[var(--secondary)] border border-[var(--border)] hover:text-[var(--text)]'
             }`}
           >
@@ -202,7 +202,7 @@ export function DepartmentSectionTabsTable({
             }}
             className={`h-9 px-4 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shadow-2xs ${
               activeTab === 'sections'
-                ? 'bg-[#6F3DBA] text-white'
+                ? 'bg-[#493287] text-white'
                 : 'surface text-[var(--secondary)] border border-[var(--border)] hover:text-[var(--text)]'
             }`}
           >
@@ -280,12 +280,12 @@ export function DepartmentSectionTabsTable({
         <div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border)]/70">
           {activeTab === 'departments' ? (
             <>
-              <Building2 className="w-4 h-4 text-[#6F3DBA]" />
+              <Building2 className="w-4 h-4 text-[#493287]" />
               <h3 className="text-xs font-bold text-[var(--text)]">Organizational Departments</h3>
             </>
           ) : (
             <>
-              <Layers className="w-4 h-4 text-[#6F3DBA]" />
+              <Layers className="w-4 h-4 text-[#493287]" />
               <h3 className="text-xs font-bold text-[var(--text)]">Organizational Sections</h3>
             </>
           )}
@@ -347,7 +347,7 @@ export function DepartmentSectionTabsTable({
                       <div className="flex items-center gap-2">
                         <div className="flex-1 h-2 rounded-full bg-[var(--border)] overflow-hidden">
                           <div
-                            className="h-full rounded-full bg-[#8B5CF6] transition-all"
+                            className="h-full rounded-full bg-[#493287] transition-all"
                             style={{
                               width: `${Math.min(100, Math.max(0, parseFloat(d.distributionPct)))}%`,
                             }}

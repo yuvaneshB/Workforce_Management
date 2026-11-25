@@ -19,6 +19,8 @@ import {
   Zap,
 } from 'lucide-react';
 import { useState } from 'react';
+import { AgentFindingCard, AgentFindingList } from '../common/AgentFindingCard';
+import { isJsonBlob, safeParseJson } from '../../utils/humanizeAgentOutput';
 
 function parseInline(text) {
   const parts = String(text).split(/(\*\*[^*]+\*\*)/g);
@@ -37,12 +39,59 @@ function parseInline(text) {
 function renderFormattedText(content) {
   if (!content) return null;
 
+  const rawStr = String(content).trim();
+
+  // If the whole content is a JSON blob
+  if (isJsonBlob(rawStr)) {
+    const parsed = safeParseJson(rawStr);
+    if (parsed) {
+      if (Array.isArray(parsed)) {
+        return <AgentFindingList findings={parsed} />;
+      }
+      if (typeof parsed === 'object') {
+        if (parsed.findings && Array.isArray(parsed.findings)) {
+          return <AgentFindingList findings={parsed.findings} />;
+        }
+        return <AgentFindingCard finding={parsed} />;
+      }
+    }
+  }
+
   const rawLines = String(content).split('\n');
   const blocks = [];
   let currentTable = null;
+  let inCodeBlock = false;
+  let codeBuffer = [];
+  let codeLang = '';
 
   for (let i = 0; i < rawLines.length; i++) {
-    const trimmed = rawLines[i].trim();
+    const line = rawLines[i];
+    const trimmed = line.trim();
+
+    if (trimmed.startsWith('```')) {
+      if (inCodeBlock) {
+        const fullCode = codeBuffer.join('\n');
+        if ((codeLang === 'json' || isJsonBlob(fullCode)) && safeParseJson(fullCode)) {
+          blocks.push({ type: 'json', data: safeParseJson(fullCode) });
+        } else {
+          blocks.push({ type: 'code', text: fullCode, lang: codeLang });
+        }
+        inCodeBlock = false;
+        codeBuffer = [];
+        codeLang = '';
+      } else {
+        inCodeBlock = true;
+        codeLang = trimmed.replace(/^```/, '').trim().toLowerCase();
+        codeBuffer = [];
+      }
+      continue;
+    }
+
+    if (inCodeBlock) {
+      codeBuffer.push(line);
+      continue;
+    }
+
     if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
       if (!currentTable) {
         currentTable = [];
@@ -53,14 +102,68 @@ function renderFormattedText(content) {
         blocks.push({ type: 'table', rows: currentTable });
         currentTable = null;
       }
-      blocks.push({ type: 'line', text: rawLines[i] });
+
+      // If this single line is a JSON blob
+      if (isJsonBlob(trimmed)) {
+        const parsed = safeParseJson(trimmed);
+        if (parsed) {
+          blocks.push({ type: 'json', data: parsed });
+          continue;
+        }
+      }
+
+      blocks.push({ type: 'line', text: line });
     }
   }
+
   if (currentTable) {
     blocks.push({ type: 'table', rows: currentTable });
   }
+  if (inCodeBlock && codeBuffer.length > 0) {
+    const fullCode = codeBuffer.join('\n');
+    if ((codeLang === 'json' || isJsonBlob(fullCode)) && safeParseJson(fullCode)) {
+      blocks.push({ type: 'json', data: safeParseJson(fullCode) });
+    } else {
+      blocks.push({ type: 'code', text: fullCode, lang: codeLang });
+    }
+  }
 
   return blocks.map((block, bIdx) => {
+    if (block.type === 'json') {
+      if (Array.isArray(block.data)) {
+        return (
+          <div key={bIdx} className="my-2.5">
+            <AgentFindingList findings={block.data} />
+          </div>
+        );
+      }
+      if (typeof block.data === 'object' && block.data) {
+        if (block.data.findings && Array.isArray(block.data.findings)) {
+          return (
+            <div key={bIdx} className="my-2.5">
+              <AgentFindingList findings={block.data.findings} />
+            </div>
+          );
+        }
+        return (
+          <div key={bIdx} className="my-2.5">
+            <AgentFindingCard finding={block.data} />
+          </div>
+        );
+      }
+    }
+
+    if (block.type === 'code') {
+      return (
+        <pre
+          key={bIdx}
+          className="my-2.5 p-3 rounded-xl bg-slate-900 text-slate-100 text-[10.5px] font-mono overflow-x-auto"
+        >
+          <code>{block.text}</code>
+        </pre>
+      );
+    }
+
     if (block.type === 'table') {
       const validRows = block.rows.filter((r) => !/^[|\s-:]+$/.test(r));
       if (validRows.length === 0) return null;
@@ -138,7 +241,7 @@ function renderFormattedText(content) {
     if (isHeading) {
       return (
         <div key={bIdx} className="font-extrabold text-xs text-[var(--text)] mt-3 mb-1.5 flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#6F3DBA]" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#493287]" />
           <span>{parsedElements}</span>
         </div>
       );
@@ -147,7 +250,7 @@ function renderFormattedText(content) {
     if (isBullet) {
       return (
         <div key={bIdx} className="flex items-start gap-2 my-1 pl-1">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#6F3DBA] shrink-0 mt-1.5" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#493287] shrink-0 mt-1.5" />
           <span className="leading-relaxed text-[var(--text)]">{parsedElements}</span>
         </div>
       );
@@ -194,12 +297,12 @@ export function ChatMessage({
         <div className="flex items-start gap-2.5 max-w-[85%] sm:max-w-xl">
           <div
             className="rounded-2xl rounded-tr-sm px-4 py-2.5 text-white text-[11px] font-medium leading-relaxed shadow-sm break-words"
-            style={{ background: '#5932EA' }}
+            style={{ background: '#493287' }}
           >
             <div className="whitespace-pre-wrap">{text}</div>
           </div>
           <div
-            className="w-7 h-7 rounded-lg grid place-items-center shrink-0 mt-0.5 bg-purple-50 text-[#5932EA] dark:bg-purple-950/60 dark:text-purple-300 border border-purple-200 dark:border-purple-800"
+            className="w-7 h-7 rounded-lg grid place-items-center shrink-0 mt-0.5 bg-purple-50 text-[#493287] dark:bg-purple-950/60 dark:text-purple-300 border border-purple-200 dark:border-purple-800"
             aria-label="User"
           >
             <User className="w-4 h-4" />
@@ -248,14 +351,14 @@ export function ChatMessage({
     <div className="flex justify-start w-full animate-in fade-in duration-200">
       <div className="flex items-start gap-2.5 max-w-[92%] sm:max-w-3xl w-full">
         <div
-          className="w-7 h-7 rounded-lg grid place-items-center shrink-0 mt-0.5 bg-purple-50 text-[#5932EA] dark:bg-purple-950/60 dark:text-purple-300 border border-purple-200 dark:border-purple-800"
+          className="w-7 h-7 rounded-lg grid place-items-center shrink-0 mt-0.5 bg-purple-50 text-[#493287] dark:bg-purple-950/60 dark:text-purple-300 border border-purple-200 dark:border-purple-800"
           aria-label="Assistant"
         >
           <Bot className="w-4 h-4" />
         </div>
 
         <div className="rounded-2xl rounded-tl-sm border p-4 text-[11px] leading-relaxed shadow-xs w-full surface border-[var(--border)] overflow-hidden space-y-3">
-          {/* Header Bar: Selected Agents + Verified Neon Grounding */}
+          {/* Header Bar: Selected Agents + Verified Operations Grounding */}
           {selectedAgents && selectedAgents.length > 0 && (
             <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 border-b border-[var(--border)]">
               <div className="flex flex-wrap items-center gap-1.5">
@@ -265,7 +368,7 @@ export function ChatMessage({
                 {selectedAgents.map((ag, idx) => (
                   <span
                     key={idx}
-                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[9.5px] font-extrabold bg-[#5932EA]/10 text-[#5932EA] dark:bg-purple-950/60 dark:text-purple-300 border border-purple-200 dark:border-purple-800"
+                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[9.5px] font-extrabold bg-[#493287]/10 text-[#493287] dark:bg-purple-950/60 dark:text-purple-300 border border-purple-200 dark:border-purple-800"
                   >
                     <Zap className="w-2.5 h-2.5" />
                     {ag}
@@ -275,7 +378,7 @@ export function ChatMessage({
 
               <span className="inline-flex items-center gap-1 text-[9px] font-bold text-emerald-600 dark:text-emerald-400">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                Neon DB Grounded • Zero Mock Data
+                Verified Operations Data • Zero Mock Data
               </span>
             </div>
           )}
@@ -285,11 +388,11 @@ export function ChatMessage({
             <div className="rounded-xl border border-[var(--border)] bg-[var(--surface-hover)]/40 p-2.5 my-2">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-1.5 text-[10px] font-bold text-[var(--secondary)] uppercase tracking-wider">
-                  <Layers className="w-3.5 h-3.5 text-[#5932EA]" />
+                  <Layers className="w-3.5 h-3.5 text-[#493287]" />
                   <span>Backend Execution Pipeline (6 Stages)</span>
                 </div>
                 {isStreaming ? (
-                  <span className="inline-flex items-center gap-1 text-[9.5px] font-extrabold text-[#5932EA] animate-pulse">
+                  <span className="inline-flex items-center gap-1 text-[9.5px] font-extrabold text-[#493287] animate-pulse">
                     <Loader2 className="w-3 h-3 animate-spin" />
                     Executing Stage {currentStageId}/6...
                   </span>
@@ -329,7 +432,7 @@ export function ChatMessage({
                             {st.id}. {st.name}
                           </span>
                           {isRunning ? (
-                            <Loader2 className="w-2.5 h-2.5 animate-spin text-[#5932EA] shrink-0" />
+                            <Loader2 className="w-2.5 h-2.5 animate-spin text-[#493287] shrink-0" />
                           ) : isDone ? (
                             <CheckCircle2 className="w-2.5 h-2.5 text-emerald-600 shrink-0" />
                           ) : isFailed ? (
@@ -366,7 +469,7 @@ export function ChatMessage({
                     {km.value}
                   </div>
                   {km.source && (
-                    <div className="text-[7.5px] font-semibold text-[#5932EA] dark:text-purple-400 truncate mt-0.5">
+                    <div className="text-[7.5px] font-semibold text-[#493287] dark:text-purple-400 truncate mt-0.5">
                       {km.source}
                     </div>
                   )}

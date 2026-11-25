@@ -86,7 +86,7 @@ export function HourlyProductionTrendCard({
                   type="monotone"
                   dataKey="S2"
                   name="S2"
-                  stroke="#6F3DBA"
+                  stroke="#493287"
                   strokeWidth={2}
                   dot={{ r: 2 }}
                 />
@@ -109,7 +109,7 @@ export function HourlyProductionTrendCard({
           <span className="w-2 h-2 rounded-full bg-[#4D8EEB]" /> GS1
         </span>
         <span className="flex items-center gap-1 font-bold text-[var(--text)]">
-          <span className="w-2 h-2 rounded-full bg-[#6F3DBA]" /> S2
+          <span className="w-2 h-2 rounded-full bg-[#493287]" /> S2
         </span>
         <span className="flex items-center gap-1 font-bold text-[var(--text)]">
           <span className="w-2 h-2 rounded-full bg-[#06B6D4]" /> NS3

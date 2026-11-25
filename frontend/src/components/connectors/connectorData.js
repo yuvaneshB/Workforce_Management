@@ -152,7 +152,7 @@ export const INITIAL_CONNECTORS = [
     name: 'API',
     category: 'Files & APIs',
     typeBadge: 'REST / Webhook',
-    iconColor: '#7C3AED',
+    iconColor: '#493287',
     iconBg: 'rgba(124, 58, 237, 0.12)',
     driver: 'httpx / FastAPI Webhook',
     backendStatus: 'driver_pending',

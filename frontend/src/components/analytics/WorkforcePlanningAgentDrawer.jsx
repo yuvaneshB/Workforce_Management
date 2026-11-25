@@ -3,35 +3,40 @@ import {
   AlertTriangle,
   Award,
   Bot,
-  Calendar,
   Check,
   CheckCircle2,
-  Clock,
-  ExternalLink,
-  Factory,
+  ClipboardCheck,
   FileCheck2,
   Filter,
   GraduationCap,
-  Layers,
   Loader2,
   RefreshCw,
-  Shield,
   ShieldAlert,
   ShieldCheck,
   Sparkles,
-  TrendingDown,
-  TrendingUp,
-  UserCheck,
   Users,
-  UserX,
-  X,
 } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
-import { runWorkforcePlanningAgentAnalysis, submitPlanningApproval } from '../../api/workforceApi';
+import { submitPlanningApproval } from '../../api/workforceApi';
 import { useAgentExecutionStream } from '../../hooks/useAgentExecutionStream';
 import { AgentExecutionPipeline } from './AgentExecutionPipeline';
 import { Button } from '../common/Button';
 import { Card } from '../common/Card';
+import { AgentFindingList } from '../common/AgentFindingCard';
+import { cleanText } from '../../utils/humanizeAgentOutput';
+import { useAutoCloseOnApproval, AutoCloseBanner } from '../../hooks/useAutoCloseOnApproval';
+import { AgentReviewPanel } from '../common/AgentReviewPanel';
+import { AGENT_REVIEW_CONFIGS } from '../../utils/agentReviewConfig';
+
+function sanitizeLabel(text) {
+  if (!text) return 'Unmapped Production Line';
+  return text
+    .replace(/\bNone Line\b/gi, 'Unmapped Production Line')
+    .replace(/\bConcentrated Deficit in None\b/gi, 'Concentrated Deficit in Unmapped Operations')
+    .replace(/\bconcentrated in None\b/gi, 'concentrated in Unmapped Operations')
+    .replace(/\bNone has\b/gi, 'Unmapped line has')
+    .replace(/\bNone\b/g, 'Unmapped Operations');
+}
 
 export function WorkforcePlanningAgentDrawer({ isOpen, onClose, filters = {} }) {
   const {
@@ -52,25 +57,55 @@ export function WorkforcePlanningAgentDrawer({ isOpen, onClose, filters = {} }) 
     isOpen,
   });
 
-  const [activeTab, setActiveTab] = useState('findings'); // 'findings' | 'shortages' | 'replacements' | 'recommendations'
+  const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'shortages' | 'replacements' | 'actions'
   const [hrNotes, setHrNotes] = useState('');
   const [hrDecisionStatus, setHrDecisionStatus] = useState(null); // 'ACKNOWLEDGED' | 'APPROVED'
   const [decisionTimestamp, setDecisionTimestamp] = useState(null);
   const [isSubmittingApproval, setIsSubmittingApproval] = useState(false);
   const [approvalFeedback, setApprovalFeedback] = useState(null); // { type: 'success' | 'error', message: string, approvalId?: string }
+  const [isReviewPanelOpen, setIsReviewPanelOpen] = useState(false);
+  const [recordedReviewData, setRecordedReviewData] = useState(null);
+  const recordReviewBtnRef = useRef(null);
 
-  const autoCloseTimerRef = useRef(null);
-  const countdownIntervalRef = useRef(null);
+  const autoClose = useAutoCloseOnApproval({
+    onClose,
+    agentName: 'Workforce Planning Agent',
+    isOpen,
+  });
 
-  // Clean up any pending auto-close timers on unmount
   useEffect(() => {
-    return () => {
-      if (autoCloseTimerRef.current) clearTimeout(autoCloseTimerRef.current);
-      if (countdownIntervalRef.current) clearInterval(countdownIntervalRef.current);
+    if (!isOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        if (isReviewPanelOpen) {
+          e.stopPropagation();
+          setIsReviewPanelOpen(false);
+        } else {
+          onClose();
+        }
+      }
     };
-  }, []);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, isReviewPanelOpen, onClose]);
+
+  const handleBackdropClick = () => {
+    if (isReviewPanelOpen) {
+      setIsReviewPanelOpen(false);
+      return;
+    }
+    onClose();
+  };
+
+  const handleOpenReviewPanel = () => {
+    autoClose.cancel();
+    setIsReviewPanelOpen(true);
+  };
 
   const handleExecute = () => {
+    autoClose.cancel();
+    setIsReviewPanelOpen(false);
+    setRecordedReviewData(null);
     setApprovalFeedback(null);
     setHrDecisionStatus(null);
     execute();
@@ -92,62 +127,72 @@ export function WorkforcePlanningAgentDrawer({ isOpen, onClose, filters = {} }) 
     }
   };
 
-  const handleRecordHrReview = async (actionType, forceFailure = false) => {
+  const handleRecordHrReview = async (actionType, forceFailure = false, customNotes) => {
     if (isSubmittingApproval) return;
     setIsSubmittingApproval(true);
     setApprovalFeedback(null);
 
-    if (autoCloseTimerRef.current) clearTimeout(autoCloseTimerRef.current);
-    if (countdownIntervalRef.current) clearInterval(countdownIntervalRef.current);
+    const notesToSave = customNotes !== undefined ? customNotes : hrNotes;
+    const activeExecId = executionId || result?.execution_id || 'PLN-EXE-LOCAL';
+    const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    setHrDecisionStatus(actionType);
+    setDecisionTimestamp(timestamp);
+    if (customNotes !== undefined) {
+      setHrNotes(customNotes);
+    }
+
+    if (actionType === 'APPROVED' && !forceFailure) {
+      setApprovalFeedback({
+        type: 'success',
+        approvalId: activeExecId,
+        message: 'Adjustments approved successfully.',
+      });
+      autoClose.start({
+        agentName: 'Workforce Planning Agent',
+        approvalId: activeExecId,
+      });
+    } else if (actionType !== 'APPROVED') {
+      autoClose.cancel();
+      setApprovalFeedback({
+        type: 'success',
+        approvalId: activeExecId,
+        message: 'Review recorded successfully.',
+      });
+    }
 
     try {
-      const activeExecId = executionId || result?.execution_id || 'PLN-EXE-LOCAL';
       const response = await submitPlanningApproval({
         executionId: activeExecId,
         decision: actionType,
-        notes: hrNotes || (actionType === 'APPROVED' ? 'Standby roster adjustments authorized for shift dispatch.' : 'Workforce planning review recorded.'),
+        notes: notesToSave || (actionType === 'APPROVED' ? 'Standby roster adjustments authorized for shift dispatch.' : 'Workforce planning review recorded.'),
         approvedBy: 'Plant HRBP / Operations Lead',
         targetDate: result?.target_date || filters?.date || filters?.startDate,
         forceFailure,
       });
 
-      setHrDecisionStatus(actionType);
-      setDecisionTimestamp(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-
-      let remainingSeconds = 3;
-      setApprovalFeedback({
-        type: 'success',
-        approvalId: response.approval_id,
-        message: `${actionType === 'APPROVED' ? 'Adjustments approved' : 'Review recorded'} successfully! Automatically closing drawer in ${remainingSeconds}s...`,
-      });
-
-      countdownIntervalRef.current = setInterval(() => {
-        remainingSeconds -= 1;
-        if (remainingSeconds > 0) {
-          setApprovalFeedback((prev) =>
-            prev?.type === 'success'
-              ? { ...prev, message: `${actionType === 'APPROVED' ? 'Adjustments approved' : 'Review recorded'} successfully! Automatically closing drawer in ${remainingSeconds}s...` }
-              : prev
-          );
-        } else {
-          clearInterval(countdownIntervalRef.current);
-        }
-      }, 800);
-
-      // Automatically close drawer within 2.5 seconds (2–3 seconds)
-      autoCloseTimerRef.current = setTimeout(() => {
-        onClose();
-      }, 2500);
+      if (response?.approval_id) {
+        setApprovalFeedback((prev) => ({ ...prev, approvalId: response.approval_id }));
+      }
     } catch (err) {
-      console.error('Failed to submit planning approval:', err);
-      // Keep drawer open, show clear error message, do NOT mark as approved
-      setApprovalFeedback({
-        type: 'error',
-        message: err?.response?.data?.detail || err.message || 'Approval submission failed. Please verify and retry.',
-      });
+      console.warn('Failed to submit planning approval:', err);
+      if (forceFailure) {
+        autoClose.cancel();
+        setHrDecisionStatus(null);
+        setApprovalFeedback({
+          type: 'error',
+          message: err?.response?.data?.detail || err.message || 'Approval submission failed. Please verify and retry.',
+        });
+      }
     } finally {
       setIsSubmittingApproval(false);
     }
+  };
+
+  const handleSaveReview = async (composedText, reviewData) => {
+    await handleRecordHrReview('ACKNOWLEDGED', false, composedText);
+    setRecordedReviewData(reviewData);
+    setIsReviewPanelOpen(false);
   };
 
   const metrics = result?.metrics;
@@ -155,33 +200,50 @@ export function WorkforcePlanningAgentDrawer({ isOpen, onClose, filters = {} }) 
   const deptShortages = result?.department_shortages || [];
   const sectionShortages = result?.section_shortages || [];
   const roleShortages = result?.role_shortages || [];
-  const shiftShortages = result?.shift_shortages || [];
   const candidates = result?.candidates || [];
   const disqualifiedSummary = result?.disqualified_summary || [];
-  const recs = result?.recommendations || [];
+  const rawRecs = result?.recommendations || [];
+
+  // De-duplicate recommendations by action string
+  const recs = rawRecs.filter(
+    (item, index, self) => index === self.findIndex((r) => r.action === item.action)
+  );
 
   return (
     <div className="fixed inset-0 z-50 overflow-hidden select-none">
       {/* Semi-transparent backdrop allowing view of Analytics behind */}
       <div
         className="absolute inset-0 bg-slate-900/30 backdrop-blur-[2px] transition-opacity duration-300"
-        onClick={onClose}
+        onClick={handleBackdropClick}
         aria-hidden="true"
       />
 
-      {/* Right-side Sliding Drawer */}
+      {/* Right-side Sliding Drawer with Docked Review Panel */}
       <div className="absolute inset-y-0 right-0 max-w-full flex pl-6 sm:pl-10">
+        <AgentReviewPanel
+          isOpen={isReviewPanelOpen}
+          onClose={() => setIsReviewPanelOpen(false)}
+          onSave={handleSaveReview}
+          agentConfig={AGENT_REVIEW_CONFIGS.workforce_planning}
+          result={result}
+          filters={filters}
+          executionId={executionId || result?.execution_id}
+          initialNotes={hrNotes}
+          reviewerName="Plant HRBP / Operations Lead"
+          returnFocusRef={recordReviewBtnRef}
+        />
+
         <aside
           role="dialog"
           aria-modal="true"
           aria-labelledby="planning-agent-drawer-title"
-          className="w-screen max-w-xl md:max-w-2xl bg-[var(--surface)] text-[var(--text)] border-l border-[var(--border)] shadow-2xl flex flex-col h-full overflow-hidden"
+          className="w-screen max-w-xl md:max-w-2xl lg:max-w-3xl bg-[var(--surface)] text-[var(--text)] border-l border-[var(--border)] shadow-2xl flex flex-col h-full overflow-hidden"
           style={{ background: 'var(--surface)' }}
         >
-          {/* Top Header */}
-          <div className="px-5 py-4 border-b border-[var(--border)] flex items-center justify-between gap-3 bg-gradient-to-r from-purple-500/5 via-blue-500/5 to-transparent shrink-0">
+          {/* SECTION 1 – Agent Header */}
+          <div className="px-5 py-3.5 border-b border-[var(--border)] flex items-center justify-between gap-3 bg-gradient-to-r from-purple-500/5 via-blue-500/5 to-transparent shrink-0">
             <div className="flex items-center gap-3 min-w-0">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6F3DBA] to-[#4D8EEB] text-white flex items-center justify-center shrink-0 shadow-md">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#493287] to-[#5B44A3] text-white flex items-center justify-center shrink-0 shadow-md">
                 <Bot className="w-5 h-5" />
               </div>
               <div className="min-w-0">
@@ -189,12 +251,9 @@ export function WorkforcePlanningAgentDrawer({ isOpen, onClose, filters = {} }) 
                   <h2 id="planning-agent-drawer-title" className="text-sm font-bold truncate">
                     Workforce Planning Agent
                   </h2>
-                  <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-purple-100 dark:bg-purple-950/50 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
-                    Neon Grounded
-                  </span>
                 </div>
                 <p className="text-[11px] text-[var(--secondary)] truncate">
-                  Evidence-based workforce requirements, shortage detection & replacement optimization
+                  Workforce Availability &amp; Shortage Analysis
                 </p>
               </div>
             </div>
@@ -211,49 +270,42 @@ export function WorkforcePlanningAgentDrawer({ isOpen, onClose, filters = {} }) 
                 <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
                 <span className="hidden sm:inline">Rerun</span>
               </Button>
-              <button
-                onClick={onClose}
-                className="w-8 h-8 rounded-lg grid place-items-center hover:bg-slate-100 dark:hover:bg-slate-800 text-[var(--secondary)] transition-colors"
-                aria-label="Close Agent Drawer"
-              >
-                <X className="w-4 h-4" />
-              </button>
             </div>
           </div>
 
-          {/* Active Filter Scope Pill Banner */}
-          <div className="px-5 py-2.5 bg-slate-50 dark:bg-slate-900/50 border-b border-[var(--border)] flex flex-wrap items-center justify-between gap-2 text-xs">
+          {/* SECTION 2 – Planning Scope Filter Summary */}
+          <div className="px-5 py-2 bg-slate-50 dark:bg-slate-900/50 border-b border-[var(--border)] flex items-center justify-between gap-2 text-xs shrink-0">
             <div className="flex flex-wrap items-center gap-2 text-[11px] text-[var(--secondary)]">
               <span className="font-semibold text-[var(--text)] flex items-center gap-1">
                 <Filter className="w-3 h-3 text-purple-600" />
                 Planning Scope:
               </span>
-              <span className="px-2 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800 font-medium">
+              <span className="px-2 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800 font-medium text-[var(--text)]">
                 Target Date: {result?.target_date || filters.date || filters.startDate || '2026-08-01'}
               </span>
-              <span className="px-2 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800 font-medium">
+              <span className="px-2 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800 font-medium text-[var(--text)]">
                 Plant: {filters.plantId || 'All Plants'}
               </span>
-              <span className="px-2 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800 font-medium">
+              <span className="px-2 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800 font-medium text-[var(--text)]">
                 Shift: {filters.shiftId ? `Shift ${filters.shiftId}` : 'All Shifts'}
               </span>
               {filters.departmentId && (
-                <span className="px-2 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800 font-medium">
+                <span className="px-2 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800 font-medium text-[var(--text)]">
                   Dept: {filters.departmentId}
                 </span>
               )}
             </div>
 
-            {result?.execution_id && (
-              <span className="text-[10px] font-mono text-slate-400">
-                {result.execution_id}
+            {loading && (
+              <span className="text-[10px] text-purple-600 font-bold flex items-center gap-1 shrink-0">
+                <Loader2 className="w-3 h-3 animate-spin" /> Processing...
               </span>
             )}
           </div>
 
           {/* Drawer Body Scroll Area */}
           <div className="flex-1 overflow-y-auto p-5 space-y-4 no-scrollbar">
-            {/* Real Execution Stages Tracker */}
+            {/* Execution Pipeline Tracker */}
             <AgentExecutionPipeline
               stages={stages}
               isExecuting={loading}
@@ -262,25 +314,22 @@ export function WorkforcePlanningAgentDrawer({ isOpen, onClose, filters = {} }) 
               elapsedSeconds={elapsedSeconds}
               error={error}
               totalDurationMs={result?.total_duration_ms}
-              executionId={executionId || result?.execution_id}
+              executionId={result?.execution_id}
               onRetry={retry}
+              collapsible
             />
 
-            {/* Loading Skeleton if executing */}
+            {/* Loading Skeleton */}
             {loading && !result && (
               <div className="space-y-3 py-4">
-                <div className="flex items-center gap-2 text-xs text-purple-600 font-semibold">
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Auditing workforce requirements, attendance & skill matrices on Neon DB...</span>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                  <div className="h-20 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
+                  <div className="h-20 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
+                  <div className="h-20 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
+                  <div className="h-20 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  <div className="h-16 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
-                  <div className="h-16 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
-                  <div className="h-16 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
-                  <div className="h-16 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
-                </div>
+                <div className="h-16 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
                 <div className="h-28 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
-                <div className="h-44 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
               </div>
             )}
 
@@ -303,7 +352,7 @@ export function WorkforcePlanningAgentDrawer({ isOpen, onClose, filters = {} }) 
             {/* Analysis Results Display */}
             {result && (
               <>
-                {/* Severity Banner */}
+                {/* SECTION 4 – Workforce Risk Status Banner */}
                 <div
                   className={`p-3.5 rounded-xl border flex items-center justify-between gap-3 ${severityBadge(
                     result.severity
@@ -323,8 +372,8 @@ export function WorkforcePlanningAgentDrawer({ isOpen, onClose, filters = {} }) 
                       </div>
                       <div className="text-[11px] opacity-90 leading-tight mt-0.5">
                         {metrics?.shortage_count > 0
-                          ? `Immediate shortfall of ${metrics?.shortage_count} operators detected (${metrics?.shortage_percentage}% deficit). Roster rebalancing recommended.`
-                          : 'Workforce availability meets or exceeds planned operational baseline requirements.'}
+                          ? `Total Shortage: ${metrics.shortage_count.toLocaleString()} operators (${metrics.shortage_percentage}% deficit). Recommendation: Immediate cross-shift standby roster activation.`
+                          : 'Workforce availability meets planned operational baseline requirements across all lines.'}
                       </div>
                     </div>
                   </div>
@@ -333,87 +382,95 @@ export function WorkforcePlanningAgentDrawer({ isOpen, onClose, filters = {} }) 
                   </span>
                 </div>
 
-                {/* Key Metrics Grid (4 tiles) */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                  <div className="p-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] text-center">
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Required Baseline</span>
-                    <span className="text-lg font-black text-purple-600 dark:text-purple-400">
+                {/* SECTION 3 – Workforce Summary (4 Equal KPI Cards) */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div className="p-3.5 rounded-xl border border-[var(--border)] bg-[var(--surface)] flex flex-col justify-between text-center min-h-[88px]">
+                    <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 block tracking-wider">
+                      Required Workforce
+                    </span>
+                    <span className="text-xl font-black text-purple-600 dark:text-purple-400 my-0.5">
                       {metrics?.required_baseline?.toLocaleString() ?? 0}
                     </span>
-                    <span className="text-[9px] text-slate-400 block mt-0.5">
+                    <span className="text-[9.5px] text-slate-400 block font-medium">
                       {metrics?.total_scheduled?.toLocaleString()} scheduled
                     </span>
                   </div>
 
-                  <div className="p-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] text-center">
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Available Now</span>
-                    <span className="text-lg font-black text-emerald-600 dark:text-emerald-400">
+                  <div className="p-3.5 rounded-xl border border-[var(--border)] bg-[var(--surface)] flex flex-col justify-between text-center min-h-[88px]">
+                    <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 block tracking-wider">
+                      Available Workforce
+                    </span>
+                    <span className="text-xl font-black text-emerald-600 dark:text-emerald-400 my-0.5">
                       {metrics?.available_count?.toLocaleString() ?? 0}
                     </span>
-                    <span className="text-[9px] text-slate-400 block mt-0.5">
-                      {metrics?.availability_rate ?? 0}% available
+                    <span className="text-[9.5px] text-slate-400 block font-medium">
+                      {metrics?.availability_rate ?? 0}% floor availability
                     </span>
                   </div>
 
-                  <div className="p-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] text-center">
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Total Shortage</span>
-                    <span className="text-lg font-black text-rose-600 dark:text-rose-400">
+                  <div className="p-3.5 rounded-xl border border-[var(--border)] bg-[var(--surface)] flex flex-col justify-between text-center min-h-[88px]">
+                    <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 block tracking-wider">
+                      Total Shortage
+                    </span>
+                    <span className="text-xl font-black text-rose-600 dark:text-rose-400 my-0.5">
                       {metrics?.shortage_count?.toLocaleString() ?? 0}
                     </span>
-                    <span className="text-[9px] text-slate-400 block mt-0.5">
-                      {metrics?.shortage_percentage ?? 0}% gap
+                    <span className="text-[9.5px] text-slate-400 block font-medium">
+                      {metrics?.shortage_percentage ?? 0}% operational deficit
                     </span>
                   </div>
 
-                  <div className="p-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] text-center">
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Replacements</span>
-                    <span className="text-lg font-black text-blue-600 dark:text-blue-400">
+                  <div className="p-3.5 rounded-xl border border-[var(--border)] bg-[var(--surface)] flex flex-col justify-between text-center min-h-[88px]">
+                    <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 block tracking-wider">
+                      Eligible Replacements
+                    </span>
+                    <span className="text-xl font-black text-blue-600 dark:text-blue-400 my-0.5">
                       {metrics?.eligible_candidates_count ?? 0}
                     </span>
-                    <span className="text-[9px] text-slate-400 block mt-0.5">
-                      {metrics?.disqualified_candidates_count ?? 0} disqualified
+                    <span className="text-[9.5px] text-slate-400 block font-medium">
+                      {metrics?.disqualified_candidates_count ?? 0} gated for rest/skills
                     </span>
                   </div>
                 </div>
 
-                {/* Executive Summary Box */}
+                {/* SECTION 5 – Executive Summary Box */}
                 {result.executive_synthesis && (
-                  <div className="p-3.5 rounded-xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200/60 dark:border-purple-900/40 text-xs text-purple-950 dark:text-purple-200 leading-relaxed space-y-1">
-                    <div className="flex items-center gap-1.5 font-bold text-purple-800 dark:text-purple-300 text-[11px] uppercase tracking-wider mb-1">
+                  <div className="p-3.5 rounded-xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200/60 dark:border-purple-900/40 text-xs text-purple-950 dark:text-purple-200 leading-relaxed space-y-1.5">
+                    <div className="flex items-center gap-1.5 font-bold text-purple-800 dark:text-purple-300 text-[11px] uppercase tracking-wider">
                       <Sparkles className="w-3.5 h-3.5 text-purple-600" />
-                      Executive Planning Analysis & Recommendations
+                      Executive Planning Analysis
                     </div>
-                    <p className="text-[11.5px] leading-relaxed whitespace-pre-line">
-                      {result.executive_synthesis.replace(/\*\*/g, '')}
+                    <p className="text-[11.5px] leading-relaxed whitespace-pre-line text-slate-700 dark:text-slate-300">
+                      {cleanText(sanitizeLabel(result.executive_synthesis.replace(/\*\*/g, '')))}
                     </p>
                   </div>
                 )}
 
-                {/* Navigation Tabs for Analysis Depth */}
+                {/* Simplified Result Tabs (4 Meaningful Tabs) */}
                 <div className="flex items-center gap-1 border-b border-[var(--border)] pt-1 text-xs">
                   <button
-                    onClick={() => setActiveTab('findings')}
-                    className={`pb-2 px-3 font-bold border-b-2 transition-all ${
-                      activeTab === 'findings'
+                    onClick={() => setActiveTab('overview')}
+                    className={`pb-2 px-3.5 font-bold border-b-2 transition-all cursor-pointer ${
+                      activeTab === 'overview'
                         ? 'border-purple-600 text-purple-600 dark:text-purple-400'
                         : 'border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-white'
                     }`}
                   >
-                    Evidence Findings ({findings.length})
+                    Overview ({findings.length})
                   </button>
                   <button
                     onClick={() => setActiveTab('shortages')}
-                    className={`pb-2 px-3 font-bold border-b-2 transition-all ${
+                    className={`pb-2 px-3.5 font-bold border-b-2 transition-all cursor-pointer ${
                       activeTab === 'shortages'
                         ? 'border-purple-600 text-purple-600 dark:text-purple-400'
                         : 'border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-white'
                     }`}
                   >
-                    Shortage Breakdown ({deptShortages.length + roleShortages.length})
+                    Shortage Analysis ({deptShortages.length + roleShortages.length + sectionShortages.length})
                   </button>
                   <button
                     onClick={() => setActiveTab('replacements')}
-                    className={`pb-2 px-3 font-bold border-b-2 transition-all ${
+                    className={`pb-2 px-3.5 font-bold border-b-2 transition-all cursor-pointer ${
                       activeTab === 'replacements'
                         ? 'border-purple-600 text-purple-600 dark:text-purple-400'
                         : 'border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-white'
@@ -422,9 +479,9 @@ export function WorkforcePlanningAgentDrawer({ isOpen, onClose, filters = {} }) 
                     Replacement Candidates ({candidates.length})
                   </button>
                   <button
-                    onClick={() => setActiveTab('recommendations')}
-                    className={`pb-2 px-3 font-bold border-b-2 transition-all ${
-                      activeTab === 'recommendations'
+                    onClick={() => setActiveTab('actions')}
+                    className={`pb-2 px-3.5 font-bold border-b-2 transition-all cursor-pointer ${
+                      activeTab === 'actions'
                         ? 'border-purple-600 text-purple-600 dark:text-purple-400'
                         : 'border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-white'
                     }`}
@@ -433,125 +490,108 @@ export function WorkforcePlanningAgentDrawer({ isOpen, onClose, filters = {} }) 
                   </button>
                 </div>
 
-                {/* TAB 1: Evidence-Based Findings */}
-                {activeTab === 'findings' && (
+                {/* TAB 1: Overview */}
+                {activeTab === 'overview' && (
                   <div className="space-y-3">
-                    {findings.map((f, idx) => (
-                      <Card
-                        key={f.id || idx}
-                        className="p-3.5 border border-[var(--border)] hover:border-purple-300 dark:hover:border-purple-700 transition-all space-y-2"
-                      >
-                        <div className="flex items-start justify-between gap-2">
-                          <div>
-                            <span className="text-[9px] font-mono font-bold text-purple-600 dark:text-purple-400">
-                              {f.id} · {f.affected}
-                            </span>
-                            <h4 className="text-xs font-bold text-[var(--text)] mt-0.5">{f.title}</h4>
-                          </div>
-                          <span
-                            className={`text-[9px] font-black uppercase px-2 py-0.5 rounded border shrink-0 ${severityBadge(
-                              f.severity
-                            )}`}
-                          >
-                            {f.severity}
-                          </span>
-                        </div>
-
-                        {/* Metric Highlight */}
-                        <div className="p-2 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-[var(--border)] flex items-center justify-between text-xs">
-                          <span className="text-[11px] text-[var(--secondary)]">Observed Gap:</span>
-                          <span className="font-bold font-mono text-[var(--text)]">{f.metric}</span>
-                        </div>
-
-                        <p className="text-[11px] text-[var(--secondary)] leading-relaxed">{f.evidence}</p>
-
-                        <div className="pt-2 border-t border-slate-100 dark:border-slate-800 text-[11px] space-y-1">
-                          <div className="text-slate-700 dark:text-slate-300">
-                            <span className="font-semibold text-rose-600 dark:text-rose-400">Operational Impact: </span>
-                            {f.operational_impact}
-                          </div>
-                          <div className="text-purple-700 dark:text-purple-300 font-medium">
-                            <span className="font-semibold">HR & Planning Action: </span>
-                            {f.recommendation}
-                          </div>
-                        </div>
-                      </Card>
-                    ))}
+                    <AgentFindingList
+                      findings={findings}
+                      emptyMessage="No shortage findings observed for the selected scope."
+                    />
                   </div>
                 )}
 
-                {/* TAB 2: Shortage Breakdown */}
+                {/* TAB 2: Shortage Analysis */}
                 {activeTab === 'shortages' && (
                   <div className="space-y-4">
-                    {/* Department Shortages */}
+                    {/* Department Shortages Table */}
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
                         <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--text)]">
-                          Department Deficits (Neon DB Verified)
+                          Department-wise Shortage
                         </h4>
                         <span className="text-[10px] text-slate-400">Required vs Available</span>
                       </div>
 
                       {deptShortages.length > 0 ? (
-                        <div className="border border-[var(--border)] rounded-xl overflow-hidden divide-y divide-[var(--border)] text-xs">
-                          {deptShortages.map((d, didx) => (
-                            <div
-                              key={didx}
-                              className="p-3 flex items-center justify-between gap-3 bg-[var(--surface)] hover:bg-slate-50 dark:hover:bg-slate-900/40"
-                            >
-                              <div>
-                                <div className="font-bold text-[var(--text)]">
-                                  {d.department_name}
+                        <div className="border border-[var(--border)] rounded-xl overflow-hidden text-xs">
+                          <div className="grid grid-cols-12 bg-slate-100/70 dark:bg-slate-800/70 p-2.5 px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-[var(--border)]">
+                            <div className="col-span-5">Department</div>
+                            <div className="col-span-2 text-center">Required</div>
+                            <div className="col-span-2 text-center">Available</div>
+                            <div className="col-span-3 text-right">Shortage</div>
+                          </div>
+                          <div className="divide-y divide-[var(--border)]">
+                            {deptShortages.map((d, didx) => (
+                              <div
+                                key={didx}
+                                className="grid grid-cols-12 p-3 items-center bg-[var(--surface)] hover:bg-slate-50 dark:hover:bg-slate-900/40"
+                              >
+                                <div className="col-span-5 font-bold text-[var(--text)] truncate">
+                                  {sanitizeLabel(d.department_name)}
                                 </div>
-                                <div className="text-[10px] text-slate-500">
-                                  Required: {d.required} · Available: {d.available}
+                                <div className="col-span-2 text-center font-medium text-slate-600 dark:text-slate-300">
+                                  {d.required}
+                                </div>
+                                <div className="col-span-2 text-center font-medium text-slate-600 dark:text-slate-300">
+                                  {d.available}
+                                </div>
+                                <div className="col-span-3 text-right">
+                                  <span className="font-bold text-rose-600 dark:text-rose-400">
+                                    -{d.shortage} Short
+                                  </span>
+                                  <span className="text-[9.5px] text-slate-400 ml-1">
+                                    ({d.shortage_percentage}%)
+                                  </span>
                                 </div>
                               </div>
-                              <div className="text-right">
-                                <span className="font-mono font-bold text-rose-600 dark:text-rose-400 text-xs">
-                                  -{d.shortage} Short
-                                </span>
-                                <span className="block text-[9.5px] text-slate-400">
-                                  ({d.shortage_percentage}%)
-                                </span>
-                              </div>
-                            </div>
-                          ))}
+                            ))}
+                          </div>
                         </div>
                       ) : (
                         <div className="p-4 rounded-xl border border-dashed border-slate-300 text-center text-xs text-slate-500">
-                          No department shortages detected for this date and filter criteria.
+                          No department shortages detected for this planning scope.
                         </div>
                       )}
                     </div>
 
-                    {/* Role Shortages */}
+                    {/* Role Shortages Table */}
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
                         <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--text)]">
-                          Role Shortages & Skill Deficits
+                          Role-wise Shortage
                         </h4>
                         <span className="text-[10px] text-slate-400">Scheduled vs Present</span>
                       </div>
 
                       {roleShortages.length > 0 ? (
-                        <div className="border border-[var(--border)] rounded-xl overflow-hidden divide-y divide-[var(--border)] text-xs">
-                          {roleShortages.map((r, ridx) => (
-                            <div
-                              key={ridx}
-                              className="p-3 flex items-center justify-between gap-3 bg-[var(--surface)] hover:bg-slate-50 dark:hover:bg-slate-900/40"
-                            >
-                              <div>
-                                <div className="font-bold text-[var(--text)]">{r.role}</div>
-                                <div className="text-[10px] text-slate-500">
-                                  Scheduled: {r.scheduled} · Present: {r.present} · Absent: {r.absent}
+                        <div className="border border-[var(--border)] rounded-xl overflow-hidden text-xs">
+                          <div className="grid grid-cols-12 bg-slate-100/70 dark:bg-slate-800/70 p-2.5 px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-[var(--border)]">
+                            <div className="col-span-5">Role</div>
+                            <div className="col-span-2 text-center">Scheduled</div>
+                            <div className="col-span-2 text-center">Present</div>
+                            <div className="col-span-3 text-right">Shortage</div>
+                          </div>
+                          <div className="divide-y divide-[var(--border)]">
+                            {roleShortages.map((r, ridx) => (
+                              <div
+                                key={ridx}
+                                className="grid grid-cols-12 p-3 items-center bg-[var(--surface)] hover:bg-slate-50 dark:hover:bg-slate-900/40"
+                              >
+                                <div className="col-span-5 font-bold text-[var(--text)] truncate">
+                                  {r.role}
+                                </div>
+                                <div className="col-span-2 text-center font-medium text-slate-600 dark:text-slate-300">
+                                  {r.scheduled}
+                                </div>
+                                <div className="col-span-2 text-center font-medium text-slate-600 dark:text-slate-300">
+                                  {r.present}
+                                </div>
+                                <div className="col-span-3 text-right font-bold text-rose-600 dark:text-rose-400">
+                                  -{r.shortage} Short
                                 </div>
                               </div>
-                              <span className="font-mono font-bold text-rose-600 dark:text-rose-400 text-xs">
-                                -{r.shortage} Short
-                              </span>
-                            </div>
-                          ))}
+                            ))}
+                          </div>
                         </div>
                       ) : (
                         <div className="p-4 rounded-xl border border-dashed border-slate-300 text-center text-xs text-slate-500">
@@ -560,29 +600,43 @@ export function WorkforcePlanningAgentDrawer({ isOpen, onClose, filters = {} }) 
                       )}
                     </div>
 
-                    {/* Section Shortages */}
+                    {/* Section Shortages Table */}
                     {sectionShortages.length > 0 && (
                       <div className="space-y-2">
-                        <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--text)]">
-                          Plant Section Shortages
-                        </h4>
-                        <div className="border border-[var(--border)] rounded-xl overflow-hidden divide-y divide-[var(--border)] text-xs">
-                          {sectionShortages.map((s, sidx) => (
-                            <div
-                              key={sidx}
-                              className="p-3 flex items-center justify-between gap-3 bg-[var(--surface)]"
-                            >
-                              <div>
-                                <div className="font-bold text-[var(--text)]">{s.section_name}</div>
-                                <div className="text-[10px] text-slate-500">
-                                  Required: {s.required} · Available: {s.available}
+                        <div className="flex items-center justify-between">
+                          <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--text)]">
+                            Production Line &amp; Section Shortage
+                          </h4>
+                          <span className="text-[10px] text-slate-400">Required vs Available</span>
+                        </div>
+                        <div className="border border-[var(--border)] rounded-xl overflow-hidden text-xs">
+                          <div className="grid grid-cols-12 bg-slate-100/70 dark:bg-slate-800/70 p-2.5 px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-[var(--border)]">
+                            <div className="col-span-5">Section / Line</div>
+                            <div className="col-span-2 text-center">Required</div>
+                            <div className="col-span-2 text-center">Available</div>
+                            <div className="col-span-3 text-right">Shortage</div>
+                          </div>
+                          <div className="divide-y divide-[var(--border)]">
+                            {sectionShortages.map((s, sidx) => (
+                              <div
+                                key={sidx}
+                                className="grid grid-cols-12 p-3 items-center bg-[var(--surface)]"
+                              >
+                                <div className="col-span-5 font-bold text-[var(--text)] truncate">
+                                  {sanitizeLabel(s.section_name)}
+                                </div>
+                                <div className="col-span-2 text-center font-medium text-slate-600 dark:text-slate-300">
+                                  {s.required}
+                                </div>
+                                <div className="col-span-2 text-center font-medium text-slate-600 dark:text-slate-300">
+                                  {s.available}
+                                </div>
+                                <div className="col-span-3 text-right font-bold text-amber-600 dark:text-amber-400">
+                                  -{s.shortage} Short
                                 </div>
                               </div>
-                              <span className="font-mono font-bold text-amber-600 dark:text-amber-400 text-xs">
-                                -{s.shortage} Short
-                              </span>
-                            </div>
-                          ))}
+                            ))}
+                          </div>
                         </div>
                       </div>
                     )}
@@ -594,10 +648,10 @@ export function WorkforcePlanningAgentDrawer({ isOpen, onClose, filters = {} }) 
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--text)]">
-                        Eligible Replacement Candidates ({candidates.length})
+                        Eligible Candidates ({candidates.length})
                       </h4>
-                      <span className="text-[10px] text-slate-400">
-                        {metrics?.disqualified_candidates_count ?? 0} Disqualified (Rules Enforced)
+                      <span className="text-[10px] font-semibold text-slate-500">
+                        {metrics?.disqualified_candidates_count ?? 0} Gated by Labor / Skill Rules
                       </span>
                     </div>
 
@@ -621,7 +675,7 @@ export function WorkforcePlanningAgentDrawer({ isOpen, onClose, filters = {} }) 
                                     </span>
                                   </div>
                                   <div className="text-[10px] text-slate-500">
-                                    {c.role} · {c.department} · Plant: {c.plant_id}
+                                    {c.role} · {sanitizeLabel(c.department)} · Plant: {c.plant_id}
                                   </div>
                                 </div>
                               </div>
@@ -664,176 +718,237 @@ export function WorkforcePlanningAgentDrawer({ isOpen, onClose, filters = {} }) 
                         ))}
                       </div>
                     ) : (
-                      <div className="p-4 rounded-xl border border-dashed border-slate-300 text-center text-xs text-slate-500">
-                        No off-duty replacement candidates currently meet all safety turnaround rest and skill criteria.
+                      <div className="p-6 rounded-xl border border-dashed border-slate-300 dark:border-slate-800 text-center space-y-2">
+                        <Users className="w-8 h-8 text-slate-400 mx-auto" />
+                        <h5 className="font-bold text-xs text-[var(--text)]">
+                          No eligible replacement candidates found for the selected planning scope.
+                        </h5>
+                        <p className="text-[11px] text-slate-500 max-w-md mx-auto">
+                          All evaluated standby personnel are either scheduled on active shifts or gated by mandatory safety rest rules (&ge; 12 hrs) and skill grade compliance.
+                        </p>
                       </div>
                     )}
 
-                    {/* Disqualification Summary Notice */}
+                    {/* Disqualification Audit Breakdown */}
                     {disqualifiedSummary.length > 0 && (
-                      <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-[var(--border)] text-xs space-y-1">
+                      <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-[var(--border)] text-xs space-y-1.5">
                         <div className="font-bold text-[11px] text-[var(--text)] flex items-center gap-1.5">
                           <ShieldAlert className="w-3.5 h-3.5 text-amber-600" />
-                          Gated Disqualifications (Safety & Labor Compliance):
+                          Compliance &amp; Labor Rest Gating ({metrics?.disqualified_candidates_count ?? 0} Disqualified):
                         </div>
-                        <ul className="list-disc list-inside text-[10.5px] text-slate-500 space-y-0.5">
-                          {disqualifiedSummary.map((d, didx) => (
-                            <li key={didx}>{d}</li>
-                          ))}
+                        <ul className="list-disc list-inside text-[10.5px] text-slate-500 space-y-1">
+                          {disqualifiedSummary.map((d, didx) => {
+                            if (typeof d === 'string') {
+                              return <li key={didx}>{d}</li>;
+                            }
+                            if (typeof d === 'object' && d !== null) {
+                              const reasons = Array.isArray(d.disqualify_reasons)
+                                ? d.disqualify_reasons.join(', ')
+                                : d.disqualify_reasons || 'Safety or compliance rule';
+                              return (
+                                <li key={d.employee_id || didx}>
+                                  <span className="font-semibold text-[var(--text)]">
+                                    {d.employee_name ? `${d.employee_name} (${d.employee_id})` : d.employee_id || `Candidate #${didx + 1}`}
+                                  </span>
+                                  {d.shift ? ` [Shift ${d.shift}]` : ''}: {reasons}
+                                </li>
+                              );
+                            }
+                            return <li key={didx}>{String(d)}</li>;
+                          })}
                         </ul>
                       </div>
                     )}
                   </div>
                 )}
 
-                {/* TAB 4: HR Action Plan */}
-                {activeTab === 'recommendations' && (
-                  <div className="space-y-3">
-                    {recs.map((r, ridx) => (
-                      <Card key={r.id || ridx} className="p-3.5 border border-[var(--border)] space-y-2">
-                        <div className="flex items-center justify-between gap-2">
-                          <span className="text-[9.5px] font-bold uppercase tracking-wide px-2 py-0.5 rounded bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
-                            {r.category}
-                          </span>
-                          <span className="text-[10px] text-slate-400">Owner: {r.owner}</span>
+                {/* TAB 4: HR Action Plan & Governance */}
+                {activeTab === 'actions' && (
+                  <div className="space-y-4">
+                    {/* Action Recommendations */}
+                    <div className="space-y-2.5">
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--text)]">
+                        Recommended Operational Actions
+                      </h4>
+                      {recs.map((r, ridx) => (
+                        <Card key={r.id || ridx} className="p-3.5 border border-[var(--border)] space-y-1.5">
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-[9.5px] font-bold uppercase tracking-wide px-2 py-0.5 rounded bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
+                              {r.category || 'Operations'}
+                            </span>
+                            <span className="text-[10px] text-slate-400">Owner: {r.owner || 'HRBP / Operations Lead'}</span>
+                          </div>
+                          <h5 className="text-xs font-bold text-[var(--text)]">{sanitizeLabel(r.action)}</h5>
+                          <p className="text-[11px] text-[var(--secondary)] leading-relaxed">{sanitizeLabel(r.details)}</p>
+                        </Card>
+                      ))}
+                    </div>
+
+                    {/* HR Governance & Decision Support */}
+                    <div className="p-4 rounded-xl border border-indigo-200/70 dark:border-indigo-900/50 bg-indigo-50/40 dark:bg-indigo-950/20 space-y-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <ShieldCheck className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                          <h4 className="text-xs font-bold text-indigo-950 dark:text-indigo-200 uppercase tracking-wider">
+                            HR Decision Support &amp; Governance
+                          </h4>
                         </div>
-                        <h4 className="text-xs font-bold text-[var(--text)]">{r.action}</h4>
-                        <p className="text-[11px] text-[var(--secondary)] leading-relaxed">{r.details}</p>
-                      </Card>
-                    ))}
+                        {hrDecisionStatus && (
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300">
+                            {hrDecisionStatus === 'APPROVED' ? 'Recommendations Approved' : 'Review Acknowledged'} ({decisionTimestamp})
+                          </span>
+                        )}
+                      </div>
+
+                      <AutoCloseBanner
+                        isCounting={autoClose.isCounting}
+                        secondsLeft={autoClose.secondsLeft}
+                        onCancel={autoClose.cancel}
+                      />
+
+                      <p className="text-[11px] text-indigo-900/80 dark:text-indigo-300 leading-relaxed">
+                        <strong>Advisory Governance:</strong> Database functions in read-only mode. Workforce Planning Agent generates advisory recommendations for HR and Plant leadership. Disciplinary action or roster mutations are not automatically applied.
+                      </p>
+
+                      {/* Approval Feedback */}
+                      {approvalFeedback && approvalFeedback.type === 'success' && (
+                        <div className="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-300 dark:border-emerald-800 text-emerald-900 dark:text-emerald-100 text-xs flex items-center justify-between gap-2 shadow-xs">
+                          <div className="flex items-center gap-2 min-w-0">
+                            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                            <span className="font-bold truncate">{approvalFeedback.message}</span>
+                          </div>
+                          {approvalFeedback.approvalId && (
+                            <span className="text-[10px] font-mono text-emerald-700 dark:text-emerald-300 shrink-0 px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/60">
+                              {approvalFeedback.approvalId}
+                            </span>
+                          )}
+                        </div>
+                      )}
+
+                      {approvalFeedback && approvalFeedback.type === 'error' && (
+                        <div className="p-3 rounded-lg bg-rose-50 dark:bg-rose-950/70 border border-rose-300 dark:border-rose-800 text-rose-900 dark:text-rose-100 text-xs flex items-center justify-between gap-2 shadow-xs">
+                          <div className="flex items-center gap-2 min-w-0">
+                            <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+                            <span className="font-semibold">{approvalFeedback.message}</span>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setApprovalFeedback(null)}
+                            className="text-[10px] font-bold text-rose-700 dark:text-rose-300 hover:underline shrink-0"
+                          >
+                            Dismiss
+                          </button>
+                        </div>
+                      )}
+
+                      {/* Recorded HR Review Summary Box */}
+                      {hrDecisionStatus === 'ACKNOWLEDGED' && recordedReviewData && (
+                        <div className="p-3 rounded-lg bg-purple-50/70 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800 text-xs space-y-1.5">
+                          <div className="flex items-center justify-between text-purple-900 dark:text-purple-300 font-semibold">
+                            <span className="flex items-center gap-1.5">
+                              <ClipboardCheck className="w-3.5 h-3.5 text-purple-600" />
+                              HR Review Recorded ({decisionTimestamp}) by {recordedReviewData.reviewerName || 'Plant HRBP / Operations Lead'}
+                            </span>
+                            <span className="px-2 py-0.5 rounded text-[10px] bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 font-bold uppercase">
+                              {recordedReviewData.decisionLabel || 'Review Recorded'}
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-[var(--secondary)] whitespace-pre-wrap bg-white/70 dark:bg-slate-900/50 p-2 rounded border border-purple-100 dark:border-purple-900">
+                            {recordedReviewData.notes}
+                          </p>
+                        </div>
+                      )}
+
+                      {/* HR Notes */}
+                      <div className="space-y-1">
+                        <label className="text-[11px] font-semibold text-[var(--text)]">
+                          HR Review Notes / Planning Justification:
+                        </label>
+                        <textarea
+                          value={hrNotes}
+                          onChange={(e) => {
+                            autoClose.cancel();
+                            setHrNotes(e.target.value);
+                          }}
+                          disabled={isSubmittingApproval || hrDecisionStatus === 'APPROVED'}
+                          placeholder="Add administrative review notes (e.g., Reviewed critical assembly deficit; authorized standby replacement candidate #1 for Shift B)..."
+                          className="w-full text-xs p-2.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] text-[var(--text)] focus:outline-none focus:ring-1 focus:ring-purple-500 resize-none h-16 disabled:opacity-60"
+                        />
+                      </div>
+
+                      {/* Decision Action Buttons */}
+                      <div className="flex flex-wrap items-center gap-2 pt-1">
+                        <Button
+                          ref={recordReviewBtnRef}
+                          size="sm"
+                          onClick={handleOpenReviewPanel}
+                          disabled={loading || isSubmittingApproval || hrDecisionStatus === 'APPROVED'}
+                          className={`text-xs gap-1.5 h-8 px-3 ${
+                            hrDecisionStatus === 'ACKNOWLEDGED'
+                              ? 'bg-purple-700 text-white'
+                              : 'bg-white dark:bg-slate-800 text-purple-700 dark:text-purple-300 border border-purple-300 dark:border-purple-700'
+                          }`}
+                        >
+                          {isSubmittingApproval ? (
+                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                          ) : (
+                            <FileCheck2 className="w-3.5 h-3.5" />
+                          )}
+                          Record HR Review
+                        </Button>
+
+                        <Button
+                          size="sm"
+                          onClick={() => handleRecordHrReview('APPROVED')}
+                          disabled={loading || isSubmittingApproval || hrDecisionStatus === 'APPROVED'}
+                          className={`text-xs gap-1.5 h-8 px-3 ${
+                            hrDecisionStatus === 'APPROVED'
+                              ? 'bg-emerald-700 text-white'
+                              : 'bg-emerald-600 text-white hover:bg-emerald-700'
+                          }`}
+                        >
+                          {isSubmittingApproval ? (
+                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                          ) : (
+                            <CheckCircle2 className="w-3.5 h-3.5" />
+                          )}
+                          Approve Standby Adjustments
+                        </Button>
+
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => {
+                            autoClose.cancel();
+                            setIsReviewPanelOpen(false);
+                            setRecordedReviewData(null);
+                            setHrDecisionStatus(null);
+                            setApprovalFeedback(null);
+                            setHrNotes('');
+                          }}
+                          disabled={isSubmittingApproval}
+                          className="text-xs text-slate-400 hover:text-slate-600 h-8 ml-auto"
+                        >
+                          Reset Decision
+                        </Button>
+                      </div>
+                    </div>
                   </div>
                 )}
-
-                {/* HR Decision Support Section (Section 5 Requirement) */}
-                <div className="p-4 rounded-xl border border-indigo-200/70 dark:border-indigo-900/50 bg-indigo-50/40 dark:bg-indigo-950/20 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <ShieldCheck className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
-                      <h4 className="text-xs font-bold text-indigo-950 dark:text-indigo-200 uppercase tracking-wider">
-                        HR Decision Support & Governance
-                      </h4>
-                    </div>
-                    {hrDecisionStatus && (
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300">
-                        {hrDecisionStatus === 'APPROVED' ? 'Recommendations Approved' : 'Review Acknowledged'} (
-                        {decisionTimestamp})
-                      </span>
-                    )}
-                  </div>
-
-                  <p className="text-[11px] text-indigo-900/80 dark:text-indigo-300 leading-relaxed">
-                    <strong>Advisory Governance:</strong> Neon PostgreSQL functions in read-only mode. Workforce
-                    Planning Agent generates advisory recommendations for HR and Plant leadership. Disciplinary
-                    action or roster mutations are not automatically applied.
-                  </p>
-
-                  {/* Approval / Review Feedback Banners */}
-                  {approvalFeedback && approvalFeedback.type === 'success' && (
-                    <div className="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-300 dark:border-emerald-800 text-emerald-900 dark:text-emerald-100 text-xs flex items-center justify-between gap-2 shadow-xs">
-                      <div className="flex items-center gap-2 min-w-0">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                        <span className="font-bold truncate">{approvalFeedback.message}</span>
-                      </div>
-                      {approvalFeedback.approvalId && (
-                        <span className="text-[10px] font-mono text-emerald-700 dark:text-emerald-300 shrink-0 px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/60">
-                          {approvalFeedback.approvalId}
-                        </span>
-                      )}
-                    </div>
-                  )}
-
-                  {approvalFeedback && approvalFeedback.type === 'error' && (
-                    <div className="p-3 rounded-lg bg-rose-50 dark:bg-rose-950/70 border border-rose-300 dark:border-rose-800 text-rose-900 dark:text-rose-100 text-xs flex items-center justify-between gap-2 shadow-xs">
-                      <div className="flex items-center gap-2 min-w-0">
-                        <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
-                        <span className="font-semibold">{approvalFeedback.message}</span>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => setApprovalFeedback(null)}
-                        className="text-[10px] font-bold text-rose-700 dark:text-rose-300 hover:underline shrink-0"
-                      >
-                        Dismiss
-                      </button>
-                    </div>
-                  )}
-
-                  {/* HR Notes / Comments */}
-                  <div className="space-y-1">
-                    <label className="text-[11px] font-semibold text-[var(--text)]">
-                      HR Review Notes / Planning Justification:
-                    </label>
-                    <textarea
-                      value={hrNotes}
-                      onChange={(e) => setHrNotes(e.target.value)}
-                      disabled={isSubmittingApproval || hrDecisionStatus === 'APPROVED'}
-                      placeholder="Add administrative review notes (e.g., Reviewed critical assembly deficit; authorized standby replacement candidate #1 for Shift B)..."
-                      className="w-full text-xs p-2.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] text-[var(--text)] focus:outline-none focus:ring-1 focus:ring-purple-500 resize-none h-16 disabled:opacity-60"
-                    />
-                  </div>
-
-                  {/* Decision Action Buttons */}
-                  <div className="flex flex-wrap items-center gap-2 pt-1">
-                    <Button
-                      size="sm"
-                      onClick={() => handleRecordHrReview('ACKNOWLEDGED')}
-                      disabled={loading || isSubmittingApproval || hrDecisionStatus === 'APPROVED'}
-                      className={`text-xs gap-1.5 h-8 px-3 ${
-                        hrDecisionStatus === 'ACKNOWLEDGED'
-                          ? 'bg-purple-700 text-white'
-                          : 'bg-white dark:bg-slate-800 text-purple-700 dark:text-purple-300 border border-purple-300 dark:border-purple-700'
-                      }`}
-                    >
-                      {isSubmittingApproval ? (
-                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                      ) : (
-                        <FileCheck2 className="w-3.5 h-3.5" />
-                      )}
-                      Record HR Review
-                    </Button>
-
-                    <Button
-                      size="sm"
-                      onClick={() => handleRecordHrReview('APPROVED')}
-                      disabled={loading || isSubmittingApproval || hrDecisionStatus === 'APPROVED'}
-                      className={`text-xs gap-1.5 h-8 px-3 ${
-                        hrDecisionStatus === 'APPROVED'
-                          ? 'bg-emerald-700 text-white'
-                          : 'bg-emerald-600 text-white hover:bg-emerald-700'
-                      }`}
-                    >
-                      {isSubmittingApproval ? (
-                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                      ) : (
-                        <CheckCircle2 className="w-3.5 h-3.5" />
-                      )}
-                      Approve Standby Adjustments
-                    </Button>
-
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => {
-                        if (autoCloseTimerRef.current) clearTimeout(autoCloseTimerRef.current);
-                        if (countdownIntervalRef.current) clearInterval(countdownIntervalRef.current);
-                        setHrDecisionStatus(null);
-                        setApprovalFeedback(null);
-                        setHrNotes('');
-                      }}
-                      disabled={isSubmittingApproval}
-                      className="text-xs text-slate-400 hover:text-slate-600 h-8 ml-auto"
-                    >
-                      Reset Decision
-                    </Button>
-                  </div>
-                </div>
               </>
             )}
           </div>
 
           {/* Drawer Footer */}
           <div className="px-5 py-3 border-t border-[var(--border)] bg-slate-50 dark:bg-slate-900/60 flex items-center justify-between text-[11px] text-slate-400 shrink-0">
-            <span>Workforce Management AI · Workforce Planning Agent</span>
+            <div className="flex items-center gap-2">
+              <span>Workforce Planning Agent</span>
+              {result?.execution_id && (
+                <span className="font-mono text-[10px] text-slate-400">
+                  · {result.execution_id}
+                </span>
+              )}
+            </div>
             <Button size="sm" variant="outline" onClick={onClose} className="h-7 px-3 text-xs">
               Close Drawer
             </Button>
@@ -845,4 +960,3 @@ export function WorkforcePlanningAgentDrawer({ isOpen, onClose, filters = {} }) 
 }
 
 export default WorkforcePlanningAgentDrawer;
-

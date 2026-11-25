@@ -1333,6 +1333,9 @@ def get_team_production_analytics(
 
     # 4. Join aggregates
     all_teams = sorted(set(prod_map.keys()) | set(headcounts.keys()) | set(att_map.keys()))
+    sec_name_stmt = select(SectionMaster.section_id, SectionMaster.section_name)
+    sec_name_map = {str(r[0]): str(r[1]) for r in db.execute(sec_name_stmt).all()}
+
     items = []
     tot_target = 0
     tot_actual = 0
@@ -1379,8 +1382,12 @@ def get_team_production_analytics(
         prod_per_present = round((actual_q / pres_c), 1) if pres_c > 0 else 0.0
         att_pct = _pct(pres_c, rec_c)
 
+        sec_name = sec_name_map.get(tm) or tm
+
         items.append({
             "operator_team": tm,
+            "section_id": tm,
+            "section_name": sec_name,
             "headcount": hc,
             "target_qty": target_q,
             "actual_qty": actual_q,
@@ -1697,10 +1704,17 @@ def get_skills_analytics(
     total_employees = int(db.execute(tot_stmt).scalar_one())
 
     # 2. Skill Grade Distribution (L1, L2, L3, L4)
+    mapped_grade = case(
+        (Workforce.skill_grade.in_(["L1", "G1"]), "L1"),
+        (Workforce.skill_grade.in_(["L2", "G2"]), "L2"),
+        (Workforce.skill_grade.in_(["L3", "G3"]), "L3"),
+        (Workforce.skill_grade.in_(["L4", "G4", "G5", "G6", "G7"]), "L4"),
+        else_="L1",
+    )
     sg_stmt = (
-        select(Workforce.skill_grade, func.count(Workforce.employee_id))
-        .group_by(Workforce.skill_grade)
-        .order_by(asc(Workforce.skill_grade))
+        select(mapped_grade, func.count(Workforce.employee_id))
+        .group_by(mapped_grade)
+        .order_by(mapped_grade)
     )
     if emp_filters:
         sg_stmt = sg_stmt.where(*emp_filters)
@@ -1718,10 +1732,10 @@ def get_skills_analytics(
         select(
             DepartmentMaster.department_id,
             DepartmentMaster.department_name,
-            func.coalesce(func.sum(case((Workforce.skill_grade == "L1", 1), else_=0)), 0),
-            func.coalesce(func.sum(case((Workforce.skill_grade == "L2", 1), else_=0)), 0),
-            func.coalesce(func.sum(case((Workforce.skill_grade == "L3", 1), else_=0)), 0),
-            func.coalesce(func.sum(case((Workforce.skill_grade == "L4", 1), else_=0)), 0),
+            func.coalesce(func.sum(case((Workforce.skill_grade.in_(["L1", "G1"]), 1), else_=0)), 0),
+            func.coalesce(func.sum(case((Workforce.skill_grade.in_(["L2", "G2"]), 1), else_=0)), 0),
+            func.coalesce(func.sum(case((Workforce.skill_grade.in_(["L3", "G3"]), 1), else_=0)), 0),
+            func.coalesce(func.sum(case((Workforce.skill_grade.in_(["L4", "G4", "G5", "G6", "G7"]), 1), else_=0)), 0),
             func.count(Workforce.employee_id),
         )
         .join(EmployeeDepartmentMapping, DepartmentMaster.department_id == EmployeeDepartmentMapping.department_id)
@@ -1749,10 +1763,10 @@ def get_skills_analytics(
         select(
             SectionMaster.section_id,
             SectionMaster.section_name,
-            func.coalesce(func.sum(case((Workforce.skill_grade == "L1", 1), else_=0)), 0),
-            func.coalesce(func.sum(case((Workforce.skill_grade == "L2", 1), else_=0)), 0),
-            func.coalesce(func.sum(case((Workforce.skill_grade == "L3", 1), else_=0)), 0),
-            func.coalesce(func.sum(case((Workforce.skill_grade == "L4", 1), else_=0)), 0),
+            func.coalesce(func.sum(case((Workforce.skill_grade.in_(["L1", "G1"]), 1), else_=0)), 0),
+            func.coalesce(func.sum(case((Workforce.skill_grade.in_(["L2", "G2"]), 1), else_=0)), 0),
+            func.coalesce(func.sum(case((Workforce.skill_grade.in_(["L3", "G3"]), 1), else_=0)), 0),
+            func.coalesce(func.sum(case((Workforce.skill_grade.in_(["L4", "G4", "G5", "G6", "G7"]), 1), else_=0)), 0),
             func.count(Workforce.employee_id),
         )
         .join(EmployeeSectionMapping, SectionMaster.section_id == EmployeeSectionMapping.section_id)
@@ -1779,10 +1793,10 @@ def get_skills_analytics(
     team_sg_stmt = (
         select(
             Workforce.team_id,
-            func.coalesce(func.sum(case((Workforce.skill_grade == "L1", 1), else_=0)), 0),
-            func.coalesce(func.sum(case((Workforce.skill_grade == "L2", 1), else_=0)), 0),
-            func.coalesce(func.sum(case((Workforce.skill_grade == "L3", 1), else_=0)), 0),
-            func.coalesce(func.sum(case((Workforce.skill_grade == "L4", 1), else_=0)), 0),
+            func.coalesce(func.sum(case((Workforce.skill_grade.in_(["L1", "G1"]), 1), else_=0)), 0),
+            func.coalesce(func.sum(case((Workforce.skill_grade.in_(["L2", "G2"]), 1), else_=0)), 0),
+            func.coalesce(func.sum(case((Workforce.skill_grade.in_(["L3", "G3"]), 1), else_=0)), 0),
+            func.coalesce(func.sum(case((Workforce.skill_grade.in_(["L4", "G4", "G5", "G6", "G7"]), 1), else_=0)), 0),
             func.count(Workforce.employee_id),
         )
         .group_by(Workforce.team_id)
@@ -1824,14 +1838,21 @@ def get_skills_analytics(
 
     # 7. Active employee skill distribution
     active_filters = list(emp_filters) + [func.upper(Workforce.active_status) == "ACTIVE"]
+    act_mapped_grade = case(
+        (Workforce.skill_grade.in_(["L1", "G1"]), "L1"),
+        (Workforce.skill_grade.in_(["L2", "G2"]), "L2"),
+        (Workforce.skill_grade.in_(["L3", "G3"]), "L3"),
+        (Workforce.skill_grade.in_(["L4", "G4", "G5", "G6", "G7"]), "L4"),
+        else_="L1",
+    )
     act_stmt = (
         select(
-            Workforce.skill_grade,
+            act_mapped_grade,
             func.count(Workforce.employee_id),
         )
         .where(*active_filters)
-        .group_by(Workforce.skill_grade)
-        .order_by(asc(Workforce.skill_grade))
+        .group_by(act_mapped_grade)
+        .order_by(act_mapped_grade)
     )
     active_skills = [
         {

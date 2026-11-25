@@ -4,6 +4,59 @@ import { streamAgentAnalysis } from './agentStreamClient';
 
 export { invalidateCache, streamAgentAnalysis };
 
+export async function fetchEmployeeCreateOptions({ signal } = {}) {
+  const { data } = await apiClient.get('/api/v1/workforce/employees/options', { signal });
+  return data;
+}
+
+export async function createEmployee(payload, { signal } = {}) {
+  const { data } = await apiClient.post('/api/v1/workforce/employees', payload, { signal });
+  invalidateCache();
+  return data;
+}
+
+export async function searchActiveEmployees({ q = '', status = 'Active', limit = 10, signal } = {}) {
+  const { data } = await apiClient.get('/api/v1/workforce/employees/search', {
+    params: { q, status, limit },
+    signal,
+  });
+  return data;
+}
+
+export async function fetchExitOptions({ signal } = {}) {
+  return cachedGet('/api/v1/workforce/employees/exit-options', { signal }, {
+    ttlMs: CACHE_TTL.STATIC_REFERENCE,
+  });
+}
+
+export async function relieveEmployee(employeeId, payload, { signal } = {}) {
+  const { data } = await apiClient.post(
+    `/api/v1/workforce/employees/${encodeURIComponent(employeeId)}/relieve`,
+    payload,
+    { signal }
+  );
+  invalidateCache();
+  return data;
+}
+
+export async function fetchRecentlyRelieved({ limit = 20, signal } = {}) {
+  const { data } = await apiClient.get('/api/v1/workforce/employees/relieved', {
+    params: { limit },
+    signal,
+  });
+  return data;
+}
+
+export async function reinstateEmployee(employeeId, { signal } = {}) {
+  const { data } = await apiClient.post(
+    `/api/v1/workforce/employees/${encodeURIComponent(employeeId)}/reinstate`,
+    {},
+    { signal }
+  );
+  invalidateCache();
+  return data;
+}
+
 export async function checkBackendHealth({ signal } = {}) {
   const { data } = await apiClient.get('/health', { signal });
   return data;
@@ -806,8 +859,10 @@ export async function submitPlanningApproval({
   executionId,
   decision = 'APPROVED',
   notes = '',
-  approvedBy = 'Plant HRBP / Operations Lead',
+  approvedBy = 'Workspace User (HR)',
   targetDate = null,
+  specialistAgent = null,
+  rejectionReason = null,
   forceFailure = false,
   signal,
 } = {}) {
@@ -817,11 +872,90 @@ export async function submitPlanningApproval({
     notes,
     approved_by: approvedBy,
     target_date: targetDate,
+    specialist_agent: specialistAgent,
+    rejection_reason: rejectionReason,
     force_failure: forceFailure,
   };
-  const { data } = await apiClient.post('/api/v1/agent/approve-planning', payload, { signal });
+  const { data } = await apiClient.post('/api/v1/agent/approve-planning', payload, {
+    signal,
+    timeout: 5000,
+  });
+  invalidateCache();
   return data;
 }
+
+export async function fetchHrApprovals({
+  status,
+  agent,
+  plantId,
+  departmentId,
+  startDate,
+  endDate,
+  search,
+  limit = 25,
+  offset = 0,
+  signal,
+} = {}) {
+  const params = { limit, offset };
+  if (status) params.status = status;
+  if (agent) params.agent = agent;
+  if (plantId) params.plant_id = plantId;
+  if (departmentId) params.department_id = departmentId;
+  if (startDate) params.start_date = startDate;
+  if (endDate) params.end_date = endDate;
+  if (search) params.search = search;
+
+  const { data } = await apiClient.get('/api/v1/hr-approvals', { params, signal });
+  return data;
+}
+
+export async function fetchHrApprovalDetails(approvalId, { signal } = {}) {
+  const { data } = await apiClient.get(`/api/v1/hr-approvals/${encodeURIComponent(approvalId)}`, { signal });
+  return data;
+}
+
+export async function recordHrReview(approvalId, { reviewedBy, reviewNotes }, { signal } = {}) {
+  const { data } = await apiClient.post(
+    `/api/v1/hr-approvals/${encodeURIComponent(approvalId)}/review`,
+    {
+      reviewed_by: reviewedBy,
+      review_notes: reviewNotes,
+    },
+    { signal }
+  );
+  invalidateCache();
+  return data;
+}
+
+export async function recordHrDecision(
+  approvalId,
+  { decision, approvedBy, decisionNotes, rejectionReason },
+  { signal } = {}
+) {
+  const { data } = await apiClient.post(
+    `/api/v1/hr-approvals/${encodeURIComponent(approvalId)}/decision`,
+    {
+      decision,
+      approved_by: approvedBy,
+      decision_notes: decisionNotes || null,
+      rejection_reason: rejectionReason || null,
+    },
+    { signal }
+  );
+  invalidateCache();
+  return data;
+}
+
+export async function resetHrDecision(approvalId, { signal } = {}) {
+  const { data } = await apiClient.post(
+    `/api/v1/hr-approvals/${encodeURIComponent(approvalId)}/reset`,
+    {},
+    { signal }
+  );
+  invalidateCache();
+  return data;
+}
+
 
 
 

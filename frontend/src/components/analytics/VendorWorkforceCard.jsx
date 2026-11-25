@@ -12,15 +12,15 @@ import { EmptyState } from '../common/EmptyState';
 import { LoadingSkeleton } from '../common/LoadingSkeleton';
 
 const VENDOR_COLORS = {
-  V01: '#6F3DBA',
+  V01: '#493287',
   V02: '#4D8EEB',
   V03: '#0E9C86',
   V04: '#F58A3A',
   V05: '#E45C72',
-  V06: '#8B5CF6',
+  V06: '#1F2F59',
 };
 
-const FALLBACK_PALETTE = ['#6F3DBA', '#4D8EEB', '#0E9C86', '#F58A3A', '#E45C72', '#8B5CF6'];
+const FALLBACK_PALETTE = ['#493287', '#4D8EEB', '#0E9C86', '#F58A3A', '#E45C72', '#1F2F59'];
 
 export function VendorWorkforceCard({
   vendorData = null,
@@ -83,7 +83,7 @@ export function VendorWorkforceCard({
       {/* Single clean line header - no subtitles, no overlapping legends */}
       <div className="flex items-center justify-between gap-2 mb-2 min-w-0 shrink-0">
         <div className="flex items-center gap-2 min-w-0">
-          <Building2 className="w-4 h-4 shrink-0" style={{ color: '#6F3DBA' }} aria-hidden="true" />
+          <Building2 className="w-4 h-4 shrink-0" style={{ color: '#493287' }} aria-hidden="true" />
           <h2 className="text-[13px] sm:text-sm font-bold truncate">Vendor-wise Workforce Distribution</h2>
         </div>
         {totalActive > 0 && !loading && (

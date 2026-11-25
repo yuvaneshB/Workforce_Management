@@ -281,7 +281,7 @@ async def stream_specialist_agent_execution(
             "stage_name": stages[1]["name"],
             "status": "completed",
             "duration_ms": max(400, s2_ms),
-            "message": "Connected to Neon PostgreSQL pool and ingested verified records",
+            "message": "Connected to operational database pool and ingested verified records",
             "timestamp": dt.datetime.utcnow().isoformat() + "Z",
         })
         await asyncio.sleep(0.05)
@@ -478,6 +478,63 @@ async def stream_specialist_agent_execution(
             "timestamp": dt.datetime.utcnow().isoformat() + "Z",
         })
         await asyncio.sleep(0.05)
+
+        # -------------------------------------------------------------
+        # HR GOVERNANCE: Register real execution recommendation
+        # -------------------------------------------------------------
+        try:
+            from app.services import hr_approval_service
+
+            primary_rec = ""
+            recs = agent_result.get("recommendations", [])
+            if recs:
+                first = recs[0]
+                if isinstance(first, dict):
+                    primary_rec = first.get("title") or first.get("description") or first.get("action") or str(first)
+                else:
+                    primary_rec = str(first)
+            elif agent_result.get("executive_summary"):
+                primary_rec = agent_result["executive_summary"]
+            elif agent_result.get("summary"):
+                primary_rec = agent_result["summary"]
+            else:
+                primary_rec = f"{clean_agent_type.replace('_', ' ').title()} operational analysis complete."
+
+            target_date_val = (
+                agent_result.get("target_date")
+                or filters.get("date")
+                or filters.get("start_date")
+                or filters.get("startDate")
+                or dt.date.today().isoformat()
+            )
+            plant_val = (
+                agent_result.get("plant_id")
+                or agent_result.get("plant")
+                or plant_id
+                or "All Plants"
+            )
+            dept_val = (
+                agent_result.get("department_id")
+                or agent_result.get("department")
+                or dept_id
+                or "Cross-Functional"
+            )
+
+            if db_manager and db_manager.session_local:
+                with db_manager.session_local() as write_db:
+                    apv_record = hr_approval_service.register_or_update_from_execution(
+                        write_db,
+                        execution_id=execution_id,
+                        specialist_agent=clean_agent_type,
+                        recommendation=primary_rec,
+                        plant_id=plant_val,
+                        department_id=dept_val,
+                        target_date=str(target_date_val),
+                        result_payload=agent_result,
+                    )
+                    agent_result["approval_id"] = apv_record.approval_id
+        except Exception as apv_exc:
+            logger.warning("Could not register HR approval record for execution %s: %s", execution_id, apv_exc)
 
         # -------------------------------------------------------------
         # FINAL EVENT: Complete with full result payload

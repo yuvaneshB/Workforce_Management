@@ -45,7 +45,7 @@ export function ArchitectureStageModal({ stage, onClose, onSelectStage, totalSta
               style={{
                 background: 'var(--brand-purple-soft)',
                 color: 'var(--brand-purple)',
-                border: '1px solid rgba(111, 61, 186, 0.25)',
+                border: '1px solid rgba(53, 43, 109, 0.25)',
               }}
             >
               Stage {stage.badge}
